@@ -7,7 +7,12 @@ interface CooperativeCardProps {
 }
 
 export default function CooperativeCard({ cooperative }: CooperativeCardProps) {
-  const isVerified = cooperative.status === 'verified';
+  // Support both database (is_verified) and legacy (status) verification fields
+  const isVerified = cooperative.is_verified ?? cooperative.status === 'verified';
+  
+  // Support both database (sector/department) and legacy (secteur/departement) fields
+  const sector = cooperative.sector || cooperative.secteur || '';
+  const department = cooperative.department || cooperative.departement;
 
   return (
     <Link
@@ -35,17 +40,19 @@ export default function CooperativeCard({ cooperative }: CooperativeCardProps) {
         <div className="flex items-center gap-2">
           <MapPin className="h-4 w-4 text-gray-400" />
           <span>{cooperative.region}</span>
-          {cooperative.departement && (
+          {department && (
             <>
               <span className="text-gray-300">•</span>
-              <span>{cooperative.departement}</span>
+              <span>{department}</span>
             </>
           )}
         </div>
-        <div className="flex items-center gap-2">
-          <Building2 className="h-4 w-4 text-gray-400" />
-          <span>{cooperative.secteur}</span>
-        </div>
+        {sector && (
+          <div className="flex items-center gap-2">
+            <Building2 className="h-4 w-4 text-gray-400" />
+            <span>{sector}</span>
+          </div>
+        )}
       </div>
 
       {cooperative.natureActiviteTags && cooperative.natureActiviteTags.length > 0 && (

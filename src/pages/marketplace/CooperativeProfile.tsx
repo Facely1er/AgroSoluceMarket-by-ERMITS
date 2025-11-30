@@ -1,12 +1,21 @@
+import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { MapPin, Building2, Phone, User, ArrowLeft, CheckCircle, Clock } from 'lucide-react';
+import { MapPin, Building2, Phone, User, ArrowLeft, CheckCircle, Clock, BarChart3 } from 'lucide-react';
 import { useCooperatives } from '../../hooks/useCooperatives';
+import CooperativeLocationMap from '../../features/cooperatives/components/CooperativeLocationMap';
+import CooperativeStats from '../../features/cooperatives/components/CooperativeStats';
 
 export default function CooperativeProfile() {
   const { id } = useParams<{ id: string }>();
   const { cooperatives, loading } = useCooperatives();
+  const [activeTab, setActiveTab] = useState<'details' | 'map' | 'stats'>('details');
 
-  const cooperative = cooperatives.find(c => c.id === Number(id));
+  // Support both UUID (string) and legacy numeric IDs
+  const cooperative = cooperatives.find(c => {
+    const coopId = String(c.id);
+    const paramId = id || '';
+    return coopId === paramId || coopId === String(Number(paramId));
+  });
 
   if (loading) {
     return (
@@ -35,11 +44,16 @@ export default function CooperativeProfile() {
     );
   }
 
-  const isVerified = cooperative.status === 'verified';
+  // Support both database (is_verified) and legacy (status) verification fields
+  const isVerified = cooperative.is_verified ?? cooperative.status === 'verified';
+  
+  // Support both database and legacy field names
+  const sector = cooperative.sector || cooperative.secteur || '';
+  const department = cooperative.department || cooperative.departement;
 
   return (
     <div className="min-h-screen py-8">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Link
           to="/cooperatives"
           className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6"
@@ -48,8 +62,9 @@ export default function CooperativeProfile() {
           Retour à la liste
         </Link>
 
-        <div className="bg-white rounded-lg shadow-md p-8">
-          <div className="flex items-start justify-between mb-6">
+        {/* Header */}
+        <div className="bg-white rounded-lg shadow-md p-6 mb-6 border-t-4 border-secondary-500">
+          <div className="flex items-start justify-between">
             <div>
               <h1 className="text-3xl font-bold text-gray-900 mb-2">
                 {cooperative.name}
@@ -67,93 +82,182 @@ export default function CooperativeProfile() {
               )}
             </div>
           </div>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <div className="space-y-4">
-              <div>
-                <h3 className="text-sm font-semibold text-gray-500 mb-1">Informations Générales</h3>
-                <div className="space-y-3">
-                  <div className="flex items-start gap-3">
-                    <MapPin className="h-5 w-5 text-gray-400 mt-0.5" />
-                    <div>
-                      <div className="font-medium text-gray-900">{cooperative.region}</div>
-                      {cooperative.departement && (
-                        <div className="text-sm text-gray-600">{cooperative.departement}</div>
-                      )}
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <Building2 className="h-5 w-5 text-gray-400 mt-0.5" />
-                    <div>
-                      <div className="font-medium text-gray-900">{cooperative.secteur}</div>
-                    </div>
-                  </div>
-                  {cooperative.registrationNumber && (
-                    <div>
-                      <div className="text-sm text-gray-500">N° d'Enregistrement</div>
-                      <div className="font-medium text-gray-900">{cooperative.registrationNumber}</div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <div>
-                <h3 className="text-sm font-semibold text-gray-500 mb-1">Contact</h3>
-                <div className="space-y-3">
-                  {cooperative.president && (
-                    <div className="flex items-start gap-3">
-                      <User className="h-5 w-5 text-gray-400 mt-0.5" />
-                      <div>
-                        <div className="text-sm text-gray-500">Président</div>
-                        <div className="font-medium text-gray-900">{cooperative.president}</div>
-                      </div>
-                    </div>
-                  )}
-                  {cooperative.primaryPhoneE164 && (
-                    <div className="flex items-start gap-3">
-                      <Phone className="h-5 w-5 text-gray-400 mt-0.5" />
-                      <div>
-                        <div className="text-sm text-gray-500">Téléphone</div>
-                        <div className="font-medium text-gray-900">{cooperative.primaryPhoneE164}</div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
+        {/* Tabs */}
+        <div className="bg-white rounded-lg shadow-md mb-6">
+          <div className="border-b border-gray-200">
+            <nav className="flex -mb-px">
+              <button
+                onClick={() => setActiveTab('details')}
+                className={`px-6 py-3 text-sm font-medium border-b-2 ${
+                  activeTab === 'details'
+                    ? 'border-secondary-500 text-secondary-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+              >
+                <Building2 className="inline h-4 w-4 mr-2" />
+                Détails
+              </button>
+              <button
+                onClick={() => setActiveTab('map')}
+                className={`px-6 py-3 text-sm font-medium border-b-2 ${
+                  activeTab === 'map'
+                    ? 'border-secondary-500 text-secondary-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+              >
+                <MapPin className="inline h-4 w-4 mr-2" />
+                Carte
+              </button>
+              <button
+                onClick={() => setActiveTab('stats')}
+                className={`px-6 py-3 text-sm font-medium border-b-2 ${
+                  activeTab === 'stats'
+                    ? 'border-secondary-500 text-secondary-600'
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                }`}
+              >
+                <BarChart3 className="inline h-4 w-4 mr-2" />
+                Statistiques
+              </button>
+            </nav>
           </div>
 
-          {cooperative.natureActivite && (
-            <div className="mb-6">
-              <h3 className="text-sm font-semibold text-gray-500 mb-2">Nature d'Activité</h3>
-              <p className="text-gray-700 bg-gray-50 p-4 rounded-lg border-l-4 border-secondary-500">
-                {cooperative.natureActivite}
-              </p>
-              {cooperative.natureActiviteTags && cooperative.natureActiviteTags.length > 0 && (
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {cooperative.natureActiviteTags.map(tag => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 bg-primary-100 text-primary-700 text-sm rounded-full"
-                    >
-                      #{tag}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </div>
-          )}
+          <div className="p-6">
+            {activeTab === 'details' && (
+              <div className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-4">
+                    <div>
+                      <h3 className="text-sm font-semibold text-gray-500 mb-1">Informations Générales</h3>
+                      <div className="space-y-3">
+                        <div className="flex items-start gap-3">
+                          <MapPin className="h-5 w-5 text-gray-400 mt-0.5" />
+                          <div>
+                            <div className="font-medium text-gray-900">{cooperative.region}</div>
+                            {department && (
+                              <div className="text-sm text-gray-600">{department}</div>
+                            )}
+                          </div>
+                        </div>
+                        {sector && (
+                          <div className="flex items-start gap-3">
+                            <Building2 className="h-5 w-5 text-gray-400 mt-0.5" />
+                            <div>
+                              <div className="font-medium text-gray-900">{sector}</div>
+                            </div>
+                          </div>
+                        )}
+                        {cooperative.registrationNumber && (
+                          <div>
+                            <div className="text-sm text-gray-500">N° d'Enregistrement</div>
+                            <div className="font-medium text-gray-900">{cooperative.registrationNumber}</div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
 
-          {cooperative.latitude && cooperative.longitude && (
-            <div className="mt-6">
-              <h3 className="text-sm font-semibold text-gray-500 mb-2">Coordonnées GPS</h3>
-              <p className="text-gray-700">
-                {cooperative.latitude.toFixed(4)}, {cooperative.longitude.toFixed(4)}
-              </p>
-            </div>
-          )}
+                  <div className="space-y-4">
+                    <div>
+                      <h3 className="text-sm font-semibold text-gray-500 mb-1">Contact</h3>
+                      <div className="space-y-3">
+                        {cooperative.president && (
+                          <div className="flex items-start gap-3">
+                            <User className="h-5 w-5 text-gray-400 mt-0.5" />
+                            <div>
+                              <div className="text-sm text-gray-500">Président</div>
+                              <div className="font-medium text-gray-900">{cooperative.president}</div>
+                            </div>
+                          </div>
+                        )}
+                        {cooperative.primaryPhoneE164 && (
+                          <div className="flex items-start gap-3">
+                            <Phone className="h-5 w-5 text-gray-400 mt-0.5" />
+                            <div>
+                              <div className="text-sm text-gray-500">Téléphone</div>
+                              <div className="font-medium text-gray-900">{cooperative.primaryPhoneE164}</div>
+                            </div>
+                          </div>
+                        )}
+                        {cooperative.email && (
+                          <div className="flex items-start gap-3">
+                            <Phone className="h-5 w-5 text-gray-400 mt-0.5" />
+                            <div>
+                              <div className="text-sm text-gray-500">Email</div>
+                              <a 
+                                href={`mailto:${cooperative.email}`}
+                                className="font-medium text-secondary-600 hover:text-secondary-700"
+                              >
+                                {cooperative.email}
+                              </a>
+                            </div>
+                          </div>
+                        )}
+                        {cooperative.address && (
+                          <div className="flex items-start gap-3">
+                            <MapPin className="h-5 w-5 text-gray-400 mt-0.5" />
+                            <div>
+                              <div className="text-sm text-gray-500">Adresse</div>
+                              <div className="font-medium text-gray-900">{cooperative.address}</div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {cooperative.natureActivite && (
+                  <div>
+                    <h3 className="text-sm font-semibold text-gray-500 mb-2">Nature d'Activité</h3>
+                    <p className="text-gray-700 bg-gray-50 p-4 rounded-lg border-l-4 border-secondary-500">
+                      {cooperative.natureActivite}
+                    </p>
+                    {cooperative.natureActiviteTags && cooperative.natureActiviteTags.length > 0 && (
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {cooperative.natureActiviteTags.map(tag => (
+                          <span
+                            key={tag}
+                            className="px-3 py-1 bg-primary-100 text-primary-700 text-sm rounded-full"
+                          >
+                            #{tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {cooperative.description && (
+                  <div>
+                    <h3 className="text-sm font-semibold text-gray-500 mb-2">Description</h3>
+                    <p className="text-gray-700 bg-gray-50 p-4 rounded-lg">
+                      {cooperative.description}
+                    </p>
+                  </div>
+                )}
+
+                {cooperative.latitude && cooperative.longitude && (
+                  <div>
+                    <h3 className="text-sm font-semibold text-gray-500 mb-2">Coordonnées GPS</h3>
+                    <p className="text-gray-700 font-mono text-sm">
+                      {cooperative.latitude.toFixed(6)}, {cooperative.longitude.toFixed(6)}
+                    </p>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {activeTab === 'map' && (
+              <CooperativeLocationMap cooperative={cooperative} />
+            )}
+
+            {activeTab === 'stats' && (
+              <CooperativeStats cooperative={cooperative} />
+            )}
+          </div>
         </div>
       </div>
     </div>
