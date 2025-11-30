@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "deploy": "powershell -ExecutionPolicy Bypass -File ./deploy-vercel.ps1",
+    "setup:vercel": "powershell -ExecutionPolicy Bypass -File ./setup-vercel-project.ps1"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.0",

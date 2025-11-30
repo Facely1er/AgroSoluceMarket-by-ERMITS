@@ -18,6 +18,8 @@ Agricultural marketplace platform connecting West African cooperatives with glob
 - **Routing**: React Router v6
 - **Build Tool**: Vite
 - **Icons**: Lucide React
+- **Database**: Supabase (Database 3 with `agrosoluce` schema)
+- **Deployment**: Vercel
 
 ## 📦 Installation
 
@@ -56,7 +58,7 @@ src/
 ├── hooks/             # Custom React hooks
 ├── lib/               # Utilities and libraries
 │   ├── utils/         # Helper functions
-│   └── supabase/      # Supabase integration (future)
+│   └── supabase/      # Supabase integration (Database 3 with agrosoluce schema)
 └── types/             # TypeScript type definitions
 ```
 
@@ -70,15 +72,53 @@ src/
 
 ## 📊 Data
 
-Cooperative data is loaded from `/public/cooperatives_cote_ivoire.json` containing 3,797+ verified cooperatives.
+Cooperative data is currently loaded from `/public/cooperatives_cote_ivoire.json` containing 3,797+ verified cooperatives. Supabase integration is configured and ready for backend migration.
+
+## 🗄️ Database Configuration
+
+AgroSoluce uses **Database 3** with the `agrosoluce` schema prefix to avoid conflicts with other platforms.
+
+**Environment Variables:**
+```env
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+VITE_SUPABASE_SCHEMA=agrosoluce
+```
+
+**Build Output:** `dist/agrosoluce`
 
 ## 🔐 Access Control
 
 Contact information is gated behind access control. Use access code `AGRO-ACCESS-2025` for development.
 
+## 🚀 Deployment
+
+### Vercel Deployment
+
+AgroSoluce is configured for deployment on Vercel with Database 3 schema support.
+
+**Quick Deploy:**
+```powershell
+# Setup Vercel project (first time only)
+.\setup-vercel-project.ps1
+
+# Deploy to Vercel
+.\deploy-vercel.ps1
+```
+
+**Manual Deployment:**
+1. Build: `npm run build`
+2. Deploy `dist/agrosoluce` to Vercel
+3. Configure custom domain: `www.agrosoluce.com`
+4. Set environment variables in Vercel dashboard:
+   - `VITE_SUPABASE_URL`
+   - `VITE_SUPABASE_ANON_KEY`
+   - `VITE_SUPABASE_SCHEMA=agrosoluce`
+
 ## 🚧 Roadmap
 
-- [ ] Supabase backend integration
+- [x] Supabase backend integration (configured, ready for migration)
+- [ ] Migrate cooperative data to Supabase
 - [ ] Product listing management
 - [ ] Buyer-seller matching engine
 - [ ] Transaction and payment processing
