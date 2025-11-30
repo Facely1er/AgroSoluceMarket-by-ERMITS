@@ -129,10 +129,10 @@ export function enrichCooperatives(cooperatives: any[]): any[] {
     const [lat, lng] = getRegionCoordinates(c.region || '');
     const contactParts = splitContact(c.contact);
     const phoneCandidates = [c.phone, ...contactParts];
-    const phonesE164 = phoneCandidates
+    const phonesE164 = (phoneCandidates
       .map(p => normalizeCIPhone(p))
-      .filter(Boolean) as string[]
-      .filter((v, i, arr) => arr.indexOf(v) === i);
+      .filter(Boolean)
+      .filter((v, i, arr) => arr.indexOf(v) === i)) as string[];
     return {
       ...c,
       lat,
