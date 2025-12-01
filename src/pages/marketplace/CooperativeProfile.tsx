@@ -1,14 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { MapPin, Building2, Phone, User, ArrowLeft, CheckCircle, Clock, BarChart3 } from 'lucide-react';
+import { MapPin, Building2, Phone, User, ArrowLeft, CheckCircle, Clock, BarChart3, Users } from 'lucide-react';
 import { useCooperatives } from '../../hooks/useCooperatives';
 import CooperativeLocationMap from '../../features/cooperatives/components/CooperativeLocationMap';
 import CooperativeStats from '../../features/cooperatives/components/CooperativeStats';
+import { getFarmerCountByCooperative } from '../../features/producers/api/farmersApi';
 
 export default function CooperativeProfile() {
   const { id } = useParams<{ id: string }>();
   const { cooperatives, loading } = useCooperatives();
   const [activeTab, setActiveTab] = useState<'details' | 'map' | 'stats'>('details');
+  const [farmerCount, setFarmerCount] = useState<number | null>(null);
 
   // Support both UUID (string) and legacy numeric IDs
   const cooperative = cooperatives.find(c => {
@@ -16,6 +18,17 @@ export default function CooperativeProfile() {
     const paramId = id || '';
     return coopId === paramId || coopId === String(Number(paramId));
   });
+
+  // Load farmer count
+  useEffect(() => {
+    if (cooperative?.id) {
+      getFarmerCountByCooperative(cooperative.id).then(({ data }) => {
+        if (data !== null) {
+          setFarmerCount(data);
+        }
+      });
+    }
+  }, [cooperative?.id]);
 
   if (loading) {
     return (
@@ -153,6 +166,15 @@ export default function CooperativeProfile() {
                           <div>
                             <div className="text-sm text-gray-500">N° d'Enregistrement</div>
                             <div className="font-medium text-gray-900">{cooperative.registrationNumber}</div>
+                          </div>
+                        )}
+                        {farmerCount !== null && (
+                          <div className="flex items-start gap-3">
+                            <Users className="h-5 w-5 text-gray-400 mt-0.5" />
+                            <div>
+                              <div className="text-sm text-gray-500">Producteurs</div>
+                              <div className="font-medium text-gray-900">{farmerCount} producteur{farmerCount !== 1 ? 's' : ''}</div>
+                            </div>
                           </div>
                         )}
                       </div>

@@ -169,3 +169,137 @@ export interface CooperativeData {
   cooperatives: Cooperative[];
 }
 
+// Farmer (Producer Registry)
+export interface Farmer {
+  id: string; // UUID
+  cooperative_id: string;
+  name: string;
+  registration_number?: string;
+  phone?: string;
+  email?: string;
+  address?: string;
+  latitude?: number;
+  longitude?: number;
+  location_description?: string;
+  date_of_birth?: string; // ISO date string
+  gender?: string;
+  is_active?: boolean;
+  created_at?: string;
+  updated_at?: string;
+  metadata?: Record<string, any>;
+}
+
+// Batch (Traceability)
+export interface Batch {
+  id: string; // UUID
+  product_id: string;
+  cooperative_id: string;
+  farmer_id?: string;
+  harvest_date?: string; // ISO date string
+  origin_gps_latitude?: number;
+  origin_gps_longitude?: number;
+  quantity: number;
+  unit?: string;
+  created_at?: string;
+  updated_at?: string;
+  metadata?: Record<string, any>;
+}
+
+// Batch Transaction (Traceability Chain)
+export interface BatchTransaction {
+  id: string;
+  batch_id: string;
+  from_entity_type: 'farmer' | 'cooperative' | 'buyer';
+  from_entity_id: string;
+  to_entity_type: 'farmer' | 'cooperative' | 'buyer';
+  to_entity_id: string;
+  transaction_type: 'harvest' | 'transfer' | 'sale' | 'processing';
+  quantity: number;
+  timestamp: string; // ISO timestamp
+  notes?: string;
+  created_at?: string;
+}
+
+// Certification (Compliance)
+export interface Certification {
+  id: string;
+  cooperative_id?: string;
+  farmer_id?: string;
+  certification_type: string; // 'organic', 'fair_trade', 'rainforest_alliance', etc.
+  issuer: string;
+  issue_date: string; // ISO date string
+  expiry_date?: string; // ISO date string
+  status: 'active' | 'expired' | 'revoked' | 'pending';
+  document_url?: string;
+  created_at?: string;
+  updated_at?: string;
+}
+
+// EUDR Verification (Compliance)
+export interface EUDRVerification {
+  id: string;
+  batch_id: string;
+  gps_coordinates?: { latitude: number; longitude: number };
+  deforestation_check: 'passed' | 'failed' | 'pending';
+  child_labor_check: 'passed' | 'failed' | 'pending';
+  status: 'verified' | 'rejected' | 'pending';
+  verified_at?: string; // ISO timestamp
+  verified_by?: string;
+  notes?: string;
+  created_at?: string;
+  updated_at?: string;
+}
+
+// Compliance Requirement
+export interface ComplianceRequirement {
+  id: string;
+  requirement_type: string; // 'eudr', 'child_labor', 'organic', etc.
+  description: string;
+  applicable_to: 'cooperative' | 'farmer' | 'product' | 'batch';
+  created_at?: string;
+}
+
+// Field Declaration (Evidence)
+export interface FieldDeclaration {
+  id: string;
+  cooperative_id: string;
+  farmer_id?: string;
+  field_location_latitude?: number;
+  field_location_longitude?: number;
+  crop_type: string;
+  area: number; // in hectares
+  declaration_date: string; // ISO date string
+  status: 'pending' | 'verified' | 'rejected';
+  verified_by?: string;
+  verified_at?: string;
+  created_at?: string;
+  updated_at?: string;
+}
+
+// Audit (Evidence)
+export interface Audit {
+  id: string;
+  cooperative_id: string;
+  audit_type: string; // 'third_party', 'internal', 'regulatory', etc.
+  auditor_name: string;
+  audit_date: string; // ISO date string
+  findings?: string;
+  document_url?: string;
+  status: 'pending' | 'completed' | 'failed';
+  created_at?: string;
+  updated_at?: string;
+}
+
+// Attestation (Evidence)
+export interface Attestation {
+  id: string;
+  entity_id: string; // Can be cooperative_id, farmer_id, batch_id, etc.
+  entity_type: 'cooperative' | 'farmer' | 'batch' | 'product';
+  attestation_type: string; // 'sustainability', 'labor', 'environmental', etc.
+  content: string;
+  signed_by: string;
+  signed_at: string; // ISO timestamp
+  document_url?: string;
+  created_at?: string;
+}
+
