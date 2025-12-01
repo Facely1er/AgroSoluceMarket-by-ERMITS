@@ -9,7 +9,11 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "deploy": "powershell -ExecutionPolicy Bypass -File ./deploy-vercel.ps1",
-    "setup:vercel": "powershell -ExecutionPolicy Bypass -File ./setup-vercel-project.ps1"
+    "setup:vercel": "powershell -ExecutionPolicy Bypass -File ./setup-vercel-project.ps1",
+    "migrate:generate": "tsx scripts/run-migrations.ts --generate",
+    "migrate:check": "tsx scripts/run-migrations.ts --check",
+    "migrate:run": "powershell -ExecutionPolicy Bypass -File ./scripts/run-migrations.ps1",
+    "migrate:data": "tsx scripts/migrate-cooperatives-to-db.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.0",
@@ -39,6 +43,7 @@
     "jsdom": "^27.2.0",
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
+    "tsx": "^4.8.1",
     "typescript": "^5.5.3",
     "vite": "^7.2.4",
     "vitest": "^4.0.14"
