@@ -3,6 +3,17 @@
 -- Uses the 'agrosoluce' schema to avoid conflicts with other projects
 
 -- =============================================
+-- SCHEMA CREATION
+-- =============================================
+
+-- Create the agrosoluce schema if it doesn't exist
+CREATE SCHEMA IF NOT EXISTS agrosoluce;
+
+-- Grant necessary permissions on the schema
+GRANT USAGE ON SCHEMA agrosoluce TO authenticated;
+GRANT USAGE ON SCHEMA agrosoluce TO anon;
+
+-- =============================================
 -- MIGRATION METADATA
 -- =============================================
 

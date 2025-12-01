@@ -87,6 +87,19 @@ VITE_SUPABASE_SCHEMA=agrosoluce
 
 **Build Output:** `dist/agrosoluce`
 
+### Database Migrations
+
+Before using the application, you need to run database migrations. See [DATABASE_MIGRATION_GUIDE.md](./DATABASE_MIGRATION_GUIDE.md) for detailed instructions.
+
+**Quick Start:**
+```bash
+# Generate combined migration SQL file
+npm run migrate:generate
+
+# Then execute in Supabase SQL Editor
+# See DATABASE_MIGRATION_GUIDE.md for details
+```
+
 ## 🔐 Access Control
 
 Contact information is gated behind access control. Use access code `AGRO-ACCESS-2025` for development.
