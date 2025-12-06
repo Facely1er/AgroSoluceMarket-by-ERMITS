@@ -52,6 +52,20 @@ export default function Footer() {
                 </a>
               </div>
             </div>
+            <div className="mt-4 space-y-2">
+              <Link 
+                to="/principles/farmer-protection" 
+                className="text-sm text-gray-600 hover:text-secondary-600 block"
+              >
+                Farmer Protection Principles
+              </Link>
+              <Link 
+                to="/governance/due-care" 
+                className="text-sm text-gray-600 hover:text-secondary-600 block"
+              >
+                Governance & Due-Care Principles
+              </Link>
+            </div>
             <div className="mt-4 text-sm text-gray-500">
               © {new Date().getFullYear()} AgroSoluce. Tous droits réservés.
             </div>

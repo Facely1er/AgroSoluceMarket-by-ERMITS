@@ -3,6 +3,8 @@
 
 import { supabase } from '../../../lib/supabase/client';
 import { uploadDocument } from '../../../lib/supabase/storage';
+import type { EvidenceType } from '../types/evidenceType';
+import { EVIDENCE_TYPE_DEFAULT } from '../types/evidenceType';
 
 export interface EvidenceDocument {
   id: string;
@@ -18,6 +20,7 @@ export interface EvidenceDocument {
   file_name?: string;
   file_size_bytes?: number;
   mime_type?: string;
+  evidence_type?: EvidenceType; // Optional evidence typology
   created_at?: string;
   updated_at?: string;
 }
@@ -30,6 +33,7 @@ export interface EvidenceDocumentInput {
   issue_date?: string;
   expiration_date?: string;
   uploaded_by?: string;
+  evidence_type?: EvidenceType; // Optional evidence typology
   file: File;
 }
 
@@ -73,6 +77,7 @@ export async function uploadEvidenceDocument(
         issued_at: input.issue_date ? new Date(input.issue_date).toISOString() : null,
         expires_at: input.expiration_date ? new Date(input.expiration_date).toISOString() : null,
         expiry_date: input.expiration_date || null,
+        evidence_type: input.evidence_type || EVIDENCE_TYPE_DEFAULT,
       })
       .select()
       .single();
@@ -201,6 +206,7 @@ function transformDocument(data: any): EvidenceDocument {
     file_name: data.file_name,
     file_size_bytes: data.file_size_bytes,
     mime_type: data.mime_type,
+    evidence_type: data.evidence_type || EVIDENCE_TYPE_DEFAULT,
     created_at: data.created_at,
     updated_at: data.updated_at,
   };

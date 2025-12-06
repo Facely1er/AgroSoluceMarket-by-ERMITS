@@ -277,58 +277,39 @@ export default function CooperativeProfile() {
                     Due Diligence Summary
                   </h3>
                   <div className="bg-gray-50 rounded-lg p-6 space-y-4">
-                    {/* EUDR Status */}
+                    {/* EUDR Information */}
                     <div className="flex items-start justify-between p-4 bg-white rounded-lg border">
                       <div className="flex items-start gap-3">
                         <FileCheck className="h-5 w-5 text-blue-600 mt-0.5" />
                         <div>
-                          <h4 className="font-medium text-gray-900 mb-1">EUDR Compliance</h4>
+                          <h4 className="font-medium text-gray-900 mb-1">EUDR Information</h4>
                           <p className="text-sm text-gray-600">
-                            European Union Deforestation Regulation readiness
+                            European Union Deforestation Regulation context
                           </p>
                         </div>
                       </div>
                       <div>
-                        {(cooperative.complianceFlags as any)?.eudrReady ? (
-                          <span className="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full flex items-center gap-1">
-                            <CheckCircle className="h-4 w-4" />
-                            Ready
-                          </span>
-                        ) : (
-                          <span className="px-3 py-1 bg-yellow-100 text-yellow-800 text-sm rounded-full flex items-center gap-1">
-                            <Clock className="h-4 w-4" />
-                            In Progress
-                          </span>
-                        )}
+                        <span className="px-3 py-1 bg-gray-100 text-gray-800 text-sm rounded-full">
+                          Informational
+                        </span>
                       </div>
                     </div>
 
-                    {/* Child Labor Risk */}
+                    {/* Contextual Information */}
                     <div className="flex items-start justify-between p-4 bg-white rounded-lg border">
                       <div className="flex items-start gap-3">
                         <AlertTriangle className="h-5 w-5 text-orange-600 mt-0.5" />
                         <div>
-                          <h4 className="font-medium text-gray-900 mb-1">Child Labor Risk</h4>
+                          <h4 className="font-medium text-gray-900 mb-1">Contextual Information</h4>
                           <p className="text-sm text-gray-600">
-                            Assessment of child labor risk in supply chain
+                            Contextual information about supply chain characteristics
                           </p>
                         </div>
                       </div>
                       <div>
-                        {(() => {
-                          const risk = (cooperative.complianceFlags as any)?.childLaborRisk || 'unknown';
-                          const riskColors = {
-                            low: 'bg-green-100 text-green-800',
-                            medium: 'bg-yellow-100 text-yellow-800',
-                            high: 'bg-red-100 text-red-800',
-                            unknown: 'bg-gray-100 text-gray-800'
-                          };
-                          return (
-                            <span className={`px-3 py-1 text-sm rounded-full capitalize ${riskColors[risk as keyof typeof riskColors]}`}>
-                              {risk}
-                            </span>
-                          );
-                        })()}
+                        <span className="px-3 py-1 bg-gray-100 text-gray-800 text-sm rounded-full">
+                          Context Only
+                        </span>
                       </div>
                     </div>
 
@@ -355,7 +336,7 @@ export default function CooperativeProfile() {
                         Impact Profile (via ImpactSoluce)
                       </h4>
                       <p className="text-sm text-primary-700">
-                        Coming soon: ESG & social impact scoring for this cooperative.
+                        Additional contextual information may be available through ImpactSoluce integration.
                       </p>
                     </div>
                   </div>

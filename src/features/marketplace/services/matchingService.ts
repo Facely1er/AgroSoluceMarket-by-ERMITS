@@ -119,14 +119,14 @@ async function scoreMatch(
     }
   }
 
-  // Check EUDR compliance (simplified - would need actual verification)
+  // Check EUDR context (informational only)
   if (requirements.eudrCompliant) {
-    // In a real implementation, check actual EUDR verification status
+    // Note: This checks for EUDR context information only, not compliance determination
     if (cooperative.is_verified) {
       score += 20;
-      matchReasons.push('Coopérative vérifiée (potentiellement EUDR conforme)');
+      matchReasons.push('EUDR context information available');
     } else {
-      missingRequirements.push('Vérification EUDR requise');
+      missingRequirements.push('EUDR context information not available');
     }
   }
 

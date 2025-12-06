@@ -244,8 +244,8 @@ export default function CooperativeDirectory() {
                 className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent"
               >
                 <option value="">EUDR: All</option>
-                <option value="yes">EUDR: Ready</option>
-                <option value="no">EUDR: Not Ready</option>
+                <option value="yes">EUDR Context Available</option>
+                <option value="no">EUDR Context Not Available</option>
               </select>
               <div className="flex flex-wrap gap-2">
                 {availableCertifications.slice(0, 3).map(cert => (

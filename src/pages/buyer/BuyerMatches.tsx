@@ -61,11 +61,6 @@ export default function BuyerMatches() {
     }
   };
 
-  const getScoreColor = (score: number) => {
-    if (score >= 80) return 'text-green-600 bg-green-50';
-    if (score >= 60) return 'text-yellow-600 bg-yellow-50';
-    return 'text-orange-600 bg-orange-50';
-  };
 
   const getRiskBadgeColor = (risk?: string) => {
     switch (risk) {
@@ -212,10 +207,6 @@ export default function BuyerMatches() {
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
                         <h3 className="text-xl font-semibold text-gray-900">{coop.name}</h3>
-                        <span className={`px-3 py-1 rounded-full text-sm font-medium ${getScoreColor(match.matchScore)}`}>
-                          <Star className="inline h-4 w-4 mr-1" />
-                          {match.matchScore}% Match
-                        </span>
                       </div>
                       <div className="flex flex-wrap gap-4 text-sm text-gray-600">
                         {coop.country && (
@@ -247,17 +238,16 @@ export default function BuyerMatches() {
                     </Link>
                   </div>
 
-                  {/* Compliance Flags */}
+                  {/* Contextual Information */}
                   <div className="flex flex-wrap gap-2 mb-4">
                     {coop.complianceFlags.eudrReady && (
-                      <span className="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full flex items-center gap-1">
-                        <CheckCircle className="h-4 w-4" />
-                        EUDR Ready
+                      <span className="px-3 py-1 bg-gray-100 text-gray-800 text-sm rounded-full">
+                        EUDR Context Available
                       </span>
                     )}
                     {coop.complianceFlags.childLaborRisk && (
-                      <span className={`px-3 py-1 text-sm rounded-full ${getRiskBadgeColor(coop.complianceFlags.childLaborRisk)}`}>
-                        Child Labor Risk: {coop.complianceFlags.childLaborRisk}
+                      <span className="px-3 py-1 bg-gray-100 text-gray-800 text-sm rounded-full">
+                        Contextual Information Available
                       </span>
                     )}
                     {coop.certifications.map(cert => (

@@ -120,7 +120,7 @@ function getMatchReasons(request: BuyerRequest, coop: Cooperative): string[] {
   }
 
   if (coop.complianceFlags.eudrReady) {
-    reasons.push('EUDR compliant');
+    reasons.push('EUDR context available');
   }
 
   if (coop.complianceFlags.childLaborRisk === 'low') {
