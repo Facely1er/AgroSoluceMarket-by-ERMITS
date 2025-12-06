@@ -1,11 +1,15 @@
 import { useState, useEffect } from 'react';
-import { Building2, Package, ShoppingCart, MessageSquare, Users, Shield, FileText, Route } from 'lucide-react';
+import { Building2, Package, ShoppingCart, MessageSquare, Users, Shield, FileText, Route, CheckCircle, AlertCircle, XCircle } from 'lucide-react';
 import FarmerList from '../../features/producers/components/FarmerList';
 import ComplianceDashboard from '../../features/compliance/components/ComplianceDashboard';
 import AuditList from '../../features/evidence/components/AuditList';
 import FieldDeclarationForm from '../../features/evidence/components/FieldDeclarationForm';
 import { BatchCard } from '../../features/traceability/components';
 import { getBatchesByCooperative } from '../../features/traceability/api/traceabilityApi';
+import { getCooperativeById } from '../../features/cooperatives/api/cooperativesApi';
+import { useCooperativeEnrichment } from '../../hooks/useCooperativeEnrichment';
+import type { Cooperative } from '../../types';
+import CoopReadinessChecklist from '../../components/CoopReadinessChecklist';
 
 // Mock cooperative ID - in real app, get from auth/context
 const MOCK_COOPERATIVE_ID = 'cooperative-id-placeholder';
@@ -83,12 +87,192 @@ export default function CooperativeDashboard() {
 }
 
 function OverviewTab() {
+  const [cooperative, setCooperative] = useState<Cooperative | null>(null);
+  const [loading, setLoading] = useState(true);
+  const { recomputeEnrichment } = useCooperativeEnrichment();
+
+  useEffect(() => {
+    loadCooperative();
+  }, []);
+
+  const loadCooperative = async () => {
+    // In real app, get cooperative ID from auth/context
+    const { data } = await getCooperativeById(MOCK_COOPERATIVE_ID);
+    if (data) {
+      setCooperative(data);
+    }
+    setLoading(false);
+  };
+
+  const handleRecalculate = async () => {
+    if (!cooperative?.id) return;
+    const { data } = await recomputeEnrichment(cooperative.id);
+    if (data) {
+      setCooperative(data);
+    }
+  };
+
+  if (loading) {
+    return <div className="text-center py-12 text-gray-500">Chargement...</div>;
+  }
+
+  const readinessStatus = cooperative?.readiness_status || 'not_ready';
+  const coverageMetrics = cooperative?.coverage_metrics;
+  const contextualRisks = cooperative?.contextual_risks;
+
+  // Readiness badge styling
+  const getReadinessBadge = () => {
+    switch (readinessStatus) {
+      case 'buyer_ready':
+        return {
+          label: 'Prêt pour les acheteurs',
+          color: 'bg-green-100 text-green-800 border-green-300',
+          icon: CheckCircle,
+        };
+      case 'in_progress':
+        return {
+          label: 'En cours',
+          color: 'bg-yellow-100 text-yellow-800 border-yellow-300',
+          icon: AlertCircle,
+        };
+      default:
+        return {
+          label: 'Non prêt',
+          color: 'bg-red-100 text-red-800 border-red-300',
+          icon: XCircle,
+        };
+    }
+  };
+
+  const readinessBadge = getReadinessBadge();
+  const BadgeIcon = readinessBadge.icon;
+
   return (
     <div className="space-y-6">
+      {/* Readiness Status Badge */}
+      <div className="bg-white rounded-lg shadow-md p-6">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-semibold text-gray-900">Statut de Préparation</h2>
+          <button
+            onClick={handleRecalculate}
+            className="px-4 py-2 text-sm bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+          >
+            Recalculer
+          </button>
+        </div>
+        <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg border ${readinessBadge.color}`}>
+          <BadgeIcon className="h-5 w-5" />
+          <span className="font-medium">{readinessBadge.label}</span>
+        </div>
+      </div>
+
+      {/* Coverage Metrics */}
+      {coverageMetrics && (
+        <div className="bg-white rounded-lg shadow-md p-6">
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">Couverture des Données</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Farmers Coverage */}
+            <div className="border rounded-lg p-4">
+              <div className="text-sm text-gray-600 mb-2">Producteurs Documentés</div>
+              <div className="text-2xl font-bold text-gray-900 mb-1">
+                {coverageMetrics.farmers_with_declarations || 0} / {coverageMetrics.farmers_total || 0}
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-2">
+                <div
+                  className="bg-primary-600 h-2 rounded-full"
+                  style={{
+                    width: `${coverageMetrics.farmers_total > 0 
+                      ? ((coverageMetrics.farmers_with_declarations || 0) / coverageMetrics.farmers_total * 100) 
+                      : 0}%`,
+                  }}
+                />
+              </div>
+              <div className="text-xs text-gray-500 mt-1">
+                {coverageMetrics.farmers_total > 0
+                  ? Math.round(((coverageMetrics.farmers_with_declarations || 0) / coverageMetrics.farmers_total) * 100)
+                  : 0}%
+              </div>
+            </div>
+
+            {/* Plots Coverage */}
+            <div className="border rounded-lg p-4">
+              <div className="text-sm text-gray-600 mb-2">Parcelles avec Géolocalisation</div>
+              <div className="text-2xl font-bold text-gray-900 mb-1">
+                {coverageMetrics.plots_with_geo || 0} / {coverageMetrics.plots_total || 0}
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-2">
+                <div
+                  className="bg-primary-600 h-2 rounded-full"
+                  style={{
+                    width: `${coverageMetrics.plots_total > 0 
+                      ? ((coverageMetrics.plots_with_geo || 0) / coverageMetrics.plots_total * 100) 
+                      : 0}%`,
+                  }}
+                />
+              </div>
+              <div className="text-xs text-gray-500 mt-1">
+                {coverageMetrics.plots_total > 0
+                  ? Math.round(((coverageMetrics.plots_with_geo || 0) / coverageMetrics.plots_total) * 100)
+                  : 0}%
+              </div>
+            </div>
+
+            {/* Documents Coverage */}
+            <div className="border rounded-lg p-4">
+              <div className="text-sm text-gray-600 mb-2">Documents Requis</div>
+              <div className="text-2xl font-bold text-gray-900 mb-1">
+                {coverageMetrics.required_docs_present || 0} / {coverageMetrics.required_docs_total || 0}
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-2">
+                <div
+                  className="bg-primary-600 h-2 rounded-full"
+                  style={{
+                    width: `${coverageMetrics.required_docs_total > 0 
+                      ? ((coverageMetrics.required_docs_present || 0) / coverageMetrics.required_docs_total * 100) 
+                      : 0}%`,
+                  }}
+                />
+              </div>
+              <div className="text-xs text-gray-500 mt-1">
+                {coverageMetrics.required_docs_total > 0
+                  ? Math.round(((coverageMetrics.required_docs_present || 0) / coverageMetrics.required_docs_total) * 100)
+                  : 0}%
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Contextual Risks */}
+      {contextualRisks && (
+        <div className="bg-white rounded-lg shadow-md p-6">
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">Risques Contextuels</h2>
+          <div className="flex flex-wrap gap-2">
+            <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
+              Zone de déforestation: <strong>{contextualRisks.deforestation_zone || 'unknown'}</strong>
+            </span>
+            <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
+              Zone protégée: <strong>{contextualRisks.protected_area_overlap || 'unknown'}</strong>
+            </span>
+            <span className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
+              Risque climatique: <strong>{contextualRisks.climate_risk || 'unknown'}</strong>
+            </span>
+          </div>
+        </div>
+      )}
+
+      {/* Readiness Checklist */}
+      {cooperative && (
+        <CoopReadinessChecklist cooperative={cooperative} />
+      )}
+
+      {/* Quick Stats */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
           <Users className="h-8 w-8 text-primary-600 mb-4" />
-          <div className="text-2xl font-bold text-gray-900 mb-1">-</div>
+          <div className="text-2xl font-bold text-gray-900 mb-1">
+            {coverageMetrics?.farmers_total || '-'}
+          </div>
           <div className="text-sm text-gray-600">Producteurs</div>
         </div>
         <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-secondary-500">
@@ -103,25 +287,11 @@ function OverviewTab() {
         </div>
         <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-blue-500">
           <Shield className="h-8 w-8 text-blue-600 mb-4" />
-          <div className="text-2xl font-bold text-gray-900 mb-1">-</div>
-          <div className="text-sm text-gray-600">Statut Conformité</div>
+          <div className="text-2xl font-bold text-gray-900 mb-1">
+            {coverageMetrics?.plots_total || '-'}
+          </div>
+          <div className="text-sm text-gray-600">Parcelles</div>
         </div>
-      </div>
-
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-        <h3 className="text-lg font-semibold text-blue-900 mb-2">
-          Bienvenue sur votre tableau de bord
-        </h3>
-        <p className="text-blue-800 mb-4">
-          Utilisez les onglets ci-dessus pour gérer vos producteurs, produits, traçabilité, conformité et preuves.
-        </p>
-        <ul className="space-y-2 text-blue-800">
-          <li>• <strong>Producteurs:</strong> Gérez votre registre de producteurs</li>
-          <li>• <strong>Produits:</strong> Listez et gérez vos produits</li>
-          <li>• <strong>Traçabilité:</strong> Suivez vos lots et chaînes d'approvisionnement</li>
-          <li>• <strong>Conformité:</strong> Gérez vos certifications et vérifications EUDR</li>
-          <li>• <strong>Preuves:</strong> Déclarations de champs, audits et attestations</li>
-        </ul>
       </div>
     </div>
   );

@@ -37,6 +37,19 @@ export async function getCooperatives(): Promise<{
       status: coop.is_verified ? 'verified' : 'pending',
       // Ensure id is string (UUID)
       id: coop.id.toString(),
+      // v1 scope fields
+      country: coop.country,
+      commodity: coop.commodity,
+      annualVolumeTons: coop.annual_volume_tons,
+      complianceFlags: coop.compliance_flags || {},
+      contactEmail: coop.contact_email || coop.email,
+      contactPhone: coop.contact_phone || coop.phone,
+      profileSource: coop.profile_source,
+      // Enrichment fields
+      contextual_risks: coop.contextual_risks,
+      regulatory_context: coop.regulatory_context,
+      coverage_metrics: coop.coverage_metrics,
+      readiness_status: coop.readiness_status,
     })) as Cooperative[];
 
     return { data: transformed, error: null };
@@ -81,6 +94,19 @@ export async function getCooperativeById(id: string): Promise<{
       secteur: data.sector,
       status: data.is_verified ? 'verified' : 'pending',
       id: data.id.toString(),
+      // v1 scope fields
+      country: data.country,
+      commodity: data.commodity,
+      annualVolumeTons: data.annual_volume_tons,
+      complianceFlags: data.compliance_flags || {},
+      contactEmail: data.contact_email || data.email,
+      contactPhone: data.contact_phone || data.phone,
+      profileSource: data.profile_source,
+      // Enrichment fields
+      contextual_risks: data.contextual_risks,
+      regulatory_context: data.regulatory_context,
+      coverage_metrics: data.coverage_metrics,
+      readiness_status: data.readiness_status,
     } as Cooperative;
 
     return { data: transformed, error: null };
@@ -121,6 +147,11 @@ export async function searchCooperatives(query: string): Promise<{
       secteur: coop.sector,
       status: coop.is_verified ? 'verified' : 'pending',
       id: coop.id.toString(),
+      // Enrichment fields
+      contextual_risks: coop.contextual_risks,
+      regulatory_context: coop.regulatory_context,
+      coverage_metrics: coop.coverage_metrics,
+      readiness_status: coop.readiness_status,
     })) as Cooperative[];
 
     return { data: transformed, error: null };
@@ -158,6 +189,11 @@ export async function getCooperativesByRegion(region: string): Promise<{
       secteur: coop.sector,
       status: coop.is_verified ? 'verified' : 'pending',
       id: coop.id.toString(),
+      // Enrichment fields
+      contextual_risks: coop.contextual_risks,
+      regulatory_context: coop.regulatory_context,
+      coverage_metrics: coop.coverage_metrics,
+      readiness_status: coop.readiness_status,
     })) as Cooperative[];
 
     return { data: transformed, error: null };
@@ -195,6 +231,11 @@ export async function getCooperativesByDepartment(department: string): Promise<{
       secteur: coop.sector,
       status: coop.is_verified ? 'verified' : 'pending',
       id: coop.id.toString(),
+      // Enrichment fields
+      contextual_risks: coop.contextual_risks,
+      regulatory_context: coop.regulatory_context,
+      coverage_metrics: coop.coverage_metrics,
+      readiness_status: coop.readiness_status,
     })) as Cooperative[];
 
     return { data: transformed, error: null };

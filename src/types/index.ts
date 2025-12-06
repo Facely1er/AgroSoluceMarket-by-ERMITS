@@ -46,6 +46,40 @@ export interface Cooperative {
   phonesE164?: string[];
   primaryPhoneE164?: string | null;
   searchKeywords?: string[];
+  
+  // v1 Scope fields (AgroSoluce v1)
+  country?: string;
+  commodity?: string; // e.g. cocoa, coffee
+  annualVolumeTons?: number;
+  complianceFlags?: {
+    eudrReady?: boolean;
+    childLaborRisk?: 'unknown' | 'low' | 'medium' | 'high';
+    otherRisks?: string[];
+  };
+  contactEmail?: string;
+  contactPhone?: string;
+  profileSource?: string;
+  
+  // Phase 1 Data Enrichment fields
+  contextual_risks?: {
+    deforestation_zone?: 'low' | 'medium' | 'high' | 'unknown';
+    protected_area_overlap?: 'yes' | 'no' | 'unknown';
+    climate_risk?: 'low' | 'medium' | 'high' | 'unknown';
+  };
+  regulatory_context?: {
+    eudr_applicable?: boolean;
+    child_labor_due_diligence_required?: boolean;
+    other_requirements?: string[];
+  };
+  coverage_metrics?: {
+    farmers_total?: number;
+    farmers_with_declarations?: number;
+    plots_total?: number;
+    plots_with_geo?: number;
+    required_docs_total?: number;
+    required_docs_present?: number;
+  };
+  readiness_status?: 'not_ready' | 'in_progress' | 'buyer_ready';
 }
 
 // Database-aligned Product type
@@ -81,6 +115,35 @@ export interface ProductCategory {
   description?: string;
   parent_category_id?: string;
   created_at?: string;
+}
+
+// Document type (Phase 1 Data Enrichment)
+export type DocType = 'certification' | 'policy' | 'land_evidence' | 'other';
+
+export interface Document {
+  id: string; // UUID
+  entity_type: 'cooperative' | 'farmer' | 'plot' | 'lot' | 'certification' | 'other';
+  entity_id: string;
+  document_type: string; // Legacy field, maps to doc_type
+  doc_type?: DocType; // Phase 1 enrichment field
+  title: string;
+  file_url: string;
+  file_name?: string;
+  file_size_bytes?: number;
+  mime_type?: string;
+  uploaded_by?: string;
+  uploaded_at?: string;
+  expiry_date?: string; // Legacy field
+  expires_at?: string; // Phase 1 enrichment field
+  issued_at?: string; // Phase 1 enrichment field
+  issuer?: string; // Phase 1 enrichment field
+  is_required_type?: boolean; // Phase 1 enrichment field
+  is_internal_only?: boolean;
+  is_buyer_visible?: boolean;
+  description?: string;
+  metadata?: Record<string, any>;
+  created_at?: string;
+  updated_at?: string;
 }
 
 // User Profile (from database)
@@ -301,5 +364,22 @@ export interface Attestation {
   signed_at: string; // ISO timestamp
   document_url?: string;
   created_at?: string;
+}
+
+// Canonical Cooperative Directory
+export type RecordStatus = 'active' | 'inactive' | 'archived' | 'pending';
+
+export interface CanonicalCooperativeDirectory {
+  coop_id: string; // UUID
+  name: string;
+  country?: string;
+  region?: string;
+  department?: string;
+  primary_crop?: string;
+  source_registry?: string;
+  record_status: RecordStatus;
+  pilot_id?: string | null; // Pilot cohort identifier (nullable)
+  pilot_label?: string; // Pilot cohort label (e.g., "Pilot A")
+  created_at?: string; // ISO timestamp
 }
 

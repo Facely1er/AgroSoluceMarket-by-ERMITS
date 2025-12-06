@@ -44,6 +44,20 @@ export default function BuyerPortal() {
             </a>
           </div>
 
+          <div className="bg-white rounded-lg shadow-md p-6 text-center border-2 border-primary-500">
+            <ShoppingCart className="h-12 w-12 text-primary-600 mx-auto mb-4" />
+            <h3 className="text-lg font-semibold mb-2">Create Buyer Request</h3>
+            <p className="text-gray-600 text-sm mb-4">
+              Submit your sourcing requirements and get matched with suitable cooperatives
+            </p>
+            <a
+              href="/buyer/request"
+              className="inline-block px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
+            >
+              Create Request
+            </a>
+          </div>
+
           <div className="bg-white rounded-lg shadow-md p-6 text-center">
             <Heart className="h-12 w-12 text-red-500 mx-auto mb-4" />
             <h3 className="text-lg font-semibold mb-2">Favoris</h3>

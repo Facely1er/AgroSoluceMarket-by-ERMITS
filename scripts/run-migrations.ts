@@ -28,7 +28,11 @@ const migrations = [
   '003_add_traceability_tables.sql',
   '004_add_compliance_tables.sql',
   '005_add_evidence_tables.sql',
-  '006_add_logistics_tables.sql'
+  '006_add_logistics_tables.sql',
+  '007_agrosoluce_v1_scope.sql',
+  '008_farmers_first_toolkit.sql',
+  '009_dataset_enrichment_guide.sql',
+  '010_cooperative_dashboard_enhancements.sql'
 ];
 
 /**

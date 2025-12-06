@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { MapPin, Building2, Phone, User, ArrowLeft, CheckCircle, Clock, BarChart3, Users } from 'lucide-react';
+import { MapPin, Building2, Phone, User, ArrowLeft, CheckCircle, Clock, BarChart3, Users, Shield, AlertTriangle, FileCheck, BookOpen } from 'lucide-react';
 import { useCooperatives } from '../../hooks/useCooperatives';
 import CooperativeLocationMap from '../../features/cooperatives/components/CooperativeLocationMap';
 import CooperativeStats from '../../features/cooperatives/components/CooperativeStats';
@@ -78,7 +78,7 @@ export default function CooperativeProfile() {
         {/* Header */}
         <div className="bg-white rounded-lg shadow-md p-6 mb-6 border-t-4 border-secondary-500">
           <div className="flex items-start justify-between">
-            <div>
+            <div className="flex-1">
               <h1 className="text-3xl font-bold text-gray-900 mb-2">
                 {cooperative.name}
               </h1>
@@ -93,6 +93,15 @@ export default function CooperativeProfile() {
                   En attente de vérification
                 </span>
               )}
+            </div>
+            <div className="ml-4">
+              <Link
+                to={`/cooperative/${cooperative.id}/farmers-first`}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
+              >
+                <BookOpen className="h-5 w-5" />
+                Farmers First Dashboard
+              </Link>
             </div>
           </div>
         </div>
@@ -260,6 +269,97 @@ export default function CooperativeProfile() {
                     </p>
                   </div>
                 )}
+
+                {/* Due Diligence Panel - v1 Scope */}
+                <div className="border-t pt-6">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                    <Shield className="h-5 w-5 text-primary-600" />
+                    Due Diligence Summary
+                  </h3>
+                  <div className="bg-gray-50 rounded-lg p-6 space-y-4">
+                    {/* EUDR Status */}
+                    <div className="flex items-start justify-between p-4 bg-white rounded-lg border">
+                      <div className="flex items-start gap-3">
+                        <FileCheck className="h-5 w-5 text-blue-600 mt-0.5" />
+                        <div>
+                          <h4 className="font-medium text-gray-900 mb-1">EUDR Compliance</h4>
+                          <p className="text-sm text-gray-600">
+                            European Union Deforestation Regulation readiness
+                          </p>
+                        </div>
+                      </div>
+                      <div>
+                        {(cooperative.complianceFlags as any)?.eudrReady ? (
+                          <span className="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full flex items-center gap-1">
+                            <CheckCircle className="h-4 w-4" />
+                            Ready
+                          </span>
+                        ) : (
+                          <span className="px-3 py-1 bg-yellow-100 text-yellow-800 text-sm rounded-full flex items-center gap-1">
+                            <Clock className="h-4 w-4" />
+                            In Progress
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Child Labor Risk */}
+                    <div className="flex items-start justify-between p-4 bg-white rounded-lg border">
+                      <div className="flex items-start gap-3">
+                        <AlertTriangle className="h-5 w-5 text-orange-600 mt-0.5" />
+                        <div>
+                          <h4 className="font-medium text-gray-900 mb-1">Child Labor Risk</h4>
+                          <p className="text-sm text-gray-600">
+                            Assessment of child labor risk in supply chain
+                          </p>
+                        </div>
+                      </div>
+                      <div>
+                        {(() => {
+                          const risk = (cooperative.complianceFlags as any)?.childLaborRisk || 'unknown';
+                          const riskColors = {
+                            low: 'bg-green-100 text-green-800',
+                            medium: 'bg-yellow-100 text-yellow-800',
+                            high: 'bg-red-100 text-red-800',
+                            unknown: 'bg-gray-100 text-gray-800'
+                          };
+                          return (
+                            <span className={`px-3 py-1 text-sm rounded-full capitalize ${riskColors[risk as keyof typeof riskColors]}`}>
+                              {risk}
+                            </span>
+                          );
+                        })()}
+                      </div>
+                    </div>
+
+                    {/* Additional Risk Assessments */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="p-4 bg-white rounded-lg border">
+                        <h4 className="font-medium text-gray-900 mb-2 text-sm">Land-use & Deforestation Risk</h4>
+                        <span className="px-3 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
+                          Assessment Pending
+                        </span>
+                      </div>
+                      <div className="p-4 bg-white rounded-lg border">
+                        <h4 className="font-medium text-gray-900 mb-2 text-sm">Traceability Confidence</h4>
+                        <span className="px-3 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
+                          Assessment Pending
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Integration Hook for ImpactSoluce */}
+                    <div className="mt-4 p-4 bg-primary-50 rounded-lg border border-primary-200">
+                      <h4 className="font-medium text-primary-900 mb-2 flex items-center gap-2">
+                        <BarChart3 className="h-4 w-4" />
+                        Impact Profile (via ImpactSoluce)
+                      </h4>
+                      <p className="text-sm text-primary-700">
+                        Coming soon: ESG & social impact scoring for this cooperative.
+                      </p>
+                    </div>
+                  </div>
+                </div>
 
                 {cooperative.latitude && cooperative.longitude && (
                   <div>
