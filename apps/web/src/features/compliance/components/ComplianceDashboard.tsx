@@ -81,7 +81,7 @@ export default function ComplianceDashboard({ cooperativeId }: ComplianceDashboa
   if (loading) {
     return (
       <div className="flex justify-center items-center py-12">
-        <div className="text-gray-500">Chargement du tableau de bord de conformité...</div>
+        <div className="text-gray-500">Chargement du tableau de bord de documentation...</div>
       </div>
     );
   }
@@ -97,7 +97,7 @@ export default function ComplianceDashboard({ cooperativeId }: ComplianceDashboa
   if (!status) {
     return (
       <div className="text-center py-12 text-gray-500">
-        Aucune donnée de conformité disponible
+        Aucune donnée de documentation disponible
       </div>
     );
   }
@@ -112,7 +112,7 @@ export default function ComplianceDashboard({ cooperativeId }: ComplianceDashboa
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
             <Shield className="h-8 w-8 text-primary-600" />
-            <h2 className="text-2xl font-bold text-gray-900">Statut de Conformité</h2>
+            <h2 className="text-2xl font-bold text-gray-900">Statut de Documentation</h2>
           </div>
           <div className={`flex items-center gap-2 px-4 py-2 rounded-full border ${getOverallStatusColor()}`}>
             {getOverallStatusIcon()}

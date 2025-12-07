@@ -307,7 +307,7 @@ export default function DirectoryPage() {
             <div className="text-3xl font-bold text-primary-600 mb-1">
               {stats.total.toLocaleString()}
             </div>
-            <div className="text-gray-600 text-sm">Enregistrements Totaux</div>
+            <div className="text-gray-600 text-sm">Enregistrements dans le répertoire</div>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-md text-center border-l-4 border-green-500">
             <div className="text-3xl font-bold text-green-600 mb-1">

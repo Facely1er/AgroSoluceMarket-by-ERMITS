@@ -4,7 +4,8 @@
  * TypeScript Type Definitions
  * =====================================================
  * Version: 1.0
- * Purpose: Type-safe interfaces for child labor compliance tracking
+ * Purpose: Type-safe interfaces for child labor monitoring and documentation tracking
+ * Note: This module tracks documentation and self-assessments, not compliance determinations
  * =====================================================
  */
 
@@ -56,12 +57,16 @@ export enum LaborCertification {
   GlobalGAP = 'globalgap',
 }
 
-export enum ComplianceRating {
+export enum ReadinessRating {
   Excellent = 'Excellent',
   Good = 'Good',
   Fair = 'Fair',
   Poor = 'Poor',
 }
+
+// Legacy alias for backward compatibility during migration
+/** @deprecated Use ReadinessRating instead. This will be removed in a future version. */
+export const ComplianceRating = ReadinessRating;
 
 // =====================================================
 // 2. BASE INTERFACES
@@ -140,8 +145,13 @@ export interface ChildLaborAssessment {
   violationSeverity: ViolationSeverity;
   violationDetails: Violation[];
 
-  // Compliance Score (0-100, auto-calculated)
-  complianceScore: number;
+  // Readiness Score (0-100, auto-calculated from self-assessment)
+  // This is not a compliance determination - it reflects documentation and self-reported data
+  readinessScore: number;
+  
+  // Legacy field for backward compatibility during migration
+  /** @deprecated Use readinessScore instead. This will be removed in a future version. */
+  complianceScore?: number;
 
   // Supporting Evidence
   evidenceDocuments: string[];
@@ -395,22 +405,26 @@ export interface ChildLaborIncident {
 // 4. VIEW MODELS & AGGREGATIONS
 // =====================================================
 
-export interface CooperativeComplianceStatus {
+export interface CooperativeReadinessStatus {
   cooperativeId: string;
   cooperativeName: string;
   region: string;
   department: string;
   latestAssessmentId?: string;
   assessmentDate?: string;
-  complianceScore?: number;
+  readinessScore?: number; // Self-assessment score, not a compliance determination
   violationSeverity?: ViolationSeverity;
   childrenEnrolledSchool?: number;
   schoolEnrollmentRate?: number;
   childLaborViolations?: number;
   nextAssessmentDue?: string;
-  complianceRating: ComplianceRating;
+  readinessRating: ReadinessRating;
   activeCertifications: number;
 }
+
+// Legacy alias for backward compatibility during migration
+/** @deprecated Use CooperativeReadinessStatus instead. This will be removed in a future version. */
+export type CooperativeComplianceStatus = CooperativeReadinessStatus;
 
 export interface SocialImpactSummary {
   cooperativeId: string;
@@ -506,11 +520,11 @@ export interface ReportIncidentRequest {
 // 6. ANALYTICS & REPORTING TYPES
 // =====================================================
 
-export interface ComplianceDashboard {
+export interface MonitoringDashboard {
   totalCooperatives: number;
   cooperativesWithGoodScores: number; // Cooperatives with assessment scores ≥75
-  complianceRate: number; // Percentage of cooperatives with scores ≥75
-  averageComplianceScore: number;
+  documentationCoverageRate: number; // Percentage of cooperatives with documentation scores ≥75
+  averageReadinessScore: number; // Average self-assessment score, not a compliance determination
   totalAssessments: number;
   assessmentsDueThisMonth: number;
   totalViolations: number;
@@ -518,6 +532,10 @@ export interface ComplianceDashboard {
   activeCertifications: number;
   expiringSoonCertifications: number;
 }
+
+// Legacy alias for backward compatibility during migration
+/** @deprecated Use MonitoringDashboard instead. This will be removed in a future version. */
+export type ComplianceDashboard = MonitoringDashboard;
 
 export interface SocialImpactDashboard {
   totalChildrenHelped: number;
@@ -529,22 +547,30 @@ export interface SocialImpactDashboard {
   cooperativesWithProgress: number;
 }
 
-export interface RegionalCompliance {
+export interface RegionalMonitoring {
   region: string;
   totalCooperatives: number;
   cooperativesWithGoodScores: number; // Cooperatives with assessment scores ≥75
-  complianceRate: number; // Percentage of cooperatives with scores ≥75
-  averageComplianceScore: number;
+  documentationCoverageRate: number; // Percentage of cooperatives with documentation scores ≥75
+  averageReadinessScore: number; // Average self-assessment score
   totalChildrenInSchool: number;
   totalViolations: number;
 }
 
-export interface ComplianceTrend {
+// Legacy alias for backward compatibility during migration
+/** @deprecated Use RegionalMonitoring instead. This will be removed in a future version. */
+export type RegionalCompliance = RegionalMonitoring;
+
+export interface ReadinessTrend {
   date: string;
-  averageComplianceScore: number;
+  averageReadinessScore: number; // Average self-assessment score over time
   totalViolations: number;
   childrenEnrolled: number;
 }
+
+// Legacy alias for backward compatibility during migration
+/** @deprecated Use ReadinessTrend instead. This will be removed in a future version. */
+export type ComplianceTrend = ReadinessTrend;
 
 export interface CertificationDistribution {
   certificationType: LaborCertification;
@@ -561,7 +587,13 @@ export interface AssessmentFilters {
   region?: string;
   department?: string;
   status?: AssessmentStatus;
+  minReadinessScore?: number; // Minimum self-assessment score filter
+  maxReadinessScore?: number; // Maximum self-assessment score filter
+  
+  // Legacy fields for backward compatibility during migration
+  /** @deprecated Use minReadinessScore instead. This will be removed in a future version. */
   minComplianceScore?: number;
+  /** @deprecated Use maxReadinessScore instead. This will be removed in a future version. */
   maxComplianceScore?: number;
   dateFrom?: string;
   dateTo?: string;

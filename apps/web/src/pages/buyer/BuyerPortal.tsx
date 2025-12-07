@@ -12,7 +12,7 @@ export default function BuyerPortal() {
             Espace Acheteur
           </h1>
           <p className="text-gray-600">
-            Découvrez et connectez-vous avec des coopératives vérifiées en Côte d'Ivoire
+            Découvrez et connectez-vous avec des coopératives agricoles en Côte d'Ivoire
           </p>
         </div>
 
@@ -34,7 +34,7 @@ export default function BuyerPortal() {
             <UsersRound className="h-12 w-12 text-primary-600 mx-auto mb-4" />
             <h3 className="text-lg font-semibold mb-2">Explorer les Coopératives</h3>
             <p className="text-gray-600 text-sm mb-4">
-              Parcourez notre répertoire de 3,797+ coopératives vérifiées
+              Parcourez notre répertoire de coopératives agricoles
             </p>
             <a
               href="/cooperatives"

@@ -1,6 +1,7 @@
 /**
  * Child Labor Monitoring Service
- * Handles all database interactions for child labor compliance
+ * Handles all database interactions for child labor monitoring and documentation tracking
+ * Note: This service tracks self-assessments and documentation, not compliance determinations
  */
 
 import { supabase } from '@/lib/supabase';
@@ -12,7 +13,8 @@ import type {
   CreateRemediationRequest,
   LaborCertificationRecord,
   SocialImpactMetrics,
-  CooperativeComplianceStatus,
+  CooperativeReadinessStatus,
+  CooperativeComplianceStatus, // Legacy type
   AssessmentFilters,
 } from '@/types/child-labor-monitoring-types';
 
@@ -145,11 +147,14 @@ export class ChildLaborService {
     if (filters.status) {
       query = query.eq('status', filters.status);
     }
-    if (filters.minComplianceScore !== undefined) {
-      query = query.gte('compliance_score', filters.minComplianceScore);
+    // Support both new and legacy filter names
+    const minScore = filters.minReadinessScore ?? filters.minComplianceScore;
+    const maxScore = filters.maxReadinessScore ?? filters.maxComplianceScore;
+    if (minScore !== undefined) {
+      query = query.gte('compliance_score', minScore); // Database column name unchanged
     }
-    if (filters.maxComplianceScore !== undefined) {
-      query = query.lte('compliance_score', filters.maxComplianceScore);
+    if (maxScore !== undefined) {
+      query = query.lte('compliance_score', maxScore); // Database column name unchanged
     }
     if (filters.dateFrom) {
       query = query.gte('assessment_date', filters.dateFrom);
@@ -385,7 +390,8 @@ export class ChildLaborService {
   // ========================================
 
   /**
-   * Get cooperative compliance status
+   * Get cooperative readiness status (self-assessment data)
+   * Note: This returns self-assessment data, not compliance determinations
    */
   static async getComplianceStatus(
     cooperativeId?: string
@@ -490,7 +496,8 @@ export class ChildLaborService {
       worstFormsViolations: data.worst_forms_violations,
       violationSeverity: data.violation_severity,
       violationDetails: data.violation_details,
-      complianceScore: data.compliance_score,
+      readinessScore: data.compliance_score, // Map DB column to readinessScore
+      complianceScore: data.compliance_score, // Legacy field for backward compatibility
       evidenceDocuments: data.evidence_documents,
       photographs: data.photographs,
       witnessStatements: data.witness_statements,

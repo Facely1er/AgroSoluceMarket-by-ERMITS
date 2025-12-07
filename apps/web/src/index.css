@@ -13,6 +13,11 @@
     @apply bg-gradient-to-r from-primary-600 to-secondary-500 bg-clip-text text-transparent;
   }
 
+  .readiness-score-bar {
+    transition: width 0.3s ease;
+  }
+  
+  /* Legacy class for backward compatibility */
   .compliance-score-bar {
     transition: width 0.3s ease;
   }

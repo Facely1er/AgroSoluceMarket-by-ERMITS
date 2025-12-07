@@ -1,7 +1,8 @@
 /**
  * =====================================================
- * Child Labor Compliance Dashboard
- * Main dashboard component for monitoring compliance across cooperatives
+ * Child Labor Monitoring Dashboard
+ * Main dashboard component for tracking documentation and self-assessments
+ * Note: This does not make compliance determinations
  * =====================================================
  */
 
@@ -9,11 +10,15 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CheckCircle2, BarChart3, AlertTriangle, Award, Plus, BookOpen, Trophy } from 'lucide-react';
 import {
+  CooperativeReadinessStatus,
+  MonitoringDashboard,
+  ReadinessRating,
+  AssessmentFilters,
+  ViolationSeverity,
+  // Legacy types for backward compatibility
   CooperativeComplianceStatus,
   ComplianceDashboard,
   ComplianceRating,
-  AssessmentFilters,
-  ViolationSeverity,
 } from '@/types/child-labor-monitoring-types';
 import { supabase } from '@/lib/supabase';
 
@@ -44,8 +49,8 @@ const ChildLaborDashboard: React.FC<ChildLaborDashboardProps> = ({
   const navigate = useNavigate();
   // State
   const [loading, setLoading] = useState(true);
-  const [dashboardData, setDashboardData] = useState<ComplianceDashboard | null>(null);
-  const [cooperativeStatuses, setCooperativeStatuses] = useState<CooperativeComplianceStatus[]>([]);
+  const [dashboardData, setDashboardData] = useState<MonitoringDashboard | null>(null);
+  const [cooperativeStatuses, setCooperativeStatuses] = useState<CooperativeReadinessStatus[]>([]);
   const [filters, _setFilters] = useState<AssessmentFilters>({
     region,
   });
@@ -64,11 +69,11 @@ const ChildLaborDashboard: React.FC<ChildLaborDashboardProps> = ({
         return;
       }
 
-      // Fetch compliance statistics
+      // Fetch readiness statistics (self-assessment data)
       const { data: statuses, error } = await supabase
-        .from('cooperative_compliance_status')
+        .from('cooperative_compliance_status') // Database table name unchanged for now
         .select('*')
-        .order('compliance_score', { ascending: false });
+        .order('compliance_score', { ascending: false }); // Database column name unchanged for now
 
       if (error) throw error;
 
@@ -85,13 +90,13 @@ const ChildLaborDashboard: React.FC<ChildLaborDashboardProps> = ({
   };
 
   const calculateDashboardMetrics = (
-    statuses: CooperativeComplianceStatus[]
-  ): ComplianceDashboard => {
+    statuses: CooperativeReadinessStatus[]
+  ): MonitoringDashboard => {
     const totalCooperatives = statuses.length;
     const cooperativesWithGoodScores = statuses.filter(
-      (s) => s.complianceScore && s.complianceScore >= 75
+      (s) => (s.readinessScore || s.complianceScore) && (s.readinessScore || s.complianceScore || 0) >= 75
     ).length;
-    const complianceRate = totalCooperatives > 0
+    const documentationCoverageRate = totalCooperatives > 0
       ? (cooperativesWithGoodScores / totalCooperatives) * 100
       : 0;
 
@@ -105,16 +110,16 @@ const ChildLaborDashboard: React.FC<ChildLaborDashboardProps> = ({
              s.violationSeverity === ViolationSeverity.Severe
     ).length;
 
-    const averageComplianceScore = statuses.reduce(
-      (sum, s) => sum + (s.complianceScore || 0),
+    const averageReadinessScore = statuses.reduce(
+      (sum, s) => sum + (s.readinessScore || s.complianceScore || 0),
       0
     ) / totalCooperatives || 0;
 
       return {
         totalCooperatives,
         cooperativesWithGoodScores,
-        complianceRate,
-      averageComplianceScore,
+        documentationCoverageRate,
+      averageReadinessScore,
       totalAssessments: totalCooperatives,
       assessmentsDueThisMonth: statuses.filter(s => 
         s.nextAssessmentDue && 
@@ -128,29 +133,37 @@ const ChildLaborDashboard: React.FC<ChildLaborDashboardProps> = ({
   };
 
   // Chart data preparation
-  const complianceDistribution = [
+  const readinessDistribution = [
     {
       name: 'Excellent (90-100)',
-      value: cooperativeStatuses.filter(s => (s.complianceScore || 0) >= 90).length,
+      value: cooperativeStatuses.filter(s => {
+        const score = s.readinessScore || s.complianceScore || 0;
+        return score >= 90;
+      }).length,
       color: '#10B981',
     },
     {
       name: 'Good (75-89)',
-      value: cooperativeStatuses.filter(
-        s => (s.complianceScore || 0) >= 75 && (s.complianceScore || 0) < 90
-      ).length,
+      value: cooperativeStatuses.filter(s => {
+        const score = s.readinessScore || s.complianceScore || 0;
+        return score >= 75 && score < 90;
+      }).length,
       color: '#3B82F6',
     },
     {
       name: 'Fair (60-74)',
-      value: cooperativeStatuses.filter(
-        s => (s.complianceScore || 0) >= 60 && (s.complianceScore || 0) < 75
-      ).length,
+      value: cooperativeStatuses.filter(s => {
+        const score = s.readinessScore || s.complianceScore || 0;
+        return score >= 60 && score < 75;
+      }).length,
       color: '#F59E0B',
     },
     {
       name: 'Poor (<60)',
-      value: cooperativeStatuses.filter(s => (s.complianceScore || 0) < 60).length,
+      value: cooperativeStatuses.filter(s => {
+        const score = s.readinessScore || s.complianceScore || 0;
+        return score < 60;
+      }).length,
       color: '#EF4444',
     },
   ];
@@ -207,7 +220,7 @@ const ChildLaborDashboard: React.FC<ChildLaborDashboardProps> = ({
   if (!dashboardData) {
     return (
       <div className="text-center p-8 text-gray-600">
-        No compliance data available. Please ensure the database schema is deployed.
+        No assessment data available. Please ensure the database schema is deployed.
       </div>
     );
   }
@@ -218,14 +231,14 @@ const ChildLaborDashboard: React.FC<ChildLaborDashboardProps> = ({
       <div className="border-b border-gray-200 pb-4 flex items-start justify-between">
         <div>
           <h1 className="text-3xl font-bold text-gray-900">
-            Child Labor Assessment Dashboard
+            Child Labor Monitoring Dashboard
           </h1>
           <p className="text-gray-600 mt-1">
-            Monitoring child labor assessment practices across {dashboardData.totalCooperatives} cooperatives
+            Tracking documentation and self-assessments across {dashboardData.totalCooperatives} cooperatives
           </p>
           <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mt-3 max-w-2xl">
             <p className="text-xs text-yellow-800">
-              <strong>Important:</strong> This dashboard displays self-assessment data. Assessments are non-certifying and do not replace audits or verification. Final sourcing decisions and compliance determinations remain the responsibility of buyers and operators.
+              <strong>Important:</strong> This dashboard displays self-assessment data. Assessments are non-certifying and do not replace audits or verification. This does not make compliance determinations. Final sourcing decisions and compliance determinations remain the responsibility of buyers and operators.
             </p>
           </div>
         </div>
@@ -241,17 +254,17 @@ const ChildLaborDashboard: React.FC<ChildLaborDashboardProps> = ({
       {/* Key Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <MetricCard
-          title="Assessment Score Rate"
-          value={`${dashboardData.complianceRate.toFixed(1)}%`}
+          title="Documentation Coverage Rate"
+          value={`${dashboardData.documentationCoverageRate.toFixed(1)}%`}
           subtitle={`${dashboardData.cooperativesWithGoodScores} / ${dashboardData.totalCooperatives} cooperatives with assessment scores ≥75`}
           icon={CheckCircle2}
           color="green"
-          trend={dashboardData.complianceRate >= 75 ? 'up' : 'down'}
+          trend={dashboardData.documentationCoverageRate >= 75 ? 'up' : 'down'}
         />
         <MetricCard
-          title="Avg Assessment Score"
-          value={dashboardData.averageComplianceScore.toFixed(0)}
-          subtitle="Self-assessment score (0-100 scale)"
+          title="Avg Readiness Score"
+          value={dashboardData.averageReadinessScore.toFixed(0)}
+          subtitle="Self-assessment score (0-100 scale, not a compliance determination)"
           icon={BarChart3}
           color="blue"
         />
@@ -302,7 +315,7 @@ const ChildLaborDashboard: React.FC<ChildLaborDashboardProps> = ({
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
               <Pie
-                data={complianceDistribution}
+                data={readinessDistribution}
                 cx="50%"
                 cy="50%"
                 labelLine={false}
@@ -311,7 +324,7 @@ const ChildLaborDashboard: React.FC<ChildLaborDashboardProps> = ({
                 fill="#8884d8"
                 dataKey="value"
               >
-                {complianceDistribution.map((entry, index) => (
+                {readinessDistribution.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={entry.color} />
                 ))}
               </Pie>
@@ -354,7 +367,8 @@ const ChildLaborDashboard: React.FC<ChildLaborDashboardProps> = ({
                     Region
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Assessment Score
+                    Readiness Score
+                    <span className="text-xs font-normal normal-case ml-1 text-gray-400">(Self-assessment)</span>
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Rating
@@ -392,15 +406,15 @@ const ChildLaborDashboard: React.FC<ChildLaborDashboardProps> = ({
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <div className="text-sm font-semibold text-gray-900">
-                          {status.complianceScore?.toFixed(0) || 'N/A'}
+                          {(status.readinessScore || status.complianceScore)?.toFixed(0) || 'N/A'}
                         </div>
                         <div className="ml-2">
-                          {getComplianceScoreBar(status.complianceScore)}
+                          {getReadinessScoreBar(status.readinessScore || status.complianceScore)}
                         </div>
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <ComplianceBadge rating={status.complianceRating} />
+                      <ReadinessBadge rating={status.readinessRating || (status as any).complianceRating} />
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                       {status.childrenEnrolledSchool || 0} ({status.schoolEnrollmentRate?.toFixed(1) || 0}%)
@@ -427,7 +441,7 @@ const ChildLaborDashboard: React.FC<ChildLaborDashboardProps> = ({
         </div>
       ) : (
         <div className="bg-white rounded-lg shadow p-8 text-center text-gray-600">
-          <p>No cooperative compliance data found. Add sample data to see results.</p>
+          <p>No cooperative assessment data found. Add sample data to see results.</p>
         </div>
       )}
     </div>
@@ -482,7 +496,7 @@ const TrendIndicator: React.FC<{ trend: 'up' | 'down' | 'neutral' }> = ({ trend 
   );
 };
 
-const ComplianceBadge: React.FC<{ rating: ComplianceRating }> = ({ rating }) => {
+const ReadinessBadge: React.FC<{ rating: ReadinessRating }> = ({ rating }) => {
   const colorClasses = {
     Excellent: 'bg-green-100 text-green-800',
     Good: 'bg-blue-100 text-blue-800',
@@ -493,11 +507,15 @@ const ComplianceBadge: React.FC<{ rating: ComplianceRating }> = ({ rating }) => 
   return (
     <span
       className={`px-2 py-1 text-xs font-semibold rounded-full ${colorClasses[rating]}`}
+      title="Readiness rating based on self-assessment (not a compliance determination)"
     >
       {rating}
     </span>
   );
 };
+
+// Legacy alias for backward compatibility
+const ComplianceBadge = ReadinessBadge;
 
 const ViolationBadge: React.FC<{ count: number }> = ({ count }) => {
   if (count === 0) {
@@ -517,7 +535,7 @@ const ViolationBadge: React.FC<{ count: number }> = ({ count }) => {
   );
 };
 
-const ComplianceScoreBar: React.FC<{ score: number }> = ({ score }) => {
+const ReadinessScoreBar: React.FC<{ score: number }> = ({ score }) => {
   const barRef = React.useRef<HTMLDivElement>(null);
   
   React.useEffect(() => {
@@ -536,19 +554,24 @@ const ComplianceScoreBar: React.FC<{ score: number }> = ({ score }) => {
     <div className="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
       <div
         ref={barRef}
-        className={`h-full ${color} compliance-score-bar`}
+        className={`h-full ${color} readiness-score-bar`}
+        title={`Readiness score: ${score}% (self-assessment, not a compliance determination)`}
       />
     </div>
   );
 };
 
-const getComplianceScoreBar = (score?: number) => {
+const getReadinessScoreBar = (score?: number) => {
   if (!score) return null;
-  return <ComplianceScoreBar score={score} />;
+  return <ReadinessScoreBar score={score} />;
 };
 
+// Legacy aliases for backward compatibility
+const ComplianceScoreBar = ReadinessScoreBar;
+const getComplianceScoreBar = getReadinessScoreBar;
+
 // Helper function to group by region
-const groupByRegion = (statuses: CooperativeComplianceStatus[]) => {
+const groupByRegion = (statuses: CooperativeReadinessStatus[]) => {
   const regionMap = new Map<string, {
     region: string;
     totalScore: number;
@@ -564,7 +587,7 @@ const groupByRegion = (statuses: CooperativeComplianceStatus[]) => {
       violations: 0,
     };
 
-    existing.totalScore += status.complianceScore || 0;
+    existing.totalScore += status.readinessScore || status.complianceScore || 0;
     existing.count += 1;
     existing.violations += status.childLaborViolations || 0;
 

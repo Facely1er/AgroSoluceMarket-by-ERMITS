@@ -50,8 +50,8 @@ const AssessmentForm: React.FC = () => {
       ? (formData.childrenEnrolledSchool / formData.totalChildrenInCommunity) * 100
       : 0;
 
-  // Calculate assessment score (simplified)
-  const calculateComplianceScore = (): number => {
+  // Calculate readiness score (self-assessment, not a compliance determination)
+  const calculateReadinessScore = (): number => {
     let score = 100;
 
     // Deduct for violations
@@ -74,7 +74,9 @@ const AssessmentForm: React.FC = () => {
     return Math.max(0, Math.min(100, Math.round(score)));
   };
 
-  const complianceScore = calculateComplianceScore();
+  const readinessScore = calculateReadinessScore();
+  // Legacy alias for backward compatibility
+  const complianceScore = readinessScore;
 
   // Load existing assessment if editing
   useEffect(() => {
@@ -492,24 +494,27 @@ const AssessmentForm: React.FC = () => {
             <section className="bg-gray-50 p-4 rounded-lg">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-sm font-medium text-gray-700">Score d'évaluation</h3>
-                  <p className="text-xs text-gray-500 mt-1">Calculé automatiquement</p>
+                  <h3 className="text-sm font-medium text-gray-700">Score de préparation</h3>
+                  <p className="text-xs text-gray-500 mt-1">Calculé automatiquement (auto-évaluation)</p>
                 </div>
                 <div className="text-right">
                   <div
                     className={`text-3xl font-bold ${
-                      complianceScore >= 90
+                      readinessScore >= 90
                         ? 'text-green-600'
-                        : complianceScore >= 75
+                        : readinessScore >= 75
                         ? 'text-blue-600'
-                        : complianceScore >= 60
+                        : readinessScore >= 60
                         ? 'text-yellow-600'
                         : 'text-red-600'
                     }`}
                   >
-                    {complianceScore}
+                    {readinessScore}
                   </div>
-                  <div className="text-xs text-gray-500">sur 100</div>
+                  <div className="text-xs text-gray-500">
+                    sur 100
+                    <span className="ml-2 italic">(Auto-évaluation, pas une détermination de conformité)</span>
+                  </div>
                 </div>
               </div>
               <div className="mt-3 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
