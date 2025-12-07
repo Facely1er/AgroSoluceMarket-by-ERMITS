@@ -1,25 +1,36 @@
+import { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
-import MarketplaceHome from './pages/marketplace/MarketplaceHome';
-import CooperativeDirectory from './pages/marketplace/CooperativeDirectory';
-import CooperativeProfile from './pages/marketplace/CooperativeProfile';
-import BuyerPortal from './pages/buyer/BuyerPortal';
-import BuyerRequestForm from './pages/buyer/BuyerRequestForm';
-import BuyerMatches from './pages/buyer/BuyerMatches';
-import CooperativeDashboard from './pages/cooperative/CooperativeDashboard';
-import FarmersFirstDashboard from './pages/cooperative/FarmersFirstDashboard';
-import DirectoryPage from './pages/directory/DirectoryPage';
-import DirectoryDetailPage from './pages/directory/DirectoryDetailPage';
-import CooperativeWorkspace from './pages/workspace/CooperativeWorkspace';
-import PilotDashboardPage from './pages/pilot/PilotDashboardPage';
-import FarmerProtectionPage from './pages/principles/FarmerProtectionPage';
-import RegulatoryReferencesPage from './pages/regulatory/RegulatoryReferencesPage';
-import NGORegistryPage from './pages/references/NGORegistryPage';
-import DueCarePrinciplesPage from './pages/governance/DueCarePrinciplesPage';
-import { ChildLaborDashboard, AssessmentForm } from './components/compliance';
 import ErrorBoundary from './components/common/ErrorBoundary';
-import AssessmentPage from './pages/assessment';
+
+// Lazy load all route components for code splitting
+const MarketplaceHome = lazy(() => import('./pages/marketplace/MarketplaceHome'));
+const CooperativeDirectory = lazy(() => import('./pages/marketplace/CooperativeDirectory'));
+const CooperativeProfile = lazy(() => import('./pages/marketplace/CooperativeProfile'));
+const BuyerPortal = lazy(() => import('./pages/buyer/BuyerPortal'));
+const BuyerRequestForm = lazy(() => import('./pages/buyer/BuyerRequestForm'));
+const BuyerMatches = lazy(() => import('./pages/buyer/BuyerMatches'));
+const CooperativeDashboard = lazy(() => import('./pages/cooperative/CooperativeDashboard'));
+const FarmersFirstDashboard = lazy(() => import('./pages/cooperative/FarmersFirstDashboard'));
+const DirectoryPage = lazy(() => import('./pages/directory/DirectoryPage'));
+const DirectoryDetailPage = lazy(() => import('./pages/directory/DirectoryDetailPage'));
+const CooperativeWorkspace = lazy(() => import('./pages/workspace/CooperativeWorkspace'));
+const PilotDashboardPage = lazy(() => import('./pages/pilot/PilotDashboardPage'));
+const FarmerProtectionPage = lazy(() => import('./pages/principles/FarmerProtectionPage'));
+const RegulatoryReferencesPage = lazy(() => import('./pages/regulatory/RegulatoryReferencesPage'));
+const NGORegistryPage = lazy(() => import('./pages/references/NGORegistryPage'));
+const DueCarePrinciplesPage = lazy(() => import('./pages/governance/DueCarePrinciplesPage'));
+const ChildLaborDashboard = lazy(() => import('./components/compliance').then(m => ({ default: m.ChildLaborDashboard })));
+const AssessmentForm = lazy(() => import('./components/compliance').then(m => ({ default: m.AssessmentForm })));
+const AssessmentPage = lazy(() => import('./pages/assessment'));
+
+// Loading component
+const LoadingSpinner = () => (
+  <div className="flex items-center justify-center min-h-screen">
+    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+  </div>
+);
 
 function App() {
   return (
@@ -27,7 +38,8 @@ function App() {
       <div className="flex flex-col min-h-screen bg-gradient-to-br from-secondary-50 via-primary-50 to-white">
         <Navbar />
         <main className="flex-grow">
-          <Routes>
+          <Suspense fallback={<LoadingSpinner />}>
+            <Routes>
             <Route path="/" element={<MarketplaceHome />} />
             <Route path="/cooperatives" element={<CooperativeDirectory />} />
             <Route path="/cooperatives/:id" element={<CooperativeProfile />} />
@@ -77,7 +89,8 @@ function App() {
                 </ErrorBoundary>
               }
             />
-          </Routes>
+            </Routes>
+          </Suspense>
         </main>
         <Footer />
       </div>
