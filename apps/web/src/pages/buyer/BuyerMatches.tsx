@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { Building2, Mail, Phone, MapPin, Package, CheckCircle, AlertCircle, Star, ExternalLink } from 'lucide-react';
 import { getBuyerRequestById, getRequestMatches, updateMatchStatus } from '@/features/buyers/api';
 import type { BuyerRequest, RequestMatch } from '@/domain/agro/types';
+import { matchCooperativesToRequest } from '@/domain/agro/matching';
 
 export default function BuyerMatches() {
   const { requestId } = useParams<{ requestId: string }>();
@@ -162,7 +163,7 @@ export default function BuyerMatches() {
               <p className="text-sm text-gray-500 mb-1">Requirements</p>
               <div className="flex flex-wrap gap-2 mt-1">
                 {request.requirements.eudrRequired && (
-                  <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">EUDR</span>
+                  <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded" title="EUDR-aligned documentation required">EUDR-Aligned</span>
                 )}
                 {request.requirements.childLaborZeroTolerance && (
                   <span className="px-2 py-1 bg-red-100 text-red-800 text-xs rounded">No Child Labor</span>
@@ -207,6 +208,15 @@ export default function BuyerMatches() {
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
                         <h3 className="text-xl font-semibold text-gray-900">{coop.name}</h3>
+                        {/* Match Score Badge */}
+                        <div className="flex items-center gap-2">
+                          <div className="flex items-center gap-1 px-3 py-1 bg-primary-50 border border-primary-200 rounded-full">
+                            <Star className="h-4 w-4 text-primary-600 fill-primary-600" />
+                            <span className="text-sm font-semibold text-primary-700">
+                              {match.matchScore}% Match
+                            </span>
+                          </div>
+                        </div>
                       </div>
                       <div className="flex flex-wrap gap-4 text-sm text-gray-600">
                         {coop.country && (
@@ -238,16 +248,38 @@ export default function BuyerMatches() {
                     </Link>
                   </div>
 
+                  {/* Match Reasons */}
+                  {request && (() => {
+                    const matchingResult = matchCooperativesToRequest(request, [coop]);
+                    const reasons = matchingResult[0]?.reasons || [];
+                    return reasons.length > 0 ? (
+                      <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                        <p className="text-sm font-medium text-blue-900 mb-2 flex items-center gap-2">
+                          <CheckCircle className="h-4 w-4" />
+                          Why this match?
+                        </p>
+                        <ul className="space-y-1">
+                          {reasons.map((reason, idx) => (
+                            <li key={idx} className="text-sm text-blue-800 flex items-start gap-2">
+                              <span className="text-blue-500 mt-0.5">•</span>
+                              <span>{reason}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ) : null;
+                  })()}
+
                   {/* Contextual Information */}
                   <div className="flex flex-wrap gap-2 mb-4">
                     {coop.complianceFlags.eudrReady && (
-                      <span className="px-3 py-1 bg-gray-100 text-gray-800 text-sm rounded-full">
-                        EUDR Context Available
+                      <span className="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full">
+                        EUDR-Aligned
                       </span>
                     )}
                     {coop.complianceFlags.childLaborRisk && (
-                      <span className="px-3 py-1 bg-gray-100 text-gray-800 text-sm rounded-full">
-                        Contextual Information Available
+                      <span className={`px-3 py-1 text-sm rounded-full ${getRiskBadgeColor(coop.complianceFlags.childLaborRisk)}`}>
+                        Child Labor Risk: {coop.complianceFlags.childLaborRisk.charAt(0).toUpperCase() + coop.complianceFlags.childLaborRisk.slice(1)}
                       </span>
                     )}
                     {coop.certifications.map(cert => (
@@ -290,6 +322,8 @@ export default function BuyerMatches() {
                       value={match.status}
                       onChange={(e) => handleStatusChange(match.id, e.target.value as RequestMatch['status'])}
                       className="px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary-500"
+                      title="Update match status"
+                      aria-label="Match status"
                     >
                       <option value="suggested">Suggested</option>
                       <option value="shortlisted">Shortlisted</option>

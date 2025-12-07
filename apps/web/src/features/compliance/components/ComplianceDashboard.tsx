@@ -12,7 +12,7 @@ export default function ComplianceDashboard({ cooperativeId }: ComplianceDashboa
   const [status, setStatus] = useState<{
     certifications: Certification[];
     eudrCompliant: boolean;
-    overallStatus: 'compliant' | 'non_compliant' | 'pending';
+    overallStatus: 'pending' | 'documented' | 'not_documented';
   } | null>(null);
   const [requirements, setRequirements] = useState<ComplianceRequirement[]>([]);
   const [loading, setLoading] = useState(true);
@@ -52,9 +52,9 @@ export default function ComplianceDashboard({ cooperativeId }: ComplianceDashboa
     if (!status) return null;
 
     switch (status.overallStatus) {
-      case 'compliant':
+      case 'documented':
         return <CheckCircle className="h-6 w-6 text-green-600" />;
-      case 'non_compliant':
+      case 'not_documented':
         return <AlertTriangle className="h-6 w-6 text-red-600" />;
       case 'pending':
         return <Clock className="h-6 w-6 text-yellow-600" />;
@@ -67,9 +67,9 @@ export default function ComplianceDashboard({ cooperativeId }: ComplianceDashboa
     if (!status) return 'bg-gray-100 text-gray-700';
 
     switch (status.overallStatus) {
-      case 'compliant':
+      case 'documented':
         return 'bg-green-100 text-green-700 border-green-300';
-      case 'non_compliant':
+      case 'not_documented':
         return 'bg-red-100 text-red-700 border-red-300';
       case 'pending':
         return 'bg-yellow-100 text-yellow-700 border-yellow-300';
@@ -117,10 +117,10 @@ export default function ComplianceDashboard({ cooperativeId }: ComplianceDashboa
           <div className={`flex items-center gap-2 px-4 py-2 rounded-full border ${getOverallStatusColor()}`}>
             {getOverallStatusIcon()}
             <span className="font-semibold capitalize">
-              {status.overallStatus === 'compliant'
-                ? 'Conforme'
-                : status.overallStatus === 'non_compliant'
-                ? 'Non Conforme'
+              {status.overallStatus === 'documented'
+                ? 'Documenté'
+                : status.overallStatus === 'not_documented'
+                ? 'Non Documenté'
                 : 'En Attente'}
             </span>
           </div>
@@ -132,15 +132,18 @@ export default function ComplianceDashboard({ cooperativeId }: ComplianceDashboa
             <div className="text-2xl font-bold text-gray-900">{activeCertifications.length}</div>
           </div>
           <div>
-            <div className="text-sm text-gray-500 mb-1">Conformité EUDR</div>
+            <div className="text-sm text-gray-500 mb-1">Documentation EUDR</div>
             <div className="flex items-center gap-2">
               {status.eudrCompliant ? (
                 <CheckCircle className="h-5 w-5 text-green-600" />
               ) : (
-                <AlertTriangle className="h-5 w-5 text-red-600" />
+                <AlertTriangle className="h-5 w-5 text-yellow-600" />
               )}
-              <span className="font-medium">{status.eudrCompliant ? 'Conforme' : 'Non Conforme'}</span>
+              <span className="font-medium text-xs">
+                {status.eudrCompliant ? 'Documentation alignée disponible' : 'Documentation alignée non disponible'}
+              </span>
             </div>
+            <p className="text-xs text-gray-400 mt-1">Contexte de diligence raisonnable uniquement</p>
           </div>
         </div>
       </div>

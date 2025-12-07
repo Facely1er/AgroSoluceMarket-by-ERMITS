@@ -12,7 +12,7 @@ export interface BuyerRequirements {
   maxPrice?: number;
   requiredCertifications?: string[]; // e.g., ['organic', 'fair_trade']
   region?: string;
-  eudrCompliant?: boolean;
+  eudrAligned?: boolean; // EUDR-aligned documentation and due diligence context
 }
 
 export interface MatchResult {
@@ -120,13 +120,13 @@ async function scoreMatch(
   }
 
   // Check EUDR context (informational only)
-  if (requirements.eudrCompliant) {
-    // Note: This checks for EUDR context information only, not compliance determination
+  if (requirements.eudrAligned) {
+    // Note: This checks for EUDR-aligned documentation and due diligence context only, not compliance determination
     if (cooperative.is_verified) {
       score += 20;
-      matchReasons.push('EUDR context information available');
+      matchReasons.push('EUDR-aligned documentation and due diligence context available');
     } else {
-      missingRequirements.push('EUDR context information not available');
+      missingRequirements.push('EUDR-aligned documentation and due diligence context not available');
     }
   }
 

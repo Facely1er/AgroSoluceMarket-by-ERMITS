@@ -87,11 +87,11 @@ const ChildLaborDashboard: React.FC<ChildLaborDashboardProps> = ({
     statuses: CooperativeComplianceStatus[]
   ): ComplianceDashboard => {
     const totalCooperatives = statuses.length;
-    const compliantCooperatives = statuses.filter(
+    const cooperativesWithGoodScores = statuses.filter(
       (s) => s.complianceScore && s.complianceScore >= 75
     ).length;
     const complianceRate = totalCooperatives > 0
-      ? (compliantCooperatives / totalCooperatives) * 100
+      ? (cooperativesWithGoodScores / totalCooperatives) * 100
       : 0;
 
     const totalViolations = statuses.reduce(
@@ -109,10 +109,10 @@ const ChildLaborDashboard: React.FC<ChildLaborDashboardProps> = ({
       0
     ) / totalCooperatives || 0;
 
-    return {
-      totalCooperatives,
-      compliantCooperatives,
-      complianceRate,
+      return {
+        totalCooperatives,
+        compliantCooperatives: cooperativesWithGoodScores,
+        complianceRate,
       averageComplianceScore,
       totalAssessments: totalCooperatives,
       assessmentsDueThisMonth: statuses.filter(s => 
@@ -235,17 +235,17 @@ const ChildLaborDashboard: React.FC<ChildLaborDashboardProps> = ({
       {/* Key Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <MetricCard
-          title="Compliance Rate"
+          title="Assessment Score Rate"
           value={`${dashboardData.complianceRate.toFixed(1)}%`}
-          subtitle={`${dashboardData.compliantCooperatives} / ${dashboardData.totalCooperatives} cooperatives`}
+          subtitle={`${dashboardData.compliantCooperatives} / ${dashboardData.totalCooperatives} cooperatives with scores ≥75`}
           icon="✓"
           color="green"
           trend={dashboardData.complianceRate >= 75 ? 'up' : 'down'}
         />
         <MetricCard
-          title="Avg Compliance Score"
+          title="Avg Assessment Score"
           value={dashboardData.averageComplianceScore.toFixed(0)}
-          subtitle="Out of 100"
+          subtitle="Self-assessment score (0-100 scale)"
           icon="📊"
           color="blue"
         />

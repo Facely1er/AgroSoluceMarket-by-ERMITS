@@ -294,7 +294,7 @@ export default function BuyerRequestForm() {
                 </span>
               </label>
               <p className="text-xs text-gray-500 ml-8 mt-1">
-                Only show cooperatives that are EUDR compliant
+                Only show cooperatives with EUDR-aligned documentation and due diligence context
               </p>
             </div>
 

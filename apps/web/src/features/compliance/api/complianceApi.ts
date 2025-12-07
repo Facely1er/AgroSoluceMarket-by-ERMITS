@@ -215,7 +215,7 @@ export async function getComplianceStatus(cooperativeId: string): Promise<{
   data: {
     certifications: Certification[];
     eudrCompliant: boolean;
-    overallStatus: 'compliant' | 'non_compliant' | 'pending';
+    overallStatus: 'pending' | 'documented' | 'not_documented';
   } | null;
   error: Error | null;
 }> {
@@ -239,26 +239,28 @@ export async function getComplianceStatus(cooperativeId: string): Promise<{
 
     const batchIds = (batches || []).map((b: any) => b.id);
 
-    let eudrCompliant = true;
+    // Check for EUDR-aligned documentation and verification context (not compliance determination)
+    let eudrAligned = true;
     if (batchIds.length > 0) {
       const { data: verifications } = await supabase
         .from('eudr_verifications')
         .select('status')
         .in('batch_id', batchIds);
 
-      eudrCompliant =
+      eudrAligned =
         (verifications || []).length > 0 &&
         (verifications || []).every((v: any) => v.status === 'verified');
     }
 
     const activeCerts = (certs || []).filter((c) => c.status === 'active');
+    // Note: overallStatus is informational only, not a compliance determination
     const overallStatus =
-      activeCerts.length > 0 && eudrCompliant ? 'compliant' : activeCerts.length === 0 ? 'non_compliant' : 'pending';
+      activeCerts.length > 0 && eudrAligned ? 'documented' : activeCerts.length === 0 ? 'not_documented' : 'pending';
 
     return {
       data: {
         certifications: certs || [],
-        eudrCompliant,
+        eudrCompliant: eudrAligned, // Keep for backward compatibility, but represents alignment not compliance
         overallStatus,
       },
       error: null,
