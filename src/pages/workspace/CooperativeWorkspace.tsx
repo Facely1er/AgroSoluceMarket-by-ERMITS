@@ -54,13 +54,16 @@ import { getDocTypeLabel } from '../../data/gapGuidanceConfig';
 import { getToolkitById } from '../../data/fieldOfficerToolkitConfig';
 import { getFarmerGuidanceForTypes, getFarmerGuidance } from '../../data/farmerGuidanceConfig';
 import { getFarmerDeclarations } from '../../features/farmers/api/farmerDeclarationsApi';
+import FarmersFirstDashboard from '../cooperative/FarmersFirstDashboard';
+import { getFarmersFirstSummary } from '../../features/farmers/api/farmersFirstApi';
+import type { FarmersFirstSummary } from '../../features/farmers/api/farmersFirstApi';
 
 // NOTE: Authentication check is available via getCurrentUser() but not enforced.
 // This workspace is currently unprotected. In production, add auth protection here.
 
 export default function CooperativeWorkspace() {
   const { coop_id } = useParams<{ coop_id: string }>();
-  const [activeTab, setActiveTab] = useState<'overview' | 'evidence' | 'coverage' | 'gaps' | 'enablement'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'evidence' | 'coverage' | 'gaps' | 'enablement' | 'farmers-first'>('overview');
 
   if (!coop_id) {
     return (
@@ -97,6 +100,11 @@ export default function CooperativeWorkspace() {
       id: 'enablement' as const, 
       label: 'Enablement', 
       icon: Zap 
+    },
+    { 
+      id: 'farmers-first' as const, 
+      label: 'Farmers First', 
+      icon: Sprout 
     },
   ];
 
@@ -148,14 +156,23 @@ export default function CooperativeWorkspace() {
           </div>
 
           <div className="p-6">
-            {activeTab === 'overview' && <OverviewTab cooperativeId={coop_id} />}
+            {activeTab === 'overview' && <OverviewTab cooperativeId={coop_id} onSwitchTab={setActiveTab} />}
             {activeTab === 'evidence' && <EvidenceTab cooperativeId={coop_id} />}
             {activeTab === 'coverage' && <CoverageTab cooperativeId={coop_id} />}
             {activeTab === 'gaps' && <GapsTab cooperativeId={coop_id} />}
             {activeTab === 'enablement' && <EnablementTab cooperativeId={coop_id} />}
+            {activeTab === 'farmers-first' && <FarmersFirstTab cooperativeId={coop_id} />}
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function FarmersFirstTab({ cooperativeId }: { cooperativeId: string }) {
+  return (
+    <div>
+      <FarmersFirstDashboard cooperativeId={cooperativeId} />
     </div>
   );
 }
@@ -233,7 +250,7 @@ function getApplicableRegulatoryReferences(
   return uniqueRefs;
 }
 
-function OverviewTab({ cooperativeId }: { cooperativeId: string }) {
+function OverviewTab({ cooperativeId, onSwitchTab }: { cooperativeId: string; onSwitchTab?: (tab: 'overview' | 'evidence' | 'coverage' | 'gaps' | 'enablement' | 'farmers-first') => void }) {
   const [latestSnapshot, setLatestSnapshot] = useState<ReadinessSnapshot | null>(null);
   const [snapshots, setSnapshots] = useState<ReadinessSnapshot[]>([]);
   const [cooperative, setCooperative] = useState<{ pilot_id?: string | null; pilot_label?: string } | null>(null);
@@ -248,10 +265,22 @@ function OverviewTab({ cooperativeId }: { cooperativeId: string }) {
   const [updatingPilot, setUpdatingPilot] = useState(false);
   const [countryContextExpanded, setCountryContextExpanded] = useState(false);
   const [commodityContextExpanded, setCommodityContextExpanded] = useState(false);
+  const [farmersFirstSummary, setFarmersFirstSummary] = useState<FarmersFirstSummary | null>(null);
+  const [loadingFarmersFirst, setLoadingFarmersFirst] = useState(true);
 
   useEffect(() => {
     loadData();
+    loadFarmersFirstSummary();
   }, [cooperativeId]);
+
+  const loadFarmersFirstSummary = async () => {
+    setLoadingFarmersFirst(true);
+    const result = await getFarmersFirstSummary(cooperativeId);
+    if (!result.error && result.data) {
+      setFarmersFirstSummary(result.data);
+    }
+    setLoadingFarmersFirst(false);
+  };
 
   const loadData = async () => {
     setLoading(true);
@@ -480,6 +509,85 @@ function OverviewTab({ cooperativeId }: { cooperativeId: string }) {
           )}
         </div>
       )}
+
+      {/* Farmers First Snapshot */}
+      <div className="bg-white rounded-lg border border-gray-200 p-6">
+        <div className="flex items-center justify-between mb-4">
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900 mb-1 flex items-center gap-2">
+              <Sprout className="h-5 w-5 text-primary-600" />
+              Farmers First Snapshot
+            </h3>
+            <p className="text-sm text-gray-600">Overview of farmers onboarding, declarations, training, and impact tracking</p>
+          </div>
+          <button
+            onClick={() => {
+              if (onSwitchTab) {
+                onSwitchTab('farmers-first');
+              }
+            }}
+            className="text-sm text-primary-600 hover:text-primary-700 font-medium"
+          >
+            View Full Dashboard →
+          </button>
+        </div>
+        
+        {loadingFarmersFirst ? (
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            {[1, 2, 3, 4].map(i => (
+              <div key={i} className="animate-pulse">
+                <div className="h-20 bg-gray-200 rounded-lg"></div>
+              </div>
+            ))}
+          </div>
+        ) : farmersFirstSummary ? (
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="bg-blue-50 rounded-lg p-4 border border-blue-200">
+              <div className="text-xs font-medium text-blue-600 mb-1">Onboarding</div>
+              <div className="text-2xl font-bold text-blue-900">
+                {farmersFirstSummary.farmersOnboarded} / {farmersFirstSummary.totalFarmers}
+              </div>
+              <div className="text-xs text-blue-700 mt-1">
+                {farmersFirstSummary.onboardingCoveragePercentage.toFixed(1)}% coverage
+              </div>
+            </div>
+            
+            <div className="bg-green-50 rounded-lg p-4 border border-green-200">
+              <div className="text-xs font-medium text-green-600 mb-1">Declarations</div>
+              <div className="text-2xl font-bold text-green-900">
+                {farmersFirstSummary.farmersWithDeclarations} / {farmersFirstSummary.totalFarmers}
+              </div>
+              <div className="text-xs text-green-700 mt-1">
+                {farmersFirstSummary.declarationsCoveragePercentage.toFixed(1)}% coverage
+              </div>
+            </div>
+            
+            <div className="bg-purple-50 rounded-lg p-4 border border-purple-200">
+              <div className="text-xs font-medium text-purple-600 mb-1">Training</div>
+              <div className="text-2xl font-bold text-purple-900">
+                {farmersFirstSummary.completedTrainingSessions} / {farmersFirstSummary.totalTrainingSessions}
+              </div>
+              <div className="text-xs text-purple-700 mt-1">
+                {farmersFirstSummary.trainingCoveragePercentage.toFixed(1)}% completed
+              </div>
+            </div>
+            
+            <div className="bg-orange-50 rounded-lg p-4 border border-orange-200">
+              <div className="text-xs font-medium text-orange-600 mb-1">Impact Data</div>
+              <div className="text-2xl font-bold text-orange-900">
+                {farmersFirstSummary.impactDataPoints}
+              </div>
+              <div className="text-xs text-orange-700 mt-1">
+                {farmersFirstSummary.hasBaseline ? 'Baseline set' : 'No baseline'}
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="text-center py-4 text-gray-500 text-sm">
+            No Farmers First data available
+          </div>
+        )}
+      </div>
 
       {/* Export Summary Button */}
       <div className="bg-white rounded-lg border border-gray-200 p-6">
@@ -1467,6 +1575,14 @@ function CoverageTab({ cooperativeId }: { cooperativeId: string }) {
   );
 }
 
+function FarmersFirstTab({ cooperativeId }: { cooperativeId: string }) {
+  return (
+    <div>
+      <FarmersFirstDashboard cooperativeId={cooperativeId} />
+    </div>
+  );
+}
+
 function GapsTab({ cooperativeId }: { cooperativeId: string }) {
   const [documentPresence, setDocumentPresence] = useState<DocumentPresence[]>([]);
   const [loading, setLoading] = useState(true);
@@ -1972,6 +2088,14 @@ function EnablementTab({ cooperativeId }: { cooperativeId: string }) {
           View Farmer Protection Principles
         </Link>
       </div>
+    </div>
+  );
+}
+
+function FarmersFirstTab({ cooperativeId }: { cooperativeId: string }) {
+  return (
+    <div>
+      <FarmersFirstDashboard cooperativeId={cooperativeId} />
     </div>
   );
 }
