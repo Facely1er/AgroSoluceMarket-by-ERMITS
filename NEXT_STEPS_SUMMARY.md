@@ -88,6 +88,6 @@ Add these for **Production, Preview, and Development**:
 
 ---
 
-**Created:** $(Get-Date -Format "yyyy-MM-dd")
+**Created:** 2025-12-06
 **Status:** ✅ Ready
 
