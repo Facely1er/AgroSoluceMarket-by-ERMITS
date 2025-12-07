@@ -297,6 +297,50 @@ Follow the detailed schedule in `AgroSoluce_Implementation_Guide.md`:
 - Local market expertise
 - Mobile-money integration
 - Offline capabilities
+
+---
+
+## 👨‍👩‍👧‍👦 Child Labor Compliance Module
+
+AgroSoluce includes comprehensive child labor monitoring and compliance tracking to ensure ethical sourcing and regulatory compliance.
+
+### Features
+- **Real-time Compliance Scoring** - Automated compliance score calculation (0-100 scale)
+- **Assessment Management** - Create, edit, and track child labor assessments
+- **Remediation Action Tracking** - Monitor progress of corrective actions
+- **Certification Management** - Track Fair Trade & Rainforest Alliance certifications
+- **Social Impact Metrics** - Measure education and economic impact
+- **Evidence Repository** - Upload and manage assessment documents and photos
+- **Compliance Badges** - Visual indicators on cooperative cards
+- **Dashboard Analytics** - Comprehensive compliance overview with charts and metrics
+
+### Routes
+- `/compliance/child-labor` - Main compliance dashboard
+- `/compliance/assessments/new` - Create new assessment
+- `/compliance/assessments/:id/edit` - Edit existing assessment
+
+### Key Components
+- `ChildLaborDashboard` - Main compliance dashboard with metrics and charts
+- `AssessmentForm` - Create/edit assessments with form validation
+- `ComplianceBadge` - Display cooperative compliance status
+- `FileUpload` - Reusable file upload component with drag & drop
+- `ErrorBoundary` - Error handling for React components
+
+### Database Tables
+- `child_labor_assessments` - Assessment records
+- `remediation_actions` - Corrective action tracking
+- `labor_certifications` - Certification management
+- `social_impact_metrics` - Impact measurement data
+- `child_labor_incidents` - Incident reporting
+
+### Technical Details
+- **Service Layer:** `ChildLaborService` - Complete CRUD operations
+- **File Storage:** Supabase Storage bucket `child-labor-evidence`
+- **Type Safety:** Full TypeScript type definitions
+- **Error Handling:** Error boundaries and loading states
+- **Responsive Design:** Mobile-friendly interface
+
+For more details, see `CURSOR_TODO_CHECKLIST.md` for implementation guide.
 - Multi-language support
 - Affordable pricing
 

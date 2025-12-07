@@ -17,6 +17,8 @@ import FarmerProtectionPage from './pages/principles/FarmerProtectionPage';
 import RegulatoryReferencesPage from './pages/regulatory/RegulatoryReferencesPage';
 import NGORegistryPage from './pages/references/NGORegistryPage';
 import DueCarePrinciplesPage from './pages/governance/DueCarePrinciplesPage';
+import { ChildLaborDashboard, AssessmentForm } from './components/compliance';
+import ErrorBoundary from './components/common/ErrorBoundary';
 
 function App() {
   return (
@@ -42,6 +44,30 @@ function App() {
             <Route path="/regulatory-references" element={<RegulatoryReferencesPage />} />
             <Route path="/references/ngo" element={<NGORegistryPage />} />
             <Route path="/governance/due-care" element={<DueCarePrinciplesPage />} />
+            <Route
+              path="/compliance/child-labor"
+              element={
+                <ErrorBoundary>
+                  <ChildLaborDashboard />
+                </ErrorBoundary>
+              }
+            />
+            <Route
+              path="/compliance/assessments/new"
+              element={
+                <ErrorBoundary>
+                  <AssessmentForm />
+                </ErrorBoundary>
+              }
+            />
+            <Route
+              path="/compliance/assessments/:id/edit"
+              element={
+                <ErrorBoundary>
+                  <AssessmentForm />
+                </ErrorBoundary>
+              }
+            />
           </Routes>
         </main>
         <Footer />

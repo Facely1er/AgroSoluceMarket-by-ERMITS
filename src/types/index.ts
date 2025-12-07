@@ -383,3 +383,6 @@ export interface CanonicalCooperativeDirectory {
   created_at?: string; // ISO timestamp
 }
 
+// Re-export all child labor monitoring types
+export * from './child-labor-monitoring-types';
+

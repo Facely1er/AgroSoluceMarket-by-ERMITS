@@ -94,7 +94,14 @@ export default function CooperativeProfile() {
                 </span>
               )}
             </div>
-            <div className="ml-4">
+            <div className="ml-4 flex gap-2">
+              <Link
+                to={`/compliance/child-labor?cooperativeId=${cooperative.id}`}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-secondary-600 text-white rounded-lg hover:bg-secondary-700 transition-colors"
+              >
+                <Shield className="h-4 w-4" />
+                Voir Conformité
+              </Link>
               <Link
                 to={`/cooperative/${cooperative.id}/farmers-first`}
                 className="inline-flex items-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
