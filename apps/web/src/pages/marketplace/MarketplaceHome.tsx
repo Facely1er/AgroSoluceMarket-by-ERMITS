@@ -1,100 +1,334 @@
 import { Link } from 'react-router-dom';
-import { Building2, Shield, TrendingUp, Globe, ArrowRight } from 'lucide-react';
+import { 
+  Shield, 
+  TrendingUp, 
+  ArrowRight,
+  CheckCircle,
+  Users,
+  FileText,
+  BarChart3,
+  Target,
+  Zap,
+  MapPin,
+  Award,
+  ClipboardList
+} from 'lucide-react';
+import { useI18n } from '@/lib/i18n/I18nProvider';
 
 export default function MarketplaceHome() {
+  const { t, language } = useI18n();
+
+  const outcomes = [
+    {
+      id: 'buyerConnections',
+      icon: TrendingUp,
+      iconColor: 'primary',
+      title: t.landing.outcomes.buyerConnections.title,
+      feature: t.landing.outcomes.buyerConnections.feature,
+      outcomes: [
+        t.landing.outcomes.buyerConnections.outcome1,
+        t.landing.outcomes.buyerConnections.outcome2,
+        t.landing.outcomes.buyerConnections.outcome3,
+      ],
+      cta: t.landing.outcomes.buyerConnections.cta,
+      ctaLink: '/buyer',
+    },
+    {
+      id: 'readiness',
+      icon: Target,
+      iconColor: 'green',
+      title: t.landing.outcomes.readiness.title,
+      feature: t.landing.outcomes.readiness.feature,
+      outcomes: [
+        t.landing.outcomes.readiness.outcome1,
+        t.landing.outcomes.readiness.outcome2,
+        t.landing.outcomes.readiness.outcome3,
+      ],
+    },
+    {
+      id: 'coverage',
+      icon: BarChart3,
+      iconColor: 'blue',
+      title: t.landing.outcomes.coverage.title,
+      feature: t.landing.outcomes.coverage.feature,
+      outcomes: [
+        t.landing.outcomes.coverage.outcome1,
+        t.landing.outcomes.coverage.outcome2,
+        t.landing.outcomes.coverage.outcome3,
+      ],
+    },
+    {
+      id: 'assessment',
+      icon: ClipboardList,
+      iconColor: 'purple',
+      title: t.landing.outcomes.assessment.title,
+      feature: t.landing.outcomes.assessment.feature,
+      outcomes: [
+        t.landing.outcomes.assessment.outcome1,
+        t.landing.outcomes.assessment.outcome2,
+        t.landing.outcomes.assessment.outcome3,
+      ],
+      cta: t.landing.outcomes.assessment.cta,
+      ctaLink: '/assessment',
+    },
+    {
+      id: 'evidence',
+      icon: FileText,
+      iconColor: 'orange',
+      title: t.landing.outcomes.evidence.title,
+      feature: t.landing.outcomes.evidence.feature,
+      outcomes: [
+        t.landing.outcomes.evidence.outcome1,
+        t.landing.outcomes.evidence.outcome2,
+        t.landing.outcomes.evidence.outcome3,
+      ],
+    },
+    {
+      id: 'compliance',
+      icon: Shield,
+      iconColor: 'red',
+      title: t.landing.outcomes.compliance.title,
+      feature: t.landing.outcomes.compliance.feature,
+      outcomes: [
+        t.landing.outcomes.compliance.outcome1,
+        t.landing.outcomes.compliance.outcome2,
+        t.landing.outcomes.compliance.outcome3,
+      ],
+      cta: t.landing.outcomes.compliance.cta,
+      ctaLink: '/compliance/child-labor',
+    },
+    {
+      id: 'farmersFirst',
+      icon: Users,
+      iconColor: 'teal',
+      title: t.landing.outcomes.farmersFirst.title,
+      feature: t.landing.outcomes.farmersFirst.feature,
+      outcomes: [
+        t.landing.outcomes.farmersFirst.outcome1,
+        t.landing.outcomes.farmersFirst.outcome2,
+        t.landing.outcomes.farmersFirst.outcome3,
+      ],
+    },
+    {
+      id: 'traceability',
+      icon: MapPin,
+      iconColor: 'indigo',
+      title: t.landing.outcomes.traceability.title,
+      feature: t.landing.outcomes.traceability.feature,
+      outcomes: [
+        t.landing.outcomes.traceability.outcome1,
+        t.landing.outcomes.traceability.outcome2,
+        t.landing.outcomes.traceability.outcome3,
+      ],
+    },
+    {
+      id: 'gaps',
+      icon: Award,
+      iconColor: 'yellow',
+      title: t.landing.outcomes.gaps.title,
+      feature: t.landing.outcomes.gaps.feature,
+      outcomes: [
+        t.landing.outcomes.gaps.outcome1,
+        t.landing.outcomes.gaps.outcome2,
+        t.landing.outcomes.gaps.outcome3,
+      ],
+    },
+  ];
+
+  const getIconBgColor = (color: string) => {
+    const colors: Record<string, string> = {
+      primary: 'bg-primary-100',
+      green: 'bg-green-100',
+      blue: 'bg-blue-100',
+      purple: 'bg-purple-100',
+      orange: 'bg-orange-100',
+      red: 'bg-red-100',
+      teal: 'bg-teal-100',
+      indigo: 'bg-indigo-100',
+      yellow: 'bg-yellow-100',
+    };
+    return colors[color] || 'bg-gray-100';
+  };
+
+  const getIconTextColor = (color: string) => {
+    const colors: Record<string, string> = {
+      primary: 'text-primary-600',
+      green: 'text-green-600',
+      blue: 'text-blue-600',
+      purple: 'text-purple-600',
+      orange: 'text-orange-600',
+      red: 'text-red-600',
+      teal: 'text-teal-600',
+      indigo: 'text-indigo-600',
+      yellow: 'text-yellow-600',
+    };
+    return colors[color] || 'text-gray-600';
+  };
+
+  const getCtaColor = (color: string) => {
+    const colors: Record<string, string> = {
+      primary: 'text-primary-600',
+      green: 'text-green-600',
+      blue: 'text-blue-600',
+      purple: 'text-purple-600',
+      orange: 'text-orange-600',
+      red: 'text-red-600',
+      teal: 'text-teal-600',
+      indigo: 'text-indigo-600',
+      yellow: 'text-yellow-600',
+    };
+    return colors[color] || 'text-gray-600';
+  };
+
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="pt-20 pb-16 md:pt-28 md:pb-24 bg-gradient-to-r from-primary-600 to-secondary-500 text-white relative overflow-hidden">
+      <section className="pt-20 pb-16 md:pt-32 md:pb-24 bg-gradient-to-r from-primary-600 via-primary-700 to-secondary-500 text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/440731/pexels-photo-440731.jpeg')] bg-cover bg-center opacity-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-transparent"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">
-              🌾 AgroSoluce® Marketplace
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium mb-6 border border-white/20">
+              <Zap className="h-4 w-4" />
+              <span>{t.landing.hero.tagline}</span>
+            </div>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 leading-tight">
+              {t.landing.hero.title}
             </h1>
-            <p className="text-xl md:text-2xl mb-8 text-white/90">
-              Connect West African Cooperatives with Global Buyers
+            <p className="text-xl md:text-2xl lg:text-3xl mb-4 text-white/95 font-medium">
+              {t.landing.hero.subtitle}
             </p>
-            <p className="text-lg mb-8 text-white/80 max-w-3xl mx-auto">
-              The secure agricultural marketplace platform that transforms farming 
-              operations through technology, compliance, and global market access.
+            <p className="text-base md:text-lg lg:text-xl mb-10 text-white/85 max-w-3xl mx-auto leading-relaxed px-4">
+              {t.landing.hero.description}
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8 px-4">
               <Link
                 to="/cooperatives"
-                className="bg-white text-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors flex items-center justify-center gap-2"
+                className="group bg-white text-primary-600 px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 text-sm md:text-base"
               >
-                Explorer les Coopératives
-                <ArrowRight className="h-5 w-5" />
+                {t.landing.hero.ctaCooperatives}
+                <ArrowRight className="h-4 w-4 md:h-5 md:w-5 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
                 to="/buyer"
-                className="bg-secondary-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-secondary-700 transition-colors flex items-center justify-center gap-2"
+                className="group bg-secondary-600 text-white px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold hover:bg-secondary-700 transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 border-2 border-secondary-400 text-sm md:text-base"
               >
-                Espace Acheteur
-                <ArrowRight className="h-5 w-5" />
+                {t.landing.hero.ctaBuyer}
+                <ArrowRight className="h-4 w-4 md:h-5 md:w-5 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
+            <p className="text-xs md:text-sm text-white/70 px-4">
+              {t.landing.hero.freeNote}
+            </p>
           </div>
         </div>
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent"></div>
       </section>
 
       {/* Stats Section */}
-      <section className="py-12 bg-white">
+      <section className="py-12 md:py-16 bg-white -mt-12 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div className="text-center p-6 bg-primary-50 rounded-lg">
-              <div className="text-4xl font-bold text-primary-600 mb-2">3,797+</div>
-              <div className="text-gray-600">Coopératives Enregistrées</div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            <div className="text-center p-4 md:p-6 bg-primary-50 rounded-xl border border-primary-100">
+              <div className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-primary-600 mb-2">3,797+</div>
+              <div className="text-xs md:text-sm text-gray-600 font-medium">{t.landing.stats.cooperatives}</div>
             </div>
-            <div className="text-center p-6 bg-secondary-50 rounded-lg">
-              <div className="text-4xl font-bold text-secondary-600 mb-2">31</div>
-              <div className="text-gray-600">Régions Couvertes</div>
+            <div className="text-center p-4 md:p-6 bg-secondary-50 rounded-xl border border-secondary-100">
+              <div className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-secondary-600 mb-2">31</div>
+              <div className="text-xs md:text-sm text-gray-600 font-medium">{t.landing.stats.regions}</div>
             </div>
-            <div className="text-center p-6 bg-green-50 rounded-lg">
-              <div className="text-4xl font-bold text-green-600 mb-2">98%+</div>
-              <div className="text-gray-600">Taux de Vérification</div>
+            <div className="text-center p-4 md:p-6 bg-green-50 rounded-xl border border-green-100">
+              <div className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-green-600 mb-2">98%+</div>
+              <div className="text-xs md:text-sm text-gray-600 font-medium">{t.landing.stats.verification}</div>
             </div>
-            <div className="text-center p-6 bg-blue-50 rounded-lg">
-              <div className="text-4xl font-bold text-blue-600 mb-2">€3.2B+</div>
-              <div className="text-gray-600">Marché Potentiel</div>
+            <div className="text-center p-4 md:p-6 bg-blue-50 rounded-xl border border-blue-100">
+              <div className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-blue-600 mb-2">€3.2B+</div>
+              <div className="text-xs md:text-sm text-gray-600 font-medium">{t.landing.stats.market}</div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-16 bg-gray-50">
+      {/* Outcomes Based on Features Section */}
+      <section className="py-16 md:py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">
-            Pourquoi AgroSoluce?
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-gray-900">
+              {t.landing.outcomes.title}
+            </h2>
+            <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto px-4">
+              {t.landing.outcomes.subtitle}
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {outcomes.map((outcome) => {
+              const Icon = outcome.icon;
+              return (
+                <div 
+                  key={outcome.id} 
+                  className="bg-white p-6 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100"
+                >
+                  <div className={`${getIconBgColor(outcome.iconColor)} w-14 h-14 rounded-lg flex items-center justify-center mb-4`}>
+                    <Icon className={`h-7 w-7 ${getIconTextColor(outcome.iconColor)}`} />
+                  </div>
+                  <h3 className="text-xl md:text-2xl font-semibold mb-3 text-gray-900">
+                    {outcome.title}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed mb-4 text-sm md:text-base">
+                    <strong className="font-semibold">{language === 'fr' ? 'Fonctionnalité:' : 'Feature:'}</strong> {outcome.feature}
+                  </p>
+                  <div className="space-y-2 text-sm text-gray-700 mb-4">
+                    {outcome.outcomes.map((outcomeText, index) => (
+                      <div key={index} className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
+                        <span className="text-xs md:text-sm">{outcomeText}</span>
+                      </div>
+                    ))}
+                  </div>
+                  {outcome.cta && outcome.ctaLink && (
+                    <Link 
+                      to={outcome.ctaLink} 
+                      className={`mt-4 ${getCtaColor(outcome.iconColor)} font-medium hover:underline inline-flex items-center gap-1 text-sm md:text-base`}
+                    >
+                      {outcome.cta} <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA Section */}
+      <section className="py-16 md:py-24 bg-gradient-to-r from-primary-600 to-secondary-500 text-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <Target className="h-12 w-12 md:h-16 md:w-16 mx-auto mb-6 opacity-90" />
+          <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-4">
+            {t.landing.cta.title}
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <Building2 className="h-12 w-12 text-primary-600 mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Marché Global</h3>
-              <p className="text-gray-600">
-                Connectez-vous avec des acheteurs internationaux recherchant des produits agricoles de qualité
-              </p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <Shield className="h-12 w-12 text-primary-600 mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Transactions Sécurisées</h3>
-              <p className="text-gray-600">
-                Système d'escrow avec intégration mobile money pour une protection complète
-              </p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <TrendingUp className="h-12 w-12 text-primary-600 mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Matching Intelligent</h3>
-              <p className="text-gray-600">
-                Connexions acheteur-vendeur alimentées par l'IA en temps réel
-              </p>
-            </div>
+          <p className="text-lg md:text-xl lg:text-2xl mb-8 text-white/90 px-4">
+            {t.landing.cta.subtitle}
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              to="/cooperatives"
+              className="bg-white text-primary-600 px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 text-sm md:text-base"
+            >
+              {t.landing.cta.buttonCooperatives}
+              <ArrowRight className="h-4 w-4 md:h-5 md:w-5" />
+            </Link>
+            <Link
+              to="/buyer"
+              className="bg-secondary-600 text-white px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold hover:bg-secondary-700 transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 border-2 border-secondary-400 text-sm md:text-base"
+            >
+              {t.landing.cta.buttonBuyer}
+              <ArrowRight className="h-4 w-4 md:h-5 md:w-5" />
+            </Link>
           </div>
         </div>
       </section>
     </div>
   );
 }
-
