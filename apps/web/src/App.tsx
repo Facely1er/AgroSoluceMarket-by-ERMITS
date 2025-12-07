@@ -11,6 +11,11 @@ const CooperativeProfile = lazy(() => import('./pages/marketplace/CooperativePro
 const BuyerPortal = lazy(() => import('./pages/buyer/BuyerPortal'));
 const BuyerRequestForm = lazy(() => import('./pages/buyer/BuyerRequestForm'));
 const BuyerMatches = lazy(() => import('./pages/buyer/BuyerMatches'));
+const BuyerLandingPage = lazy(() => import('./pages/buyer/BuyerLandingPage'));
+const AboutPage = lazy(() => import('./pages/about/AboutPage'));
+const WhatWeDoPage = lazy(() => import('./pages/about/WhatWeDoPage'));
+const WhoItsForPage = lazy(() => import('./pages/about/WhoItsForPage'));
+const PartnerLandingPage = lazy(() => import('./pages/partners/PartnerLandingPage'));
 const CooperativeDashboard = lazy(() => import('./pages/cooperative/CooperativeDashboard'));
 const FarmersFirstDashboard = lazy(() => import('./pages/cooperative/FarmersFirstDashboard'));
 const DirectoryPage = lazy(() => import('./pages/directory/DirectoryPage'));
@@ -47,10 +52,16 @@ function App() {
             <Route path="/directory/:coop_id" element={<DirectoryDetailPage />} />
             <Route path="/workspace/:coop_id" element={<CooperativeWorkspace />} />
             <Route path="/pilot/:pilot_id" element={<PilotDashboardPage />} />
+            <Route path="/buyers" element={<BuyerLandingPage />} />
             <Route path="/buyer" element={<BuyerPortal />} />
             <Route path="/buyer/request" element={<BuyerRequestForm />} />
             <Route path="/buyer/requests/:requestId/matches" element={<BuyerMatches />} />
             <Route path="/buyer/*" element={<BuyerPortal />} />
+            <Route path="/partners" element={<PartnerLandingPage />} />
+            <Route path="/ngos" element={<PartnerLandingPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/what-we-do" element={<WhatWeDoPage />} />
+            <Route path="/who-its-for" element={<WhoItsForPage />} />
             <Route path="/cooperative/*" element={<CooperativeDashboard />} />
             <Route path="/cooperative/:id/farmers-first" element={<FarmersFirstDashboard />} />
             <Route path="/principles/farmer-protection" element={<FarmerProtectionPage />} />

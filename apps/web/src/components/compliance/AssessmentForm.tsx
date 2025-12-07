@@ -50,7 +50,7 @@ const AssessmentForm: React.FC = () => {
       ? (formData.childrenEnrolledSchool / formData.totalChildrenInCommunity) * 100
       : 0;
 
-  // Calculate compliance score (simplified)
+  // Calculate assessment score (simplified)
   const calculateComplianceScore = (): number => {
     let score = 100;
 
@@ -170,9 +170,12 @@ const AssessmentForm: React.FC = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-white rounded-lg shadow-md p-6">
           <div className="flex items-center justify-between mb-6">
-            <h1 className="text-2xl font-bold text-gray-900">
-              {isEditMode ? 'Modifier l\'évaluation' : 'Nouvelle évaluation'}
-            </h1>
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">
+                {isEditMode ? 'Modifier l\'évaluation' : 'Nouvelle évaluation'}
+              </h1>
+              <p className="text-sm text-gray-600 mt-1">Auto-évaluation (non certifiante)</p>
+            </div>
             <button
               onClick={() => navigate('/compliance/child-labor')}
               className="text-gray-600 hover:text-gray-900"
@@ -485,11 +488,11 @@ const AssessmentForm: React.FC = () => {
               </div>
             </section>
 
-            {/* Compliance Score Preview */}
+            {/* Assessment Score Preview */}
             <section className="bg-gray-50 p-4 rounded-lg">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="text-sm font-medium text-gray-700">Score de conformité</h3>
+                  <h3 className="text-sm font-medium text-gray-700">Score d'évaluation</h3>
                   <p className="text-xs text-gray-500 mt-1">Calculé automatiquement</p>
                 </div>
                 <div className="text-right">
@@ -508,6 +511,11 @@ const AssessmentForm: React.FC = () => {
                   </div>
                   <div className="text-xs text-gray-500">sur 100</div>
                 </div>
+              </div>
+              <div className="mt-3 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+                <p className="text-xs text-yellow-800">
+                  <strong>Important:</strong> Cette évaluation est une auto-évaluation. Elle ne constitue pas une certification, une vérification ou une approbation réglementaire. Elle ne remplace pas les audits ou les vérifications.
+                </p>
               </div>
             </section>
 

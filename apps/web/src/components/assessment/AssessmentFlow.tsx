@@ -50,6 +50,11 @@ export function AssessmentFlow({ cooperativeId, onComplete }: AssessmentFlowProp
             ❤️ Farmers First - 100% Free Assessment
           </span>
         </div>
+        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mt-4 text-left max-w-2xl mx-auto">
+          <p className="text-sm text-yellow-800">
+            <strong>Important:</strong> This is a self-assessment tool. It is non-certifying and does not replace audits or verification. Final sourcing decisions and compliance determinations remain the responsibility of buyers and operators.
+          </p>
+        </div>
       </div>
 
       {/* Progress */}

@@ -217,11 +217,16 @@ const ChildLaborDashboard: React.FC<ChildLaborDashboardProps> = ({
       <div className="border-b border-gray-200 pb-4 flex items-start justify-between">
         <div>
           <h1 className="text-3xl font-bold text-gray-900">
-            Child Labor Compliance Dashboard
+            Child Labor Assessment Dashboard
           </h1>
           <p className="text-gray-600 mt-1">
-            Monitoring child labor-free practices across {dashboardData.totalCooperatives} cooperatives
+            Monitoring child labor assessment practices across {dashboardData.totalCooperatives} cooperatives
           </p>
+          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mt-3 max-w-2xl">
+            <p className="text-xs text-yellow-800">
+              <strong>Important:</strong> This dashboard displays self-assessment data. Assessments are non-certifying and do not replace audits or verification. Final sourcing decisions and compliance determinations remain the responsibility of buyers and operators.
+            </p>
+          </div>
         </div>
         <button
           onClick={() => navigate('/compliance/assessments/new')}
@@ -289,9 +294,9 @@ const ChildLaborDashboard: React.FC<ChildLaborDashboardProps> = ({
 
       {/* Charts Row */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Compliance Distribution Pie Chart */}
+        {/* Assessment Distribution Pie Chart */}
         <div className="bg-white rounded-lg shadow p-6">
-          <h3 className="text-lg font-semibold mb-4">Compliance Distribution</h3>
+          <h3 className="text-lg font-semibold mb-4">Assessment Score Distribution</h3>
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
               <Pie
@@ -313,9 +318,9 @@ const ChildLaborDashboard: React.FC<ChildLaborDashboardProps> = ({
           </ResponsiveContainer>
         </div>
 
-        {/* Regional Compliance Bar Chart */}
+        {/* Regional Assessment Bar Chart */}
         <div className="bg-white rounded-lg shadow p-6">
-          <h3 className="text-lg font-semibold mb-4">Compliance by Region</h3>
+          <h3 className="text-lg font-semibold mb-4">Assessment Scores by Region</h3>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={regionalData}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -334,7 +339,7 @@ const ChildLaborDashboard: React.FC<ChildLaborDashboardProps> = ({
       {cooperativeStatuses.length > 0 ? (
         <div className="bg-white rounded-lg shadow overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-200">
-            <h3 className="text-lg font-semibold">Cooperative Compliance Status</h3>
+            <h3 className="text-lg font-semibold">Cooperative Assessment Status</h3>
           </div>
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200">
@@ -347,7 +352,7 @@ const ChildLaborDashboard: React.FC<ChildLaborDashboardProps> = ({
                     Region
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Compliance Score
+                    Assessment Score
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Rating

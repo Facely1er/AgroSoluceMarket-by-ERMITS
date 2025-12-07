@@ -23,16 +23,19 @@ export const Skeleton: React.FC<SkeletonProps> = ({
   rounded = true,
   circle = false,
 }) => {
-  const style: React.CSSProperties = {};
-  if (width) style.width = typeof width === 'number' ? `${width}px` : width;
-  if (height) style.height = typeof height === 'number' ? `${height}px` : height;
-
   const roundedClass = circle ? 'rounded-full' : rounded ? 'rounded' : '';
+  
+  // Build width and height classes using Tailwind's arbitrary value syntax
+  const widthClass = width 
+    ? `w-[${typeof width === 'number' ? `${width}px` : width}]` 
+    : '';
+  const heightClass = height 
+    ? `h-[${typeof height === 'number' ? `${height}px` : height}]` 
+    : '';
   
   return (
     <div
-      className={`bg-gray-200 animate-pulse ${roundedClass} ${className}`}
-      style={style}
+      className={`bg-gray-200 animate-pulse ${roundedClass} ${widthClass} ${heightClass} ${className}`.trim()}
     />
   );
 };

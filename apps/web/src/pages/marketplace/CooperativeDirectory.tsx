@@ -162,7 +162,7 @@ export default function CooperativeDirectory() {
             <div className="text-3xl font-bold text-green-600 mb-1">
               {stats.verified.toLocaleString()}
             </div>
-            <div className="text-gray-600 text-sm">Vérifiées</div>
+            <div className="text-gray-600 text-sm">Enregistrées</div>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-md text-center border-l-4 border-blue-500">
             <div className="text-3xl font-bold text-blue-600 mb-1">

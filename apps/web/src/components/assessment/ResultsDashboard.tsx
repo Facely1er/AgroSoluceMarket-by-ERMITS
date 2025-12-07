@@ -31,9 +31,8 @@ export function ResultsDashboard({ results }: ResultsDashboardProps) {
         {/* Disclaimer */}
         <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mt-4 text-left">
           <p className="text-sm text-yellow-800">
-            <strong>Important:</strong> This is a self-assessment tool to help you understand your cooperative's current practices. 
-            It is not a certification, compliance determination, or approval. Final sourcing decisions and compliance 
-            determinations remain the responsibility of buyers and operators.
+            <strong>Important:</strong> This is a self-assessment tool. It is non-certifying and does not replace audits or verification. 
+            Final sourcing decisions and compliance determinations remain the responsibility of buyers and operators.
           </p>
         </div>
       </div>

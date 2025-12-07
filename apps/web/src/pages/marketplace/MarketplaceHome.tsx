@@ -3,7 +3,6 @@ import {
   Shield, 
   TrendingUp, 
   ArrowRight,
-  CheckCircle,
   Users,
   FileText,
   BarChart3,
@@ -11,12 +10,16 @@ import {
   Zap,
   MapPin,
   Award,
-  ClipboardList
+  ClipboardList,
+  AlertTriangle,
+  Leaf,
+  Scale,
+  Heart
 } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/I18nProvider';
 
 export default function MarketplaceHome() {
-  const { t, language } = useI18n();
+  const { t } = useI18n();
 
   const outcomes = [
     {
@@ -165,21 +168,6 @@ export default function MarketplaceHome() {
     return colors[color] || 'text-gray-600';
   };
 
-  const getCtaColor = (color: string) => {
-    const colors: Record<string, string> = {
-      primary: 'text-primary-600',
-      green: 'text-green-600',
-      blue: 'text-blue-600',
-      purple: 'text-purple-600',
-      orange: 'text-orange-600',
-      red: 'text-red-600',
-      teal: 'text-teal-600',
-      indigo: 'text-indigo-600',
-      yellow: 'text-yellow-600',
-    };
-    return colors[color] || 'text-gray-600';
-  };
-
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
@@ -210,7 +198,7 @@ export default function MarketplaceHome() {
                 <ArrowRight className="h-4 w-4 md:h-5 md:w-5 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
-                to="/buyer"
+                to="/buyers"
                 className="group bg-secondary-600 text-white px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold hover:bg-secondary-700 transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 border-2 border-secondary-400 text-sm md:text-base"
               >
                 {t.landing.hero.ctaBuyer}
@@ -249,54 +237,200 @@ export default function MarketplaceHome() {
         </div>
       </section>
 
-      {/* Outcomes Based on Features Section */}
+      {/* Quick Links Section */}
       <section className="py-16 md:py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-gray-900">
-              {t.landing.outcomes.title}
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+              Learn More
             </h2>
-            <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto px-4">
-              {t.landing.outcomes.subtitle}
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Explore how AgroSoluce supports responsible sourcing for different audiences
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {outcomes.map((outcome) => {
+          <div className="grid md:grid-cols-3 gap-6">
+            <Link
+              to="/buyers"
+              className="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-all border-l-4 border-primary-500"
+            >
+              <h3 className="text-xl font-bold mb-3 text-gray-900">For Buyers</h3>
+              <p className="text-gray-600 mb-4">
+                Understand what exists, what is missing, and where to focus due diligence
+              </p>
+              <span className="text-primary-600 font-semibold inline-flex items-center gap-2">
+                Learn more <ArrowRight className="h-4 w-4" />
+              </span>
+            </Link>
+            
+            <Link
+              to="/partners"
+              className="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-all border-l-4 border-green-500"
+            >
+              <h3 className="text-xl font-bold mb-3 text-gray-900">For NGOs & Partners</h3>
+              <p className="text-gray-600 mb-4">
+                Make farmer-level progress visible without distorting reality
+              </p>
+              <span className="text-green-600 font-semibold inline-flex items-center gap-2">
+                Learn more <ArrowRight className="h-4 w-4" />
+              </span>
+            </Link>
+            
+            <Link
+              to="/what-we-do"
+              className="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-all border-l-4 border-blue-500"
+            >
+              <h3 className="text-xl font-bold mb-3 text-gray-900">What We Do</h3>
+              <p className="text-gray-600 mb-4">
+                See how AgroSoluce supports responsible sourcing through transparency
+              </p>
+              <span className="text-blue-600 font-semibold inline-flex items-center gap-2">
+                Learn more <ArrowRight className="h-4 w-4" />
+              </span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Challenges Section - Simplified */}
+      <section className="py-16 md:py-24 bg-gradient-to-b from-red-50 via-orange-50 to-yellow-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12 md:mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-red-100 rounded-full text-sm font-medium mb-6">
+              <AlertTriangle className="h-4 w-4 text-red-600" />
+              <span className="text-red-800 font-semibold">{t.landing.challenges.tagline}</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-gray-900">
+              {t.landing.challenges.title}
+            </h2>
+            <p className="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto px-4 leading-relaxed">
+              {t.landing.challenges.subtitle}
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            {/* Regulatory Pressure */}
+            <div className="bg-white p-6 md:p-8 rounded-xl shadow-lg border-l-4 border-red-500">
+              <div className="bg-red-100 w-14 h-14 rounded-lg flex items-center justify-center mb-4">
+                <Scale className="h-7 w-7 text-red-600" />
+              </div>
+              <h3 className="text-xl md:text-2xl font-bold mb-3 text-gray-900">
+                {t.landing.challenges.regulatory.title}
+              </h3>
+              <p className="text-gray-700 leading-relaxed mb-4 text-sm md:text-base">
+                {t.landing.challenges.regulatory.description}
+              </p>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li className="flex items-start gap-2">
+                  <AlertTriangle className="h-4 w-4 text-red-500 mt-0.5 flex-shrink-0" />
+                  <span>{t.landing.challenges.regulatory.point1}</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <AlertTriangle className="h-4 w-4 text-red-500 mt-0.5 flex-shrink-0" />
+                  <span>{t.landing.challenges.regulatory.point2}</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <AlertTriangle className="h-4 w-4 text-red-500 mt-0.5 flex-shrink-0" />
+                  <span>{t.landing.challenges.regulatory.point3}</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Environmental Issues */}
+            <div className="bg-white p-6 md:p-8 rounded-xl shadow-lg border-l-4 border-orange-500">
+              <div className="bg-orange-100 w-14 h-14 rounded-lg flex items-center justify-center mb-4">
+                <Leaf className="h-7 w-7 text-orange-600" />
+              </div>
+              <h3 className="text-xl md:text-2xl font-bold mb-3 text-gray-900">
+                {t.landing.challenges.environmental.title}
+              </h3>
+              <p className="text-gray-700 leading-relaxed mb-4 text-sm md:text-base">
+                {t.landing.challenges.environmental.description}
+              </p>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li className="flex items-start gap-2">
+                  <AlertTriangle className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
+                  <span>{t.landing.challenges.environmental.point1}</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <AlertTriangle className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
+                  <span>{t.landing.challenges.environmental.point2}</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <AlertTriangle className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
+                  <span>{t.landing.challenges.environmental.point3}</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Social Challenges */}
+            <div className="bg-white p-6 md:p-8 rounded-xl shadow-lg border-l-4 border-yellow-500">
+              <div className="bg-yellow-100 w-14 h-14 rounded-lg flex items-center justify-center mb-4">
+                <Heart className="h-7 w-7 text-yellow-600" />
+              </div>
+              <h3 className="text-xl md:text-2xl font-bold mb-3 text-gray-900">
+                {t.landing.challenges.social.title}
+              </h3>
+              <p className="text-gray-700 leading-relaxed mb-4 text-sm md:text-base">
+                {t.landing.challenges.social.description}
+              </p>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li className="flex items-start gap-2">
+                  <AlertTriangle className="h-4 w-4 text-yellow-500 mt-0.5 flex-shrink-0" />
+                  <span>{t.landing.challenges.social.point1}</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <AlertTriangle className="h-4 w-4 text-yellow-500 mt-0.5 flex-shrink-0" />
+                  <span>{t.landing.challenges.social.point2}</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <AlertTriangle className="h-4 w-4 text-yellow-500 mt-0.5 flex-shrink-0" />
+                  <span>{t.landing.challenges.social.point3}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Brief Overview Section */}
+      <section className="py-16 md:py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+              {t.landing.value.title}
+            </h2>
+            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              {t.landing.value.subtitle}
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+            {outcomes.slice(0, 5).map((outcome) => {
               const Icon = outcome.icon;
               return (
                 <div 
                   key={outcome.id} 
-                  className="bg-white p-6 md:p-8 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100"
+                  className="bg-gradient-to-br from-white to-gray-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-all border border-gray-100"
                 >
-                  <div className={`${getIconBgColor(outcome.iconColor)} w-14 h-14 rounded-lg flex items-center justify-center mb-4`}>
-                    <Icon className={`h-7 w-7 ${getIconTextColor(outcome.iconColor)}`} />
+                  <div className={`${getIconBgColor(outcome.iconColor)} w-12 h-12 rounded-lg flex items-center justify-center mb-4`}>
+                    <Icon className={`h-6 w-6 ${getIconTextColor(outcome.iconColor)}`} />
                   </div>
-                  <h3 className="text-xl md:text-2xl font-semibold mb-3 text-gray-900">
+                  <h3 className="text-lg font-semibold mb-2 text-gray-900">
                     {outcome.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed mb-4 text-sm md:text-base">
-                    <strong className="font-semibold">{language === 'fr' ? 'Fonctionnalité:' : 'Feature:'}</strong> {outcome.feature}
-                  </p>
-                  <div className="space-y-2 text-sm text-gray-700 mb-4">
-                    {outcome.outcomes.map((outcomeText, index) => (
-                      <div key={index} className="flex items-start gap-2">
-                        <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
-                        <span className="text-xs md:text-sm">{outcomeText}</span>
-                      </div>
-                    ))}
-                  </div>
-                  {outcome.cta && outcome.ctaLink && (
-                    <Link 
-                      to={outcome.ctaLink} 
-                      className={`mt-4 ${getCtaColor(outcome.iconColor)} font-medium hover:underline inline-flex items-center gap-1 text-sm md:text-base`}
-                    >
-                      {outcome.cta} <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  )}
                 </div>
               );
             })}
+          </div>
+          
+          <div className="text-center">
+            <Link
+              to="/what-we-do"
+              className="inline-flex items-center gap-2 text-primary-600 font-semibold hover:text-primary-700 hover:underline"
+            >
+              Learn more about what we do <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
         </div>
       </section>

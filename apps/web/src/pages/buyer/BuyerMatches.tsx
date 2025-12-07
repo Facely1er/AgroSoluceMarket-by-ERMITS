@@ -163,10 +163,10 @@ export default function BuyerMatches() {
               <p className="text-sm text-gray-500 mb-1">Requirements</p>
               <div className="flex flex-wrap gap-2 mt-1">
                 {request.requirements.eudrRequired && (
-                  <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded" title="EUDR-aligned documentation required">EUDR-Aligned</span>
+                  <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded" title="EUDR-aligned documentation context required">EUDR-Aligned Documentation</span>
                 )}
                 {request.requirements.childLaborZeroTolerance && (
-                  <span className="px-2 py-1 bg-red-100 text-red-800 text-xs rounded">No Child Labor</span>
+                  <span className="px-2 py-1 bg-red-100 text-red-800 text-xs rounded" title="Zero tolerance policy for child labor">Zero Tolerance Policy</span>
                 )}
                 {request.requirements.certifications?.map(cert => (
                   <span key={cert} className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">
@@ -273,17 +273,17 @@ export default function BuyerMatches() {
                   {/* Contextual Information */}
                   <div className="flex flex-wrap gap-2 mb-4">
                     {coop.complianceFlags.eudrReady && (
-                      <span className="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full">
-                        EUDR-Aligned
+                      <span className="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full" title="EUDR-aligned documentation context available (not a compliance determination)">
+                        EUDR-Aligned Documentation
                       </span>
                     )}
                     {coop.complianceFlags.childLaborRisk && (
-                      <span className={`px-3 py-1 text-sm rounded-full ${getRiskBadgeColor(coop.complianceFlags.childLaborRisk)}`}>
+                      <span className={`px-3 py-1 text-sm rounded-full ${getRiskBadgeColor(coop.complianceFlags.childLaborRisk)}`} title="Contextual risk indicator (not a compliance determination)">
                         Child Labor Risk: {coop.complianceFlags.childLaborRisk.charAt(0).toUpperCase() + coop.complianceFlags.childLaborRisk.slice(1)}
                       </span>
                     )}
                     {coop.certifications.map(cert => (
-                      <span key={cert} className="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full">
+                      <span key={cert} className="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full" title="Certification status (self-reported)">
                         {cert}
                       </span>
                     ))}

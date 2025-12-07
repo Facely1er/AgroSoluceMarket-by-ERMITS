@@ -100,7 +100,7 @@ export default function CooperativeProfile() {
                 className="inline-flex items-center gap-2 px-4 py-2 bg-secondary-600 text-white rounded-lg hover:bg-secondary-700 transition-colors"
               >
                 <Shield className="h-4 w-4" />
-                Voir Conformité
+                Voir Évaluations
               </Link>
               <Link
                 to={`/cooperative/${cooperative.id}/farmers-first`}
@@ -283,6 +283,11 @@ export default function CooperativeProfile() {
                     <Shield className="h-5 w-5 text-primary-600" />
                     Due Diligence Summary
                   </h3>
+                  <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mb-4">
+                    <p className="text-xs text-yellow-800">
+                      <strong>Disclaimer:</strong> Information may include self-reported data and does not constitute certification, verification, or regulatory approval.
+                    </p>
+                  </div>
                   <div className="bg-gray-50 rounded-lg p-6 space-y-4">
                     {/* EUDR Information */}
                     <div className="flex items-start justify-between p-4 bg-white rounded-lg border">

@@ -708,7 +708,9 @@ export default function DirectoryDetailPage() {
           </h2>
           <div className="space-y-4 text-sm text-gray-700">
             <p>
-              This view structures supplier-provided information to support due-diligence processes. It is not a certification or compliance determination. Responsibility for due care and final sourcing decisions remains with buyers and operators.
+              <strong>Important:</strong> Information may include self-reported data and does not constitute certification, verification, or regulatory approval. 
+              This view structures supplier-provided information to support due-diligence processes. It is not a certification or compliance determination. 
+              Responsibility for due care and final sourcing decisions remains with buyers and operators.
             </p>
             <p className="pt-2 border-t border-gray-200">
               <strong className="text-gray-900">Data Source:</strong> {record.source_registry || 'Not specified'}
