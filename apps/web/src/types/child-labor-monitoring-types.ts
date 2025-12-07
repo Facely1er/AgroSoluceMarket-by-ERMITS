@@ -508,8 +508,8 @@ export interface ReportIncidentRequest {
 
 export interface ComplianceDashboard {
   totalCooperatives: number;
-  compliantCooperatives: number;
-  complianceRate: number;
+  cooperativesWithGoodScores: number; // Cooperatives with assessment scores ≥75
+  complianceRate: number; // Percentage of cooperatives with scores ≥75
   averageComplianceScore: number;
   totalAssessments: number;
   assessmentsDueThisMonth: number;
@@ -532,8 +532,8 @@ export interface SocialImpactDashboard {
 export interface RegionalCompliance {
   region: string;
   totalCooperatives: number;
-  compliantCooperatives: number;
-  complianceRate: number;
+  cooperativesWithGoodScores: number; // Cooperatives with assessment scores ≥75
+  complianceRate: number; // Percentage of cooperatives with scores ≥75
   averageComplianceScore: number;
   totalChildrenInSchool: number;
   totalViolations: number;

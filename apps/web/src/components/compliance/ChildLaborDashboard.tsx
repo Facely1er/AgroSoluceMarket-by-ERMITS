@@ -112,7 +112,7 @@ const ChildLaborDashboard: React.FC<ChildLaborDashboardProps> = ({
 
       return {
         totalCooperatives,
-        compliantCooperatives: cooperativesWithGoodScores,
+        cooperativesWithGoodScores,
         complianceRate,
       averageComplianceScore,
       totalAssessments: totalCooperatives,
@@ -243,7 +243,7 @@ const ChildLaborDashboard: React.FC<ChildLaborDashboardProps> = ({
         <MetricCard
           title="Assessment Score Rate"
           value={`${dashboardData.complianceRate.toFixed(1)}%`}
-          subtitle={`${dashboardData.compliantCooperatives} / ${dashboardData.totalCooperatives} cooperatives with scores ≥75`}
+          subtitle={`${dashboardData.cooperativesWithGoodScores} / ${dashboardData.totalCooperatives} cooperatives with assessment scores ≥75`}
           icon={CheckCircle2}
           color="green"
           trend={dashboardData.complianceRate >= 75 ? 'up' : 'down'}
