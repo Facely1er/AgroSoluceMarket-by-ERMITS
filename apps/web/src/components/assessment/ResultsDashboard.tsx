@@ -1,6 +1,7 @@
 import type { AssessmentResults } from '@/types/assessment.types';
 import { ScoreCircle } from './ScoreCircle';
 import { RecommendationCard } from './RecommendationCard';
+import { Building2, Shield, Baby, BarChart3, Wrench, Phone } from 'lucide-react';
 
 interface ResultsDashboardProps {
   results: AssessmentResults;
@@ -59,15 +60,18 @@ export function ResultsDashboard({ results }: ResultsDashboardProps) {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           {Object.entries(results.sectionScores).map(([sectionId, score]) => {
             const section = {
-              'farm-profile': { name: 'Farm Profile', icon: '🏛️' },
-              'security-data': { name: 'Security', icon: '🛡️' },
-              'child-protection': { name: 'Child Protection', icon: '👶' },
-              'economic-performance': { name: 'Economic', icon: '📊' }
-            }[sectionId] || { name: sectionId, icon: '📊' };
+              'farm-profile': { name: 'Farm Profile', icon: Building2 },
+              'security-data': { name: 'Security', icon: Shield },
+              'child-protection': { name: 'Child Protection', icon: Baby },
+              'economic-performance': { name: 'Economic', icon: BarChart3 }
+            }[sectionId] || { name: sectionId, icon: BarChart3 };
 
+            const IconComponent = section.icon;
             return (
               <div key={sectionId} className="text-center">
-                <div className="text-2xl mb-2">{section.icon}</div>
+                <div className="flex justify-center mb-2">
+                  <IconComponent className="h-10 w-10 text-primary-600" />
+                </div>
                 <div className="text-2xl font-bold text-green-600">{score}%</div>
                 <div className="text-sm text-gray-600">{section.name}</div>
               </div>
@@ -107,17 +111,19 @@ export function ResultsDashboard({ results }: ResultsDashboardProps) {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button 
-            className="bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
+            className="flex items-center gap-2 bg-white text-green-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
             onClick={() => alert('Implementation toolkit coming soon!')}
           >
-            🛠️ Access Toolkit
+            <Wrench className="h-5 w-5" />
+            Access Toolkit
           </button>
           
           <button 
-            className="bg-white/20 text-white px-8 py-3 rounded-lg font-semibold hover:bg-white/30 transition-colors border border-white/30"
+            className="flex items-center gap-2 bg-white/20 text-white px-8 py-3 rounded-lg font-semibold hover:bg-white/30 transition-colors border border-white/30"
             onClick={() => alert('Expert consultation coming soon!')}
           >
-            📞 Speak with Expert
+            <Phone className="h-5 w-5" />
+            Speak with Expert
           </button>
         </div>
       </div>

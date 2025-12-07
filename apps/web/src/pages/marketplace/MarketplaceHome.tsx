@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { 
   Shield, 
   TrendingUp, 
@@ -17,9 +18,26 @@ import {
   Heart
 } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/I18nProvider';
+import { EUDR_COMMODITIES_IN_SCOPE } from '@/types';
 
 export default function MarketplaceHome() {
   const { t } = useI18n();
+  const [carouselIndex, setCarouselIndex] = useState(0);
+
+  // Split description into carousel items
+  const carouselItems = [
+    'AgroSoluce helps cooperatives, buyers, and partners make farmer engagement, documentation coverage, and improvement efforts visible',
+    '— without overstating readiness or replacing audits.',
+    'We start from the farmer, structure reality at the cooperative level, and support credible EUDR-aligned due diligence across agricultural supply chains.'
+  ];
+
+  // Auto-rotate carousel every 4 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCarouselIndex((prev) => (prev + 1) % carouselItems.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [carouselItems.length]);
 
   const outcomes = [
     {
@@ -171,7 +189,7 @@ export default function MarketplaceHome() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="pt-20 pb-16 md:pt-32 md:pb-24 bg-gradient-to-r from-primary-600 via-primary-700 to-secondary-500 text-white relative overflow-hidden">
+      <section className="pt-12 pb-16 md:pt-20 md:pb-24 bg-gradient-to-r from-primary-600 via-primary-700 to-secondary-500 text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/440731/pexels-photo-440731.jpeg')] bg-cover bg-center opacity-10"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-transparent"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -184,11 +202,17 @@ export default function MarketplaceHome() {
               {t.landing.hero.title}
             </h1>
             <p className="text-xl md:text-2xl lg:text-3xl mb-4 text-white/95 font-medium">
-              {t.landing.hero.subtitle}
+              Making Farmer Engagement, Documentation Coverage,<br />
+              and Improvement Efforts Visible
             </p>
-            <p className="text-base md:text-lg lg:text-xl mb-10 text-white/85 max-w-3xl mx-auto leading-relaxed px-4">
-              {t.landing.hero.description}
-            </p>
+            <div className="text-base md:text-lg lg:text-xl mb-10 text-white/85 max-w-3xl mx-auto leading-relaxed px-4 min-h-[4rem] md:min-h-[5rem] flex items-center justify-center">
+              <p 
+                key={carouselIndex}
+                className="animate-fade-in"
+              >
+                {carouselItems[carouselIndex]}
+              </p>
+            </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8 px-4">
               <Link
                 to="/cooperatives"
@@ -216,22 +240,22 @@ export default function MarketplaceHome() {
       {/* Stats Section */}
       <section className="py-12 md:py-16 bg-white -mt-12 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
             <div className="text-center p-4 md:p-6 bg-primary-50 rounded-xl border border-primary-100">
-              <div className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-primary-600 mb-2">3,797+</div>
-              <div className="text-xs md:text-sm text-gray-600 font-medium">{t.landing.stats.cooperatives}</div>
+              <div className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-primary-600 mb-2">{EUDR_COMMODITIES_IN_SCOPE.length}</div>
+              <div className="text-xs md:text-sm text-gray-600 font-medium mb-2">{t.landing.stats.productCategories}</div>
+              <div className="text-xs text-gray-500 mt-2 leading-relaxed">
+                {EUDR_COMMODITIES_IN_SCOPE.map(c => c.label).join(', ')}
+              </div>
             </div>
             <div className="text-center p-4 md:p-6 bg-secondary-50 rounded-xl border border-secondary-100">
               <div className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-secondary-600 mb-2">31</div>
-              <div className="text-xs md:text-sm text-gray-600 font-medium">{t.landing.stats.regions}</div>
+              <div className="text-xs md:text-sm text-gray-600 font-medium mb-2">{t.landing.stats.regions}</div>
+              <div className="text-xs text-gray-500 mt-2">{t.landing.stats.regionsNote}</div>
             </div>
             <div className="text-center p-4 md:p-6 bg-green-50 rounded-xl border border-green-100">
-              <div className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-green-600 mb-2">98%+</div>
-              <div className="text-xs md:text-sm text-gray-600 font-medium">{t.landing.stats.verification}</div>
-            </div>
-            <div className="text-center p-4 md:p-6 bg-blue-50 rounded-xl border border-blue-100">
-              <div className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-blue-600 mb-2">€3.2B+</div>
-              <div className="text-xs md:text-sm text-gray-600 font-medium">{t.landing.stats.market}</div>
+              <div className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-green-600 mb-2">3+</div>
+              <div className="text-xs md:text-sm text-gray-600 font-medium">{t.landing.stats.complianceFrameworks}</div>
             </div>
           </div>
         </div>
@@ -436,8 +460,10 @@ export default function MarketplaceHome() {
       </section>
 
       {/* Final CTA Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-r from-primary-600 to-secondary-500 text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="py-16 md:py-24 bg-gradient-to-r from-primary-600 to-secondary-500 text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/440731/pexels-photo-440731.jpeg')] bg-cover bg-center opacity-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-transparent"></div>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <Target className="h-12 w-12 md:h-16 md:w-16 mx-auto mb-6 opacity-90" />
           <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-4">
             {t.landing.cta.title}

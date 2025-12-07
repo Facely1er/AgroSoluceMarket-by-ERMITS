@@ -1,4 +1,5 @@
 import type { Recommendation } from '@/types/assessment.types';
+import { Shield, Baby, ClipboardList, BarChart3, Pin } from 'lucide-react';
 
 interface RecommendationCardProps {
   recommendation: Recommendation;
@@ -17,11 +18,11 @@ export function RecommendationCard({ recommendation }: RecommendationCardProps) 
 
   const getCategoryIcon = (category: string) => {
     switch (category) {
-      case 'security': return '🛡️';
-      case 'child-protection': return '👶';
-      case 'compliance': return '📋';
-      case 'economic': return '📊';
-      default: return '📌';
+      case 'security': return Shield;
+      case 'child-protection': return Baby;
+      case 'compliance': return ClipboardList;
+      case 'economic': return BarChart3;
+      default: return Pin;
     }
   };
 
@@ -30,7 +31,10 @@ export function RecommendationCard({ recommendation }: RecommendationCardProps) 
       {/* Header */}
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
-          <span className="text-2xl">{getCategoryIcon(recommendation.category)}</span>
+          {(() => {
+            const IconComponent = getCategoryIcon(recommendation.category);
+            return <IconComponent className="h-6 w-6 text-primary-600" />;
+          })()}
           <div>
             <h3 className="font-semibold text-gray-900 text-lg">
               {recommendation.title}

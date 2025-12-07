@@ -2,6 +2,8 @@
 
 export type DocumentPresence = 'present' | 'missing' | 'expired' | 'pending';
 
+export type CoverageBand = 'limited' | 'partial' | 'substantial';
+
 export interface CoverageMetrics {
   cooperative_id: string;
   farmers_total: number;

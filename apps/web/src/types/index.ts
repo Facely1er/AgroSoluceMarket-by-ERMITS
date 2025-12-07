@@ -369,17 +369,44 @@ export interface Attestation {
 // Canonical Cooperative Directory
 export type RecordStatus = 'active' | 'inactive' | 'archived' | 'pending';
 
+// EUDR Commodity types
+export type EudrCommodity =
+  | 'cocoa'
+  | 'coffee'
+  | 'palm_oil'
+  | 'rubber'
+  | 'soy'
+  | 'cattle'
+  | 'wood';
+
+export const EUDR_COMMODITIES_IN_SCOPE: { id: EudrCommodity; label: string }[] = [
+  { id: 'cocoa', label: 'Cocoa' },
+  { id: 'coffee', label: 'Coffee' },
+  { id: 'palm_oil', label: 'Palm oil' },
+  { id: 'rubber', label: 'Natural rubber' },
+  { id: 'soy', label: 'Soy' },
+  { id: 'cattle', label: 'Cattle (beef/leather)' },
+  { id: 'wood', label: 'Wood / timber' }
+];
+
+// Coverage band type
+export type CoverageBand = 'limited' | 'partial' | 'substantial';
+
 export interface CanonicalCooperativeDirectory {
   coop_id: string; // UUID
   name: string;
-  country?: string;
-  region?: string;
+  country?: string; // Full country name (backward compatibility)
+  countryCode?: string; // ISO country code (e.g. "CI")
+  region?: string; // Full region name (backward compatibility)
+  regionName?: string; // Region name for filtering (e.g. "Nawa", "Haut-Sassandra")
   department?: string;
-  primary_crop?: string;
+  primary_crop?: string; // Legacy field - prefer using commodities array
+  commodities?: EudrCommodity[]; // Array of EUDR commodities (e.g. ['cocoa', 'coffee'])
   source_registry?: string;
   record_status: RecordStatus;
   pilot_id?: string | null; // Pilot cohort identifier (nullable)
   pilot_label?: string; // Pilot cohort label (e.g., "Pilot A")
+  coverageBand?: CoverageBand; // Overall coverage band (limited/partial/substantial)
   created_at?: string; // ISO timestamp
 }
 

@@ -7,4 +7,5 @@ export * from './farmer';
 export * from './assessment';
 export * from './coverage';
 export * from './readiness';
+export * from './commodity';
 

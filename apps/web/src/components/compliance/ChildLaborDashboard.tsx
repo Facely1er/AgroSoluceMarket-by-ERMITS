@@ -7,6 +7,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { CheckCircle2, BarChart3, AlertTriangle, Award, Plus, BookOpen, Trophy } from 'lucide-react';
 import {
   CooperativeComplianceStatus,
   ComplianceDashboard,
@@ -232,7 +233,7 @@ const ChildLaborDashboard: React.FC<ChildLaborDashboardProps> = ({
           onClick={() => navigate('/compliance/assessments/new')}
           className="inline-flex items-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
         >
-          <span>➕</span>
+          <Plus className="h-5 w-5" />
           <span>New Assessment</span>
         </button>
       </div>
@@ -243,7 +244,7 @@ const ChildLaborDashboard: React.FC<ChildLaborDashboardProps> = ({
           title="Assessment Score Rate"
           value={`${dashboardData.complianceRate.toFixed(1)}%`}
           subtitle={`${dashboardData.compliantCooperatives} / ${dashboardData.totalCooperatives} cooperatives with scores ≥75`}
-          icon="✓"
+          icon={CheckCircle2}
           color="green"
           trend={dashboardData.complianceRate >= 75 ? 'up' : 'down'}
         />
@@ -251,14 +252,14 @@ const ChildLaborDashboard: React.FC<ChildLaborDashboardProps> = ({
           title="Avg Assessment Score"
           value={dashboardData.averageComplianceScore.toFixed(0)}
           subtitle="Self-assessment score (0-100 scale)"
-          icon="📊"
+          icon={BarChart3}
           color="blue"
         />
         <MetricCard
           title="Total Violations"
           value={dashboardData.totalViolations.toString()}
           subtitle={`${dashboardData.criticalViolations} critical/severe`}
-          icon="⚠️"
+          icon={AlertTriangle}
           color="red"
           trend={dashboardData.totalViolations === 0 ? 'neutral' : 'down'}
         />
@@ -266,15 +267,16 @@ const ChildLaborDashboard: React.FC<ChildLaborDashboardProps> = ({
           title="Active Certifications"
           value={dashboardData.activeCertifications.toString()}
           subtitle="Fair Trade, Rainforest Alliance, etc."
-          icon="🏆"
+          icon={Award}
           color="yellow"
         />
       </div>
 
       {/* Social Impact Highlight */}
       <div className="bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-lg p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">
-          📚 Social Impact Achievements
+        <h2 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
+          <BookOpen className="h-6 w-6 text-primary-600" />
+          Social Impact Achievements
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="text-center">
@@ -407,8 +409,8 @@ const ChildLaborDashboard: React.FC<ChildLaborDashboardProps> = ({
                       <ViolationBadge count={status.childLaborViolations || 0} />
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                      <div className="flex items-center">
-                        <span className="mr-1">🏆</span>
+                      <div className="flex items-center gap-1">
+                        <Trophy className="h-4 w-4 text-yellow-600" />
                         {status.activeCertifications}
                       </div>
                     </td>
@@ -437,7 +439,7 @@ interface MetricCardProps {
   title: string;
   value: string;
   subtitle: string;
-  icon: string;
+  icon: React.ComponentType<{ className?: string }>;
   color: 'green' | 'blue' | 'red' | 'yellow';
   trend?: 'up' | 'down' | 'neutral';
 }
@@ -446,7 +448,7 @@ const MetricCard: React.FC<MetricCardProps> = ({
   title,
   value,
   subtitle,
-  icon,
+  icon: IconComponent,
   color,
   trend,
 }) => {
@@ -460,7 +462,7 @@ const MetricCard: React.FC<MetricCardProps> = ({
   return (
     <div className={`rounded-lg border p-6 ${colorClasses[color]}`}>
       <div className="flex items-center justify-between mb-2">
-        <span className="text-2xl">{icon}</span>
+        <IconComponent className="h-6 w-6" />
         {trend && <TrendIndicator trend={trend} />}
       </div>
       <div className="text-3xl font-bold mb-1">{value}</div>

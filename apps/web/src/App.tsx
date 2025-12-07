@@ -29,6 +29,7 @@ const DueCarePrinciplesPage = lazy(() => import('./pages/governance/DueCarePrinc
 const ChildLaborDashboard = lazy(() => import('./components/compliance').then(m => ({ default: m.ChildLaborDashboard })));
 const AssessmentForm = lazy(() => import('./components/compliance').then(m => ({ default: m.AssessmentForm })));
 const AssessmentPage = lazy(() => import('./pages/assessment'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 // Loading component
 const LoadingSpinner = () => (
@@ -100,6 +101,7 @@ function App() {
                 </ErrorBoundary>
               }
             />
+            <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </Suspense>
         </main>

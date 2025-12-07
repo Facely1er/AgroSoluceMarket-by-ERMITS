@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, Building2, Heart, ShoppingCart } from 'lucide-react';
+import { Search, UsersRound, Heart, Briefcase } from 'lucide-react';
 
 export default function BuyerPortal() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -31,7 +31,7 @@ export default function BuyerPortal() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <div className="bg-white rounded-lg shadow-md p-6 text-center">
-            <Building2 className="h-12 w-12 text-primary-600 mx-auto mb-4" />
+            <UsersRound className="h-12 w-12 text-primary-600 mx-auto mb-4" />
             <h3 className="text-lg font-semibold mb-2">Explorer les Coopératives</h3>
             <p className="text-gray-600 text-sm mb-4">
               Parcourez notre répertoire de 3,797+ coopératives vérifiées
@@ -45,7 +45,7 @@ export default function BuyerPortal() {
           </div>
 
           <div className="bg-white rounded-lg shadow-md p-6 text-center border-2 border-primary-500">
-            <ShoppingCart className="h-12 w-12 text-primary-600 mx-auto mb-4" />
+            <Briefcase className="h-12 w-12 text-primary-600 mx-auto mb-4" />
             <h3 className="text-lg font-semibold mb-2">Create Buyer Request</h3>
             <p className="text-gray-600 text-sm mb-4">
               Submit your sourcing requirements and get matched with suitable cooperatives
@@ -70,7 +70,7 @@ export default function BuyerPortal() {
           </div>
 
           <div className="bg-white rounded-lg shadow-md p-6 text-center">
-            <ShoppingCart className="h-12 w-12 text-secondary-600 mx-auto mb-4" />
+            <Briefcase className="h-12 w-12 text-secondary-600 mx-auto mb-4" />
             <h3 className="text-lg font-semibold mb-2">Mes Commandes</h3>
             <p className="text-gray-600 text-sm mb-4">
               Suivez vos transactions et commandes en cours

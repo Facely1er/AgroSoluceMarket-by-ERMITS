@@ -1,22 +1,76 @@
 import { useState, useEffect, useMemo } from 'react';
-import { Search, Building2, Filter, X } from 'lucide-react';
+import { Search, Building2, X, ClipboardList } from 'lucide-react';
 import {
   getCanonicalDirectoryRecords,
   getCanonicalDirectoryRecordsByStatus,
-  getCanonicalDirectoryRecordsByCountry,
-  getCanonicalDirectoryRecordsByPrimaryCrop,
-  getCanonicalDirectoryRecordsByPilotId,
 } from '@/features/cooperatives/api/canonicalDirectoryApi';
-import CanonicalDirectoryCard from '@/features/cooperatives/components/CanonicalDirectoryCard';
 import type { CanonicalCooperativeDirectory } from '@/types';
+import type { EudrCommodity } from '@/types';
+import type { CoverageBand } from '@/types';
+import { EUDR_COMMODITIES_IN_SCOPE } from '@/types';
+
+// Helper function to get coverage band for a coop + commodity
+// TODO[directory-filters]: replace this placeholder with real per-commodity lookup
+function getCoverageBandForCommodity(
+  coop: CanonicalCooperativeDirectory,
+  commodity: EudrCommodity
+): CoverageBand | null {
+  // For now, if the coop has that commodity at all, fall back to its main coverageBand.
+  // If you already have per-commodity metrics, plug them in instead.
+  if (!coop.commodities?.includes(commodity)) return null;
+
+  // Assuming coop.coverageBand exists; adjust if needed
+  return coop.coverageBand ?? null;
+}
+
+// Helper to derive commodities from primary_crop for backward compatibility
+function getCommoditiesFromRecord(record: CanonicalCooperativeDirectory): EudrCommodity[] {
+  if (record.commodities && record.commodities.length > 0) {
+    return record.commodities;
+  }
+  
+  // Fallback: try to map primary_crop to EUDR commodity
+  if (record.primary_crop) {
+    const cropLower = record.primary_crop.toLowerCase();
+    const commodityMap: Record<string, EudrCommodity> = {
+      'cocoa': 'cocoa',
+      'cacao': 'cocoa',
+      'coffee': 'coffee',
+      'café': 'coffee',
+      'palm': 'palm_oil',
+      'palm oil': 'palm_oil',
+      'rubber': 'rubber',
+      'soy': 'soy',
+      'soja': 'soy',
+      'cattle': 'cattle',
+      'wood': 'wood',
+      'timber': 'wood',
+    };
+    
+    for (const [key, value] of Object.entries(commodityMap)) {
+      if (cropLower.includes(key)) {
+        return [value];
+      }
+    }
+  }
+  
+  return [];
+}
 
 export default function DirectoryPage() {
   const [records, setRecords] = useState<CanonicalCooperativeDirectory[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [countryFilter, setCountryFilter] = useState('');
-  const [cropFilter, setCropFilter] = useState('');
+  
+  // TODO[directory-filters]: directory filter controls
+  // Default commodity will be set after records load if 'cocoa' is not available
+  const [selectedCommodity, setSelectedCommodity] = useState<EudrCommodity | 'all'>('cocoa');
+  const [selectedCountry, setSelectedCountry] = useState<string>('CI'); // Côte d'Ivoire as v1 default
+  const [selectedRegion, setSelectedRegion] = useState<string>('all');
+  const [selectedCoverage, setSelectedCoverage] = useState<CoverageBand | 'all'>('all');
+  
+  // Legacy filters (keeping for backward compatibility)
   const [statusFilter, setStatusFilter] = useState<'active' | 'all'>('active');
   const [pilotFilter, setPilotFilter] = useState('');
 
@@ -29,23 +83,9 @@ export default function DirectoryPage() {
       try {
         let result;
 
-        // Apply filters in priority order
-        // Note: Pilot filter is applied client-side to avoid breaking existing filter logic
-        if (countryFilter && cropFilter) {
-          // If both filters are set, fetch by country first, then filter by crop client-side
-          const countryResult = await getCanonicalDirectoryRecordsByCountry(countryFilter);
-          if (countryResult.error) throw countryResult.error;
-          const filtered = (countryResult.data || []).filter(
-            r => r.primary_crop?.toLowerCase() === cropFilter.toLowerCase()
-          );
-          result = { data: filtered, error: null };
-        } else if (countryFilter) {
-          result = await getCanonicalDirectoryRecordsByCountry(countryFilter);
-        } else if (cropFilter) {
-          result = await getCanonicalDirectoryRecordsByPrimaryCrop(cropFilter);
-        } else if (pilotFilter) {
-          result = await getCanonicalDirectoryRecordsByPilotId(pilotFilter);
-        } else if (statusFilter === 'active') {
+        // For now, fetch all active records and filter client-side
+        // This allows us to use the new commodity/region/coverage filters
+        if (statusFilter === 'active') {
           result = await getCanonicalDirectoryRecordsByStatus('active');
         } else {
           result = await getCanonicalDirectoryRecords();
@@ -66,13 +106,62 @@ export default function DirectoryPage() {
     };
 
     fetchRecords();
-  }, [countryFilter, cropFilter, statusFilter, pilotFilter]);
+  }, [statusFilter]);
 
-  // Apply search filter and pilot filter client-side
+  // TODO[directory-filters]: derive filter options from data
+  const countries = useMemo(
+    () =>
+      Array.from(
+        new Set(
+          records
+            .map((c) => c.countryCode || c.country)
+            .filter(Boolean)
+        )
+      ).sort(),
+    [records]
+  );
+
+  const regions = useMemo(
+    () =>
+      Array.from(
+        new Set(
+          records
+            .filter((c) =>
+              selectedCountry === 'all' ? true : (c.countryCode || c.country) === selectedCountry
+            )
+            .map((c) => c.regionName || c.region || 'Unspecified')
+        )
+      ).sort(),
+    [records, selectedCountry]
+  );
+
+  // Derive available commodities from records (only show commodities that exist in data)
+  const availableCommodities = useMemo(() => {
+    const commoditySet = new Set<EudrCommodity>();
+    records.forEach((record) => {
+      const commodities = getCommoditiesFromRecord(record);
+      commodities.forEach((commodity) => commoditySet.add(commodity));
+    });
+    return Array.from(commoditySet).sort((a, b) => {
+      const labelA = EUDR_COMMODITIES_IN_SCOPE.find((c) => c.id === a)?.label || a;
+      const labelB = EUDR_COMMODITIES_IN_SCOPE.find((c) => c.id === b)?.label || b;
+      return labelA.localeCompare(labelB);
+    });
+  }, [records]);
+
+  // Adjust default commodity if 'cocoa' is not available
+  useEffect(() => {
+    if (availableCommodities.length > 0 && selectedCommodity === 'cocoa' && !availableCommodities.includes('cocoa')) {
+      // If cocoa is not available, default to first available commodity
+      setSelectedCommodity(availableCommodities[0]);
+    }
+  }, [availableCommodities, selectedCommodity]);
+
+  // TODO[directory-filters]: apply commodity, geography, coverage filters
   const filteredRecords = useMemo(() => {
     let filtered = records;
 
-    // Apply pilot filter if set (client-side to avoid breaking existing filters)
+    // Apply pilot filter if set (client-side)
     if (pilotFilter) {
       filtered = filtered.filter(record => 
         record.pilot_id === pilotFilter || 
@@ -93,59 +182,83 @@ export default function DirectoryPage() {
       );
     }
 
-    return filtered;
-  }, [records, searchTerm, pilotFilter]);
-
-  // Extract unique values for filter dropdowns
-  const availableCountries = useMemo(() => {
-    const countries = new Set<string>();
-    records.forEach(r => {
-      if (r.country) countries.add(r.country);
-    });
-    return Array.from(countries).sort();
-  }, [records]);
-
-  const availableCrops = useMemo(() => {
-    const crops = new Set<string>();
-    records.forEach(r => {
-      if (r.primary_crop) crops.add(r.primary_crop);
-    });
-    return Array.from(crops).sort();
-  }, [records]);
-
-  const availablePilots = useMemo(() => {
-    const pilots = new Map<string, string>(); // Map pilot_id to pilot_label
-    records.forEach(r => {
-      if (r.pilot_id) {
-        pilots.set(r.pilot_id, r.pilot_label || r.pilot_id);
+    // Apply new filters
+    return filtered.filter((coop) => {
+      // 1) commodity filter
+      if (selectedCommodity !== 'all') {
+        const coopCommodities = getCommoditiesFromRecord(coop);
+        if (!coopCommodities.includes(selectedCommodity)) return false;
       }
+
+      // 2) country filter
+      const coopCountry = coop.countryCode || coop.country;
+      if (selectedCountry !== 'all' && coopCountry !== selectedCountry) {
+        return false;
+      }
+
+      // 3) region filter
+      if (selectedRegion !== 'all') {
+        const region = coop.regionName || coop.region || 'Unspecified';
+        if (region !== selectedRegion) return false;
+      }
+
+      // 4) coverage filter (per selected commodity if any)
+      if (selectedCoverage !== 'all') {
+        if (selectedCommodity === 'all') {
+          // If all commodities are selected, fall back to coop-level coverage if present
+          const band = coop.coverageBand;
+          if (!band || band !== selectedCoverage) return false;
+        } else {
+          const band = getCoverageBandForCommodity(coop, selectedCommodity);
+          if (!band || band !== selectedCoverage) return false;
+        }
+      }
+
+      return true;
     });
-    return Array.from(pilots.entries())
-      .map(([id, label]) => ({ id, label }))
-      .sort((a, b) => a.label.localeCompare(b.label));
-  }, [records]);
+  }, [records, searchTerm, pilotFilter, selectedCommodity, selectedCountry, selectedRegion, selectedCoverage]);
 
   const stats = useMemo(() => {
     const active = records.filter(r => r.record_status === 'active').length;
-    const uniqueCountries = new Set(records.map(r => r.country).filter(Boolean)).size;
-    const uniqueCrops = new Set(records.map(r => r.primary_crop).filter(Boolean)).size;
+    const uniqueCountries = new Set(records.map(r => r.countryCode || r.country).filter(Boolean)).size;
+    const uniqueCommodities = new Set(
+      records.flatMap(r => getCommoditiesFromRecord(r))
+    ).size;
     return {
       total: records.length,
       active,
       countries: uniqueCountries,
-      crops: uniqueCrops,
+      commodities: uniqueCommodities,
     };
   }, [records]);
 
   const clearFilters = () => {
-    setCountryFilter('');
-    setCropFilter('');
+    // Reset to first available commodity (or 'cocoa' if available, otherwise first in list)
+    const defaultCommodity = availableCommodities.includes('cocoa') 
+      ? 'cocoa' 
+      : (availableCommodities[0] || 'all');
+    setSelectedCommodity(defaultCommodity);
+    setSelectedCountry('CI');
+    setSelectedRegion('all');
+    setSelectedCoverage('all');
     setSearchTerm('');
     setStatusFilter('active');
     setPilotFilter('');
   };
 
-  const hasActiveFilters = countryFilter || cropFilter || searchTerm || statusFilter !== 'active' || pilotFilter;
+  // Determine default commodity for hasActiveFilters check
+  const defaultCommodity = availableCommodities.includes('cocoa') 
+    ? 'cocoa' 
+    : (availableCommodities[0] || 'all');
+
+  const hasActiveFilters = 
+    selectedCommodity !== defaultCommodity ||
+    selectedCountry !== 'CI' ||
+    selectedRegion !== 'all' ||
+    selectedCoverage !== 'all' ||
+    searchTerm ||
+    statusFilter !== 'active' ||
+    pilotFilter;
 
   if (loading) {
     return (
@@ -173,11 +286,18 @@ export default function DirectoryPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="bg-white rounded-lg shadow-md p-6 mb-6 border-t-4 border-secondary-500">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            📋 Répertoire Canonique des Coopératives
+          <h1 className="text-3xl font-bold text-gray-900 mb-2 flex items-center gap-2">
+            <ClipboardList className="h-8 w-8 text-secondary-500" />
+            Répertoire Canonique des Coopératives
           </h1>
-          <p className="text-gray-600">
+          <p className="text-gray-600 mb-2">
             Répertoire standardisé des coopératives agricoles
+          </p>
+          {/* Disclaimer */}
+          <p className="text-xs text-gray-600">
+            This directory helps you explore cooperatives by EUDR commodity, geography, and documentation
+            coverage. Information may include cooperative self-reported data and does not constitute
+            certification, verification, or regulatory approval.
           </p>
         </div>
 
@@ -203,102 +323,119 @@ export default function DirectoryPage() {
           </div>
           <div className="bg-white p-6 rounded-lg shadow-md text-center border-l-4 border-blue-500">
             <div className="text-3xl font-bold text-blue-600 mb-1">
-              {stats.crops}
+              {stats.commodities}
             </div>
-            <div className="text-gray-600 text-sm">Cultures</div>
+            <div className="text-gray-600 text-sm">Commodités</div>
           </div>
         </div>
 
-        {/* Filters */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-          <div className="flex items-center gap-2 mb-4">
-            <Filter className="h-5 w-5 text-gray-500" />
-            <h2 className="text-lg font-semibold text-gray-900">Filtres</h2>
-            {hasActiveFilters && (
-              <button
-                onClick={clearFilters}
-                className="ml-auto flex items-center gap-1 px-3 py-1 text-sm text-gray-600 hover:text-gray-900 bg-gray-100 rounded-lg transition-colors"
-              >
-                <X className="h-4 w-4" />
-                Réinitialiser
-              </button>
-            )}
-          </div>
+        {/* TODO[directory-filters]: context-first filters bar */}
+        <section className="mb-4 space-y-2 bg-white rounded-lg shadow-md p-6">
+          <p className="text-xs text-gray-600 mb-4">
+            Filter cooperatives by EUDR commodity, geography, and documentation coverage to support sourcing and due-diligence planning.
+          </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+          <div className="flex flex-wrap gap-3 items-center text-xs">
+            {/* Commodity */}
+            <label className="flex items-center gap-1">
+              <span className="font-medium">Commodity</span>
+              <select
+                value={selectedCommodity}
+                onChange={(e) =>
+                  setSelectedCommodity(e.target.value as EudrCommodity | 'all')
+                }
+                className="border rounded px-2 py-1 text-xs"
+              >
+                <option value="all">All commodities</option>
+                {availableCommodities.map((commodityId) => {
+                  const commodity = EUDR_COMMODITIES_IN_SCOPE.find((c) => c.id === commodityId);
+                  return (
+                    <option key={commodityId} value={commodityId}>
+                      {commodity?.label || commodityId}
+                    </option>
+                  );
+                })}
+              </select>
+            </label>
+
+            {/* Country */}
+            <label className="flex items-center gap-1">
+              <span className="font-medium">Country</span>
+              <select
+                value={selectedCountry}
+                onChange={(e) => setSelectedCountry(e.target.value)}
+                className="border rounded px-2 py-1 text-xs"
+              >
+                <option value="all">All</option>
+                {countries.map((code) => (
+                  <option key={code} value={code}>
+                    {code}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            {/* Region */}
+            <label className="flex items-center gap-1">
+              <span className="font-medium">Region</span>
+              <select
+                value={selectedRegion}
+                onChange={(e) => setSelectedRegion(e.target.value)}
+                className="border rounded px-2 py-1 text-xs"
+              >
+                <option value="all">All</option>
+                {regions.map((name) => (
+                  <option key={name} value={name}>
+                    {name}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            {/* Coverage */}
+            <label className="flex items-center gap-1">
+              <span className="font-medium">Coverage</span>
+              <select
+                value={selectedCoverage}
+                onChange={(e) =>
+                  setSelectedCoverage(
+                    e.target.value === 'all'
+                      ? 'all'
+                      : (e.target.value as CoverageBand)
+                  )
+                }
+                className="border rounded px-2 py-1 text-xs"
+              >
+                <option value="all">All levels</option>
+                <option value="substantial">Substantial</option>
+                <option value="partial">Partial</option>
+                <option value="limited">Limited</option>
+              </select>
+            </label>
+
             {/* Search */}
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+            <div className="relative flex-1 min-w-[200px]">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
               <input
                 type="text"
-                placeholder="Rechercher par nom, région..."
+                placeholder="Search by name, region..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent"
+                className="w-full pl-10 pr-4 py-1 text-xs border border-gray-300 rounded focus:ring-2 focus:ring-secondary-500 focus:border-transparent"
               />
             </div>
 
-            {/* Country Filter */}
-            <select
-              value={countryFilter}
-              onChange={(e) => setCountryFilter(e.target.value)}
-              title="Filter by country"
-              aria-label="Filter by country"
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent"
-            >
-              <option value="">Tous les pays</option>
-              {availableCountries.map(country => (
-                <option key={country} value={country}>
-                  {country}
-                </option>
-              ))}
-            </select>
-
-            {/* Crop Filter */}
-            <select
-              value={cropFilter}
-              onChange={(e) => setCropFilter(e.target.value)}
-              title="Filter by crop"
-              aria-label="Filter by crop"
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent"
-            >
-              <option value="">Toutes les cultures</option>
-              {availableCrops.map(crop => (
-                <option key={crop} value={crop}>
-                  {crop}
-                </option>
-              ))}
-            </select>
-
-            {/* Pilot Filter */}
-            <select
-              value={pilotFilter}
-              onChange={(e) => setPilotFilter(e.target.value)}
-              title="Filter by pilot"
-              aria-label="Filter by pilot"
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent"
-            >
-              <option value="">Tous les pilotes</option>
-              {availablePilots.map(pilot => (
-                <option key={pilot.id} value={pilot.id}>
-                  {pilot.label}
-                </option>
-              ))}
-            </select>
-
-            {/* Status Filter */}
-            <select
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value as 'active' | 'all')}
-              title="Filter by status"
-              aria-label="Filter by status"
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent"
-            >
-              <option value="active">Actifs uniquement</option>
-              <option value="all">Tous les statuts</option>
-            </select>
+            {hasActiveFilters && (
+              <button
+                onClick={clearFilters}
+                className="ml-auto flex items-center gap-1 px-3 py-1 text-xs text-gray-600 hover:text-gray-900 bg-gray-100 rounded transition-colors"
+              >
+                <X className="h-3 w-3" />
+                Reset
+              </button>
+            )}
           </div>
-        </div>
+        </section>
 
         {/* Results */}
         <div className="bg-white rounded-lg shadow-md p-6">
@@ -308,29 +445,83 @@ export default function DirectoryPage() {
             </h2>
           </div>
 
+          {/* TODO[directory-filters]: show context (product / region / coverage) first */}
           {filteredRecords.length === 0 ? (
             <div className="text-center py-12 text-gray-500">
               <Building2 className="h-12 w-12 mx-auto mb-4 text-gray-400" />
-              <p>Aucune coopérative trouvée</p>
+              <p className="text-xs text-gray-500 mt-4">
+                No cooperatives match the current filters. Try broadening commodity, region, or coverage level.
+              </p>
               {hasActiveFilters && (
                 <button
                   onClick={clearFilters}
-                  className="mt-4 text-secondary-600 hover:text-secondary-700 underline"
+                  className="mt-4 text-secondary-600 hover:text-secondary-700 underline text-sm"
                 >
                   Réinitialiser les filtres
                 </button>
               )}
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {filteredRecords.map(record => (
-                <CanonicalDirectoryCard key={record.coop_id} record={record} />
-              ))}
-            </div>
+            <ul className="space-y-3">
+              {filteredRecords.map((coop) => {
+                const regionLabel = coop.regionName || coop.region || 'Unspecified region';
+                const countryLabel = coop.countryCode || coop.country || 'Unknown';
+
+                const primaryCommodity =
+                  selectedCommodity === 'all'
+                    ? getCommoditiesFromRecord(coop)[0] ?? null
+                    : selectedCommodity;
+
+                const commodityLabel = primaryCommodity
+                  ? EUDR_COMMODITIES_IN_SCOPE.find((c) => c.id === primaryCommodity)?.label ??
+                    'Multi-commodity'
+                  : 'Multi-commodity';
+
+                const coverageBand = coop.coverageBand;
+                const coverageLabel = coverageBand
+                  ? coverageBand.charAt(0).toUpperCase() + coverageBand.slice(1)
+                  : 'Not available';
+
+                return (
+                  <li key={coop.coop_id} className="border rounded-lg p-3 bg-white hover:shadow-md transition-shadow">
+                    {/* Context line */}
+                    <div className="text-xs text-gray-600 mb-1">
+                      <span className="font-semibold">{commodityLabel}</span>{' '}
+                      • {countryLabel}{' '}
+                      • {regionLabel}
+                    </div>
+
+                    {/* Coop name */}
+                    <h2 className="text-sm font-semibold mb-1">{coop.name}</h2>
+
+                    {/* Coverage snippet (commodity-aware if possible) */}
+                    <div className="text-xs text-gray-600 mb-2">
+                      <span>
+                        Documentation coverage: {coverageLabel}
+                      </span>
+                    </div>
+
+                    {/* Status and CTA */}
+                    <div className="flex items-center justify-between mt-2">
+                      <span className={`text-xs font-medium ${
+                        coop.record_status === 'active' ? 'text-green-600' : 'text-gray-500'
+                      }`}>
+                        {coop.record_status === 'active' ? 'Actif' : coop.record_status}
+                      </span>
+                      <a
+                        href={`/directory/${coop.coop_id}`}
+                        className="text-xs font-medium underline text-secondary-600 hover:text-secondary-700"
+                      >
+                        View cooperative profile →
+                      </a>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
           )}
         </div>
       </div>
     </div>
   );
 }
-

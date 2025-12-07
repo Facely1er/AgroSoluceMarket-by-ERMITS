@@ -77,10 +77,10 @@ export interface Translations {
       freeNote: string;
     };
     stats: {
-      cooperatives: string;
+      productCategories: string;
       regions: string;
-      verification: string;
-      market: string;
+      regionsNote: string;
+      complianceFrameworks: string;
     };
     challenges: {
       tagline: string;
@@ -474,7 +474,7 @@ export const translations: Record<Language, Translations> = {
       cooperatives: 'Cooperatives',
       buyers: 'Buyers',
       cooperativeSpace: 'Cooperative Space',
-      compliance: '👨‍👩‍👧‍👦 Compliance',
+      compliance: 'Compliance',
     },
     common: {
       loading: 'Loading...',
@@ -521,123 +521,123 @@ export const translations: Record<Language, Translations> = {
     landing: {
     hero: {
       tagline: 'Farmers-First Due Diligence for Responsible Agricultural Sourcing',
-      title: '🌾 AgroSoluce',
+      title: 'AgroSoluce™',
       subtitle: 'Making Farmer Engagement, Documentation Coverage, and Improvement Efforts Visible',
-      description: 'AgroSoluce helps cooperatives, buyers, and partners make farmer engagement, documentation coverage, and improvement efforts visible — without overstating compliance or replacing audits. We start from the farmer, structure reality at the cooperative level, and support credible EUDR-aligned due diligence across agricultural supply chains.',
+      description: 'AgroSoluce helps cooperatives, buyers, and partners make farmer engagement, documentation coverage, and improvement efforts visible — without overstating readiness or replacing audits. We start from the farmer, structure reality at the cooperative level, and support credible EUDR-aligned due diligence across agricultural supply chains.',
       ctaCooperatives: 'Explore Cooperatives',
       ctaBuyer: 'Buyer Portal',
-      freeNote: '✨ Free for cooperatives • Transparent • Progress-focused',
+      freeNote: 'Free for cooperatives • Transparent • Progress-focused',
     },
       stats: {
-        cooperatives: 'Registered Cooperatives',
-        regions: 'Regions Covered',
-        verification: 'Verification Rate',
-        market: 'Potential Market',
+        productCategories: 'Product Categories',
+        regions: 'Regions in Ivory Coast',
+        regionsNote: 'Accurately counted',
+        complianceFrameworks: 'Compliance Frameworks',
       },
       challenges: {
         tagline: 'The Challenges We Address',
         title: 'Facing Critical Pressures',
-        subtitle: 'West African agricultural cooperatives navigate an increasingly complex landscape of regulatory requirements, environmental threats, and social responsibilities.',
+        subtitle: 'West African agricultural cooperatives navigate an increasingly complex landscape where regulatory requirements, environmental threats, and social responsibilities intersect — creating both risks and opportunities.',
         regulatory: {
           title: 'Regulatory Pressure',
-          description: 'New regulations are transforming global supply chains, demanding unprecedented levels of documentation and due diligence.',
-          point1: 'EUDR requires deforestation-free supply chains with complete traceability by 2025',
-          point2: 'Child labor due diligence requirements threaten market access for non-compliant cooperatives',
-          point3: 'Buyers demand complete compliance documentation or risk exclusion from European markets',
+          description: 'New regulations are transforming global supply chains, demanding unprecedented levels of documentation, traceability, and due diligence from cooperatives.',
+          point1: 'EUDR mandates deforestation-free supply chains with complete traceability, requiring detailed documentation that many cooperatives find challenging to produce',
+          point2: 'Child labor due diligence requirements can create market access barriers for cooperatives without systematic risk assessment and remediation tracking',
+          point3: 'Buyers increasingly demand comprehensive documentation portfolios, with potential exclusion from European markets for those unable to provide required evidence',
         },
         environmental: {
           title: 'Environmental Challenges',
-          description: 'Climate change and deforestation threaten both agricultural productivity and market access.',
-          point1: 'Deforestation-linked agriculture risks European market exclusion under EUDR regulations',
-          point2: 'Climate change affects crop yields and farmer livelihoods in West Africa',
-          point3: 'Protected area overlap and biodiversity loss create compliance and reputation risks',
+          description: 'Climate change and deforestation threaten both agricultural productivity and market access, creating urgent need for environmental documentation and risk management.',
+          point1: 'Deforestation-linked agriculture faces potential European market exclusion under EUDR regulations, affecting many cooperatives and farmers across West Africa',
+          point2: 'Climate change impacts crop yields and farmer livelihoods across West Africa, requiring adaptation strategies and documentation of environmental practices',
+          point3: 'Protected area overlap and biodiversity loss create documentation requirements and reputation risks that can impact market access',
         },
         social: {
           title: 'Social Challenges',
-          description: 'Ensuring ethical supply chains while maintaining farmer livelihoods requires a delicate balance.',
-          point1: 'Child labor remains a critical concern, with zero-tolerance policies from major buyers',
-          point2: 'Smallholder farmers struggle with poverty, limiting their ability to invest in compliance',
-          point3: 'Limited access to technology and training creates barriers to meeting new requirements',
+          description: 'Ensuring ethical supply chains while maintaining farmer livelihoods requires balancing regulatory requirements with community needs.',
+          point1: 'Child labor remains a critical concern, with zero-tolerance policies from major buyers requiring systematic risk assessment and remediation',
+          point2: 'Smallholder farmers struggle with poverty, limiting their ability to invest in documentation, training, and process improvements needed for market access',
+          point3: 'Limited access to technology and training creates barriers to meeting new regulatory requirements, potentially excluding vulnerable communities from global markets',
         },
       },
       value: {
         tagline: 'Value We Bring',
         title: 'Transforming Challenges into Opportunities',
-        subtitle: 'Our platform delivers measurable value by helping cooperatives navigate compliance, protect the environment, and improve social outcomes while accessing global markets.',
+        subtitle: 'AgroSoluce helps cooperatives turn regulatory pressure, environmental risks, and social challenges into pathways for market access, improved documentation, and stronger buyer relationships — all while supporting farmer livelihoods and forest preservation efforts.',
       },
       outcomes: {
-        title: 'Measurable Value Delivered',
-        subtitle: 'How we help cooperatives overcome challenges and achieve their goals',
+        title: 'Value Delivered',
+        subtitle: 'How we help cooperatives address challenges and work toward their goals',
         buyerConnections: {
           title: 'Market Access & Buyer Connections',
-          feature: 'Overcome market exclusion by connecting with buyers who value compliance and sustainability',
-          outcome1: 'Access premium buyers requiring EUDR-aligned and child-labor-free supply chains',
-          outcome2: 'Demonstrate your compliance readiness through verified documentation and assessments',
-          outcome3: 'Expand your reach beyond traditional buyers to sustainability-focused global partners',
+          feature: 'Support market access by connecting with buyers who value transparency, documentation readiness, and sustainable sourcing practices',
+          outcome1: 'Connect with buyers requiring EUDR-aligned documentation and child-labor-free supply chain evidence',
+          outcome2: 'Showcase your documentation readiness and due diligence efforts through transparent self-reported information and assessments',
+          outcome3: 'Expand your reach to sustainability-focused global partners who value progressive improvement and transparency',
           cta: 'Access matching',
         },
         readiness: {
-          title: 'EUDR Compliance Readiness',
-          feature: 'Transform from non-compliant to buyer-ready, systematically meeting EUDR requirements',
-          outcome1: 'Progress from not_ready to buyer_ready status with clear, actionable milestones',
-          outcome2: 'Build an evidence history demonstrating continuous compliance improvement',
-          outcome3: 'Identify and prioritize compliance gaps before they block market access',
+          title: 'EUDR Readiness & Documentation',
+          feature: 'Systematically organize and build the documentation and evidence portfolio needed to support EUDR requirements and demonstrate readiness to buyers',
+          outcome1: 'Track progress from not_ready to buyer_ready status with clear, actionable milestones and documentation checkpoints',
+          outcome2: 'Maintain an evidence history showing continuous improvement in documentation coverage and due diligence efforts',
+          outcome3: 'Identify and prioritize documentation gaps to help prevent them from becoming barriers to market access',
         },
         coverage: {
           title: 'Deforestation Risk Mitigation',
-          feature: 'Protect market access by proving deforestation-free supply chains with complete coverage',
-          outcome1: 'Document farmer and plot coverage to demonstrate supply chain transparency',
-          outcome2: 'Use GPS geolocation to prove plots are outside deforestation risk zones',
-          outcome3: 'Build an evidence portfolio showing protected area compliance and environmental management',
+          feature: 'Support market access efforts by documenting deforestation-free supply chains with comprehensive farmer and plot coverage',
+          outcome1: 'Document farmer and plot coverage to show supply chain transparency and traceability',
+          outcome2: 'Use GPS geolocation to document plot locations relative to deforestation risk zones and protected areas',
+          outcome3: 'Organize an evidence portfolio showing environmental stewardship efforts, protected area awareness, and deforestation risk management activities',
         },
         assessment: {
-          title: 'Compliance Gap Identification',
-          feature: 'Understand exactly where you stand and what needs improvement to meet regulatory requirements',
-          outcome1: 'Get a comprehensive assessment of compliance status across all regulatory frameworks',
-          outcome2: 'Receive a prioritized action plan based on risk and market access impact',
-          outcome3: 'Track improvement over time with measurable progress indicators',
+          title: 'Documentation Gap Identification',
+          feature: 'Understand where you stand and what documentation or processes may need improvement to support regulatory requirements',
+          outcome1: 'Complete a comprehensive self-assessment of your documentation status across EUDR, child labor due diligence, and other regulatory frameworks',
+          outcome2: 'Receive a prioritized action plan based on documentation gaps, risk factors, and potential market access impact',
+          outcome3: 'Track improvement over time with progress indicators showing documentation growth and readiness evolution',
           cta: 'Start assessment',
         },
         evidence: {
-          title: 'Regulatory Documentation',
-          feature: 'Build the evidence portfolio that buyers and regulators require for market access',
-          outcome1: 'Organize all compliance documents (EUDR, child labor, certifications) in one place',
-          outcome2: 'Ensure documentation meets buyer requirements with appropriate metadata and verifications',
-          outcome3: 'Reduce market exclusion risk by maintaining complete, accessible compliance records',
+          title: 'Regulatory Documentation Management',
+          feature: 'Organize and structure the evidence portfolio that buyers and regulators may require for market access and due diligence',
+          outcome1: 'Organize all regulatory documentation (EUDR-related, child labor due diligence, certifications) in one centralized location',
+          outcome2: 'Structure documentation with appropriate metadata, timestamps, and self-reported status information to support buyer requirements',
+          outcome3: 'Help reduce market exclusion risk by maintaining organized, accessible documentation records that support due diligence processes',
         },
         compliance: {
-          title: 'Child Labor Elimination',
-          feature: 'Demonstrate zero tolerance for child labor while supporting farmer livelihoods',
-          outcome1: 'Conduct systematic assessments to identify and address child labor risks',
-          outcome2: 'Track remediation actions that protect children while maintaining farmer income',
-          outcome3: 'Build buyer trust through transparent tracking and certification management',
+          title: 'Child Labor Risk Management',
+          feature: 'Support zero tolerance for child labor through systematic risk assessment and remediation tracking while supporting farmer livelihoods',
+          outcome1: 'Conduct systematic self-assessments to identify and document child labor risks in your supply chain',
+          outcome2: 'Track remediation actions and efforts to address child labor risks while maintaining farmer income and community stability',
+          outcome3: 'Support buyer trust-building through transparent risk tracking, remediation documentation, and certification management',
           cta: 'View dashboard',
         },
         farmersFirst: {
           title: 'Farmer Livelihood Protection',
-          feature: 'Ensure compliance improvements support rather than harm smallholder communities',
-          outcome1: 'Register farmers systematically to provide training and support',
-          outcome2: 'Track farmer engagement to ensure compliance measures don\'t exclude vulnerable communities',
-          outcome3: 'Measure social impact to demonstrate that compliance and farmer welfare go hand in hand',
+          feature: 'Support efforts to ensure that meeting regulatory requirements and building documentation supports rather than harms smallholder farmer communities',
+          outcome1: 'Register farmers systematically to track training, support, and engagement at the cooperative level',
+          outcome2: 'Track farmer engagement to help ensure that documentation and due diligence requirements don\'t exclude vulnerable communities from supply chains',
+          outcome3: 'Track social impact indicators to show how meeting regulatory requirements and farmer welfare efforts can be pursued together',
         },
         traceability: {
           title: 'Supply Chain Transparency',
-          feature: 'Meet EUDR traceability requirements by tracking products from plot to market',
-          outcome1: 'Document the complete supply chain from individual plots to final sale',
-          outcome2: 'Provide buyers with origin mapping proving deforestation-free sourcing',
-          outcome3: 'Create an audit trail that satisfies regulatory due diligence requirements',
+          feature: 'Support EUDR traceability requirements by documenting and tracking products from plot to market',
+          outcome1: 'Document the supply chain from individual plots to final sale with transfer records and origin mapping',
+          outcome2: 'Provide buyers with origin mapping and documentation of deforestation-free sourcing practices',
+          outcome3: 'Maintain documentation records that support regulatory due diligence and buyer verification processes',
         },
         gaps: {
           title: 'Targeted Improvement Guidance',
-          feature: 'Get specific, actionable guidance to effectively close compliance gaps',
-          outcome1: 'Automatically identify missing documentation before it blocks market access',
-          outcome2: 'Receive step-by-step guidance tailored to your specific compliance gaps',
-          outcome3: 'Access resources and tools that help you meet requirements without overwhelming your team',
+          feature: 'Get specific, actionable guidance to help close documentation and process gaps',
+          outcome1: 'Identify missing documentation or processes to help prevent them from becoming barriers to market access',
+          outcome2: 'Receive step-by-step guidance tailored to your specific documentation gaps and regulatory requirements',
+          outcome3: 'Access resources and tools that support building required documentation and processes',
         },
       },
       cta: {
         title: 'Join the Mission',
-        subtitle: 'Together, we can build sustainable, compliant supply chains that protect farmers, forests, and future generations',
+        subtitle: 'Together, we can build sustainable, transparent supply chains that support farmers, forests, and future generations while meeting regulatory requirements',
         buttonCooperatives: 'Explore Cooperatives',
         buttonBuyer: 'Buyer Portal',
       },
@@ -683,7 +683,7 @@ export const translations: Record<Language, Translations> = {
         },
         progress: {
           title: 'Progress over perfection',
-          description: 'We track gradual improvements and readiness over time, recognizing that compliance is a journey, not a destination.',
+          description: 'We track gradual improvements and readiness over time, recognizing that building documentation and meeting regulatory requirements is a journey, not a destination.',
         },
         transparency: {
           title: 'Transparency without over-claiming',
@@ -691,7 +691,7 @@ export const translations: Record<Language, Translations> = {
         },
         process: {
           title: 'Due diligence as a process, not a badge',
-          description: 'We support continuous due diligence efforts, enabling ongoing oversight rather than one-off compliance checks.',
+          description: 'We support continuous due diligence efforts, enabling ongoing oversight and documentation building rather than one-off verification checks.',
         },
       },
       oneSentence: 'AgroSoluce makes farmer engagement, documentation coverage, and improvement efforts visible — responsibly, progressively, and without false compliance claims.',
@@ -829,7 +829,7 @@ export const translations: Record<Language, Translations> = {
       whatGet: {
         title: 'What Buyers Get (and What They Don\'t)',
         youGet: {
-          title: '✅ You get:',
+          title: 'You get:',
           points: [
             'structured, comparable cooperative profiles',
             'transparency on information coverage',
@@ -837,7 +837,7 @@ export const translations: Record<Language, Translations> = {
           ],
         },
         youDont: {
-          title: '🚫 You don\'t get:',
+          title: 'You don\'t get:',
           points: [
             'compliance guarantees',
             'automated risk determinations',
@@ -915,7 +915,7 @@ export const translations: Record<Language, Translations> = {
       whatIs: {
         title: 'What AgroSoluce Is (and Is Not)',
         is: {
-          title: '✅ AgroSoluce is:',
+          title: 'AgroSoluce is:',
           points: [
             'a transparency and monitoring platform',
             'a due-diligence support tool',
@@ -923,7 +923,7 @@ export const translations: Record<Language, Translations> = {
           ],
         },
         isNot: {
-          title: '🚫 AgroSoluce is not:',
+          title: 'AgroSoluce is not:',
           points: [
             'a certification scheme',
             'an audit engine',
@@ -953,7 +953,7 @@ export const translations: Record<Language, Translations> = {
       cooperatives: 'Coopératives',
       buyers: 'Acheteurs',
       cooperativeSpace: 'Espace Coopérative',
-      compliance: '👨‍👩‍👧‍👦 Conformité',
+      compliance: 'Conformité',
     },
     common: {
       loading: 'Chargement...',
@@ -1000,18 +1000,18 @@ export const translations: Record<Language, Translations> = {
     landing: {
       hero: {
         tagline: 'Autonomiser l\'Agriculture Durable en Afrique de l\'Ouest',
-        title: '🌾 AgroSoluce® Marketplace',
+        title: 'AgroSoluce™',
         subtitle: 'Naviguer la Conformité Réglementaire, la Protection Environnementale et la Responsabilité Sociale',
         description: 'Une plateforme axée sur la mission qui aide les coopératives ouest-africaines à répondre aux exigences de l\'EUDR, à lutter contre la déforestation, à éliminer le travail des enfants et à accéder aux marchés mondiaux tout en protégeant les moyens de subsistance des agriculteurs et en préservant notre planète.',
         ctaCooperatives: 'Explorer les Coopératives',
         ctaBuyer: 'Espace Acheteur',
-        freeNote: '✨ Gratuit pour les coopératives • Sécurisé • Conforme aux réglementations',
+        freeNote: 'Gratuit pour les coopératives • Sécurisé • Conforme aux réglementations',
       },
       stats: {
-        cooperatives: 'Coopératives Enregistrées',
-        regions: 'Régions Couvertes',
-        verification: 'Taux de Vérification',
-        market: 'Marché Potentiel',
+        productCategories: 'Catégories de Produits',
+        regions: 'Régions en Côte d\'Ivoire',
+        regionsNote: 'Comptage précis',
+        complianceFrameworks: 'Cadres de Conformité',
       },
       challenges: {
         tagline: 'Les Défis que Nous Relevons',
@@ -1308,7 +1308,7 @@ export const translations: Record<Language, Translations> = {
       whatGet: {
         title: 'Ce Que les Acheteurs Obtiennent (et Ce Qu\'ils N\'Obtiennent Pas)',
         youGet: {
-          title: '✅ Vous obtenez:',
+          title: 'Vous obtenez:',
           points: [
             'profils de coopératives structurés et comparables',
             'transparence sur la couverture des informations',
@@ -1316,7 +1316,7 @@ export const translations: Record<Language, Translations> = {
           ],
         },
         youDont: {
-          title: '🚫 Vous n\'obtenez pas:',
+          title: 'Vous n\'obtenez pas:',
           points: [
             'garanties de conformité',
             'déterminations de risque automatisées',
@@ -1394,7 +1394,7 @@ export const translations: Record<Language, Translations> = {
       whatIs: {
         title: 'Ce Qu\'AgroSoluce Est (et N\'Est Pas)',
         is: {
-          title: '✅ AgroSoluce est:',
+          title: 'AgroSoluce est:',
           points: [
             'une plateforme de transparence et de surveillance',
             'un outil de soutien à la diligence raisonnable',
@@ -1402,7 +1402,7 @@ export const translations: Record<Language, Translations> = {
           ],
         },
         isNot: {
-          title: '🚫 AgroSoluce n\'est pas:',
+          title: 'AgroSoluce n\'est pas:',
           points: [
             'un système de certification',
             'un moteur d\'audit',

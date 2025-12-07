@@ -1,5 +1,8 @@
 // Cooperative-related types
 
+import type { EudrCommodity } from './commodity';
+import type { CoverageBand } from './coverage';
+
 export type VerificationStatus = 'pending' | 'verified' | 'rejected';
 export type RecordStatus = 'active' | 'inactive' | 'archived' | 'pending';
 
@@ -80,14 +83,18 @@ export interface Cooperative {
 export interface CanonicalCooperativeDirectory {
   coop_id: string;
   name: string;
-  country?: string;
-  region?: string;
+  country?: string; // Full country name (backward compatibility)
+  countryCode?: string; // ISO country code (e.g. "CI")
+  region?: string; // Full region name (backward compatibility)
+  regionName?: string; // Region name for filtering (e.g. "Nawa", "Haut-Sassandra")
   department?: string;
-  primary_crop?: string;
+  primary_crop?: string; // Legacy field - prefer using commodities array
+  commodities?: EudrCommodity[]; // Array of EUDR commodities (e.g. ['cocoa', 'coffee'])
   source_registry?: string;
   record_status: RecordStatus;
   pilot_id?: string | null;
   pilot_label?: string;
+  coverageBand?: CoverageBand; // Overall coverage band (limited/partial/substantial)
   created_at?: string;
 }
 

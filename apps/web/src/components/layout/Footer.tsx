@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Mail } from 'lucide-react';
+import { Mail, UsersRound, Briefcase, Shield, Scale } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/I18nProvider';
 
 export default function Footer() {
@@ -14,10 +14,11 @@ export default function Footer() {
             <img 
               src="/agrosoluce.png" 
               alt="AgroSoluce Logo" 
-              className="h-6 w-auto"
+              className="h-12 w-auto"
             />
             <div className="text-xs">
               <div className="text-primary-600 font-semibold">AgroSoluce™</div>
+              <div className="text-gray-500">Source Intelligence</div>
               <div className="text-gray-500">by ERMITS</div>
             </div>
           </div>
@@ -26,26 +27,30 @@ export default function Footer() {
           <div className="flex flex-wrap items-center justify-center gap-4 text-xs">
             <Link 
               to="/cooperatives" 
-              className="text-gray-600 hover:text-primary-600 transition-colors"
+              className="text-gray-600 hover:text-primary-600 transition-colors flex items-center gap-1"
             >
+              <UsersRound className="h-3 w-3" />
               {t.nav.cooperatives}
             </Link>
             <Link 
               to="/buyer" 
-              className="text-gray-600 hover:text-primary-600 transition-colors"
+              className="text-gray-600 hover:text-primary-600 transition-colors flex items-center gap-1"
             >
+              <Briefcase className="h-3 w-3" />
               {t.nav.buyers}
             </Link>
             <Link 
               to="/compliance/child-labor" 
-              className="text-gray-600 hover:text-primary-600 transition-colors"
+              className="text-gray-600 hover:text-primary-600 transition-colors flex items-center gap-1"
             >
+              <Shield className="h-3 w-3" />
               {t.nav.compliance}
             </Link>
             <Link 
               to="/principles/farmer-protection" 
-              className="text-gray-600 hover:text-primary-600 transition-colors"
+              className="text-gray-600 hover:text-primary-600 transition-colors flex items-center gap-1"
             >
+              <Scale className="h-3 w-3" />
               {t.footer.principles}
             </Link>
             <a 

@@ -8,7 +8,7 @@ import {
   CheckCircle,
   XCircle,
   AlertTriangle,
-  ShoppingCart,
+  Briefcase,
   Shield
 } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/I18nProvider';
@@ -67,7 +67,7 @@ export default function BuyerLandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium mb-6 border border-white/20">
-              <ShoppingCart className="h-4 w-4" />
+              <Briefcase className="h-4 w-4" />
               <span>{t.buyerLanding.hero.tagline}</span>
             </div>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 leading-tight">

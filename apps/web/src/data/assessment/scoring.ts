@@ -38,7 +38,7 @@ export function generateRecommendations(
       id: 'good-foundation',
       category: 'compliance',
       priority: 'medium',
-      title: '✅ Good foundation. Implementation toolkit available.',
+      title: 'Good foundation. Implementation toolkit available.',
       description: 'You have a solid foundation with some areas for improvement.',
       actionItems: [
         'Access the AgroSoluce implementation toolkit',
@@ -52,7 +52,7 @@ export function generateRecommendations(
       id: 'foundation-building',
       category: 'compliance',
       priority: 'high',
-      title: '🔧 Let\'s strengthen your foundation with basic improvements.',
+      title: 'Let\'s strengthen your foundation with basic improvements.',
       description: 'Focus on building fundamental capabilities before advanced features.',
       actionItems: [
         'Start with basic infrastructure improvements',
@@ -69,7 +69,7 @@ export function generateRecommendations(
       id: 'child-protection-urgent',
       category: 'child-protection',
       priority: 'critical',
-      title: '⚠️ Child protection policies need immediate attention.',
+      title: 'Child protection policies need immediate attention.',
       description: 'Strengthening child protection measures is essential for responsible operations.',
       actionItems: [
         'Develop written child labor prevention policy',

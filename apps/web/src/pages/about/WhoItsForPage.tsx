@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { 
-  Users, 
-  ShoppingCart, 
+  UsersRound, 
+  Briefcase, 
   Handshake,
   ArrowRight,
   CheckCircle
@@ -14,7 +14,7 @@ export default function WhoItsForPage() {
   const audiences = [
     {
       id: 'cooperatives',
-      icon: Users,
+      icon: UsersRound,
       iconColor: 'primary',
       title: t.whoItsFor.audiences.cooperatives.title,
       benefits: [
@@ -28,7 +28,7 @@ export default function WhoItsForPage() {
     },
     {
       id: 'buyers',
-      icon: ShoppingCart,
+      icon: Briefcase,
       iconColor: 'blue',
       title: t.whoItsFor.audiences.buyers.title,
       benefits: [

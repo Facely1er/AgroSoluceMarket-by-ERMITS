@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
-import { Home, Building2, ShoppingCart, User, Shield, Menu, X, Globe } from 'lucide-react';
+import { Home, UsersRound, Briefcase, User, Shield, Menu, X, Globe } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/I18nProvider';
 import type { Language } from '@/lib/i18n/translations';
 
@@ -20,8 +20,8 @@ export default function Navbar() {
 
   const navLinks = [
     { to: '/', icon: Home, label: t.nav.home, exact: true },
-    { to: '/cooperatives', icon: Building2, label: t.nav.cooperatives, exact: true },
-    { to: '/buyer', icon: ShoppingCart, label: t.nav.buyers, exact: false },
+    { to: '/cooperatives', icon: UsersRound, label: t.nav.cooperatives, exact: true },
+    { to: '/buyer', icon: Briefcase, label: t.nav.buyers, exact: false },
     { to: '/cooperative', icon: User, label: t.nav.cooperativeSpace, exact: false },
     { to: '/compliance/child-labor', icon: Shield, label: t.nav.compliance, exact: false },
   ];
@@ -33,15 +33,16 @@ export default function Navbar() {
           {/* Logo */}
           <Link 
             to="/" 
-            className="flex items-center gap-3 hover:opacity-80 transition-opacity group"
+            className="flex items-center gap-2 hover:opacity-80 transition-opacity group"
           >
             <img 
               src="/agrosoluce.png" 
               alt="AgroSoluce Logo" 
-              className="h-9 w-auto transition-transform group-hover:scale-105"
+              className="h-14 w-auto transition-transform group-hover:scale-105"
             />
             <div>
               <h2 className="text-primary-600 font-bold text-lg leading-tight">AgroSoluce™</h2>
+              <p className="text-xs text-gray-500 leading-tight">Source Intelligence</p>
               <p className="text-xs text-gray-500 leading-tight">by ERMITS</p>
             </div>
           </Link>

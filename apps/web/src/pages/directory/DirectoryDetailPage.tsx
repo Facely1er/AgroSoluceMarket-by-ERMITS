@@ -17,6 +17,7 @@ import { getCoverageMetrics } from '@/features/coverage/api/coverageApi';
 import type { CoverageMetrics } from '@/services/coverageService';
 import { getCountryPackByCode, getCountryPackByName, type CountryPack } from '@/data/countryPacks';
 import { getCommodityPackByName } from '@/data/commodityPacks';
+import { EUDR_COMMODITIES_IN_SCOPE } from '@/types';
 
 export default function DirectoryDetailPage() {
   const { coop_id } = useParams<{ coop_id: string }>();
@@ -254,6 +255,22 @@ export default function DirectoryDetailPage() {
                       </div>
                     </div>
                   )}
+                  {record.commodities && record.commodities.length > 0 && (
+                    <div className="flex items-start gap-3">
+                      <Sprout className="h-5 w-5 text-gray-400 mt-0.5" />
+                      <div>
+                        <div className="text-sm text-gray-500">Commodities</div>
+                        <div className="font-medium text-gray-900">
+                          {record.commodities.map((c, idx) => (
+                            <span key={c}>
+                              {c.charAt(0).toUpperCase() + c.slice(1).replace('_', ' ')}
+                              {idx < record.commodities!.length - 1 ? ', ' : ''}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
                   {record.source_registry && (
                     <div className="flex items-start gap-3">
                       <FileText className="h-5 w-5 text-gray-400 mt-0.5" />
@@ -338,7 +355,71 @@ export default function DirectoryDetailPage() {
           </div>
         )}
 
-        {/* Section 3: Documentation Coverage Snapshot */}
+        {/* Section 3: Commodities & Documentation Coverage */}
+        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <FileText className="h-6 w-6 text-primary-600" />
+            Commodities & Documentation Coverage
+          </h2>
+          <div className="space-y-4">
+            {record.commodities && record.commodities.length > 0 ? (
+              <div className="space-y-4">
+                {record.commodities.map((commodityId) => {
+                  const commodity = EUDR_COMMODITIES_IN_SCOPE.find((c) => c.id === commodityId);
+                  const commodityLabel = commodity?.label || commodityId;
+                  const coverageBand = record.coverageBand;
+                  const coverageLabel = coverageBand
+                    ? coverageBand.charAt(0).toUpperCase() + coverageBand.slice(1)
+                    : 'Not available';
+                  
+                  return (
+                    <div key={commodityId} className="p-4 bg-gray-50 rounded-lg border">
+                      <div className="flex items-center justify-between mb-2">
+                        <h3 className="text-lg font-semibold text-gray-900">{commodityLabel}</h3>
+                        <span className="px-3 py-1 text-sm font-medium bg-blue-100 text-blue-800 rounded-full">
+                          {coverageLabel}
+                        </span>
+                      </div>
+                      {coverageMetrics && (
+                        <div className="grid grid-cols-2 gap-4 mt-3">
+                          <div>
+                            <div className="text-xs text-gray-600 mb-1">Coverage</div>
+                            <div className="text-lg font-semibold text-gray-900">
+                              {Math.round(coverageMetrics.coverage_percentage)}%
+                            </div>
+                          </div>
+                          <div>
+                            <div className="text-xs text-gray-600 mb-1">Documents</div>
+                            <div className="text-lg font-semibold text-gray-900">
+                              {coverageMetrics.required_docs_present} / {coverageMetrics.required_docs_total}
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                      {!coverageMetrics && (
+                        <p className="text-sm text-gray-600 mt-2">No documentation submitted</p>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="p-4 bg-gray-50 rounded-lg border">
+                <p className="text-sm text-gray-600">No commodities specified</p>
+              </div>
+            )}
+            {coverageMetrics && (
+              <div className="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                <p className="text-sm text-blue-800">
+                  <Info className="inline h-4 w-4 mr-1" />
+                  Documentation coverage information may include cooperative self-reported data and does not constitute certification, verification, or regulatory approval.
+                </p>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Section 4: Documentation Coverage Snapshot (Detailed) */}
         {coverageMetrics && (
           <div className="bg-white rounded-lg shadow-md p-6 mb-6">
             <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
