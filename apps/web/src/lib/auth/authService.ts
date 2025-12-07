@@ -3,8 +3,8 @@
  * Handles multi-role authentication (farmers/cooperatives, buyers, admins)
  */
 
-import { supabase } from '../supabase/client';
-import type { UserProfile, UserType } from '../../types';
+import { supabase } from '@/lib/supabase/client';
+import type { UserProfile, UserType } from '@/types';
 
 export interface SignUpData {
   email: string;

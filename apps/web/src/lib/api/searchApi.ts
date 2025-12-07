@@ -3,9 +3,9 @@
  * Comprehensive search and filtering functionality
  */
 
-import { supabase } from '../supabase/client';
-import type { Cooperative, Product } from '../../types';
-import { searchCooperatives } from '../../features/cooperatives/api/cooperativesApi';
+import { supabase } from '@/lib/supabase/client';
+import type { Cooperative, Product } from '@/types';
+import { searchCooperatives } from '@/features/cooperatives/api/cooperativesApi';
 import { getProducts } from './productsApi';
 
 export interface SearchFilters {

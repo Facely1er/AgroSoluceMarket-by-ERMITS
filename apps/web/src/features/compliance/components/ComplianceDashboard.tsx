@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Shield, CheckCircle, AlertTriangle, Clock } from 'lucide-react';
-import { getComplianceStatus, getCertifications, getComplianceRequirements } from '../api/complianceApi';
+import { getComplianceStatus, getComplianceRequirements } from '../api/complianceApi';
 import CertificationBadge from './CertificationBadge';
-import type { Certification, ComplianceRequirement } from '../../../types';
+import type { Certification, ComplianceRequirement } from '@/types';
 
 interface ComplianceDashboardProps {
   cooperativeId: string;

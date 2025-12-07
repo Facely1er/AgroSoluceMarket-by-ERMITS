@@ -1,8 +1,8 @@
 // API functions for AgroSoluce Farm Assessment
 // Connects frontend to Supabase database
 
-import { supabase } from '../../../lib/supabase/client';
-import type { AssessmentResults, AssessmentResponse } from '../../../types/assessment.types';
+import { supabase } from '@/lib/supabase/client';
+import type { AssessmentResults, AssessmentResponse } from '@/types/assessment.types';
 
 export interface AssessmentRecord {
   id: string;

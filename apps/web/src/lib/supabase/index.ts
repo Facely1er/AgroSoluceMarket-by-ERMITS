@@ -15,5 +15,5 @@ export type {
   VerificationStatus,
   OrderStatus,
   UserType
-} from '../../types';
+} from '@/types';
 

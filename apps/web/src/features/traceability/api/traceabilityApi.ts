@@ -1,8 +1,8 @@
 // API functions for traceability
 // Connects frontend to Supabase database
 
-import { supabase } from '../../../lib/supabase/client';
-import type { Batch, BatchTransaction } from '../../../types';
+import { supabase } from '@/lib/supabase/client';
+import type { Batch, BatchTransaction } from '@/types';
 
 /**
  * Create a new batch

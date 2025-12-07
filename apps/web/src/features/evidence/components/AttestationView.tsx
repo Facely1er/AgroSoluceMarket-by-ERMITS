@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { FileSignature, Calendar, User, FileText } from 'lucide-react';
 import { getAttestations } from '../api/evidenceApi';
-import type { Attestation } from '../../../types';
+import type { Attestation } from '@/types';
 
 interface AttestationViewProps {
   entityType: 'cooperative' | 'farmer' | 'batch' | 'product';

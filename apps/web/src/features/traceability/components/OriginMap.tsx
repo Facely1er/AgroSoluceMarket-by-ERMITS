@@ -1,7 +1,7 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { LatLngExpression } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import type { Batch } from '../../../types';
+import type { Batch } from '@/types';
 
 interface OriginMapProps {
   batch: Batch;

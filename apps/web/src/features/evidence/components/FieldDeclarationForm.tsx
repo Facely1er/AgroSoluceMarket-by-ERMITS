@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { X, MapPin } from 'lucide-react';
 import { createFieldDeclaration } from '../api/evidenceApi';
-import type { FieldDeclaration } from '../../../types';
+import type { FieldDeclaration } from '@/types';
 
 interface FieldDeclarationFormProps {
   cooperativeId: string;

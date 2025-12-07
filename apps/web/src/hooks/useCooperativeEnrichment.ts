@@ -2,8 +2,8 @@
 // Use this hook when cooperative data, farmers, plots, or documents change
 
 import { useState } from 'react';
-import { recomputeCooperativeEnrichment } from '../services/enrichmentOrchestrationService';
-import type { Cooperative } from '../types';
+import { recomputeCooperativeEnrichment } from '@/services/enrichmentOrchestrationService';
+import type { Cooperative } from '@/types';
 
 /**
  * Hook to recompute and update cooperative enrichment data

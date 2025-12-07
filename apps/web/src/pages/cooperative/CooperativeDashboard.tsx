@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 import { Building2, Package, ShoppingCart, MessageSquare, Users, Shield, FileText, Route, CheckCircle, AlertCircle, XCircle } from 'lucide-react';
-import FarmerList from '../../features/producers/components/FarmerList';
-import ComplianceDashboard from '../../features/compliance/components/ComplianceDashboard';
-import AuditList from '../../features/evidence/components/AuditList';
-import FieldDeclarationForm from '../../features/evidence/components/FieldDeclarationForm';
-import { BatchCard } from '../../features/traceability/components';
-import { getBatchesByCooperative } from '../../features/traceability/api/traceabilityApi';
-import { getCooperativeById } from '../../features/cooperatives/api/cooperativesApi';
-import { useCooperativeEnrichment } from '../../hooks/useCooperativeEnrichment';
-import type { Cooperative } from '../../types';
-import CoopReadinessChecklist from '../../components/CoopReadinessChecklist';
+import FarmerList from '@/features/producers/components/FarmerList';
+import ComplianceDashboard from '@/features/compliance/components/ComplianceDashboard';
+import AuditList from '@/features/evidence/components/AuditList';
+import FieldDeclarationForm from '@/features/evidence/components/FieldDeclarationForm';
+import { BatchCard } from '@/features/traceability/components';
+import { getBatchesByCooperative } from '@/features/traceability/api/traceabilityApi';
+import { getCooperativeById } from '@/features/cooperatives/api/cooperativesApi';
+import { useCooperativeEnrichment } from '@/hooks/useCooperativeEnrichment';
+import type { Cooperative } from '@/types';
+import CoopReadinessChecklist from '@/components/CoopReadinessChecklist';
 
 // Mock cooperative ID - in real app, get from auth/context
 const MOCK_COOPERATIVE_ID = 'cooperative-id-placeholder';

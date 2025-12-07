@@ -1,8 +1,8 @@
 // API functions for products
 // Connects frontend to Supabase database
 
-import { supabase } from '../../../lib/supabase/client';
-import type { Product, ProductCategory } from '../../../types';
+import { supabase } from '@/lib/supabase/client';
+import type { Product, ProductCategory } from '@/types';
 
 /**
  * Fetch all active products

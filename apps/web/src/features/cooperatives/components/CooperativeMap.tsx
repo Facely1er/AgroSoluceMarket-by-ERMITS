@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { getRegionCoordinates } from '../../../lib/utils/cooperativeUtils';
-import type { Cooperative } from '../../../types';
+import { getRegionCoordinates } from '@/lib/utils/cooperativeUtils';
+import type { Cooperative } from '@/types';
 
 // Fix Leaflet default icon paths for Vite
 import icon from 'leaflet/dist/images/marker-icon.png';

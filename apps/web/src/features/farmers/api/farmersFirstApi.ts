@@ -1,11 +1,11 @@
 // API functions for Farmers First Dashboard Summary
 // Aggregates data from farmers, declarations, training, and value tracking
 
-import { supabase } from '../../../lib/supabase/client';
-import { getFarmersByCooperative } from '../../producers/api/farmersApi';
+import { supabase } from '@/lib/supabase/client';
+import { getFarmersByCooperative } from '@/features/producers/api/farmersApi';
 import { getFarmerDeclarations } from './farmerDeclarationsApi';
-import { getTrainingSessions } from '../../training/api/trainingApi';
-import { getBaselineMeasurement, getMonthlyProgress } from '../../value-tracking/api/valueTrackingApi';
+import { getTrainingSessions } from '@/features/training/api/trainingApi';
+import { getBaselineMeasurement, getMonthlyProgress } from '@/features/value-tracking/api/valueTrackingApi';
 
 export interface FarmersFirstSummary {
   cooperativeId: string;

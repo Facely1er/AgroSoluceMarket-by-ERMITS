@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import type { Cooperative } from '../types';
-import { enrichCooperatives } from '../lib/utils/cooperativeUtils';
-import { getCooperatives } from '../features/cooperatives/api/cooperativesApi';
+import type { Cooperative } from '@/types';
+import { enrichCooperatives } from '@/lib/utils/cooperativeUtils';
+import { getCooperatives } from '@/features/cooperatives/api/cooperativesApi';
 
 /**
  * Hook to fetch cooperatives from Supabase or fallback to JSON

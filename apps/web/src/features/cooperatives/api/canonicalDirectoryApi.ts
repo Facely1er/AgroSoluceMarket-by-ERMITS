@@ -1,8 +1,8 @@
 // API functions for Canonical Cooperative Directory
 // Connects frontend to Supabase database
 
-import { supabase } from '../../../lib/supabase/client';
-import type { CanonicalCooperativeDirectory, RecordStatus } from '../../../types';
+import { supabase } from '@/lib/supabase/client';
+import type { CanonicalCooperativeDirectory, RecordStatus } from '@/types';
 
 /**
  * Fetch all canonical cooperative directory records

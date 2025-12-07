@@ -13,7 +13,7 @@ import {
   validateOrder,
   validateSignUp,
   sanitizeString,
-} from '../../validation/validators';
+} from '@/lib/validation/validators';
 
 describe('Validation Utilities', () => {
   describe('validateEmail', () => {

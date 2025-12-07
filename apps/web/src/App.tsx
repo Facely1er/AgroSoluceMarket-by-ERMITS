@@ -70,7 +70,7 @@ function App() {
               }
             />
             <Route
-              path="/assessment"
+              path="/assessment/:coop_id?"
               element={
                 <ErrorBoundary>
                   <AssessmentPage />

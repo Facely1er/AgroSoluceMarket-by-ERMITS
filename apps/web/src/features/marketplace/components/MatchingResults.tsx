@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Search, CheckCircle, AlertCircle, MapPin, Package } from 'lucide-react';
 import { findSuppliers, type BuyerRequirements, type MatchResult } from '../services/matchingService';
-import type { Cooperative } from '../../../types';
-import { useCooperatives } from '../../../hooks/useCooperatives';
+import type { Cooperative } from '@/types';
+import { useCooperatives } from '@/hooks/useCooperatives';
 
 interface MatchingResultsProps {
   requirements: BuyerRequirements;

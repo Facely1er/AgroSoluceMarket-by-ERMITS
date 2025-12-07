@@ -2,15 +2,15 @@
 // Generates structured summary data for export
 // Reuses existing logic for evidence, coverage, and readiness
 
-import type { CanonicalCooperativeDirectory } from '../types';
-import type { EvidenceDocument } from '../features/evidence/api/evidenceDocumentsApi';
+import type { CanonicalCooperativeDirectory } from '@/types';
+import type { EvidenceDocument } from '@/features/evidence/api/evidenceDocumentsApi';
 import type { CoverageMetrics } from './coverageService';
 import type { DocumentPresence } from './coverageService';
 import type { ReadinessSnapshot } from './readinessSnapshotService';
-import type { RegulatoryReference, Jurisdiction } from '../data/regulatoryReferences';
-import { REGULATORY_REFERENCES } from '../data/regulatoryReferences';
-import { getCountryPackByCode, getCountryPackByName } from '../data/countryPacks';
-import { getCommodityPackByName } from '../data/commodityPacks';
+import type { RegulatoryReference, Jurisdiction } from '@/data/regulatoryReferences';
+import { REGULATORY_REFERENCES } from '@/data/regulatoryReferences';
+import { getCountryPackByCode, getCountryPackByName } from '@/data/countryPacks';
+import { getCommodityPackByName } from '@/data/commodityPacks';
 import {
   computeContextualRisks,
   computeRegulatoryContext,

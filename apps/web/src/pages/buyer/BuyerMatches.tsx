@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Building2, Mail, Phone, MapPin, Package, CheckCircle, AlertCircle, Star, ExternalLink } from 'lucide-react';
-import { getBuyerRequestById, getRequestMatches, updateMatchStatus } from '../../features/buyers/api';
-import type { BuyerRequest, RequestMatch } from '../../domain/agro/types';
+import { getBuyerRequestById, getRequestMatches, updateMatchStatus } from '@/features/buyers/api';
+import type { BuyerRequest, RequestMatch } from '@/domain/agro/types';
 
 export default function BuyerMatches() {
   const { requestId } = useParams<{ requestId: string }>();

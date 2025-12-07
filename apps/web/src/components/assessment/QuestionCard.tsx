@@ -1,5 +1,4 @@
-import React from 'react';
-import { AssessmentQuestion, AssessmentOption } from '@/types/assessment.types';
+import type { AssessmentQuestion, AssessmentOption } from '@/types/assessment.types';
 
 interface QuestionCardProps {
   question: AssessmentQuestion;

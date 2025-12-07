@@ -1,7 +1,7 @@
 // Document Metadata Service for Phase 1 Data Enrichment
 // Helper functions for inferring document types and extracting dates from filenames
 
-import type { DocType } from '../types';
+import type { DocType } from '@/types';
 
 /**
  * Infer document type from filename or path

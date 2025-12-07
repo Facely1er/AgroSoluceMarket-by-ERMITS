@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { MapPin, Building2, Sprout, FileText } from 'lucide-react';
-import type { CanonicalCooperativeDirectory } from '../../../types';
+import { MapPin, Sprout, FileText } from 'lucide-react';
+import type { CanonicalCooperativeDirectory } from '@/types';
 
 interface CanonicalDirectoryCardProps {
   record: CanonicalCooperativeDirectory;

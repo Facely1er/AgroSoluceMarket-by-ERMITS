@@ -1,8 +1,8 @@
 // API functions for cooperatives
 // Connects frontend to Supabase database
 
-import { supabase } from '../../../lib/supabase/client';
-import type { Cooperative } from '../../../types';
+import { supabase } from '@/lib/supabase/client';
+import type { Cooperative } from '@/types';
 
 /**
  * Fetch all cooperatives from database

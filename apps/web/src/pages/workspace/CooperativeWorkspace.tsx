@@ -21,46 +21,46 @@ import {
   Sprout,
   ClipboardList
 } from 'lucide-react';
-import { getCurrentUser } from '../../lib/supabase/client';
+import { getCurrentUser } from '@/lib/supabase/client';
 import { 
   uploadEvidenceDocument, 
   getEvidenceDocuments, 
   deleteEvidenceDocument,
   type EvidenceDocument 
-} from '../../features/evidence/api/evidenceDocumentsApi';
-import { EVIDENCE_TYPE_LABELS, EVIDENCE_TYPE_TOOLTIP, EVIDENCE_TYPE_DEFAULT } from '../../features/evidence/types/evidenceType';
+} from '@/features/evidence/api/evidenceDocumentsApi';
+import { EVIDENCE_TYPE_LABELS, EVIDENCE_TYPE_TOOLTIP, EVIDENCE_TYPE_DEFAULT } from '@/features/evidence/types/evidenceType';
 import {
   getCoverageMetrics,
   getDocumentPresenceStatus,
-} from '../../features/coverage/api/coverageApi';
-import type { CoverageMetrics, DocumentPresence } from '../../services/coverageService';
-import { getGapGuidanceForTypes } from '../../data/gapGuidanceConfig';
+} from '@/features/coverage/api/coverageApi';
+import type { CoverageMetrics, DocumentPresence } from '@/services/coverageService';
+import { getGapGuidanceForTypes } from '@/data/gapGuidanceConfig';
 import {
   getLatestReadinessSnapshot,
   getReadinessSnapshots,
   createReadinessSnapshot,
-} from '../../features/readiness/api/readinessSnapshotsApi';
-import type { ReadinessSnapshot } from '../../services/readinessSnapshotService';
-import { getReadinessStatusLabel } from '../../data/readinessThresholdsConfig';
-import { getCanonicalDirectoryRecordById, updateCanonicalDirectoryRecord } from '../../features/cooperatives/api/canonicalDirectoryApi';
-import { generateDueDiligenceSummary } from '../../services/dueDiligenceSummaryService';
-import { REGULATORY_REFERENCES, type Jurisdiction, type RegulatoryReference } from '../../data/regulatoryReferences';
-import type { CanonicalCooperativeDirectory } from '../../types';
-import { getCountryPackByCode, getCountryPackByName } from '../../data/countryPacks';
-import { getCommodityPackByName } from '../../data/commodityPacks';
-import { downloadAsJSON, formatExportFilename } from '../../utils/exportUtils';
-import { enablementConfig } from '../../data/enablementConfig';
-import { getRequiredDocTypes } from '../../data/expectedDocumentsConfig';
-import { getDocTypeLabel } from '../../data/gapGuidanceConfig';
-import { getToolkitById } from '../../data/fieldOfficerToolkitConfig';
-import { getFarmerGuidanceForTypes, getFarmerGuidance } from '../../data/farmerGuidanceConfig';
-import { getFarmerDeclarations } from '../../features/farmers/api/farmerDeclarationsApi';
-import FarmersFirstDashboard from '../cooperative/FarmersFirstDashboard';
-import { getFarmersFirstSummary } from '../../features/farmers/api/farmersFirstApi';
-import type { FarmersFirstSummary } from '../../features/farmers/api/farmersFirstApi';
-import { AssessmentFlow } from '../../components/assessment/AssessmentFlow';
-import { getLatestAssessment } from '../../features/assessment/api/assessmentApi';
-import type { AssessmentRecord } from '../../features/assessment/api/assessmentApi';
+} from '@/features/readiness/api/readinessSnapshotsApi';
+import type { ReadinessSnapshot } from '@/services/readinessSnapshotService';
+import { getReadinessStatusLabel } from '@/data/readinessThresholdsConfig';
+import { getCanonicalDirectoryRecordById, updateCanonicalDirectoryRecord } from '@/features/cooperatives/api/canonicalDirectoryApi';
+import { generateDueDiligenceSummary } from '@/services/dueDiligenceSummaryService';
+import { REGULATORY_REFERENCES, type Jurisdiction, type RegulatoryReference } from '@/data/regulatoryReferences';
+import type { CanonicalCooperativeDirectory } from '@/types';
+import { getCountryPackByCode, getCountryPackByName } from '@/data/countryPacks';
+import { getCommodityPackByName } from '@/data/commodityPacks';
+import { downloadAsJSON, formatExportFilename } from '@/utils/exportUtils';
+import { enablementConfig } from '@/data/enablementConfig';
+import { getRequiredDocTypes } from '@/data/expectedDocumentsConfig';
+import { getDocTypeLabel } from '@/data/gapGuidanceConfig';
+import { getToolkitById } from '@/data/fieldOfficerToolkitConfig';
+import { getFarmerGuidanceForTypes, getFarmerGuidance } from '@/data/farmerGuidanceConfig';
+import { getFarmerDeclarations } from '@/features/farmers/api/farmerDeclarationsApi';
+import FarmersFirstDashboard from '@/pages/cooperative/FarmersFirstDashboard';
+import { getFarmersFirstSummary } from '@/features/farmers/api/farmersFirstApi';
+import type { FarmersFirstSummary } from '@/features/farmers/api/farmersFirstApi';
+import { AssessmentFlow } from '@/components/assessment/AssessmentFlow';
+import { getLatestAssessment } from '@/features/assessment/api/assessmentApi';
+import type { AssessmentRecord } from '@/features/assessment/api/assessmentApi';
 
 // NOTE: Authentication check is available via getCurrentUser() but not enforced.
 // This workspace is currently unprotected. In production, add auth protection here.

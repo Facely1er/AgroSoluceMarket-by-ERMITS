@@ -2,8 +2,8 @@
 // Converts enrichment data into actionable checklist items
 
 import { CheckCircle, AlertCircle, XCircle } from 'lucide-react';
-import type { Cooperative } from '../types';
-import { COVERAGE_THRESHOLDS } from '../config/enrichmentConfig';
+import type { Cooperative } from '@/types';
+import { COVERAGE_THRESHOLDS } from '@/config/enrichmentConfig';
 
 interface ChecklistItem {
   id: string;

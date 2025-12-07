@@ -2,15 +2,15 @@
 // Coordinates fetching data, computing enrichment, and persisting results
 // This service is called when cooperative data, farmers, plots, or documents change
 
-import { supabase } from '../lib/supabase/client';
-import type { Cooperative } from '../types';
+import { supabase } from '@/lib/supabase/client';
+import type { Cooperative } from '@/types';
 import {
   computeContextualRisks,
   computeRegulatoryContext,
   computeCoverageMetrics,
   deriveReadinessStatus,
 } from './enrichmentService';
-import { REQUIRED_DOC_TYPES } from '../config/enrichmentConfig';
+import { REQUIRED_DOC_TYPES } from '@/config/enrichmentConfig';
 
 /**
  * Recompute and persist enrichment data for a cooperative

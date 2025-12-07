@@ -2,8 +2,8 @@
 // Pure functions for computing document coverage metrics
 // No React imports, no UI - business logic only
 
-import { getRequiredDocTypes } from '../data/expectedDocumentsConfig';
-import type { DocType } from '../data/expectedDocumentsConfig';
+import { getRequiredDocTypes } from '@/data/expectedDocumentsConfig';
+import type { DocType } from '@/data/expectedDocumentsConfig';
 
 export interface CoverageMetrics {
   coop_id: string;

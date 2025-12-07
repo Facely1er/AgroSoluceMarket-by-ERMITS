@@ -1,6 +1,6 @@
 // API functions for Feedback and Survey System
 
-import { supabase } from '../../../lib/supabase/client';
+import { supabase } from '@/lib/supabase/client';
 import type { SatisfactionSurvey, FeedbackSubmission } from '../types';
 
 /**

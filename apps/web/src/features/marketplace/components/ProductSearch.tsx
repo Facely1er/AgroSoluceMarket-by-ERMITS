@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Search, Filter, X } from 'lucide-react';
-import { getProducts, getProductCategories } from '../../products/api/productsApi';
-import { getCertifications } from '../../compliance/api/complianceApi';
-import type { Product, ProductCategory } from '../../../types';
+import { getProducts, getProductCategories } from '@/features/products/api/productsApi';
+import { getCertifications } from '@/features/compliance/api/complianceApi';
+import type { Product, ProductCategory } from '@/types';
 
 interface ProductSearchProps {
   onProductSelect?: (product: Product) => void;

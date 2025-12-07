@@ -1,9 +1,9 @@
 // API functions for buyer requests and matching
 // Connects frontend to Supabase database
 
-import { supabase } from '../../../lib/supabase/client';
-import type { Cooperative } from '../../../types';
-import type { BuyerRequest, RequestMatch } from '../../../domain/agro/types';
+import { supabase } from '@/lib/supabase/client';
+import type { Cooperative } from '@/types';
+import type { BuyerRequest, RequestMatch } from '@/domain/agro/types';
 
 /**
  * Create a new buyer request

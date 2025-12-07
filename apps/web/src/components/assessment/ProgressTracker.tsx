@@ -1,17 +1,16 @@
-import React from 'react';
-import { AssessmentSection } from '@/types/assessment.types';
+import type { AssessmentSection } from '@/types/assessment.types';
 
 interface ProgressTrackerProps {
   progress: number;
   currentSection: number;
-  totalSections: number;
+  totalSections: number; // Used implicitly for section count calculation
   sections: AssessmentSection[];
 }
 
 export function ProgressTracker({ 
   progress, 
   currentSection, 
-  totalSections, 
+  totalSections: _totalSections, // Kept for API consistency, calculated from sections.length
   sections 
 }: ProgressTrackerProps) {
   return (

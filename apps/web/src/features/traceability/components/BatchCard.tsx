@@ -1,5 +1,5 @@
 import { Calendar, MapPin, Package, User } from 'lucide-react';
-import type { Batch } from '../../../types';
+import type { Batch } from '@/types';
 
 interface BatchCardProps {
   batch: Batch;

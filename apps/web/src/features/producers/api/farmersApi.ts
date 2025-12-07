@@ -1,8 +1,8 @@
 // API functions for farmers
 // Connects frontend to Supabase database
 
-import { supabase } from '../../../lib/supabase/client';
-import type { Farmer } from '../../../types';
+import { supabase } from '@/lib/supabase/client';
+import type { Farmer } from '@/types';
 
 /**
  * Fetch all farmers from database

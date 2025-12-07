@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { UserPlus, Search } from 'lucide-react';
 import { getFarmersByCooperative } from '../api/farmersApi';
-import type { Farmer } from '../../../types';
+import type { Farmer } from '@/types';
 import FarmerCard from './FarmerCard';
 import FarmerForm from './FarmerForm';
 

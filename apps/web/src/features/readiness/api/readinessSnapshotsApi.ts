@@ -1,10 +1,10 @@
 // API functions for readiness snapshots
 // Connects frontend to Supabase database
 
-import { supabase } from '../../../lib/supabase/client';
-import { getCoverageMetrics } from '../../coverage/api/coverageApi';
-import { generateReadinessSnapshot } from '../../../services/readinessSnapshotService';
-import type { ReadinessSnapshot } from '../../../services/readinessSnapshotService';
+import { supabase } from '@/lib/supabase/client';
+import { getCoverageMetrics } from '@/features/coverage/api/coverageApi';
+import { generateReadinessSnapshot } from '@/services/readinessSnapshotService';
+import type { ReadinessSnapshot } from '@/services/readinessSnapshotService';
 
 /**
  * Create a new readiness snapshot for a cooperative

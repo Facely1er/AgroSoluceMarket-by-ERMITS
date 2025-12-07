@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Building2, ArrowLeft, Info } from 'lucide-react';
-import { getCanonicalDirectoryRecordsByPilotId } from '../../features/cooperatives/api/canonicalDirectoryApi';
-import type { CanonicalCooperativeDirectory } from '../../types';
-import { getCoverageMetrics } from '../../features/coverage/api/coverageApi';
-import type { CoverageMetrics } from '../../services/coverageService';
-import { getLatestReadinessSnapshot } from '../../features/readiness/api/readinessSnapshotsApi';
-import type { ReadinessSnapshot } from '../../services/readinessSnapshotService';
-import { getReadinessStatusLabel } from '../../data/readinessThresholdsConfig';
+import { getCanonicalDirectoryRecordsByPilotId } from '@/features/cooperatives/api/canonicalDirectoryApi';
+import type { CanonicalCooperativeDirectory } from '@/types';
+import { getCoverageMetrics } from '@/features/coverage/api/coverageApi';
+import type { CoverageMetrics } from '@/services/coverageService';
+import { getLatestReadinessSnapshot } from '@/features/readiness/api/readinessSnapshotsApi';
+import type { ReadinessSnapshot } from '@/services/readinessSnapshotService';
+import { getReadinessStatusLabel } from '@/data/readinessThresholdsConfig';
 
 interface CooperativeWithMetrics extends CanonicalCooperativeDirectory {
   coverage?: CoverageMetrics | null;

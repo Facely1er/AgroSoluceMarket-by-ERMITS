@@ -1,9 +1,9 @@
 // API functions for farmer declarations
 // Connects frontend to Supabase database
 
-import { supabase } from '../../../lib/supabase/client';
-import type { FarmerDeclaration, FarmerDeclarationInput } from '../../../services/farmerDeclarationsService';
-import { validateFarmerDeclaration } from '../../../services/farmerDeclarationsService';
+import { supabase } from '@/lib/supabase/client';
+import type { FarmerDeclaration, FarmerDeclarationInput } from '@/services/farmerDeclarationsService';
+import { validateFarmerDeclaration } from '@/services/farmerDeclarationsService';
 
 /**
  * Get all farmer declarations for a cooperative

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Shield, CheckCircle, XCircle, Clock, MapPin } from 'lucide-react';
-import { verifyEUDR, checkChildLabor } from '../api/complianceApi';
-import type { EUDRVerification } from '../../../types';
+import { verifyEUDR } from '../api/complianceApi';
+import type { EUDRVerification } from '@/types';
 
 interface EUDRVerificationProps {
   batchId: string;

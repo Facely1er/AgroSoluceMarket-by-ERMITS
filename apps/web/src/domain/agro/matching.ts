@@ -1,7 +1,7 @@
 // Matching logic for AgroSoluce v1 scope
 // Simple, explicit matching algorithm
 
-import type { Cooperative } from '../../types';
+import type { Cooperative } from '@/types';
 import { BuyerRequest, MatchingResult } from './types';
 
 /**

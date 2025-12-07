@@ -1,5 +1,4 @@
-import React from 'react';
-import { Recommendation } from '@/types/assessment.types';
+import type { Recommendation } from '@/types/assessment.types';
 
 interface RecommendationCardProps {
   recommendation: Recommendation;

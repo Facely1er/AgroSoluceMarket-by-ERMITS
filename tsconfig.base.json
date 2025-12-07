@@ -17,6 +17,6 @@
       "@agrosoluce/supabase/*": ["packages/supabase/src/*"]
     }
   },
-  "exclude": ["node_modules", "dist", "build", "legacy", "apps/*/dist", "apps/*/build"]
+  "exclude": ["node_modules", "dist", "build", "legacy", "apps/*/dist", "apps/*/build", "packages/*/dist", "packages/*/build"]
 }
 

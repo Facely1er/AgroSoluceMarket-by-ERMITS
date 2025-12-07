@@ -1,8 +1,8 @@
 // API functions for evidence documents
 // Connects frontend to Supabase database
 
-import { supabase } from '../../../lib/supabase/client';
-import { uploadDocument } from '../../../lib/supabase/storage';
+import { supabase } from '@/lib/supabase/client';
+import { uploadDocument } from '@/lib/supabase/storage';
 import type { EvidenceType } from '../types/evidenceType';
 import { EVIDENCE_TYPE_DEFAULT } from '../types/evidenceType';
 

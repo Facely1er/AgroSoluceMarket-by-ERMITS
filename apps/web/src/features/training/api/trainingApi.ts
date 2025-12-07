@@ -1,6 +1,6 @@
 // API functions for Training Management System
 
-import { supabase } from '../../../lib/supabase/client';
+import { supabase } from '@/lib/supabase/client';
 import type { TrainingSession, TrainingChampion, TrainingCompletion } from '../types';
 
 /**

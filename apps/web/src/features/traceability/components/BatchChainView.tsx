@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ArrowRight, Calendar, Package } from 'lucide-react';
 import { getBatchChain } from '../api/traceabilityApi';
-import type { BatchTransaction } from '../../../types';
+import type { BatchTransaction } from '@/types';
 
 interface BatchChainViewProps {
   batchId: string;

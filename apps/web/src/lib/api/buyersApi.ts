@@ -3,9 +3,9 @@
  * Comprehensive API for buyer management
  */
 
-import { supabase } from '../supabase/client';
-import type { Buyer } from '../../types';
-import { validateUserProfile } from '../validation/validators';
+import { supabase } from '@/lib/supabase/client';
+import type { Buyer } from '@/types';
+import { validateUserProfile } from '@/lib/validation/validators';
 
 export interface CreateBuyerData {
   email: string;

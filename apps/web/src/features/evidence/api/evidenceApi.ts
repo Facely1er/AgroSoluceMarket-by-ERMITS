@@ -1,8 +1,8 @@
 // API functions for evidence and attestations
 // Connects frontend to Supabase database
 
-import { supabase } from '../../../lib/supabase/client';
-import type { FieldDeclaration, Audit, Attestation } from '../../../types';
+import { supabase } from '@/lib/supabase/client';
+import type { FieldDeclaration, Audit, Attestation } from '@/types';
 
 /**
  * Create a field declaration

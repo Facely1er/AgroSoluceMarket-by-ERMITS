@@ -1,8 +1,13 @@
 {
   "files": [],
+  "compilerOptions": {
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleDetection": "force"
+  },
   "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+    { "path": "./apps/web" }
+  ],
+  "exclude": ["node_modules", "dist", "build", "legacy"]
 }
 

@@ -1,8 +1,8 @@
 // API functions for orders
 // Connects frontend to Supabase database
 
-import { supabase } from '../../../lib/supabase/client';
-import type { Order, OrderItem } from '../../../types';
+import { supabase } from '@/lib/supabase/client';
+import type { Order, OrderItem } from '@/types';
 
 /**
  * Fetch all orders for a buyer

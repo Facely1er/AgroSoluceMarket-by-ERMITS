@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Building2, Mail, MapPin, Package, CheckCircle, AlertCircle } from 'lucide-react';
-import { createBuyerRequest } from '../../features/buyers/api';
-import { matchCooperativesToRequest } from '../../domain/agro/matching';
-import { createRequestMatches } from '../../features/buyers/api';
-import { useCooperatives } from '../../hooks/useCooperatives';
-import type { BuyerRequest } from '../../domain/agro/types';
+import { createBuyerRequest } from '@/features/buyers/api';
+import { matchCooperativesToRequest } from '@/domain/agro/matching';
+import { createRequestMatches } from '@/features/buyers/api';
+import { useCooperatives } from '@/hooks/useCooperatives';
+import type { BuyerRequest } from '@/domain/agro/types';
 
 export default function BuyerRequestForm() {
   const navigate = useNavigate();

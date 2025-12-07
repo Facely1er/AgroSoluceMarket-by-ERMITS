@@ -8,8 +8,8 @@ import type {
   Product,
   Order,
   UserProfile,
-} from '../../types';
-import type { SignUpData } from '../auth/authService';
+} from '@/types';
+import type { SignUpData } from '@/lib/auth/authService';
 
 export interface ValidationResult {
   isValid: boolean;

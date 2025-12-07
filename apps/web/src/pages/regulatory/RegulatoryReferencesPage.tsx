@@ -6,7 +6,7 @@ import {
   getAllRegulationNames,
   type RegulatoryReference,
   type Jurisdiction,
-} from '../../data/regulatoryReferences';
+} from '@/data/regulatoryReferences';
 
 export default function RegulatoryReferencesPage() {
   const [selectedJurisdiction, setSelectedJurisdiction] = useState<Jurisdiction | 'all'>('all');

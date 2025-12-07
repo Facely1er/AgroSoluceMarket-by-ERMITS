@@ -3,9 +3,9 @@
  * Comprehensive API for product management with validation
  */
 
-import { supabase } from '../supabase/client';
-import type { Product, ProductCategory } from '../../types';
-import { validateProduct, sanitizeProduct } from '../validation/validators';
+import { supabase } from '@/lib/supabase/client';
+import type { Product, ProductCategory } from '@/types';
+import { validateProduct, sanitizeProduct } from '@/lib/validation/validators';
 
 export interface ProductFilters {
   cooperativeId?: string;

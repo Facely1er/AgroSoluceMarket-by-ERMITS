@@ -1,9 +1,9 @@
 // Buyer-Seller Matching Service
 // Matches buyers with suppliers based on requirements
 
-import { getProducts } from '../../products/api/productsApi';
-import { getCertifications } from '../../compliance/api/complianceApi';
-import type { Product, Cooperative } from '../../../types';
+import { getProducts } from '@/features/products/api/productsApi';
+import { getCertifications } from '@/features/compliance/api/complianceApi';
+import type { Product, Cooperative } from '@/types';
 
 export interface BuyerRequirements {
   productName?: string;
@@ -155,9 +155,9 @@ async function scoreMatch(
  * Find buyers for a supplier's products
  */
 export async function findBuyers(
-  product: Product,
-  cooperative: Cooperative,
-  buyerProfiles: any[] // Would be Buyer[] in a real implementation
+  _product: Product, // Reserved for future implementation
+  _cooperative: Cooperative, // Reserved for future implementation
+  _buyerProfiles: any[] // Would be Buyer[] in a real implementation, reserved for future
 ): Promise<any[]> {
   // In a real implementation, this would match against buyer profiles and requirements
   // For now, return empty array

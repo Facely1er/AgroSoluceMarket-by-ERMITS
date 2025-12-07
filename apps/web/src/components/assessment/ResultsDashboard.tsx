@@ -1,4 +1,4 @@
-import { AssessmentResults } from '@/types/assessment.types';
+import type { AssessmentResults } from '@/types/assessment.types';
 import { ScoreCircle } from './ScoreCircle';
 import { RecommendationCard } from './RecommendationCard';
 

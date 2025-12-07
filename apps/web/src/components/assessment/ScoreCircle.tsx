@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface ScoreCircleProps {
   score: number;
   size?: 'small' | 'medium' | 'large';
@@ -59,7 +57,10 @@ export function ScoreCircle({ score, size = 'large' }: ScoreCircleProps) {
       
       {/* Score text */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <span className={`font-bold ${textSizeClasses[size]}`} style={{ color: getScoreColor(score) }}>
+        <span 
+          className={`font-bold ${textSizeClasses[size]}`}
+          style={{ color: getScoreColor(score) }}
+        >
           {score}%
         </span>
       </div>

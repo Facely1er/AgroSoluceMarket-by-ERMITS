@@ -2,8 +2,8 @@
 // Pure functions for generating readiness snapshots based on coverage metrics
 // No React imports, no UI - business logic only
 
-import { getReadinessStatus } from '../data/readinessThresholdsConfig';
-import type { ReadinessStatus } from '../data/readinessThresholdsConfig';
+import { getReadinessStatus } from '@/data/readinessThresholdsConfig';
+import type { ReadinessStatus } from '@/data/readinessThresholdsConfig';
 import type { CoverageMetrics } from './coverageService';
 
 export interface ReadinessSnapshot {

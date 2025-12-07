@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Package, Award, MapPin, Building2, CheckCircle, Clock, Phone, Mail } from 'lucide-react';
-import type { Cooperative, Product } from '../../../types';
-import { getProducts } from '../../products/api/productsApi';
+import type { Cooperative, Product } from '@/types';
+import { getProducts } from '@/features/products/api/productsApi';
 
 interface CooperativeStatsProps {
   cooperative: Cooperative;

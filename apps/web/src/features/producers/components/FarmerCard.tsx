@@ -1,5 +1,5 @@
 import { MapPin, User, Phone, Mail } from 'lucide-react';
-import type { Farmer } from '../../../types';
+import type { Farmer } from '@/types';
 
 interface FarmerCardProps {
   farmer: Farmer;

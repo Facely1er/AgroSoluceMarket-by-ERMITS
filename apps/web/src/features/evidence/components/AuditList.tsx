@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { FileText, Calendar, User, CheckCircle, Clock, XCircle } from 'lucide-react';
 import { getAudits } from '../api/evidenceApi';
-import type { Audit } from '../../../types';
+import type { Audit } from '@/types';
 
 interface AuditListProps {
   cooperativeId: string;

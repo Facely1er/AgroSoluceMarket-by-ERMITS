@@ -6,10 +6,9 @@ import {
   getCanonicalDirectoryRecordsByCountry,
   getCanonicalDirectoryRecordsByPrimaryCrop,
   getCanonicalDirectoryRecordsByPilotId,
-  searchCanonicalDirectoryRecords,
-} from '../../features/cooperatives/api/canonicalDirectoryApi';
-import CanonicalDirectoryCard from '../../features/cooperatives/components/CanonicalDirectoryCard';
-import type { CanonicalCooperativeDirectory } from '../../types';
+} from '@/features/cooperatives/api/canonicalDirectoryApi';
+import CanonicalDirectoryCard from '@/features/cooperatives/components/CanonicalDirectoryCard';
+import type { CanonicalCooperativeDirectory } from '@/types';
 
 export default function DirectoryPage() {
   const [records, setRecords] = useState<CanonicalCooperativeDirectory[]>([]);
@@ -243,6 +242,8 @@ export default function DirectoryPage() {
             <select
               value={countryFilter}
               onChange={(e) => setCountryFilter(e.target.value)}
+              title="Filter by country"
+              aria-label="Filter by country"
               className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent"
             >
               <option value="">Tous les pays</option>
@@ -257,6 +258,8 @@ export default function DirectoryPage() {
             <select
               value={cropFilter}
               onChange={(e) => setCropFilter(e.target.value)}
+              title="Filter by crop"
+              aria-label="Filter by crop"
               className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent"
             >
               <option value="">Toutes les cultures</option>
@@ -271,6 +274,8 @@ export default function DirectoryPage() {
             <select
               value={pilotFilter}
               onChange={(e) => setPilotFilter(e.target.value)}
+              title="Filter by pilot"
+              aria-label="Filter by pilot"
               className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent"
             >
               <option value="">Tous les pilotes</option>
@@ -285,6 +290,8 @@ export default function DirectoryPage() {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value as 'active' | 'all')}
+              title="Filter by status"
+              aria-label="Filter by status"
               className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent"
             >
               <option value="active">Actifs uniquement</option>

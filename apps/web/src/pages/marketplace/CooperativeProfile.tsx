@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { MapPin, Building2, Phone, User, ArrowLeft, CheckCircle, Clock, BarChart3, Users, Shield, AlertTriangle, FileCheck, BookOpen } from 'lucide-react';
-import { useCooperatives } from '../../hooks/useCooperatives';
-import CooperativeLocationMap from '../../features/cooperatives/components/CooperativeLocationMap';
-import CooperativeStats from '../../features/cooperatives/components/CooperativeStats';
-import { getFarmerCountByCooperative } from '../../features/producers/api/farmersApi';
+import { useCooperatives } from '@/hooks/useCooperatives';
+import CooperativeLocationMap from '@/features/cooperatives/components/CooperativeLocationMap';
+import CooperativeStats from '@/features/cooperatives/components/CooperativeStats';
+import { getFarmerCountByCooperative } from '@/features/producers/api/farmersApi';
 
 export default function CooperativeProfile() {
   const { id } = useParams<{ id: string }>();

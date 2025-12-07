@@ -6,16 +6,15 @@ import {
   TrendingUp, 
   Users, 
   CheckCircle,
-  Clock,
   BarChart3,
   AlertCircle
 } from 'lucide-react';
-import { OnboardingWizard, OnboardingProgress } from '../../features/onboarding/components';
-import { SatisfactionSurvey, FeedbackForm } from '../../features/feedback/components';
-import { BaselineAssessment, MonthlyProgressReport, ImpactDashboard } from '../../features/value-tracking/components';
-import { TrainingList } from '../../features/training/components';
-import { getFarmersFirstSummary } from '../../features/farmers/api/farmersFirstApi';
-import type { FarmersFirstSummary } from '../../features/farmers/api/farmersFirstApi';
+import { OnboardingWizard, OnboardingProgress } from '@/features/onboarding/components';
+import { SatisfactionSurvey, FeedbackForm } from '@/features/feedback/components';
+import { BaselineAssessment, MonthlyProgressReport, ImpactDashboard } from '@/features/value-tracking/components';
+import { TrainingList } from '@/features/training/components';
+import { getFarmersFirstSummary } from '@/features/farmers/api/farmersFirstApi';
+import type { FarmersFirstSummary } from '@/features/farmers/api/farmersFirstApi';
 
 interface FarmersFirstDashboardProps {
   cooperativeId?: string; // Optional prop for when used as embedded component

@@ -1,8 +1,8 @@
 import { Package, MapPin, Shield, Route } from 'lucide-react';
-import type { Product } from '../../../types';
-import { CertificationBadge } from '../../compliance/components';
-import { getCertifications } from '../../compliance/api/complianceApi';
-import { getBatchesByProduct } from '../../traceability/api/traceabilityApi';
+import type { Product } from '@/types';
+import { CertificationBadge } from '@/features/compliance/components';
+import { getCertifications } from '@/features/compliance/api/complianceApi';
+import { getBatchesByProduct } from '@/features/traceability/api/traceabilityApi';
 import { useState, useEffect } from 'react';
 
 interface ProductCardProps {

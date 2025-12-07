@@ -1,11 +1,11 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Search, MapPin, Building2, Filter, Download, CheckCircle } from 'lucide-react';
-import { useCooperatives } from '../../hooks/useCooperatives';
-import { normalizeText } from '../../lib/utils/cooperativeUtils';
-import CooperativeMap from '../../features/cooperatives/components/CooperativeMap';
-import CooperativeCard from '../../features/cooperatives/components/CooperativeCard';
-import type { Cooperative } from '../../types';
+import { useCooperatives } from '@/hooks/useCooperatives';
+import { normalizeText } from '@/lib/utils/cooperativeUtils';
+import CooperativeMap from '@/features/cooperatives/components/CooperativeMap';
+import CooperativeCard from '@/features/cooperatives/components/CooperativeCard';
+import type { Cooperative } from '@/types';
 
 export default function CooperativeDirectory() {
   const { cooperatives, loading, error } = useCooperatives();

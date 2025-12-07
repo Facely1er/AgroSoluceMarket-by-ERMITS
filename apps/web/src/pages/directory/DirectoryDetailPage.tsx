@@ -1,22 +1,22 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Building2, MapPin, Sprout, FileText, Globe, Shield, AlertTriangle, Info, ChevronDown, ChevronUp, ExternalLink } from 'lucide-react';
-import { getCanonicalDirectoryRecordById } from '../../features/cooperatives/api/canonicalDirectoryApi';
-import type { CanonicalCooperativeDirectory } from '../../types';
+import { getCanonicalDirectoryRecordById } from '@/features/cooperatives/api/canonicalDirectoryApi';
+import type { CanonicalCooperativeDirectory } from '@/types';
 import {
   computeContextualRisks,
   computeRegulatoryContext,
-} from '../../services/enrichmentService';
+} from '@/services/enrichmentService';
 import {
   HIGH_DEFORESTATION_RISK_COUNTRIES,
   MEDIUM_DEFORESTATION_RISK_COUNTRIES,
   EUDR_PRODUCER_COUNTRIES,
   CHILD_LABOR_RISK_CROPS,
-} from '../../config/enrichmentConfig';
-import { getCoverageMetrics } from '../../features/coverage/api/coverageApi';
-import type { CoverageMetrics } from '../../services/coverageService';
-import { getCountryPackByCode, getCountryPackByName, type CountryPack } from '../../data/countryPacks';
-import { getCommodityPackByName } from '../../data/commodityPacks';
+} from '@/config/enrichmentConfig';
+import { getCoverageMetrics } from '@/features/coverage/api/coverageApi';
+import type { CoverageMetrics } from '@/services/coverageService';
+import { getCountryPackByCode, getCountryPackByName, type CountryPack } from '@/data/countryPacks';
+import { getCommodityPackByName } from '@/data/commodityPacks';
 
 export default function DirectoryDetailPage() {
   const { coop_id } = useParams<{ coop_id: string }>();

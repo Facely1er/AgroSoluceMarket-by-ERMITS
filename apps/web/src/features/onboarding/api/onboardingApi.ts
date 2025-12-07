@@ -1,6 +1,6 @@
 // API functions for Farmers First Onboarding System
 
-import { supabase } from '../../../lib/supabase/client';
+import { supabase } from '@/lib/supabase/client';
 import type { CooperativeOnboarding, OnboardingStep } from '../types';
 
 /**

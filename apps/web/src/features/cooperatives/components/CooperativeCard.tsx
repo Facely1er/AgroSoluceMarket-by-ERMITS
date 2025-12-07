@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { MapPin, Building2, CheckCircle, Clock } from 'lucide-react';
-import type { Cooperative } from '../../../types';
-import ComplianceBadge from '../../../components/cooperatives/ComplianceBadge';
+import type { Cooperative } from '@/types';
+import ComplianceBadge from '@/components/cooperatives/ComplianceBadge';
 import { useI18n } from '@/lib/i18n/I18nProvider';
 
 interface CooperativeCardProps {

@@ -1,16 +1,16 @@
 // API functions for coverage metrics
 // Connects frontend to Supabase database
 
-import { supabase } from '../../../lib/supabase/client';
-import { getEvidenceDocuments } from '../../evidence/api/evidenceDocumentsApi';
-import { getCanonicalDirectoryRecordById } from '../../cooperatives/api/canonicalDirectoryApi';
+import { supabase } from '@/lib/supabase/client';
+import { getEvidenceDocuments } from '@/features/evidence/api/evidenceDocumentsApi';
+import { getCanonicalDirectoryRecordById } from '@/features/cooperatives/api/canonicalDirectoryApi';
 import {
   computeCoverageMetrics,
   getDocumentPresence,
   type CoverageMetrics,
   type DocumentPresence,
-} from '../../../services/coverageService';
-import { getRequiredDocTypes } from '../../../data/expectedDocumentsConfig';
+} from '@/services/coverageService';
+import { getRequiredDocTypes } from '@/data/expectedDocumentsConfig';
 
 /**
  * Get or compute coverage metrics for a cooperative

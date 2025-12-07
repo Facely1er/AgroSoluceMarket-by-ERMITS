@@ -1,5 +1,5 @@
 import { CheckCircle, Clock, XCircle, AlertCircle } from 'lucide-react';
-import type { Certification } from '../../../types';
+import type { Certification } from '@/types';
 
 interface CertificationBadgeProps {
   certification: Certification;

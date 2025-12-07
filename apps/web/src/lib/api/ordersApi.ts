@@ -3,9 +3,9 @@
  * Comprehensive API for order management with validation
  */
 
-import { supabase } from '../supabase/client';
-import type { Order, OrderItem } from '../../types';
-import { validateOrder } from '../validation/validators';
+import { supabase } from '@/lib/supabase/client';
+import type { Order, OrderItem } from '@/types';
+import { validateOrder } from '@/lib/validation/validators';
 
 export interface CreateOrderData {
   buyer_id: string;

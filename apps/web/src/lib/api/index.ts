@@ -4,10 +4,10 @@
  */
 
 // Authentication
-export * from '../auth/authService';
+export * from '@/lib/auth/authService';
 
 // Validation
-export * from '../validation/validators';
+export * from '@/lib/validation/validators';
 
 // Products API
 export * from './productsApi';
@@ -22,5 +22,5 @@ export * from './buyersApi';
 export * from './searchApi';
 
 // Cooperatives API (re-export from features)
-export * from '../../features/cooperatives/api/cooperativesApi';
+export * from '@/features/cooperatives/api/cooperativesApi';
 

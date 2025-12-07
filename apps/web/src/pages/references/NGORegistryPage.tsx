@@ -5,7 +5,7 @@ import {
   getAllThematicFocuses,
   getAllCountries,
   type NGORegistryEntry,
-} from '../../data/ngoRegistry';
+} from '@/data/ngoRegistry';
 
 export default function NGORegistryPage() {
   const [searchTerm, setSearchTerm] = useState('');

@@ -1,8 +1,8 @@
 // API functions for compliance
 // Connects frontend to Supabase database
 
-import { supabase } from '../../../lib/supabase/client';
-import type { Certification, EUDRVerification, ComplianceRequirement } from '../../../types';
+import { supabase } from '@/lib/supabase/client';
+import type { Certification, EUDRVerification, ComplianceRequirement } from '@/types';
 
 /**
  * Get certifications for a cooperative or farmer

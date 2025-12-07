@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { X } from 'lucide-react';
 import { createFarmer } from '../api/farmersApi';
-import type { Farmer } from '../../../types';
+import type { Farmer } from '@/types';
 
 interface FarmerFormProps {
   cooperativeId: string;

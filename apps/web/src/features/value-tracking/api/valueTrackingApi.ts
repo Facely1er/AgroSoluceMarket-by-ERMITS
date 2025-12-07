@@ -1,6 +1,6 @@
 // API functions for Value Tracking System
 
-import { supabase } from '../../../lib/supabase/client';
+import { supabase } from '@/lib/supabase/client';
 import type { BaselineMeasurement, MonthlyProgress, ValueMetric, ImpactSummary } from '../types';
 
 /**

@@ -2,7 +2,7 @@
 // Pure functions (no React imports, no UI) for computing enrichment data
 // These functions provide context and metrics only - they are not legal/compliance guarantees
 
-import type { Cooperative } from '../types';
+import type { Cooperative } from '@/types';
 import {
   COVERAGE_THRESHOLDS,
   HIGH_DEFORESTATION_RISK_COUNTRIES,
@@ -10,7 +10,7 @@ import {
   EUDR_PRODUCER_COUNTRIES,
   EUDR_BUYER_REGIONS,
   CHILD_LABOR_RISK_CROPS,
-} from '../config/enrichmentConfig';
+} from '@/config/enrichmentConfig';
 
 /**
  * Compute contextual risks for a cooperative based on geographic and environmental factors
