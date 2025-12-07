@@ -1,4 +1,6 @@
+import { useEffect, useRef } from 'react';
 import type { AssessmentSection } from '@/types/assessment.types';
+import styles from './ProgressTracker.module.css';
 
 interface ProgressTrackerProps {
   progress: number;
@@ -13,6 +15,14 @@ export function ProgressTracker({
   totalSections: _totalSections, // Kept for API consistency, calculated from sections.length
   sections 
 }: ProgressTrackerProps) {
+  const progressBarRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (progressBarRef.current) {
+      progressBarRef.current.style.setProperty('--progress-width', `${progress}%`);
+    }
+  }, [progress]);
+
   return (
     <div className="bg-white rounded-lg p-4 shadow-sm border">
       {/* Progress text */}
@@ -24,10 +34,13 @@ export function ProgressTracker({
       </div>
 
       {/* Progress bar */}
-      <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+      <div 
+        ref={progressBarRef}
+        className={`w-full bg-gray-200 rounded-full h-2.5 mb-4 ${styles.progressBarContainer}`}
+        data-progress={progress}
+      >
         <div 
-          className="bg-gradient-to-r from-green-600 to-green-700 h-2.5 rounded-full transition-all duration-500"
-          style={{ width: `${progress}%` }}
+          className={`bg-gradient-to-r from-green-600 to-green-700 h-2.5 rounded-full transition-all duration-500 ${styles.progressBar}`}
         />
       </div>
 

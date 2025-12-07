@@ -28,6 +28,12 @@ export function ScoreCircle({ score, size = 'large' }: ScoreCircleProps) {
     return '#ea580c'; // orange-600
   };
 
+  const getScoreColorClass = (score: number) => {
+    if (score >= 80) return 'text-green-600';
+    if (score >= 60) return 'text-blue-600';
+    return 'text-orange-600';
+  };
+
   return (
     <div className={`relative ${sizeClasses[size]} mx-auto mb-4`}>
       {/* Background circle */}
@@ -58,8 +64,7 @@ export function ScoreCircle({ score, size = 'large' }: ScoreCircleProps) {
       {/* Score text */}
       <div className="absolute inset-0 flex items-center justify-center">
         <span 
-          className={`font-bold ${textSizeClasses[size]}`}
-          style={{ color: getScoreColor(score) }}
+          className={`font-bold ${textSizeClasses[size]} ${getScoreColorClass(score)}`}
         >
           {score}%
         </span>
