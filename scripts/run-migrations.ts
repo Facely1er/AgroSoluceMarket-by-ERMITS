@@ -32,7 +32,16 @@ const migrations = [
   '007_agrosoluce_v1_scope.sql',
   '008_farmers_first_toolkit.sql',
   '009_dataset_enrichment_guide.sql',
-  '010_cooperative_dashboard_enhancements.sql'
+  '010_cooperative_dashboard_enhancements.sql',
+  '011_phase1_data_enrichment.sql',
+  '012_canonical_cooperative_directory.sql',
+  '013_coverage_metrics_table.sql',
+  '014_readiness_snapshots.sql',
+  '015_add_pilot_cohorts.sql',
+  '016_farmer_declarations.sql',
+  '017_add_farmer_declarations_to_buyer_view.sql',
+  '018_add_evidence_type.sql',
+  '019_add_assessment_tables.sql'
 ];
 
 /**
@@ -41,7 +50,7 @@ const migrations = [
 function generateCombinedSQL() {
   console.log('📝 Generating combined migration file...\n');
 
-  const outputPath = path.join(__dirname, '../database/migrations/ALL_MIGRATIONS.sql');
+  const outputPath = path.join(__dirname, '../packages/database/migrations/ALL_MIGRATIONS.sql');
   let combinedSQL = `-- =============================================
 -- AgroSoluce Database Migrations - Combined File
 -- =============================================
@@ -52,7 +61,7 @@ function generateCombinedSQL() {
 -- =============================================\n\n`;
 
   for (const migrationFile of migrations) {
-    const migrationPath = path.join(__dirname, '../database/migrations', migrationFile);
+    const migrationPath = path.join(__dirname, '../packages/database/migrations', migrationFile);
     
     if (!fs.existsSync(migrationPath)) {
       console.error(`❌ Migration file not found: ${migrationPath}`);
@@ -175,7 +184,7 @@ async function main() {
     console.log('Recommended steps:');
     console.log('  1. Run: npx tsx scripts/run-migrations.ts --generate');
     console.log('  2. Open Supabase Dashboard → SQL Editor');
-    console.log('  3. Copy contents of database/migrations/ALL_MIGRATIONS.sql');
+    console.log('  3. Copy contents of packages/database/migrations/ALL_MIGRATIONS.sql');
     console.log('  4. Execute the SQL');
     console.log('  5. Verify: npx tsx scripts/run-migrations.ts --check\n');
   }
