@@ -107,6 +107,6 @@ VITE_SUPABASE_SCHEMA=agrosoluce
 
 ---
 
-**Migration Date:** $(Get-Date -Format "yyyy-MM-dd")
+**Migration Date:** 2025-12-06
 **Status:** ✅ Complete
 
