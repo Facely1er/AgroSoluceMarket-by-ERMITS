@@ -104,13 +104,17 @@ export default function CooperativeProfile() {
                   <Shield className="h-4 w-4" />
                   Voir Évaluations
                 </Link>
-              <Link
-                to={`/cooperative/${cooperative.id}/farmers-first`}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
-              >
-                <BookOpen className="h-5 w-5" />
-                Farmers First Dashboard
-              </Link>
+                <Link
+                  to={`/cooperative/${cooperative.id}/farmers-first`}
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-lg hover:bg-white/30 transition-colors border border-white/30"
+                >
+                  <BookOpen className="h-5 w-5" />
+                  Farmers First Dashboard
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
             </div>
           </div>
         </div>
