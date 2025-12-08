@@ -1,11 +1,12 @@
-import { type ClassValue, clsx } from 'clsx';
-import { twMerge } from 'tailwind-merge';
-
 /**
  * Utility function to merge Tailwind CSS classes
- * Combines clsx for conditional classes and tailwind-merge for conflict resolution
+ * Simple implementation that filters out falsy values and joins classes
  */
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
+export function cn(...inputs: (string | undefined | null | false)[]): string {
+  return inputs
+    .filter(Boolean)
+    .join(' ')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 

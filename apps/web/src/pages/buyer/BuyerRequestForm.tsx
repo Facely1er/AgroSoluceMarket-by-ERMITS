@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Building2, Mail, MapPin, Package, CheckCircle, AlertCircle } from 'lucide-react';
+import { Building2, Mail, MapPin, Package, CheckCircle } from 'lucide-react';
 import { createBuyerRequest } from '@/features/buyers/api';
 import { matchCooperativesToRequest } from '@/domain/agro/matching';
 import { createRequestMatches } from '@/features/buyers/api';
 import { useCooperatives } from '@/hooks/useCooperatives';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
+import { Button, Card, CardContent, Alert, LoadingSpinner, Input, Select, Badge } from '@/components/ui';
 import type { BuyerRequest } from '@/domain/agro/types';
 
 export default function BuyerRequestForm() {
@@ -101,10 +102,7 @@ export default function BuyerRequestForm() {
   if (coopsLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading cooperatives...</p>
-        </div>
+        <LoadingSpinner size="lg" text="Loading cooperatives..." />
       </div>
     );
   }
@@ -121,15 +119,14 @@ export default function BuyerRequestForm() {
         ]} />
 
         {/* Header */}
-        <div className="bg-gradient-to-r from-primary-600 via-primary-700 to-secondary-500 rounded-xl shadow-lg p-8 mb-6 text-white relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-transparent"></div>
-          <div className="relative z-10">
-            <div className="flex items-center gap-4 mb-4">
+        <Card variant="gradient" className="mb-6">
+          <CardContent className="p-8">
+            <div className="flex items-center gap-4">
               <div className="bg-white/20 backdrop-blur-sm p-3 rounded-lg">
                 <Building2 className="h-8 w-8 text-white" />
               </div>
               <div>
-                <h1 className="text-3xl md:text-4xl font-bold mb-2">
+                <h1 className="text-3xl md:text-4xl font-bold mb-2 text-white">
                   Create Buyer Request
                 </h1>
                 <p className="text-white/90 text-lg">
@@ -137,129 +134,110 @@ export default function BuyerRequestForm() {
                 </p>
               </div>
             </div>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-lg p-6 md:p-8 space-y-6 border border-gray-100">
-          {error && (
-            <div className="bg-red-50 border border-red-200 rounded-xl p-4 flex items-start gap-3 shadow-sm">
-              <AlertCircle className="h-5 w-5 text-red-600 mt-0.5" />
-              <div>
-                <p className="text-red-800 font-medium">Error</p>
-                <p className="text-red-600 text-sm">{error}</p>
-              </div>
-            </div>
-          )}
+        <Card className="p-6 md:p-8">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {error && (
+              <Alert variant="error" title="Error">
+                {error}
+              </Alert>
+            )}
 
           {/* Organization Name */}
-          <div>
-            <label htmlFor="buyerOrg" className="block text-sm font-medium text-gray-700 mb-2">
-              Organization Name <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              id="buyerOrg"
-              required
-              value={formData.buyerOrg}
-              onChange={(e) => setFormData({ ...formData, buyerOrg: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-              placeholder="Your company or organization name"
-            />
-          </div>
+          <Input
+            label="Organization Name"
+            type="text"
+            id="buyerOrg"
+            required
+            value={formData.buyerOrg}
+            onChange={(e) => setFormData({ ...formData, buyerOrg: e.target.value })}
+            placeholder="Your company or organization name"
+          />
 
           {/* Contact Email */}
-          <div>
-            <label htmlFor="buyerContactEmail" className="block text-sm font-medium text-gray-700 mb-2">
-              <Mail className="inline h-4 w-4 mr-1" />
-              Contact Email <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="email"
-              id="buyerContactEmail"
-              required
-              value={formData.buyerContactEmail}
-              onChange={(e) => setFormData({ ...formData, buyerContactEmail: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-              placeholder="your.email@company.com"
-            />
-          </div>
+          <Input
+            label={
+              <>
+                <Mail className="inline h-4 w-4 mr-1" />
+                Contact Email
+              </>
+            }
+            type="email"
+            id="buyerContactEmail"
+            required
+            value={formData.buyerContactEmail}
+            onChange={(e) => setFormData({ ...formData, buyerContactEmail: e.target.value })}
+            placeholder="your.email@company.com"
+          />
 
           {/* Target Country */}
-          <div>
-            <label htmlFor="targetCountry" className="block text-sm font-medium text-gray-700 mb-2">
-              <MapPin className="inline h-4 w-4 mr-1" />
-              Target Country <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              id="targetCountry"
-              required
-              value={formData.targetCountry}
-              onChange={(e) => setFormData({ ...formData, targetCountry: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-              placeholder="e.g., Côte d'Ivoire"
-            />
-          </div>
+          <Input
+            label={
+              <>
+                <MapPin className="inline h-4 w-4 mr-1" />
+                Target Country
+              </>
+            }
+            type="text"
+            id="targetCountry"
+            required
+            value={formData.targetCountry}
+            onChange={(e) => setFormData({ ...formData, targetCountry: e.target.value })}
+            placeholder="e.g., Côte d'Ivoire"
+          />
 
           {/* Commodity */}
-          <div>
-            <label htmlFor="commodity" className="block text-sm font-medium text-gray-700 mb-2">
-              <Package className="inline h-4 w-4 mr-1" />
-              Commodity <span className="text-red-500">*</span>
-            </label>
-            <select
-              id="commodity"
-              required
-              value={formData.commodity}
-              onChange={(e) => setFormData({ ...formData, commodity: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-            >
-              <option value="">Select a commodity</option>
-              {commodities.map(comm => (
-                <option key={comm} value={comm}>{comm.charAt(0).toUpperCase() + comm.slice(1)}</option>
-              ))}
-            </select>
-          </div>
+          <Select
+            label={
+              <>
+                <Package className="inline h-4 w-4 mr-1" />
+                Commodity
+              </>
+            }
+            id="commodity"
+            required
+            value={formData.commodity}
+            onChange={(e) => setFormData({ ...formData, commodity: e.target.value })}
+            options={[
+              { value: '', label: 'Select a commodity' },
+              ...commodities.map(comm => ({
+                value: comm,
+                label: comm.charAt(0).toUpperCase() + comm.slice(1)
+              }))
+            ]}
+          />
 
           {/* Volume Range */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label htmlFor="minVolume" className="block text-sm font-medium text-gray-700 mb-2">
-                Min Volume (tons)
-              </label>
-              <input
-                type="number"
-                id="minVolume"
-                min="0"
-                step="0.01"
-                value={formData.minVolumeTons || ''}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  minVolumeTons: e.target.value ? parseFloat(e.target.value) : undefined
-                })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                placeholder="0"
-              />
-            </div>
-            <div>
-              <label htmlFor="maxVolume" className="block text-sm font-medium text-gray-700 mb-2">
-                Max Volume (tons)
-              </label>
-              <input
-                type="number"
-                id="maxVolume"
-                min="0"
-                step="0.01"
-                value={formData.maxVolumeTons || ''}
-                onChange={(e) => setFormData({
-                  ...formData,
-                  maxVolumeTons: e.target.value ? parseFloat(e.target.value) : undefined
-                })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                placeholder="0"
-              />
-            </div>
+            <Input
+              label="Min Volume (tons)"
+              type="number"
+              id="minVolume"
+              min="0"
+              step="0.01"
+              value={formData.minVolumeTons || ''}
+              onChange={(e) => setFormData({
+                ...formData,
+                minVolumeTons: e.target.value ? parseFloat(e.target.value) : undefined
+              })}
+              placeholder="0"
+            />
+            <Input
+              label="Max Volume (tons)"
+              type="number"
+              id="maxVolume"
+              min="0"
+              step="0.01"
+              value={formData.maxVolumeTons || ''}
+              onChange={(e) => setFormData({
+                ...formData,
+                maxVolumeTons: e.target.value ? parseFloat(e.target.value) : undefined
+              })}
+              placeholder="0"
+            />
           </div>
 
           {/* Requirements Section */}
@@ -277,14 +255,14 @@ export default function BuyerRequestForm() {
                     key={cert}
                     type="button"
                     onClick={() => toggleCertification(cert)}
-                    className={`px-4 py-2 rounded-lg border transition-colors ${
+                    className={`px-4 py-2 rounded-lg border transition-colors flex items-center gap-1 ${
                       selectedCertifications.includes(cert)
                         ? 'bg-primary-600 text-white border-primary-600'
                         : 'bg-white text-gray-700 border-gray-300 hover:border-primary-500'
                     }`}
                   >
                     {selectedCertifications.includes(cert) && (
-                      <CheckCircle className="inline h-4 w-4 mr-1" />
+                      <CheckCircle className="h-4 w-4" />
                     )}
                     {cert}
                   </button>
@@ -343,22 +321,25 @@ export default function BuyerRequestForm() {
 
           {/* Submit Button */}
           <div className="flex gap-4 pt-4 border-t">
-            <button
+            <Button
               type="button"
+              variant="outline"
               onClick={() => navigate('/cooperatives')}
-              className="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
             >
               Cancel
-            </button>
-            <button
+            </Button>
+            <Button
               type="submit"
+              variant="primary"
+              isLoading={loading}
               disabled={loading}
-              className="flex-1 px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex-1"
             >
-              {loading ? 'Creating Request...' : 'Create Request & Find Matches'}
-            </button>
+              Create Request & Find Matches
+            </Button>
           </div>
-        </form>
+          </form>
+        </Card>
       </div>
     </div>
   );
