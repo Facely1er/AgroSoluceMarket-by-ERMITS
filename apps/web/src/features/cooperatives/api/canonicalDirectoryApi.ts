@@ -3,7 +3,7 @@
 
 import { supabase } from '@/lib/supabase/client';
 import { formatCooperativeName } from '@/lib/utils/cooperativeUtils';
-import type { CanonicalCooperativeDirectory, RecordStatus } from '@/types';
+import type { CanonicalCooperativeDirectory, RecordStatus, EudrCommodity } from '@/types';
 
 /**
  * Fetch all canonical cooperative directory records
@@ -348,12 +348,49 @@ export async function getCanonicalDirectoryRecordsByPilotId(
   }
 }
 
+// Helper function to derive commodities from primary_crop
+function deriveCommoditiesFromPrimaryCrop(primaryCrop: string | null | undefined): EudrCommodity[] {
+  if (!primaryCrop) return [];
+  
+  const cropLower = primaryCrop.toLowerCase();
+  const commodityMap: Record<string, EudrCommodity> = {
+    'cocoa': 'cocoa',
+    'cacao': 'cocoa',
+    'coffee': 'coffee',
+    'café': 'coffee',
+    'cafe': 'coffee',
+    'palm': 'palm_oil',
+    'palm oil': 'palm_oil',
+    'palm_oil': 'palm_oil',
+    'rubber': 'rubber',
+    'soy': 'soy',
+    'soja': 'soy',
+    'cattle': 'cattle',
+    'wood': 'wood',
+    'timber': 'wood',
+  };
+  
+  for (const [key, value] of Object.entries(commodityMap)) {
+    if (cropLower.includes(key)) {
+      return [value];
+    }
+  }
+  
+  return [];
+}
+
 // Helper function to transform database records to TypeScript types
 function transformCanonicalRecord(data: any): CanonicalCooperativeDirectory {
   // Use display_name if available, otherwise fall back to name
   // Format the name according to workflow requirements (names should not be displayed directly)
   const rawName = data.display_name || data.name;
   const formattedName = formatCooperativeName(rawName);
+  
+  // Ensure commodities array is populated - use existing or derive from primary_crop
+  let commodities = data.commodities;
+  if (!commodities || !Array.isArray(commodities) || commodities.length === 0) {
+    commodities = deriveCommoditiesFromPrimaryCrop(data.primary_crop);
+  }
   
   return {
     coop_id: data.coop_id.toString(),
@@ -364,7 +401,7 @@ function transformCanonicalRecord(data: any): CanonicalCooperativeDirectory {
     regionName: data.region_name || data.regionName,
     department: data.department,
     primary_crop: data.primary_crop,
-    commodities: data.commodities, // Use commodities array if available (conversion from primary_crop handled in DirectoryPage)
+    commodities: commodities.length > 0 ? commodities as any : undefined, // Ensure commodities array is populated
     source_registry: data.source_registry,
     record_status: data.record_status || 'active',
     pilot_id: data.pilot_id || null,

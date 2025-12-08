@@ -1,10 +1,12 @@
 import { useState, useEffect, useMemo } from 'react';
-import { Link } from 'react-router-dom';
-import { Search, Building2, X, ClipboardList } from 'lucide-react';
+import { useSearchParams } from 'react-router-dom';
+import { Search, Building2, X, ClipboardList, Grid3x3, List, MapPin } from 'lucide-react';
 import {
   getCanonicalDirectoryRecords,
   getCanonicalDirectoryRecordsByStatus,
 } from '@/features/cooperatives/api/canonicalDirectoryApi';
+import CanonicalDirectoryCard from '@/features/cooperatives/components/CanonicalDirectoryCard';
+import CanonicalDirectoryMap from '@/features/cooperatives/components/CanonicalDirectoryMap';
 import type { CanonicalCooperativeDirectory } from '@/types';
 import type { EudrCommodity } from '@/types';
 import type { CoverageBand } from '@/types';
@@ -59,6 +61,7 @@ function getCommoditiesFromRecord(record: CanonicalCooperativeDirectory): EudrCo
 }
 
 export default function DirectoryPage() {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [records, setRecords] = useState<CanonicalCooperativeDirectory[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -66,14 +69,36 @@ export default function DirectoryPage() {
   
   // Context-first filter controls (product-first, region-aware, coverage-aware)
   // Default: Cocoa, CI (Côte d'Ivoire), All regions, All coverage levels
+  // Check URL params for region filter from map clicks
+  const regionFromUrl = searchParams.get('region');
   const [selectedCommodity, setSelectedCommodity] = useState<EudrCommodity | 'all'>('cocoa');
   const [selectedCountry, setSelectedCountry] = useState<string>('CI'); // Côte d'Ivoire as v1 default
-  const [selectedRegion, setSelectedRegion] = useState<string>('all');
+  const [selectedRegion, setSelectedRegion] = useState<string>(regionFromUrl || 'all');
   const [selectedCoverage, setSelectedCoverage] = useState<CoverageBand | 'all'>('all');
   
   // Legacy filters (keeping for backward compatibility)
   const [statusFilter, setStatusFilter] = useState<'active' | 'all'>('active');
   const [pilotFilter, setPilotFilter] = useState('');
+  const [viewMode, setViewMode] = useState<'map' | 'grid' | 'list'>('map'); // Map is default landing view
+  const [workspaceOnly, setWorkspaceOnly] = useState(false);
+
+  // Handle URL parameter for region filter (from map clicks)
+  useEffect(() => {
+    if (regionFromUrl && regionFromUrl !== selectedRegion) {
+      setSelectedRegion(regionFromUrl);
+      // Switch to grid view when region is selected from map
+      setViewMode('grid');
+    }
+  }, [regionFromUrl]);
+
+  // Update URL when region filter changes (but not on initial load if URL param exists)
+  useEffect(() => {
+    if (selectedRegion !== 'all' && selectedRegion !== regionFromUrl) {
+      setSearchParams({ region: selectedRegion }, { replace: true });
+    } else if (selectedRegion === 'all' && regionFromUrl) {
+      setSearchParams({}, { replace: true });
+    }
+  }, [selectedRegion, regionFromUrl, setSearchParams]);
 
   // Fetch records on mount and when filters change
   useEffect(() => {
@@ -463,63 +488,120 @@ export default function DirectoryPage() {
               )}
             </div>
           ) : (
-            <ul className="space-y-3">
-              {filteredRecords.map((coop) => {
-                const regionLabel = coop.regionName || coop.region || 'Unspecified region';
-                const countryLabel = coop.countryCode || coop.country || 'Unknown';
+            <>
+              {/* View mode toggle */}
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => setViewMode('map')}
+                    className={`p-2 rounded ${viewMode === 'map' ? 'bg-secondary-100 text-secondary-700' : 'text-gray-500 hover:bg-gray-100'}`}
+                    title="Map view"
+                  >
+                    <MapPin className="h-4 w-4" />
+                  </button>
+                  <button
+                    onClick={() => setViewMode('grid')}
+                    className={`p-2 rounded ${viewMode === 'grid' ? 'bg-secondary-100 text-secondary-700' : 'text-gray-500 hover:bg-gray-100'}`}
+                    title="Grid view"
+                  >
+                    <Grid3x3 className="h-4 w-4" />
+                  </button>
+                  <button
+                    onClick={() => setViewMode('list')}
+                    className={`p-2 rounded ${viewMode === 'list' ? 'bg-secondary-100 text-secondary-700' : 'text-gray-500 hover:bg-gray-100'}`}
+                    title="List view"
+                  >
+                    <List className="h-4 w-4" />
+                  </button>
+                </div>
+                {viewMode !== 'map' && (
+                  <label className="flex items-center gap-2 text-xs text-gray-600">
+                    <input
+                      type="checkbox"
+                      checked={workspaceOnly}
+                      onChange={(e) => setWorkspaceOnly(e.target.checked)}
+                      className="rounded"
+                    />
+                    <span>Show only cooperatives with workspace</span>
+                  </label>
+                )}
+              </div>
 
-                const primaryCommodity =
-                  selectedCommodity === 'all'
-                    ? getCommoditiesFromRecord(coop)[0] ?? null
-                    : selectedCommodity;
+              {/* Results display */}
+              {viewMode === 'map' ? (
+                <div className="bg-white rounded-lg overflow-hidden">
+                  <CanonicalDirectoryMap records={filteredRecords.filter(coop => !workspaceOnly || coop.coop_id)} />
+                </div>
+              ) : viewMode === 'grid' ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {filteredRecords
+                    .filter(coop => !workspaceOnly || coop.coop_id) // Filter by workspace if enabled
+                    .map((coop) => (
+                      <CanonicalDirectoryCard key={coop.coop_id} record={coop} />
+                    ))}
+                </div>
+              ) : (
+                <ul className="space-y-3">
+                  {filteredRecords
+                    .filter(coop => !workspaceOnly || coop.coop_id) // Filter by workspace if enabled
+                    .map((coop) => {
+                      const regionLabel = coop.regionName || coop.region || 'Unspecified region';
+                      const countryLabel = coop.countryCode || coop.country || 'Unknown';
 
-                const commodityLabel = primaryCommodity
-                  ? EUDR_COMMODITIES_IN_SCOPE.find((c) => c.id === primaryCommodity)?.label ??
-                    'Multi-commodity'
-                  : 'Multi-commodity';
+                      const primaryCommodity =
+                        selectedCommodity === 'all'
+                          ? getCommoditiesFromRecord(coop)[0] ?? null
+                          : selectedCommodity;
 
-                const coverageBand = coop.coverageBand;
-                const coverageLabel = coverageBand
-                  ? coverageBand.charAt(0).toUpperCase() + coverageBand.slice(1)
-                  : 'Not available';
+                      const commodityLabel = primaryCommodity
+                        ? EUDR_COMMODITIES_IN_SCOPE.find((c) => c.id === primaryCommodity)?.label ??
+                          'Multi-commodity'
+                        : 'Multi-commodity';
 
-                return (
-                  <li key={coop.coop_id} className="border rounded-lg p-3 bg-white hover:shadow-md transition-shadow">
-                    {/* Context line */}
-                    <div className="text-xs text-gray-600 mb-1">
-                      <span className="font-semibold">{commodityLabel}</span>{' '}
-                      • {countryLabel}{' '}
-                      • {regionLabel}
-                    </div>
+                      const coverageBand = coop.coverageBand;
+                      const coverageLabel = coverageBand
+                        ? coverageBand.charAt(0).toUpperCase() + coverageBand.slice(1)
+                        : 'Not available';
 
-                    {/* Coop name - formatted according to workflow (not displayed directly) */}
-                    <h2 className="text-sm font-semibold mb-1">{coop.name}</h2>
+                      return (
+                        <li key={coop.coop_id} className="border rounded-lg p-4 bg-white hover:shadow-md transition-shadow">
+                          {/* Context line */}
+                          <div className="text-xs text-gray-600 mb-2">
+                            <span className="font-semibold">{commodityLabel}</span>{' '}
+                            • {countryLabel}{' '}
+                            • {regionLabel}
+                          </div>
 
-                    {/* Coverage snippet (commodity-aware if possible) */}
-                    <div className="text-xs text-gray-600 mb-2">
-                      <span>
-                        Documentation coverage: {coverageLabel}
-                      </span>
-                    </div>
+                          {/* Coop name - formatted according to workflow (not displayed directly) */}
+                          <h2 className="text-base font-semibold mb-2">{coop.name}</h2>
 
-                    {/* Status and CTA */}
-                    <div className="flex items-center justify-between mt-2">
-                      <span className={`text-xs font-medium ${
-                        coop.record_status === 'active' ? 'text-green-600' : 'text-gray-500'
-                      }`}>
-                        {coop.record_status === 'active' ? 'Actif' : coop.record_status}
-                      </span>
-                      <Link
-                        to={`/directory/${coop.coop_id}`}
-                        className="text-xs font-medium underline text-secondary-600 hover:text-secondary-700"
-                      >
-                        View cooperative profile →
-                      </Link>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
+                          {/* Coverage snippet (commodity-aware if possible) */}
+                          <div className="text-xs text-gray-600 mb-3">
+                            <span>
+                              Documentation coverage: {coverageLabel}
+                            </span>
+                          </div>
+
+                          {/* Status and CTA */}
+                          <div className="flex items-center justify-between">
+                            <span className={`text-xs font-medium ${
+                              coop.record_status === 'active' ? 'text-green-600' : 'text-gray-500'
+                            }`}>
+                              {coop.record_status === 'active' ? 'Actif' : coop.record_status}
+                            </span>
+                            <a
+                              href={`/directory/${coop.coop_id}`}
+                              className="text-xs font-medium underline text-secondary-600 hover:text-secondary-700"
+                            >
+                              View profile →
+                            </a>
+                          </div>
+                        </li>
+                      );
+                    })}
+                </ul>
+              )}
+            </>
           )}
         </div>
       </div>

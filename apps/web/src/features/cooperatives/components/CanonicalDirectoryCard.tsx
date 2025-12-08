@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { MapPin, Sprout, FileText } from 'lucide-react';
 import type { CanonicalCooperativeDirectory } from '@/types';
+import { EUDR_COMMODITIES_IN_SCOPE } from '@/types';
 
 interface CanonicalDirectoryCardProps {
   record: CanonicalCooperativeDirectory;
@@ -37,11 +38,33 @@ export default function CanonicalDirectoryCard({ record }: CanonicalDirectoryCar
     }
   };
 
+  // Context-first: Get commodity, country, region for context line
+  const primaryCommodity = record.commodities && record.commodities.length > 0 
+    ? record.commodities[0] 
+    : null;
+  const commodityLabel = primaryCommodity
+    ? EUDR_COMMODITIES_IN_SCOPE.find(c => c.id === primaryCommodity)?.label || primaryCommodity
+    : (record.primary_crop || null);
+  const countryCode = record.countryCode || (record.country && record.country.length === 2 ? record.country : 'CI') || 'CI';
+  const region = record.regionName || record.region || '';
+
   return (
     <Link
       to={`/directory/${record.coop_id}`}
       className="block bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow border-l-4 border-secondary-500"
     >
+      {/* Context line - shown first (product-first, region-aware, coverage-aware) */}
+      {(commodityLabel || countryCode || region) && (
+        <div className="text-xs text-gray-600 mb-2">
+          {commodityLabel && <span className="font-semibold">{commodityLabel}</span>}
+          {commodityLabel && (countryCode || region) && <span> • </span>}
+          {countryCode && <span>{countryCode}</span>}
+          {countryCode && region && <span> • </span>}
+          {region && <span>{region}</span>}
+        </div>
+      )}
+
+      {/* Cooperative name - formatted, shown after context */}
       <div className="flex items-start justify-between mb-3">
         <h3 className="text-lg font-semibold text-gray-900 flex-1">
           {record.name}
@@ -70,10 +93,15 @@ export default function CanonicalDirectoryCard({ record }: CanonicalDirectoryCar
             )}
           </div>
         )}
-        {record.primary_crop && (
+        {record.primary_crop && !record.commodities && (
           <div className="flex items-center gap-2">
             <Sprout className="h-4 w-4 text-gray-400" />
             <span className="font-medium">{record.primary_crop}</span>
+          </div>
+        )}
+        {record.coverageBand && (
+          <div className="text-xs text-gray-500">
+            Documentation coverage: {record.coverageBand.charAt(0).toUpperCase() + record.coverageBand.slice(1)}
           </div>
         )}
         {record.source_registry && (
