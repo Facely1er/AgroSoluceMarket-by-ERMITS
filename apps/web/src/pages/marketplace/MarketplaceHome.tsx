@@ -330,12 +330,19 @@ export default function MarketplaceHome() {
         </div>
       </section>
 
-      {/* Challenges Section - Simplified */}
-      <section className="py-16 md:py-24 bg-gradient-to-b from-red-50 via-orange-50 to-yellow-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Challenges Section - Enhanced Visual Design */}
+      <section className="py-16 md:py-24 bg-gradient-to-b from-red-50 via-orange-50 to-yellow-50 relative overflow-hidden">
+        {/* Decorative background elements */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-red-400 rounded-full blur-3xl"></div>
+          <div className="absolute top-40 right-20 w-96 h-96 bg-orange-400 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-yellow-400 rounded-full blur-3xl"></div>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-12 md:mb-16">
             <div className="mb-6">
-              <Badge variant="error" size="lg">
+              <Badge variant="error" size="lg" className="animate-pulse">
                 <AlertTriangle className="h-4 w-4 mr-2" />
                 {t.landing.challenges.tagline}
               </Badge>
@@ -350,87 +357,195 @@ export default function MarketplaceHome() {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {/* Regulatory Pressure */}
-            <Card variant="accent" accentColor="error" className="p-6 md:p-8 shadow-lg">
-              <CardContent className="p-0">
-                <div className="bg-red-100 w-14 h-14 rounded-lg flex items-center justify-center mb-4">
-                  <Scale className="h-7 w-7 text-red-600" />
+            <Card 
+              variant="elevated" 
+              className="p-6 md:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group relative overflow-hidden bg-white"
+            >
+              {/* Gradient accent bar */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-500 via-red-600 to-red-700"></div>
+              
+              {/* Decorative corner element */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-red-50 rounded-bl-full opacity-50 group-hover:opacity-75 transition-opacity"></div>
+              
+              <CardContent className="p-0 relative z-10">
+                {/* Large icon with gradient background */}
+                <div className="relative mb-6">
+                  <div className="absolute inset-0 bg-gradient-to-br from-red-100 to-red-200 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity"></div>
+                  <div className="relative bg-gradient-to-br from-red-500 to-red-600 w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <Scale className="h-8 w-8 text-white" />
+                  </div>
                 </div>
-                <h3 className="text-xl md:text-2xl font-bold mb-3 text-gray-900">
+                
+                <h3 className="text-xl md:text-2xl font-bold mb-3 text-gray-900 group-hover:text-red-600 transition-colors">
                   {t.landing.challenges.regulatory.title}
                 </h3>
-                <p className="text-gray-700 leading-relaxed mb-4 text-sm md:text-base">
+                <p className="text-gray-700 leading-relaxed mb-6 text-sm md:text-base font-medium">
                   {t.landing.challenges.regulatory.description}
                 </p>
-                <ul className="space-y-2 text-sm text-gray-600">
-                  <li className="flex items-start gap-2">
-                    <AlertTriangle className="h-4 w-4 text-red-500 mt-0.5 flex-shrink-0" />
-                    <span>{t.landing.challenges.regulatory.point1}</span>
+                
+                {/* Visual separator */}
+                <div className="h-px bg-gradient-to-r from-transparent via-red-200 to-transparent mb-6"></div>
+                
+                <ul className="space-y-4">
+                  <li className="flex items-start gap-3 group/item">
+                    <div className="flex-shrink-0 mt-0.5">
+                      <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center group-hover/item:bg-red-200 transition-colors">
+                        <AlertTriangle className="h-3.5 w-3.5 text-red-600" />
+                      </div>
+                    </div>
+                    <span className="text-sm text-gray-700 leading-relaxed group-hover/item:text-gray-900 transition-colors">
+                      {t.landing.challenges.regulatory.point1}
+                    </span>
                   </li>
-                  <li className="flex items-start gap-2">
-                    <AlertTriangle className="h-4 w-4 text-red-500 mt-0.5 flex-shrink-0" />
-                    <span>{t.landing.challenges.regulatory.point2}</span>
+                  <li className="flex items-start gap-3 group/item">
+                    <div className="flex-shrink-0 mt-0.5">
+                      <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center group-hover/item:bg-red-200 transition-colors">
+                        <AlertTriangle className="h-3.5 w-3.5 text-red-600" />
+                      </div>
+                    </div>
+                    <span className="text-sm text-gray-700 leading-relaxed group-hover/item:text-gray-900 transition-colors">
+                      {t.landing.challenges.regulatory.point2}
+                    </span>
                   </li>
-                  <li className="flex items-start gap-2">
-                    <AlertTriangle className="h-4 w-4 text-red-500 mt-0.5 flex-shrink-0" />
-                    <span>{t.landing.challenges.regulatory.point3}</span>
+                  <li className="flex items-start gap-3 group/item">
+                    <div className="flex-shrink-0 mt-0.5">
+                      <div className="w-6 h-6 rounded-full bg-red-100 flex items-center justify-center group-hover/item:bg-red-200 transition-colors">
+                        <AlertTriangle className="h-3.5 w-3.5 text-red-600" />
+                      </div>
+                    </div>
+                    <span className="text-sm text-gray-700 leading-relaxed group-hover/item:text-gray-900 transition-colors">
+                      {t.landing.challenges.regulatory.point3}
+                    </span>
                   </li>
                 </ul>
               </CardContent>
             </Card>
 
             {/* Environmental Issues */}
-            <Card variant="accent" accentColor="warning" className="p-6 md:p-8 shadow-lg border-orange-500">
-              <CardContent className="p-0">
-                <div className="bg-orange-100 w-14 h-14 rounded-lg flex items-center justify-center mb-4">
-                  <Leaf className="h-7 w-7 text-orange-600" />
+            <Card 
+              variant="elevated" 
+              className="p-6 md:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group relative overflow-hidden bg-white"
+            >
+              {/* Gradient accent bar */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 via-orange-600 to-orange-700"></div>
+              
+              {/* Decorative corner element */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-orange-50 rounded-bl-full opacity-50 group-hover:opacity-75 transition-opacity"></div>
+              
+              <CardContent className="p-0 relative z-10">
+                {/* Large icon with gradient background */}
+                <div className="relative mb-6">
+                  <div className="absolute inset-0 bg-gradient-to-br from-orange-100 to-orange-200 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity"></div>
+                  <div className="relative bg-gradient-to-br from-orange-500 to-orange-600 w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <Leaf className="h-8 w-8 text-white" />
+                  </div>
                 </div>
-                <h3 className="text-xl md:text-2xl font-bold mb-3 text-gray-900">
+                
+                <h3 className="text-xl md:text-2xl font-bold mb-3 text-gray-900 group-hover:text-orange-600 transition-colors">
                   {t.landing.challenges.environmental.title}
                 </h3>
-                <p className="text-gray-700 leading-relaxed mb-4 text-sm md:text-base">
+                <p className="text-gray-700 leading-relaxed mb-6 text-sm md:text-base font-medium">
                   {t.landing.challenges.environmental.description}
                 </p>
-                <ul className="space-y-2 text-sm text-gray-600">
-                  <li className="flex items-start gap-2">
-                    <AlertTriangle className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
-                    <span>{t.landing.challenges.environmental.point1}</span>
+                
+                {/* Visual separator */}
+                <div className="h-px bg-gradient-to-r from-transparent via-orange-200 to-transparent mb-6"></div>
+                
+                <ul className="space-y-4">
+                  <li className="flex items-start gap-3 group/item">
+                    <div className="flex-shrink-0 mt-0.5">
+                      <div className="w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center group-hover/item:bg-orange-200 transition-colors">
+                        <AlertTriangle className="h-3.5 w-3.5 text-orange-600" />
+                      </div>
+                    </div>
+                    <span className="text-sm text-gray-700 leading-relaxed group-hover/item:text-gray-900 transition-colors">
+                      {t.landing.challenges.environmental.point1}
+                    </span>
                   </li>
-                  <li className="flex items-start gap-2">
-                    <AlertTriangle className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
-                    <span>{t.landing.challenges.environmental.point2}</span>
+                  <li className="flex items-start gap-3 group/item">
+                    <div className="flex-shrink-0 mt-0.5">
+                      <div className="w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center group-hover/item:bg-orange-200 transition-colors">
+                        <AlertTriangle className="h-3.5 w-3.5 text-orange-600" />
+                      </div>
+                    </div>
+                    <span className="text-sm text-gray-700 leading-relaxed group-hover/item:text-gray-900 transition-colors">
+                      {t.landing.challenges.environmental.point2}
+                    </span>
                   </li>
-                  <li className="flex items-start gap-2">
-                    <AlertTriangle className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
-                    <span>{t.landing.challenges.environmental.point3}</span>
+                  <li className="flex items-start gap-3 group/item">
+                    <div className="flex-shrink-0 mt-0.5">
+                      <div className="w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center group-hover/item:bg-orange-200 transition-colors">
+                        <AlertTriangle className="h-3.5 w-3.5 text-orange-600" />
+                      </div>
+                    </div>
+                    <span className="text-sm text-gray-700 leading-relaxed group-hover/item:text-gray-900 transition-colors">
+                      {t.landing.challenges.environmental.point3}
+                    </span>
                   </li>
                 </ul>
               </CardContent>
             </Card>
 
             {/* Social Challenges */}
-            <Card variant="accent" accentColor="warning" className="p-6 md:p-8 shadow-lg border-yellow-500">
-              <CardContent className="p-0">
-                <div className="bg-yellow-100 w-14 h-14 rounded-lg flex items-center justify-center mb-4">
-                  <Heart className="h-7 w-7 text-yellow-600" />
+            <Card 
+              variant="elevated" 
+              className="p-6 md:p-8 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group relative overflow-hidden bg-white"
+            >
+              {/* Gradient accent bar */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-yellow-500 via-yellow-600 to-yellow-700"></div>
+              
+              {/* Decorative corner element */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-yellow-50 rounded-bl-full opacity-50 group-hover:opacity-75 transition-opacity"></div>
+              
+              <CardContent className="p-0 relative z-10">
+                {/* Large icon with gradient background */}
+                <div className="relative mb-6">
+                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity"></div>
+                  <div className="relative bg-gradient-to-br from-yellow-500 to-yellow-600 w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <Heart className="h-8 w-8 text-white" />
+                  </div>
                 </div>
-                <h3 className="text-xl md:text-2xl font-bold mb-3 text-gray-900">
+                
+                <h3 className="text-xl md:text-2xl font-bold mb-3 text-gray-900 group-hover:text-yellow-600 transition-colors">
                   {t.landing.challenges.social.title}
                 </h3>
-                <p className="text-gray-700 leading-relaxed mb-4 text-sm md:text-base">
+                <p className="text-gray-700 leading-relaxed mb-6 text-sm md:text-base font-medium">
                   {t.landing.challenges.social.description}
                 </p>
-                <ul className="space-y-2 text-sm text-gray-600">
-                  <li className="flex items-start gap-2">
-                    <AlertTriangle className="h-4 w-4 text-yellow-500 mt-0.5 flex-shrink-0" />
-                    <span>{t.landing.challenges.social.point1}</span>
+                
+                {/* Visual separator */}
+                <div className="h-px bg-gradient-to-r from-transparent via-yellow-200 to-transparent mb-6"></div>
+                
+                <ul className="space-y-4">
+                  <li className="flex items-start gap-3 group/item">
+                    <div className="flex-shrink-0 mt-0.5">
+                      <div className="w-6 h-6 rounded-full bg-yellow-100 flex items-center justify-center group-hover/item:bg-yellow-200 transition-colors">
+                        <AlertTriangle className="h-3.5 w-3.5 text-yellow-600" />
+                      </div>
+                    </div>
+                    <span className="text-sm text-gray-700 leading-relaxed group-hover/item:text-gray-900 transition-colors">
+                      {t.landing.challenges.social.point1}
+                    </span>
                   </li>
-                  <li className="flex items-start gap-2">
-                    <AlertTriangle className="h-4 w-4 text-yellow-500 mt-0.5 flex-shrink-0" />
-                    <span>{t.landing.challenges.social.point2}</span>
+                  <li className="flex items-start gap-3 group/item">
+                    <div className="flex-shrink-0 mt-0.5">
+                      <div className="w-6 h-6 rounded-full bg-yellow-100 flex items-center justify-center group-hover/item:bg-yellow-200 transition-colors">
+                        <AlertTriangle className="h-3.5 w-3.5 text-yellow-600" />
+                      </div>
+                    </div>
+                    <span className="text-sm text-gray-700 leading-relaxed group-hover/item:text-gray-900 transition-colors">
+                      {t.landing.challenges.social.point2}
+                    </span>
                   </li>
-                  <li className="flex items-start gap-2">
-                    <AlertTriangle className="h-4 w-4 text-yellow-500 mt-0.5 flex-shrink-0" />
-                    <span>{t.landing.challenges.social.point3}</span>
+                  <li className="flex items-start gap-3 group/item">
+                    <div className="flex-shrink-0 mt-0.5">
+                      <div className="w-6 h-6 rounded-full bg-yellow-100 flex items-center justify-center group-hover/item:bg-yellow-200 transition-colors">
+                        <AlertTriangle className="h-3.5 w-3.5 text-yellow-600" />
+                      </div>
+                    </div>
+                    <span className="text-sm text-gray-700 leading-relaxed group-hover/item:text-gray-900 transition-colors">
+                      {t.landing.challenges.social.point3}
+                    </span>
                   </li>
                 </ul>
               </CardContent>
