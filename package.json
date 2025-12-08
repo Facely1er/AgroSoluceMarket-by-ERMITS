@@ -17,7 +17,11 @@
     "lint": "npm run lint --workspace apps/web",
     "typecheck": "npm run typecheck --workspace apps/web",
     "clean": "rm -rf node_modules apps/**/node_modules packages/**/node_modules build apps/**/build packages/**/build",
-    "turbo": "turbo"
+    "turbo": "turbo",
+    "_comment_mobile": "Mobile app scripts (separate build - run from apps/mobile/ or use workspace commands)",
+    "dev:mobile": "npm run dev --workspace apps/mobile",
+    "build:mobile": "npm run build --workspace apps/mobile",
+    "preview:mobile": "npm run preview --workspace apps/mobile"
   },
   "devDependencies": {
     "turbo": "^1.10.0"
