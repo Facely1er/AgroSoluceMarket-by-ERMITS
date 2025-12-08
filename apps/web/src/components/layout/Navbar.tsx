@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
-import { Home, UsersRound, Briefcase, User, Shield, Menu, X, Globe } from 'lucide-react';
+import { Home, UsersRound, Briefcase, User, Shield, Menu, X, Globe, Info, Handshake } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/I18nProvider';
 import type { Language } from '@/lib/i18n/translations';
 
@@ -18,12 +18,20 @@ export default function Navbar() {
     setLangMenuOpen(false);
   };
 
-  const navLinks = [
+  const navLinks: Array<{
+    to: string;
+    icon: React.ComponentType<{ className?: string }>;
+    label: string;
+    exact: boolean;
+    secondary?: boolean;
+  }> = [
     { to: '/', icon: Home, label: t.nav.home, exact: true },
-    { to: '/cooperatives', icon: UsersRound, label: t.nav.cooperatives, exact: true },
     { to: '/buyer', icon: Briefcase, label: t.nav.buyers, exact: false },
-    { to: '/cooperative', icon: User, label: t.nav.cooperativeSpace, exact: false },
-    { to: '/compliance/child-labor', icon: Shield, label: t.nav.compliance, exact: false },
+    { to: '/partners', icon: Handshake, label: 'Partners & NGOs', exact: false },
+    { to: '/about', icon: Info, label: 'About', exact: false },
+    { to: '/cooperatives', icon: UsersRound, label: t.nav.cooperatives, exact: true, secondary: true },
+    { to: '/cooperative', icon: User, label: t.nav.cooperativeSpace, exact: false, secondary: true },
+    { to: '/compliance/child-labor', icon: Shield, label: t.nav.compliance, exact: false, secondary: true },
   ];
 
   return (
@@ -49,7 +57,7 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-1">
-            {navLinks.map(({ to, icon: Icon, label, exact }) => {
+            {navLinks.filter(link => !link.secondary).map(({ to, icon: Icon, label, exact }) => {
               const active = exact ? isActive(to) : isActivePath(to);
               return (
                 <Link
@@ -66,6 +74,33 @@ export default function Navbar() {
                 </Link>
               );
             })}
+            
+            {/* Secondary menu dropdown */}
+            <div className="relative group ml-2">
+              <button className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:text-primary-600 hover:bg-gray-50 transition-all duration-200">
+                <UsersRound className="h-4 w-4" />
+                <span>More</span>
+              </button>
+              <div className="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                {navLinks.filter(link => link.secondary).map(({ to, icon: Icon, label, exact }) => {
+                  const active = exact ? isActive(to) : isActivePath(to);
+                  return (
+                    <Link
+                      key={to}
+                      to={to}
+                      className={`flex items-center gap-3 px-4 py-2.5 text-sm font-medium transition-colors ${
+                        active
+                          ? 'text-primary-600 bg-primary-50'
+                          : 'text-gray-700 hover:bg-gray-50'
+                      }`}
+                    >
+                      <Icon className="h-4 w-4" />
+                      <span>{label}</span>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
             
             {/* Language Switcher */}
             <div className="relative ml-2">
@@ -124,24 +159,51 @@ export default function Navbar() {
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
           <div className="md:hidden border-t border-gray-200 py-2">
-            {navLinks.map(({ to, icon: Icon, label, exact }) => {
-              const active = exact ? isActive(to) : isActivePath(to);
-              return (
-                <Link
-                  key={to}
-                  to={to}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                    active
-                      ? 'text-primary-600 bg-primary-50'
-                      : 'text-gray-700 hover:bg-gray-50'
-                  }`}
-                >
-                  <Icon className="h-5 w-5" />
-                  <span>{label}</span>
-                </Link>
-              );
-            })}
+            {/* Primary Links */}
+            <div className="px-2 py-2">
+              <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider px-4 mb-2">Main</div>
+              {navLinks.filter(link => !link.secondary).map(({ to, icon: Icon, label, exact }) => {
+                const active = exact ? isActive(to) : isActivePath(to);
+                return (
+                  <Link
+                    key={to}
+                    to={to}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                      active
+                        ? 'text-primary-600 bg-primary-50'
+                        : 'text-gray-700 hover:bg-gray-50'
+                    }`}
+                  >
+                    <Icon className="h-5 w-5" />
+                    <span>{label}</span>
+                  </Link>
+                );
+              })}
+            </div>
+            
+            {/* Secondary Links */}
+            <div className="px-2 py-2 border-t border-gray-200 mt-2">
+              <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider px-4 mb-2">More</div>
+              {navLinks.filter(link => link.secondary).map(({ to, icon: Icon, label, exact }) => {
+                const active = exact ? isActive(to) : isActivePath(to);
+                return (
+                  <Link
+                    key={to}
+                    to={to}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                      active
+                        ? 'text-primary-600 bg-primary-50'
+                        : 'text-gray-700 hover:bg-gray-50'
+                    }`}
+                  >
+                    <Icon className="h-5 w-5" />
+                    <span>{label}</span>
+                  </Link>
+                );
+              })}
+            </div>
             
             {/* Mobile Language Switcher */}
             <div className="px-4 py-2 border-t border-gray-200 mt-2">

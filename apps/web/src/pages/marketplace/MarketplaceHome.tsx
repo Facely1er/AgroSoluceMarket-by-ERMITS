@@ -191,7 +191,7 @@ export default function MarketplaceHome() {
     <div className="flex flex-col">
       {/* Hero Section */}
       <section className="pt-12 pb-16 md:pt-20 md:pb-24 bg-gradient-to-r from-primary-600 via-primary-700 to-secondary-500 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/440731/pexels-photo-440731.jpeg')] bg-cover bg-center opacity-10"></div>
+        <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/1072824/pexels-photo-1072824.jpeg?auto=compress&cs=tinysrgb&w=1920')] bg-cover bg-center opacity-10 bg-no-repeat"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-transparent"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center">
@@ -600,7 +600,7 @@ export default function MarketplaceHome() {
 
       {/* Final CTA Section */}
       <section className="py-16 md:py-24 bg-gradient-to-r from-primary-600 to-secondary-500 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/440731/pexels-photo-440731.jpeg')] bg-cover bg-center opacity-10"></div>
+        <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/1072824/pexels-photo-1072824.jpeg?auto=compress&cs=tinysrgb&w=1920')] bg-cover bg-center opacity-10 bg-no-repeat"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-transparent"></div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <Target className="h-12 w-12 md:h-16 md:w-16 mx-auto mb-6 opacity-90" />
