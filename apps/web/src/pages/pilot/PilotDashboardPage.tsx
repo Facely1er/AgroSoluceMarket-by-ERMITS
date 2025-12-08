@@ -268,10 +268,86 @@ export default function PilotDashboardPage() {
             </h2>
           </div>
           {cooperatives.length === 0 ? (
-            <div className="p-12 text-center text-gray-500">
-              <Building2 className="h-16 w-16 mx-auto mb-4 text-gray-400" />
-              <p className="text-lg font-medium mb-2">No cooperatives found in this pilot</p>
-              <p className="text-sm text-gray-400">Try selecting a different pilot from the directory</p>
+            <div className="p-12">
+              <div className="text-center mb-8">
+                <Building2 className="h-16 w-16 mx-auto mb-4 text-gray-400" />
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">No Cooperatives Found in This Pilot</h3>
+                <p className="text-gray-600 max-w-2xl mx-auto">
+                  This pilot dashboard is currently empty. This could mean the pilot is new, cooperatives haven't been assigned yet, or the pilot ID is incorrect.
+                </p>
+              </div>
+
+              {/* Information Cards */}
+              <div className="grid md:grid-cols-2 gap-6 mb-8">
+                <div className="bg-blue-50 rounded-xl p-6 border border-blue-200">
+                  <div className="flex items-center gap-3 mb-3">
+                    <Info className="h-6 w-6 text-blue-600" />
+                    <h4 className="text-lg font-semibold text-blue-900">What is a Pilot?</h4>
+                  </div>
+                  <p className="text-sm text-blue-800 leading-relaxed">
+                    A pilot program groups multiple cooperatives together for monitoring and evaluation purposes. 
+                    NGOs and partners use pilots to track progress, measure impact, and support improvement efforts 
+                    across a set of cooperatives working toward common goals.
+                  </p>
+                </div>
+
+                <div className="bg-green-50 rounded-xl p-6 border border-green-200">
+                  <div className="flex items-center gap-3 mb-3">
+                    <BarChart3 className="h-6 w-6 text-green-600" />
+                    <h4 className="text-lg font-semibold text-green-900">What You'll See Here</h4>
+                  </div>
+                  <ul className="text-sm text-green-800 space-y-2 leading-relaxed">
+                    <li>• Aggregate metrics across all cooperatives in the pilot</li>
+                    <li>• Documentation coverage percentages</li>
+                    <li>• Readiness status tracking (Not Ready, In Progress, Buyer Ready)</li>
+                    <li>• Individual cooperative performance details</li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Action Links */}
+              <div className="bg-white rounded-xl p-6 border border-gray-200">
+                <h4 className="text-lg font-semibold text-gray-900 mb-4">What You Can Do</h4>
+                <div className="grid md:grid-cols-3 gap-4">
+                  <Link
+                    to="/directory"
+                    className="flex items-center gap-3 p-4 bg-primary-50 rounded-lg border border-primary-200 hover:bg-primary-100 transition-colors group"
+                  >
+                    <Building2 className="h-5 w-5 text-primary-600 group-hover:scale-110 transition-transform" />
+                    <div>
+                      <div className="font-medium text-primary-900">Browse Directory</div>
+                      <div className="text-xs text-primary-700">Explore all cooperatives</div>
+                    </div>
+                  </Link>
+                  <Link
+                    to="/partners"
+                    className="flex items-center gap-3 p-4 bg-green-50 rounded-lg border border-green-200 hover:bg-green-100 transition-colors group"
+                  >
+                    <TrendingUp className="h-5 w-5 text-green-600 group-hover:scale-110 transition-transform" />
+                    <div>
+                      <div className="font-medium text-green-900">For Partners</div>
+                      <div className="text-xs text-green-700">Learn about pilot programs</div>
+                    </div>
+                  </Link>
+                  <Link
+                    to="/buyer"
+                    className="flex items-center gap-3 p-4 bg-blue-50 rounded-lg border border-blue-200 hover:bg-blue-100 transition-colors group"
+                  >
+                    <CheckCircle className="h-5 w-5 text-blue-600 group-hover:scale-110 transition-transform" />
+                    <div>
+                      <div className="font-medium text-blue-900">Buyer Portal</div>
+                      <div className="text-xs text-blue-700">Access buyer tools</div>
+                    </div>
+                  </Link>
+                </div>
+              </div>
+
+              {/* Help Text */}
+              <div className="mt-6 text-center">
+                <p className="text-sm text-gray-500">
+                  If you believe this pilot should contain data, please verify the pilot ID or contact support.
+                </p>
+              </div>
             </div>
           ) : (
             <div className="overflow-x-auto">
