@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import { 
   Search, 
   UsersRound, 
@@ -24,8 +25,14 @@ export default function BuyerPortal() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-secondary-50 via-primary-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Breadcrumbs */}
+        <Breadcrumbs items={[
+          { label: 'Home', path: '/' },
+          { label: 'Buyers', path: '/buyers' },
+          { label: 'Buyer Portal' }
+        ]} />
         {/* Hero Section */}
-        <div className="bg-gradient-to-r from-primary-600 via-primary-700 to-secondary-500 rounded-xl shadow-lg p-8 md:p-12 mb-8 text-white relative overflow-hidden">
+        <div className="bg-gradient-to-r from-primary-600 via-primary-700 to-secondary-500 rounded-xl shadow-xl p-8 md:p-12 mb-8 text-white relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-transparent"></div>
           <div className="relative z-10">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium mb-4 border border-white/20">
@@ -48,7 +55,7 @@ export default function BuyerPortal() {
 
         {/* Key Benefits Section */}
         <div className="grid md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-primary-500">
+          <div className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-primary-500 hover:shadow-xl transition-shadow">
             <div className="flex items-center gap-3 mb-4">
               <div className="bg-primary-100 p-3 rounded-lg">
                 <Eye className="h-6 w-6 text-primary-600" />
@@ -61,7 +68,7 @@ export default function BuyerPortal() {
             </p>
           </div>
 
-          <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-green-500">
+          <div className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-green-500 hover:shadow-xl transition-shadow">
             <div className="flex items-center gap-3 mb-4">
               <div className="bg-green-100 p-3 rounded-lg">
                 <Shield className="h-6 w-6 text-green-600" />
@@ -74,7 +81,7 @@ export default function BuyerPortal() {
             </p>
           </div>
 
-          <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-blue-500">
+          <div className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-blue-500 hover:shadow-xl transition-shadow">
             <div className="flex items-center gap-3 mb-4">
               <div className="bg-blue-100 p-3 rounded-lg">
                 <TrendingUp className="h-6 w-6 text-blue-600" />
@@ -92,7 +99,7 @@ export default function BuyerPortal() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <Link
             to="/cooperatives"
-            className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-all border-l-4 border-primary-500 group"
+            className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all border-l-4 border-primary-500 group transform hover:-translate-y-1"
           >
             <div className="flex items-center gap-4 mb-4">
               <div className="bg-primary-100 p-3 rounded-lg group-hover:bg-primary-200 transition-colors">
@@ -114,7 +121,7 @@ export default function BuyerPortal() {
 
           <Link
             to="/buyer/request"
-            className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-all border-l-4 border-secondary-500 group border-2 border-secondary-200"
+            className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all border-l-4 border-secondary-500 group border-2 border-secondary-200 transform hover:-translate-y-1"
           >
             <div className="flex items-center gap-4 mb-4">
               <div className="bg-secondary-100 p-3 rounded-lg group-hover:bg-secondary-200 transition-colors">
@@ -136,7 +143,7 @@ export default function BuyerPortal() {
 
           <Link
             to="/directory"
-            className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-all border-l-4 border-blue-500 group"
+            className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all border-l-4 border-blue-500 group transform hover:-translate-y-1"
           >
             <div className="flex items-center gap-4 mb-4">
               <div className="bg-blue-100 p-3 rounded-lg group-hover:bg-blue-200 transition-colors">
@@ -156,7 +163,7 @@ export default function BuyerPortal() {
             </p>
           </Link>
 
-          <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-green-500">
+          <div className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-green-500">
             <div className="flex items-center gap-4 mb-4">
               <div className="bg-green-100 p-3 rounded-lg">
                 <BarChart3 className="h-8 w-8 text-green-600" />
@@ -180,7 +187,7 @@ export default function BuyerPortal() {
         </div>
 
         {/* What You Can Do Section */}
-        <div className="bg-white rounded-lg shadow-md p-8 mb-8">
+        <div className="bg-white rounded-xl shadow-lg p-8 mb-8 border border-gray-100">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">What You Can Do</h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div className="space-y-4">
@@ -251,7 +258,7 @@ export default function BuyerPortal() {
         </div>
 
         {/* Important Note */}
-        <div className="bg-blue-50 border-l-4 border-blue-500 rounded-lg p-6 mb-8">
+        <div className="bg-blue-50 border-l-4 border-blue-500 rounded-xl p-6 mb-8 shadow-md">
           <div className="flex items-start gap-4">
             <Info className="h-6 w-6 text-blue-600 mt-0.5 flex-shrink-0" />
             <div>
@@ -290,7 +297,7 @@ export default function BuyerPortal() {
             </p>
           </Link>
 
-          <div className="bg-white rounded-lg shadow-md p-6 border-l-4 border-gray-400">
+          <div className="bg-white rounded-xl shadow-lg p-6 border-l-4 border-gray-400 hover:shadow-xl transition-shadow">
             <h3 className="text-xl font-bold text-gray-900 mb-4">Need Help?</h3>
             <p className="text-gray-600 leading-relaxed mb-4">
               Questions about using the platform, understanding compliance metrics, or finding 

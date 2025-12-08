@@ -5,6 +5,7 @@ import { useCooperatives } from '@/hooks/useCooperatives';
 import { normalizeText } from '@/lib/utils/cooperativeUtils';
 import CooperativeMap from '@/features/cooperatives/components/CooperativeMap';
 import CooperativeCard from '@/features/cooperatives/components/CooperativeCard';
+import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import type { Cooperative } from '@/types';
 
 export default function CooperativeDirectory() {
@@ -136,35 +137,36 @@ export default function CooperativeDirectory() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="bg-white rounded-lg shadow-md p-6 mb-6 border-t-4 border-secondary-500">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            🇨🇮 Répertoire des Coopératives - Côte d'Ivoire
-          </h1>
-          <p className="text-gray-600">
-            Système de Traçabilité et Sourcing des Filières Agricoles
-          </p>
+            <h1 className="text-3xl md:text-4xl font-bold mb-2">
+              🇨🇮 Répertoire des Coopératives - Côte d'Ivoire
+            </h1>
+            <p className="text-lg text-white/90">
+              Système de Traçabilité et Sourcing des Filières Agricoles
+            </p>
+          </div>
         </div>
 
         {/* Stats Dashboard */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-          <div className="bg-white p-6 rounded-lg shadow-md text-center border-l-4 border-primary-500">
+          <div className="bg-white p-6 rounded-xl shadow-lg text-center border-l-4 border-primary-500 hover:shadow-xl transition-shadow">
             <div className="text-3xl font-bold text-primary-600 mb-1">
               {stats.total.toLocaleString()}
             </div>
             <div className="text-gray-600 text-sm">Coopératives Enregistrées</div>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-md text-center border-l-4 border-secondary-500">
+          <div className="bg-white p-6 rounded-xl shadow-lg text-center border-l-4 border-secondary-500 hover:shadow-xl transition-shadow">
             <div className="text-3xl font-bold text-secondary-600 mb-1">
               {stats.regions}
             </div>
             <div className="text-gray-600 text-sm">Régions Couvertes</div>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-md text-center border-l-4 border-green-500">
+          <div className="bg-white p-6 rounded-xl shadow-lg text-center border-l-4 border-green-500 hover:shadow-xl transition-shadow">
             <div className="text-3xl font-bold text-green-600 mb-1">
               {stats.verified.toLocaleString()}
             </div>
             <div className="text-gray-600 text-sm">Enregistrées</div>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow-md text-center border-l-4 border-blue-500">
+          <div className="bg-white p-6 rounded-xl shadow-lg text-center border-l-4 border-blue-500 hover:shadow-xl transition-shadow">
             <div className="text-3xl font-bold text-blue-600 mb-1">
               {stats.departments}
             </div>
@@ -173,7 +175,7 @@ export default function CooperativeDirectory() {
         </div>
 
         {/* Filters */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+        <div className="bg-white rounded-xl shadow-lg p-6 mb-6 border border-gray-100">
           <div className="space-y-4">
             {/* Search and Basic Filters */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -274,7 +276,7 @@ export default function CooperativeDirectory() {
         </div>
 
         {/* Tabs */}
-        <div className="bg-white rounded-lg shadow-md mb-6">
+        <div className="bg-white rounded-xl shadow-lg mb-6 border border-gray-100">
           <div className="border-b border-gray-200">
             <nav className="flex -mb-px">
               <button

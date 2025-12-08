@@ -7,6 +7,7 @@ import {
 } from '@/features/cooperatives/api/canonicalDirectoryApi';
 import CanonicalDirectoryCard from '@/features/cooperatives/components/CanonicalDirectoryCard';
 import CanonicalDirectoryMap from '@/features/cooperatives/components/CanonicalDirectoryMap';
+import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import type { CanonicalCooperativeDirectory } from '@/types';
 import type { EudrCommodity } from '@/types';
 import type { CoverageBand } from '@/types';
@@ -308,23 +309,32 @@ export default function DirectoryPage() {
   }
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen py-8 bg-gradient-to-br from-secondary-50 via-primary-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Breadcrumbs */}
+        <Breadcrumbs items={[
+          { label: 'Home', path: '/' },
+          { label: 'Directory', path: '/directory' }
+        ]} />
+
         {/* Header */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6 border-t-4 border-secondary-500">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2 flex items-center gap-2">
-            <ClipboardList className="h-8 w-8 text-secondary-500" />
-            Répertoire Canonique des Coopératives
-          </h1>
-          <p className="text-gray-600 mb-2">
-            Répertoire standardisé des coopératives agricoles
-          </p>
-          {/* Disclaimer */}
-          <p className="text-xs text-gray-600">
-            This directory helps you explore cooperatives by EUDR commodity, geography, and documentation
-            coverage. Information may include cooperative self-reported data and does not constitute
-            certification, verification, or regulatory approval.
-          </p>
+        <div className="bg-gradient-to-r from-secondary-500 to-secondary-600 rounded-xl shadow-lg p-8 mb-8 text-white relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-transparent"></div>
+          <div className="relative z-10">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="bg-white/20 backdrop-blur-sm p-3 rounded-lg">
+                <ClipboardList className="h-8 w-8 text-white" />
+              </div>
+              <div>
+                <h1 className="text-3xl md:text-4xl font-bold mb-2">
+                  Canonical Cooperative Directory
+                </h1>
+                <p className="text-white/90 text-lg">
+                  Verified cooperative records with documentation coverage and compliance metrics
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Stats Dashboard */}
@@ -464,7 +474,7 @@ export default function DirectoryPage() {
         </section>
 
         {/* Results */}
-        <div className="bg-white rounded-lg shadow-md p-6">
+        <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 border border-gray-100">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-semibold text-gray-900">
               Résultats ({filteredRecords.length})
