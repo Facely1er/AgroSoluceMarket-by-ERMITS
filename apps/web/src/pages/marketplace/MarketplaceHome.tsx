@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/I18nProvider';
 import { EUDR_COMMODITIES_IN_SCOPE } from '@/types';
+import { Button, Card, CardContent, Badge } from '@/components/ui';
 
 export default function MarketplaceHome() {
   const { t } = useI18n();
@@ -194,9 +195,11 @@ export default function MarketplaceHome() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-transparent"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium mb-6 border border-white/20">
-              <Zap className="h-4 w-4" />
-              <span>{t.landing.hero.tagline}</span>
+            <div className="mb-6">
+              <Badge variant="primary" size="lg" className="bg-white/10 backdrop-blur-sm border-white/20 text-white">
+                <Zap className="h-4 w-4 mr-2" />
+                {t.landing.hero.tagline}
+              </Badge>
             </div>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 leading-tight">
               {t.landing.hero.title}
@@ -214,20 +217,28 @@ export default function MarketplaceHome() {
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8 px-4">
-              <Link
-                to="/cooperatives"
-                className="group bg-white text-primary-600 px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 text-sm md:text-base"
+              <Button
+                asChild
+                variant="secondary"
+                size="lg"
+                className="group"
               >
-                {t.landing.hero.ctaCooperatives}
-                <ArrowRight className="h-4 w-4 md:h-5 md:w-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <Link
-                to="/buyers"
-                className="group bg-secondary-600 text-white px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold hover:bg-secondary-700 transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 border-2 border-secondary-400 text-sm md:text-base"
+                <Link to="/cooperatives">
+                  {t.landing.hero.ctaCooperatives}
+                  <ArrowRight className="h-4 w-4 md:h-5 md:w-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </Button>
+              <Button
+                asChild
+                variant="primary"
+                size="lg"
+                className="group bg-secondary-600 hover:bg-secondary-700 border-2 border-secondary-400"
               >
-                {t.landing.hero.ctaBuyer}
-                <ArrowRight className="h-4 w-4 md:h-5 md:w-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
+                <Link to="/buyers">
+                  {t.landing.hero.ctaBuyer}
+                  <ArrowRight className="h-4 w-4 md:h-5 md:w-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </Button>
             </div>
             <p className="text-xs md:text-sm text-white/70 px-4">
               {t.landing.hero.freeNote}
@@ -241,22 +252,28 @@ export default function MarketplaceHome() {
       <section className="py-12 md:py-16 bg-white -mt-12 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-            <div className="text-center p-4 md:p-6 bg-primary-50 rounded-xl border border-primary-100">
-              <div className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-primary-600 mb-2">{EUDR_COMMODITIES_IN_SCOPE.length}</div>
-              <div className="text-xs md:text-sm text-gray-600 font-medium mb-2">{t.landing.stats.productCategories}</div>
-              <div className="text-xs text-gray-500 mt-2 leading-relaxed">
-                {EUDR_COMMODITIES_IN_SCOPE.map(c => c.label).join(', ')}
-              </div>
-            </div>
-            <div className="text-center p-4 md:p-6 bg-secondary-50 rounded-xl border border-secondary-100">
-              <div className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-secondary-600 mb-2">31</div>
-              <div className="text-xs md:text-sm text-gray-600 font-medium mb-2">{t.landing.stats.regions}</div>
-              <div className="text-xs text-gray-500 mt-2">{t.landing.stats.regionsNote}</div>
-            </div>
-            <div className="text-center p-4 md:p-6 bg-green-50 rounded-xl border border-green-100">
-              <div className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-green-600 mb-2">3+</div>
-              <div className="text-xs md:text-sm text-gray-600 font-medium">{t.landing.stats.complianceFrameworks}</div>
-            </div>
+            <Card className="text-center p-4 md:p-6 bg-primary-50 border-primary-100">
+              <CardContent className="p-0">
+                <div className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-primary-600 mb-2">{EUDR_COMMODITIES_IN_SCOPE.length}</div>
+                <div className="text-xs md:text-sm text-gray-600 font-medium mb-2">{t.landing.stats.productCategories}</div>
+                <div className="text-xs text-gray-500 mt-2 leading-relaxed">
+                  {EUDR_COMMODITIES_IN_SCOPE.map(c => c.label).join(', ')}
+                </div>
+              </CardContent>
+            </Card>
+            <Card className="text-center p-4 md:p-6 bg-secondary-50 border-secondary-100">
+              <CardContent className="p-0">
+                <div className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-secondary-600 mb-2">31</div>
+                <div className="text-xs md:text-sm text-gray-600 font-medium mb-2">{t.landing.stats.regions}</div>
+                <div className="text-xs text-gray-500 mt-2">{t.landing.stats.regionsNote}</div>
+              </CardContent>
+            </Card>
+            <Card className="text-center p-4 md:p-6 bg-green-50 border-green-100">
+              <CardContent className="p-0">
+                <div className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-green-600 mb-2">3+</div>
+                <div className="text-xs md:text-sm text-gray-600 font-medium">{t.landing.stats.complianceFrameworks}</div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
@@ -274,44 +291,41 @@ export default function MarketplaceHome() {
           </div>
           
           <div className="grid md:grid-cols-3 gap-6">
-            <Link
-              to="/buyers"
-              className="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-all border-l-4 border-primary-500"
-            >
-              <h3 className="text-xl font-bold mb-3 text-gray-900">For Buyers</h3>
-              <p className="text-gray-600 mb-4">
-                Understand what exists, what is missing, and where to focus due diligence
-              </p>
-              <span className="text-primary-600 font-semibold inline-flex items-center gap-2">
-                Learn more <ArrowRight className="h-4 w-4" />
-              </span>
-            </Link>
+            <Card variant="accent" accentColor="primary" className="p-8 hover:shadow-xl transition-all cursor-pointer">
+              <Link to="/buyers" className="block">
+                <h3 className="text-xl font-bold mb-3 text-gray-900">For Buyers</h3>
+                <p className="text-gray-600 mb-4">
+                  Understand what exists, what is missing, and where to focus due diligence
+                </p>
+                <span className="text-primary-600 font-semibold inline-flex items-center gap-2">
+                  Learn more <ArrowRight className="h-4 w-4" />
+                </span>
+              </Link>
+            </Card>
             
-            <Link
-              to="/partners"
-              className="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-all border-l-4 border-green-500"
-            >
-              <h3 className="text-xl font-bold mb-3 text-gray-900">For NGOs & Partners</h3>
-              <p className="text-gray-600 mb-4">
-                Make farmer-level progress visible without distorting reality
-              </p>
-              <span className="text-green-600 font-semibold inline-flex items-center gap-2">
-                Learn more <ArrowRight className="h-4 w-4" />
-              </span>
-            </Link>
+            <Card variant="accent" accentColor="success" className="p-8 hover:shadow-xl transition-all cursor-pointer">
+              <Link to="/partners" className="block">
+                <h3 className="text-xl font-bold mb-3 text-gray-900">For NGOs & Partners</h3>
+                <p className="text-gray-600 mb-4">
+                  Make farmer-level progress visible without distorting reality
+                </p>
+                <span className="text-green-600 font-semibold inline-flex items-center gap-2">
+                  Learn more <ArrowRight className="h-4 w-4" />
+                </span>
+              </Link>
+            </Card>
             
-            <Link
-              to="/what-we-do"
-              className="bg-white p-8 rounded-xl shadow-md hover:shadow-xl transition-all border-l-4 border-blue-500"
-            >
-              <h3 className="text-xl font-bold mb-3 text-gray-900">What We Do</h3>
-              <p className="text-gray-600 mb-4">
-                See how AgroSoluce supports responsible sourcing through transparency
-              </p>
-              <span className="text-blue-600 font-semibold inline-flex items-center gap-2">
-                Learn more <ArrowRight className="h-4 w-4" />
-              </span>
-            </Link>
+            <Card variant="accent" accentColor="info" className="p-8 hover:shadow-xl transition-all cursor-pointer">
+              <Link to="/what-we-do" className="block">
+                <h3 className="text-xl font-bold mb-3 text-gray-900">What We Do</h3>
+                <p className="text-gray-600 mb-4">
+                  See how AgroSoluce supports responsible sourcing through transparency
+                </p>
+                <span className="text-blue-600 font-semibold inline-flex items-center gap-2">
+                  Learn more <ArrowRight className="h-4 w-4" />
+                </span>
+              </Link>
+            </Card>
           </div>
         </div>
       </section>
@@ -320,9 +334,11 @@ export default function MarketplaceHome() {
       <section className="py-16 md:py-24 bg-gradient-to-b from-red-50 via-orange-50 to-yellow-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 md:mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-red-100 rounded-full text-sm font-medium mb-6">
-              <AlertTriangle className="h-4 w-4 text-red-600" />
-              <span className="text-red-800 font-semibold">{t.landing.challenges.tagline}</span>
+            <div className="mb-6">
+              <Badge variant="error" size="lg">
+                <AlertTriangle className="h-4 w-4 mr-2" />
+                {t.landing.challenges.tagline}
+              </Badge>
             </div>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-gray-900">
               {t.landing.challenges.title}
@@ -334,85 +350,91 @@ export default function MarketplaceHome() {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {/* Regulatory Pressure */}
-            <div className="bg-white p-6 md:p-8 rounded-xl shadow-lg border-l-4 border-red-500">
-              <div className="bg-red-100 w-14 h-14 rounded-lg flex items-center justify-center mb-4">
-                <Scale className="h-7 w-7 text-red-600" />
-              </div>
-              <h3 className="text-xl md:text-2xl font-bold mb-3 text-gray-900">
-                {t.landing.challenges.regulatory.title}
-              </h3>
-              <p className="text-gray-700 leading-relaxed mb-4 text-sm md:text-base">
-                {t.landing.challenges.regulatory.description}
-              </p>
-              <ul className="space-y-2 text-sm text-gray-600">
-                <li className="flex items-start gap-2">
-                  <AlertTriangle className="h-4 w-4 text-red-500 mt-0.5 flex-shrink-0" />
-                  <span>{t.landing.challenges.regulatory.point1}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <AlertTriangle className="h-4 w-4 text-red-500 mt-0.5 flex-shrink-0" />
-                  <span>{t.landing.challenges.regulatory.point2}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <AlertTriangle className="h-4 w-4 text-red-500 mt-0.5 flex-shrink-0" />
-                  <span>{t.landing.challenges.regulatory.point3}</span>
-                </li>
-              </ul>
-            </div>
+            <Card variant="accent" accentColor="error" className="p-6 md:p-8 shadow-lg">
+              <CardContent className="p-0">
+                <div className="bg-red-100 w-14 h-14 rounded-lg flex items-center justify-center mb-4">
+                  <Scale className="h-7 w-7 text-red-600" />
+                </div>
+                <h3 className="text-xl md:text-2xl font-bold mb-3 text-gray-900">
+                  {t.landing.challenges.regulatory.title}
+                </h3>
+                <p className="text-gray-700 leading-relaxed mb-4 text-sm md:text-base">
+                  {t.landing.challenges.regulatory.description}
+                </p>
+                <ul className="space-y-2 text-sm text-gray-600">
+                  <li className="flex items-start gap-2">
+                    <AlertTriangle className="h-4 w-4 text-red-500 mt-0.5 flex-shrink-0" />
+                    <span>{t.landing.challenges.regulatory.point1}</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <AlertTriangle className="h-4 w-4 text-red-500 mt-0.5 flex-shrink-0" />
+                    <span>{t.landing.challenges.regulatory.point2}</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <AlertTriangle className="h-4 w-4 text-red-500 mt-0.5 flex-shrink-0" />
+                    <span>{t.landing.challenges.regulatory.point3}</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
 
             {/* Environmental Issues */}
-            <div className="bg-white p-6 md:p-8 rounded-xl shadow-lg border-l-4 border-orange-500">
-              <div className="bg-orange-100 w-14 h-14 rounded-lg flex items-center justify-center mb-4">
-                <Leaf className="h-7 w-7 text-orange-600" />
-              </div>
-              <h3 className="text-xl md:text-2xl font-bold mb-3 text-gray-900">
-                {t.landing.challenges.environmental.title}
-              </h3>
-              <p className="text-gray-700 leading-relaxed mb-4 text-sm md:text-base">
-                {t.landing.challenges.environmental.description}
-              </p>
-              <ul className="space-y-2 text-sm text-gray-600">
-                <li className="flex items-start gap-2">
-                  <AlertTriangle className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
-                  <span>{t.landing.challenges.environmental.point1}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <AlertTriangle className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
-                  <span>{t.landing.challenges.environmental.point2}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <AlertTriangle className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
-                  <span>{t.landing.challenges.environmental.point3}</span>
-                </li>
-              </ul>
-            </div>
+            <Card variant="accent" accentColor="warning" className="p-6 md:p-8 shadow-lg border-orange-500">
+              <CardContent className="p-0">
+                <div className="bg-orange-100 w-14 h-14 rounded-lg flex items-center justify-center mb-4">
+                  <Leaf className="h-7 w-7 text-orange-600" />
+                </div>
+                <h3 className="text-xl md:text-2xl font-bold mb-3 text-gray-900">
+                  {t.landing.challenges.environmental.title}
+                </h3>
+                <p className="text-gray-700 leading-relaxed mb-4 text-sm md:text-base">
+                  {t.landing.challenges.environmental.description}
+                </p>
+                <ul className="space-y-2 text-sm text-gray-600">
+                  <li className="flex items-start gap-2">
+                    <AlertTriangle className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
+                    <span>{t.landing.challenges.environmental.point1}</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <AlertTriangle className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
+                    <span>{t.landing.challenges.environmental.point2}</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <AlertTriangle className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
+                    <span>{t.landing.challenges.environmental.point3}</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
 
             {/* Social Challenges */}
-            <div className="bg-white p-6 md:p-8 rounded-xl shadow-lg border-l-4 border-yellow-500">
-              <div className="bg-yellow-100 w-14 h-14 rounded-lg flex items-center justify-center mb-4">
-                <Heart className="h-7 w-7 text-yellow-600" />
-              </div>
-              <h3 className="text-xl md:text-2xl font-bold mb-3 text-gray-900">
-                {t.landing.challenges.social.title}
-              </h3>
-              <p className="text-gray-700 leading-relaxed mb-4 text-sm md:text-base">
-                {t.landing.challenges.social.description}
-              </p>
-              <ul className="space-y-2 text-sm text-gray-600">
-                <li className="flex items-start gap-2">
-                  <AlertTriangle className="h-4 w-4 text-yellow-500 mt-0.5 flex-shrink-0" />
-                  <span>{t.landing.challenges.social.point1}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <AlertTriangle className="h-4 w-4 text-yellow-500 mt-0.5 flex-shrink-0" />
-                  <span>{t.landing.challenges.social.point2}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <AlertTriangle className="h-4 w-4 text-yellow-500 mt-0.5 flex-shrink-0" />
-                  <span>{t.landing.challenges.social.point3}</span>
-                </li>
-              </ul>
-            </div>
+            <Card variant="accent" accentColor="warning" className="p-6 md:p-8 shadow-lg border-yellow-500">
+              <CardContent className="p-0">
+                <div className="bg-yellow-100 w-14 h-14 rounded-lg flex items-center justify-center mb-4">
+                  <Heart className="h-7 w-7 text-yellow-600" />
+                </div>
+                <h3 className="text-xl md:text-2xl font-bold mb-3 text-gray-900">
+                  {t.landing.challenges.social.title}
+                </h3>
+                <p className="text-gray-700 leading-relaxed mb-4 text-sm md:text-base">
+                  {t.landing.challenges.social.description}
+                </p>
+                <ul className="space-y-2 text-sm text-gray-600">
+                  <li className="flex items-start gap-2">
+                    <AlertTriangle className="h-4 w-4 text-yellow-500 mt-0.5 flex-shrink-0" />
+                    <span>{t.landing.challenges.social.point1}</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <AlertTriangle className="h-4 w-4 text-yellow-500 mt-0.5 flex-shrink-0" />
+                    <span>{t.landing.challenges.social.point2}</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <AlertTriangle className="h-4 w-4 text-yellow-500 mt-0.5 flex-shrink-0" />
+                    <span>{t.landing.challenges.social.point3}</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
@@ -433,17 +455,19 @@ export default function MarketplaceHome() {
             {outcomes.slice(0, 5).map((outcome) => {
               const Icon = outcome.icon;
               return (
-                <div 
+                <Card 
                   key={outcome.id} 
-                  className="bg-gradient-to-br from-white to-gray-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-all border border-gray-100"
+                  className="bg-gradient-to-br from-white to-gray-50 p-6 hover:shadow-lg transition-all"
                 >
-                  <div className={`${getIconBgColor(outcome.iconColor)} w-12 h-12 rounded-lg flex items-center justify-center mb-4`}>
-                    <Icon className={`h-6 w-6 ${getIconTextColor(outcome.iconColor)}`} />
-                  </div>
-                  <h3 className="text-lg font-semibold mb-2 text-gray-900">
-                    {outcome.title}
-                  </h3>
-                </div>
+                  <CardContent className="p-0">
+                    <div className={`${getIconBgColor(outcome.iconColor)} w-12 h-12 rounded-lg flex items-center justify-center mb-4`}>
+                      <Icon className={`h-6 w-6 ${getIconTextColor(outcome.iconColor)}`} />
+                    </div>
+                    <h3 className="text-lg font-semibold mb-2 text-gray-900">
+                      {outcome.title}
+                    </h3>
+                  </CardContent>
+                </Card>
               );
             })}
           </div>
@@ -472,20 +496,28 @@ export default function MarketplaceHome() {
             {t.landing.cta.subtitle}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              to="/cooperatives"
-              className="bg-white text-primary-600 px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 text-sm md:text-base"
+            <Button
+              asChild
+              variant="secondary"
+              size="lg"
+              className="group"
             >
-              {t.landing.cta.buttonCooperatives}
-              <ArrowRight className="h-4 w-4 md:h-5 md:w-5" />
-            </Link>
-            <Link
-              to="/buyer"
-              className="bg-secondary-600 text-white px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold hover:bg-secondary-700 transition-all duration-200 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 border-2 border-secondary-400 text-sm md:text-base"
+              <Link to="/cooperatives">
+                {t.landing.cta.buttonCooperatives}
+                <ArrowRight className="h-4 w-4 md:h-5 md:w-5 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </Button>
+            <Button
+              asChild
+              variant="primary"
+              size="lg"
+              className="group bg-secondary-600 hover:bg-secondary-700 border-2 border-secondary-400"
             >
-              {t.landing.cta.buttonBuyer}
-              <ArrowRight className="h-4 w-4 md:h-5 md:w-5" />
-            </Link>
+              <Link to="/buyer">
+                {t.landing.cta.buttonBuyer}
+                <ArrowRight className="h-4 w-4 md:h-5 md:w-5 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>

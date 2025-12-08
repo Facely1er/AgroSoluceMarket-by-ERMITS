@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils/cn';
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: 'default' | 'accent' | 'elevated' | 'gradient';
-  accentColor?: 'primary' | 'secondary' | 'success' | 'warning' | 'error';
+  accentColor?: 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'info';
   children: React.ReactNode;
 }
 
@@ -24,6 +24,7 @@ const Card = React.forwardRef<HTMLDivElement, CardProps>(
       success: 'border-success',
       warning: 'border-warning',
       error: 'border-error',
+      info: 'border-blue-500',
     };
 
     return (

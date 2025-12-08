@@ -185,8 +185,8 @@ docs/
 - **1** implementation summary
 
 ### Pages Refactored
-- **1** page fully refactored (BuyerRequestForm)
-- **3+** pages pending refactoring
+- **2** pages fully refactored (BuyerRequestForm, MarketplaceHome)
+- **2+** pages pending refactoring
 
 ### Code Quality
 - ✅ Full TypeScript support
