@@ -121,21 +121,161 @@ export default function CooperativeWorkspace() {
     <div className="min-h-screen py-8 bg-gradient-to-br from-secondary-50 via-primary-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6 border-t-4 border-primary-500">
-          <div className="flex items-start justify-between">
-            <div className="flex-1">
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                Cooperative Workspace
-              </h1>
-              <p className="text-gray-600">
-                Manage your cooperative's documentation and enablement information
-              </p>
-            </div>
-            <div className="ml-4">
-              <div className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-medium">
-                <Info className="inline h-3 w-3 mr-1" />
-                Access: Unprotected
+        <div className="bg-gradient-to-r from-primary-600 via-primary-700 to-secondary-500 rounded-xl shadow-lg p-8 md:p-12 mb-8 text-white relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-transparent"></div>
+          <div className="relative z-10">
+            <div className="flex items-start justify-between mb-6">
+              <div className="flex-1">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium mb-4 border border-white/20">
+                  <LayoutDashboard className="h-4 w-4" />
+                  <span>Cooperative Workspace</span>
+                </div>
+                <h1 className="text-4xl md:text-5xl font-bold mb-4">
+                  Manage Your Cooperative's Compliance Journey
+                </h1>
+                <p className="text-xl md:text-2xl mb-2 text-white/95">
+                  Documentation, Evidence, and Enablement Management
+                </p>
+                <p className="text-lg text-white/85 max-w-3xl leading-relaxed">
+                  This workspace provides cooperatives with tools to manage documentation coverage, 
+                  track compliance readiness, upload evidence, identify gaps, and access enablement 
+                  resources. Make your progress visible to buyers and partners while maintaining 
+                  transparency about your current state.
+                </p>
               </div>
+              <div className="ml-4">
+                <div className="px-4 py-2 bg-yellow-400/20 backdrop-blur-sm text-yellow-100 rounded-lg text-sm font-medium border border-yellow-300/30">
+                  <Info className="inline h-4 w-4 mr-1" />
+                  Public Access
+                </div>
+              </div>
+            </div>
+
+            {/* Key Features Overview */}
+            <div className="grid md:grid-cols-4 gap-4 mt-8">
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+                <FileText className="h-6 w-6 mb-2 text-white/90" />
+                <h3 className="font-semibold mb-1 text-sm">Evidence Management</h3>
+                <p className="text-xs text-white/80">
+                  Upload and organize compliance documentation
+                </p>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+                <BarChart3 className="h-6 w-6 mb-2 text-white/90" />
+                <h3 className="font-semibold mb-1 text-sm">Coverage Tracking</h3>
+                <p className="text-xs text-white/80">
+                  Monitor documentation coverage metrics
+                </p>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+                <AlertCircle className="h-6 w-6 mb-2 text-white/90" />
+                <h3 className="font-semibold mb-1 text-sm">Gap Analysis</h3>
+                <p className="text-xs text-white/80">
+                  Identify missing documentation and guidance
+                </p>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+                <Zap className="h-6 w-6 mb-2 text-white/90" />
+                <h3 className="font-semibold mb-1 text-sm">Enablement</h3>
+                <p className="text-xs text-white/80">
+                  Access tools and resources for improvement
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* What This Workspace Provides */}
+        <div className="bg-white rounded-lg shadow-md p-8 mb-6 border-l-4 border-primary-500">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">What This Workspace Provides</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-1">Documentation Management</h4>
+                  <p className="text-sm text-gray-600">
+                    Upload, organize, and manage evidence documents including land rights, farmer 
+                    registrations, traceability records, and compliance certificates.
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-1">Coverage Metrics</h4>
+                  <p className="text-sm text-gray-600">
+                    Track your documentation coverage across different categories and see how 
+                    complete your evidence collection is.
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-1">Compliance Readiness</h4>
+                  <p className="text-sm text-gray-600">
+                    View readiness scores and maturity levels for EUDR, CMMC, and other regulatory 
+                    frameworks based on your documentation.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-1">Gap Identification</h4>
+                  <p className="text-sm text-gray-600">
+                    Identify missing documentation with specific guidance on what's needed and 
+                    how to obtain it.
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-1">Enablement Resources</h4>
+                  <p className="text-sm text-gray-600">
+                    Access toolkits, templates, and guidance materials to help improve your 
+                    documentation and compliance practices.
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-1">Farmer Engagement</h4>
+                  <p className="text-sm text-gray-600">
+                    Track and manage farmer registrations, training programs, and engagement 
+                    initiatives through the Farmers First dashboard.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Important Note */}
+        <div className="bg-blue-50 border-l-4 border-blue-500 rounded-lg p-6 mb-6">
+          <div className="flex items-start gap-4">
+            <Info className="h-6 w-6 text-blue-600 mt-0.5 flex-shrink-0" />
+            <div>
+              <h3 className="text-lg font-semibold text-blue-900 mb-2">
+                About This Workspace
+              </h3>
+              <p className="text-blue-800 leading-relaxed mb-3">
+                This workspace is designed to help cooperatives make their documentation and 
+                compliance efforts <strong>visible and transparent</strong>. By uploading evidence 
+                and tracking coverage, you enable buyers and partners to understand your current 
+                state and progress.
+              </p>
+              <p className="text-blue-800 leading-relaxed">
+                <strong>This platform does not replace audits or certifications.</strong> Instead, 
+                it provides a transparent view of what exists, what's missing, and where to focus 
+                improvement efforts. We start from the farmer, structure reality at the cooperative 
+                level, and support credible EUDR-aligned due diligence.
+              </p>
             </div>
           </div>
         </div>
