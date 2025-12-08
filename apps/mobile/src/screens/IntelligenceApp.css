@@ -1179,18 +1179,366 @@ header {
   border-color: var(--color-earth-terracotta);
 }
 
-/* Responsive */
-@media (max-width: 480px) {
-  .metrics-grid {
-    grid-template-columns: 1fr;
-  }
-  
+/* Mobile-First Enhancements */
+
+/* Touch Targets - Ensure minimum 44px for accessibility */
+.role-button,
+.tab,
+.farmer-tab,
+.action-button,
+.help-button,
+.language-button,
+.voice-explain-button,
+.alert-action,
+.member-action {
+  min-height: 44px;
+  min-width: 44px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Active States for Better Feedback */
+.role-button:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tab:active,
+.farmer-tab:active {
+  opacity: 0.7;
+}
+
+.action-button:active,
+.help-button:active,
+.voice-explain-button:active {
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+
+/* Focus States for Accessibility */
+.role-button:focus-visible,
+.tab:focus-visible,
+.action-button:focus-visible {
+  outline: 3px solid var(--color-earth-forest);
+  outline-offset: 2px;
+}
+
+/* Smooth Scrolling */
+.dashboard-content {
+  scroll-behavior: smooth;
+}
+
+/* Safe Area Insets for Notched Devices */
+.role-selector,
+.dashboard-container {
+  padding-top: max(24px, env(safe-area-inset-top));
+  padding-bottom: max(24px, env(safe-area-inset-bottom));
+  padding-left: max(24px, env(safe-area-inset-left));
+  padding-right: max(24px, env(safe-area-inset-right));
+}
+
+header {
+  padding-top: max(20px, env(safe-area-inset-top));
+  padding-left: max(20px, env(safe-area-inset-left));
+  padding-right: max(20px, env(safe-area-inset-right));
+}
+
+/* Improved Typography Scaling */
+@media (max-width: 360px) {
   .role-selector-title {
     font-size: 24px;
   }
   
+  .role-button-title {
+    font-size: 20px;
+  }
+  
   .header-title {
     font-size: 20px;
+  }
+  
+  .header-title-farmer {
+    font-size: 24px;
+  }
+  
+  .section-title,
+  .section-title-farmer {
+    font-size: 18px;
+  }
+}
+
+/* Better Spacing on Small Screens */
+@media (max-width: 480px) {
+  .metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .role-selector {
+    padding: 16px;
+  }
+  
+  .role-selector-content {
+    max-width: 100%;
+  }
+  
+  .role-button {
+    padding: 20px 16px;
+  }
+  
+  .dashboard-content {
+    padding: 12px;
+  }
+  
+  .metric-card,
+  .coop-card,
+  .alert-card,
+  .trend-card {
+    padding: 14px;
+  }
+  
+  .weather-card,
+  .market-card,
+  .actions-card {
+    padding: 16px;
+  }
+  
+  .header-title {
+    font-size: 20px;
+  }
+  
+  .header-subtitle {
+    font-size: 13px;
+  }
+  
+  .tab {
+    padding: 14px 8px;
+    font-size: 13px;
+  }
+  
+  .farmer-tab {
+    padding: 10px 8px;
+  }
+  
+  .farmer-tab-icon {
+    font-size: 28px;
+  }
+  
+  .farmer-tab-label {
+    font-size: 11px;
+  }
+}
+
+/* Improved Card Shadows for Depth */
+.metric-card,
+.coop-card,
+.alert-card,
+.trend-card,
+.market-card,
+.actions-card,
+.tasks-card,
+.stats-card,
+.compliance-card,
+.order-card,
+.member-card {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.metric-card:active,
+.coop-card:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+/* Better Button Contrast */
+.action-button,
+.help-button,
+.voice-explain-button {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.action-button:active,
+.help-button:active,
+.voice-explain-button:active {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Improved Scrollbar for Webkit Browsers */
+.forecast-scroll::-webkit-scrollbar {
+  height: 4px;
+}
+
+.forecast-scroll::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
+.forecast-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+}
+
+.forecast-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Better Input Styling */
+.search-input {
+  font-size: 16px; /* Prevents zoom on iOS */
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--color-earth-leaf);
+  box-shadow: 0 0 0 3px rgba(56, 142, 60, 0.1);
+}
+
+/* Improved Icon Sizing */
+.role-button-icon {
+  font-size: clamp(40px, 8vw, 48px);
+}
+
+.farmer-tab-icon {
+  font-size: clamp(28px, 6vw, 32px);
+}
+
+.metric-icon {
+  font-size: clamp(28px, 6vw, 32px);
+}
+
+/* Better Text Readability */
+.role-button-desc,
+.metric-trend,
+.coop-stats,
+.alert-coop,
+.order-date,
+.member-details {
+  line-height: 1.5;
+}
+
+/* Improved Spacing for Lists */
+.task-item:last-child,
+.price-row:last-child,
+.forecast-row-farmer:last-child,
+.compliance-row:last-child {
+  border-bottom: none;
+}
+
+/* Better Visual Hierarchy */
+.metric-value,
+.sales-stat-value,
+.stat-value,
+.weather-temp,
+.weather-temp-large {
+  letter-spacing: -0.5px;
+}
+
+/* Loading States (for future use) */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.loading {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Improved Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .metric-card,
+  .coop-card,
+  .alert-card,
+  .trend-card {
+    border: 2px solid var(--color-neutral-dark-gray);
+  }
+  
+  .role-button {
+    border-width: 4px;
+  }
+}
+
+/* Dark Mode Support (Future) */
+@media (prefers-color-scheme: dark) {
+  /* Can be implemented later if needed */
+}
+
+/* Landscape Orientation Adjustments */
+@media (max-height: 500px) and (orientation: landscape) {
+  .role-selector {
+    padding: 12px;
+  }
+  
+  .role-button {
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  
+  .role-button-icon {
+    font-size: 36px;
+    margin-bottom: 8px;
+  }
+  
+  .role-button-title {
+    font-size: 20px;
+    margin-bottom: 4px;
+  }
+  
+  .role-button-desc {
+    font-size: 12px;
+  }
+  
+  header {
+    padding: 12px 20px;
+  }
+  
+  .header-title {
+    font-size: 18px;
+  }
+  
+  .header-subtitle {
+    font-size: 12px;
+  }
+  
+  .dashboard-content {
+    padding: 12px;
+  }
+}
+
+/* Tablet Optimizations */
+@media (min-width: 481px) and (max-width: 768px) {
+  .role-selector-content {
+    max-width: 450px;
+  }
+  
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  .dashboard-content {
+    padding: 20px;
+    max-width: 768px;
+    margin: 0 auto;
   }
 }
 

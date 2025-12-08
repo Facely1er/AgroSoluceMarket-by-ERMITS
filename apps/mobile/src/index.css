@@ -61,6 +61,60 @@ button, a, [role="button"] {
   body {
     padding-left: max(0px, env(safe-area-inset-left));
     padding-right: max(0px, env(safe-area-inset-right));
+    padding-top: max(0px, env(safe-area-inset-top));
+    padding-bottom: max(0px, env(safe-area-inset-bottom));
   }
+  
+  #root {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+}
+
+/* Prevent text size adjustment on mobile devices */
+/* stylelint-disable-next-line value-no-vendor-prefix */
+html {
+  -webkit-text-size-adjust: 100%; /* Safari, iOS */
+  text-size-adjust: 100%; /* Chrome, Edge - Firefox doesn't support but harmless */
+}
+
+/* Better font rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Prevent pull-to-refresh on mobile (can be enabled per page if needed) */
+body {
+  overscroll-behavior-y: contain;
+}
+
+/* Better scrolling momentum - handled by modern browsers automatically */
+
+/* Remove default button styles on mobile */
+button {
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+/* Better input styling on mobile */
+input,
+textarea,
+select {
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 0;
+}
+
+input[type="text"],
+input[type="search"],
+input[type="email"],
+input[type="tel"],
+input[type="number"] {
+  font-size: 16px; /* Prevents zoom on iOS */
 }
 
