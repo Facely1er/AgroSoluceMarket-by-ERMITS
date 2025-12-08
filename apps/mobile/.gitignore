@@ -37,3 +37,4 @@ workbox-*.js
 # Build outputs
 build
 out
+.vercel
