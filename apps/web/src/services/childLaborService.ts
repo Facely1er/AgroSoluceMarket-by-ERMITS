@@ -13,7 +13,6 @@ import type {
   CreateRemediationRequest,
   LaborCertificationRecord,
   SocialImpactMetrics,
-  CooperativeReadinessStatus,
   CooperativeComplianceStatus, // Legacy type
   AssessmentFilters,
 } from '@/types/child-labor-monitoring-types';
@@ -151,10 +150,11 @@ export class ChildLaborService {
     const minScore = filters.minReadinessScore ?? filters.minComplianceScore;
     const maxScore = filters.maxReadinessScore ?? filters.maxComplianceScore;
     if (minScore !== undefined) {
-      query = query.gte('compliance_score', minScore); // Database column name unchanged
+      // Query readiness_score (migration adds this column and trigger syncs with compliance_score)
+      query = query.gte('readiness_score', minScore);
     }
     if (maxScore !== undefined) {
-      query = query.lte('compliance_score', maxScore); // Database column name unchanged
+      query = query.lte('readiness_score', maxScore);
     }
     if (filters.dateFrom) {
       query = query.gte('assessment_date', filters.dateFrom);
@@ -400,13 +400,13 @@ export class ChildLaborService {
       throw new Error('Supabase client not initialized');
     }
 
-    let query = supabase.from('cooperative_compliance_status').select('*');
+    let query = supabase.from('cooperative_readiness_status').select('*');
 
     if (cooperativeId) {
       query = query.eq('cooperative_id', cooperativeId);
     }
 
-    const { data, error } = await query.order('compliance_score', {
+    const { data, error } = await query      .order('readiness_score', {
       ascending: false,
     });
 
@@ -426,7 +426,14 @@ export class ChildLaborService {
       throw new Error('Supabase client not initialized');
     }
 
-    const { data, error } = await supabase.rpc('get_compliance_dashboard_stats');
+    // Try new function first, fallback to old for backward compatibility
+    let { data, error } = await supabase.rpc('get_readiness_dashboard_stats');
+    if (error) {
+      // Fallback to old function name if new one doesn't exist yet
+      const fallback = await supabase.rpc('get_compliance_dashboard_stats');
+      data = fallback.data;
+      error = fallback.error;
+    }
 
     if (error) throw new Error(error.message);
     return data;
@@ -441,8 +448,8 @@ export class ChildLaborService {
     }
 
     const { data, error } = await supabase
-      .from('cooperative_compliance_status')
-      .select('region, compliance_score, child_labor_violations');
+      .from('cooperative_readiness_status')
+      .select('region, readiness_score, compliance_score, child_labor_violations');
 
     if (error) throw new Error(error.message);
 
@@ -458,7 +465,8 @@ export class ChildLaborService {
         });
       }
       const region = regionMap.get(row.region);
-      region.totalScore += row.compliance_score || 0;
+      // Use readiness_score, fallback to compliance_score for backward compatibility
+      region.totalScore += row.readiness_score || row.compliance_score || 0;
       region.count += 1;
       region.violations += row.child_labor_violations || 0;
     });
