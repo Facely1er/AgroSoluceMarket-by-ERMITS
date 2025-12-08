@@ -84,23 +84,72 @@ export function formatCooperativeName(name: string | null | undefined): string {
   // Trim whitespace
   let formatted = name.trim();
   
-  // Remove extra whitespace
+  // Remove extra whitespace and normalize
   formatted = formatted.replace(/\s+/g, ' ');
+  formatted = formatted.replace(/\s*-\s*/g, '-'); // Normalize hyphens
   
-  // Title case: capitalize first letter of each word, but preserve existing capitalization patterns
-  // This handles cases like "COOP ABC" or "coop abc" more intelligently
-  formatted = formatted
-    .split(' ')
-    .map(word => {
+  // Handle common cooperative name patterns
+  const commonPrefixes = ['COOP', 'COOPERATIVE', 'UNION', 'FEDERATION', 'ASSOCIATION', 'SOCIETE', 'SOCIÉTÉ'];
+  const commonSuffixes = ['SARL', 'SA', 'SCA', 'SCE', 'GIE', 'SNC', 'SAS'];
+  
+  // Split into words and format each
+  const words = formatted.split(/\s+/);
+  formatted = words
+    .map((word, index) => {
       if (!word) return word;
-      // If word is all caps or all lowercase, apply title case
-      if (word === word.toUpperCase() || word === word.toLowerCase()) {
+      
+      const upperWord = word.toUpperCase();
+      const lowerWord = word.toLowerCase();
+      const isLastWord = index === words.length - 1;
+      const isFirstWord = index === 0;
+      
+      // Handle common prefixes (usually first word)
+      if (isFirstWord && commonPrefixes.includes(upperWord)) {
+        // Capitalize first letter, rest lowercase
         return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
       }
-      // Otherwise preserve existing capitalization
+      
+      // Handle common suffixes (usually last word)
+      if (isLastWord && commonSuffixes.includes(upperWord)) {
+        // Keep as all caps for legal entities
+        return upperWord;
+      }
+      
+      // Handle hyphenated words (e.g., "COOP-ABC" or "coop-abc")
+      if (word.includes('-')) {
+        return word
+          .split('-')
+          .map(part => {
+            if (!part) return part;
+            const partUpper = part.toUpperCase();
+            const partLower = part.toLowerCase();
+            if (part === partUpper || part === partLower) {
+              return part.charAt(0).toUpperCase() + part.slice(1).toLowerCase();
+            }
+            return part;
+          })
+          .join('-');
+      }
+      
+      // If word is all caps or all lowercase, apply title case
+      if (word === upperWord || word === lowerWord) {
+        // Special handling for acronyms (2-4 letters, all caps, no numbers)
+        if (word.length <= 4 && word === upperWord && /^[A-Z]+$/.test(word)) {
+          return upperWord; // Keep acronyms as all caps
+        }
+        // Apply title case
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+      }
+      
+      // Otherwise preserve existing capitalization (mixed case)
       return word;
     })
     .join(' ');
+  
+  // Ensure first letter is always capitalized
+  if (formatted.length > 0) {
+    formatted = formatted.charAt(0).toUpperCase() + formatted.slice(1);
+  }
   
   return formatted;
 }
