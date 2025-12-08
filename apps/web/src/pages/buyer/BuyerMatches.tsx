@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Building2, Mail, Phone, MapPin, Package, CheckCircle, AlertCircle, Star, ExternalLink } from 'lucide-react';
 import { getBuyerRequestById, getRequestMatches, updateMatchStatus } from '@/features/buyers/api';
+import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import type { BuyerRequest, RequestMatch } from '@/domain/agro/types';
 import { matchCooperativesToRequest } from '@/domain/agro/matching';
 
@@ -104,29 +105,46 @@ export default function BuyerMatches() {
   return (
     <div className="min-h-screen py-8 bg-gradient-to-br from-secondary-50 via-primary-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Breadcrumbs */}
+        <Breadcrumbs items={[
+          { label: 'Home', path: '/' },
+          { label: 'Buyers', path: '/buyers' },
+          { label: 'Buyer Portal', path: '/buyer' },
+          { label: 'Matching Results' }
+        ]} />
+
         {/* Header */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6 border-t-4 border-primary-500">
-          <div className="flex items-start justify-between">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-2 flex items-center gap-3">
-                <Building2 className="h-8 w-8 text-primary-600" />
-                Matching Results
-              </h1>
-              <p className="text-gray-600">
-                Found {matches.length} cooperative{matches.length !== 1 ? 's' : ''} matching your requirements
-              </p>
+        <div className="bg-gradient-to-r from-primary-600 via-primary-700 to-secondary-500 rounded-xl shadow-lg p-8 mb-6 text-white relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-transparent"></div>
+          <div className="relative z-10">
+            <div className="flex items-start justify-between">
+              <div className="flex-1">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="bg-white/20 backdrop-blur-sm p-3 rounded-lg">
+                    <Building2 className="h-8 w-8 text-white" />
+                  </div>
+                  <div>
+                    <h1 className="text-3xl md:text-4xl font-bold mb-2">
+                      Matching Results
+                    </h1>
+                    <p className="text-white/90 text-lg">
+                      Found {matches.length} cooperative{matches.length !== 1 ? 's' : ''} matching your requirements
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <Link
+                to="/buyer/request"
+                className="px-4 py-2 bg-white/20 backdrop-blur-sm text-white border border-white/30 rounded-lg hover:bg-white/30 transition-colors"
+              >
+                New Request
+              </Link>
             </div>
-            <Link
-              to="/buyer/request"
-              className="px-4 py-2 text-primary-600 border border-primary-600 rounded-lg hover:bg-primary-50 transition-colors"
-            >
-              New Request
-            </Link>
           </div>
         </div>
 
         {/* Request Summary */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+        <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-6 border border-gray-100">
           <h2 className="text-xl font-semibold text-gray-900 mb-4">Your Request</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -180,7 +198,7 @@ export default function BuyerMatches() {
 
         {/* Matches List */}
         {matches.length === 0 ? (
-          <div className="bg-white rounded-lg shadow-md p-12 text-center">
+          <div className="bg-white rounded-xl shadow-lg p-12 text-center border border-gray-100">
             <Building2 className="h-16 w-16 text-gray-400 mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-gray-900 mb-2">No Matches Found</h3>
             <p className="text-gray-600 mb-6">
@@ -202,7 +220,7 @@ export default function BuyerMatches() {
               return (
                 <div
                   key={match.id}
-                  className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow"
+                  className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all border border-gray-100 transform hover:-translate-y-1"
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex-1">

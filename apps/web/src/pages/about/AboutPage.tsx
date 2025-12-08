@@ -12,6 +12,7 @@ import {
   Shield
 } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/I18nProvider';
+import Breadcrumbs from '@/components/layout/Breadcrumbs';
 
 export default function AboutPage() {
   const { t } = useI18n();
@@ -42,14 +43,23 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-secondary-50 via-primary-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+        {/* Breadcrumbs */}
+        <Breadcrumbs items={[
+          { label: 'Home', path: '/' },
+          { label: 'About' }
+        ]} />
+
         {/* Header */}
-        <div className="text-center mb-12 md:mb-16">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
-            {t.about.title}
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto">
-            {t.about.subtitle}
-          </p>
+        <div className="bg-gradient-to-r from-primary-600 via-primary-700 to-secondary-500 rounded-xl shadow-lg p-8 md:p-12 mb-12 text-white relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-transparent"></div>
+          <div className="relative z-10 text-center">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+              {t.about.title}
+            </h1>
+            <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto">
+              {t.about.subtitle}
+            </p>
+          </div>
         </div>
 
         {/* Why AgroSoluce Exists */}
@@ -66,7 +76,7 @@ export default function AboutPage() {
             </p>
 
             <div className="grid md:grid-cols-2 gap-8 mb-8">
-              <div className="bg-red-50 rounded-lg p-6 border border-red-200">
+              <div className="bg-red-50 rounded-xl p-6 border border-red-200 shadow-sm hover:shadow-md transition-shadow">
                 <h3 className="text-xl font-semibold text-red-900 mb-4">
                   {t.about.why.problem.title}
                 </h3>
@@ -89,7 +99,7 @@ export default function AboutPage() {
                 </p>
               </div>
 
-              <div className="bg-green-50 rounded-lg p-6 border border-green-200">
+              <div className="bg-green-50 rounded-xl p-6 border border-green-200 shadow-sm hover:shadow-md transition-shadow">
                 <h3 className="text-xl font-semibold text-green-900 mb-4">
                   {t.about.why.solution.title}
                 </h3>
@@ -138,7 +148,7 @@ export default function AboutPage() {
               ))}
             </div>
 
-            <div className="mt-8 p-6 bg-blue-50 rounded-lg border border-blue-200">
+            <div className="mt-8 p-6 bg-blue-50 rounded-xl border border-blue-200 shadow-sm">
               <p className="text-lg text-blue-900 font-medium">
                 {t.about.whatNot.footer}
               </p>
@@ -163,7 +173,7 @@ export default function AboutPage() {
               return (
                 <div
                   key={index}
-                  className="bg-white rounded-xl shadow-md p-6 md:p-8 border border-gray-200 hover:shadow-lg transition-shadow"
+                  className="bg-white rounded-xl shadow-lg p-6 md:p-8 border border-gray-200 hover:shadow-xl transition-all transform hover:-translate-y-1"
                 >
                   <div className="bg-primary-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
                     <Icon className="h-6 w-6 text-primary-600" />

@@ -4,6 +4,7 @@ import { MapPin, Building2, Phone, User, ArrowLeft, CheckCircle, Clock, BarChart
 import { useCooperatives } from '@/hooks/useCooperatives';
 import CooperativeLocationMap from '@/features/cooperatives/components/CooperativeLocationMap';
 import CooperativeStats from '@/features/cooperatives/components/CooperativeStats';
+import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import { getFarmerCountByCooperative } from '@/features/producers/api/farmersApi';
 
 export default function CooperativeProfile() {
@@ -65,18 +66,19 @@ export default function CooperativeProfile() {
   const department = cooperative.department || cooperative.departement;
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen py-8 bg-gradient-to-br from-secondary-50 via-primary-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Link
-          to="/cooperatives"
-          className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6"
-        >
-          <ArrowLeft className="h-5 w-5" />
-          Retour à la liste
-        </Link>
+        {/* Breadcrumbs */}
+        <Breadcrumbs items={[
+          { label: 'Home', path: '/' },
+          { label: 'Cooperatives', path: '/cooperatives' },
+          { label: cooperative.name }
+        ]} />
 
         {/* Header */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6 border-t-4 border-secondary-500">
+        <div className="bg-gradient-to-r from-secondary-500 to-secondary-600 rounded-xl shadow-lg p-8 mb-6 text-white relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-transparent"></div>
+          <div className="relative z-10">
           <div className="flex items-start justify-between">
             <div className="flex-1">
               <h1 className="text-3xl font-bold text-gray-900 mb-2">

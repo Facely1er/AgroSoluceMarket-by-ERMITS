@@ -5,6 +5,7 @@ import { createBuyerRequest } from '@/features/buyers/api';
 import { matchCooperativesToRequest } from '@/domain/agro/matching';
 import { createRequestMatches } from '@/features/buyers/api';
 import { useCooperatives } from '@/hooks/useCooperatives';
+import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import type { BuyerRequest } from '@/domain/agro/types';
 
 export default function BuyerRequestForm() {
@@ -111,21 +112,38 @@ export default function BuyerRequestForm() {
   return (
     <div className="min-h-screen py-8 bg-gradient-to-br from-secondary-50 via-primary-50 to-white">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Breadcrumbs */}
+        <Breadcrumbs items={[
+          { label: 'Home', path: '/' },
+          { label: 'Buyers', path: '/buyers' },
+          { label: 'Buyer Portal', path: '/buyer' },
+          { label: 'Create Request' }
+        ]} />
+
         {/* Header */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6 border-t-4 border-primary-500">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2 flex items-center gap-3">
-            <Building2 className="h-8 w-8 text-primary-600" />
-            Create Buyer Request
-          </h1>
-          <p className="text-gray-600">
-            Submit your sourcing requirements and we'll match you with suitable cooperatives
-          </p>
+        <div className="bg-gradient-to-r from-primary-600 via-primary-700 to-secondary-500 rounded-xl shadow-lg p-8 mb-6 text-white relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-transparent"></div>
+          <div className="relative z-10">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="bg-white/20 backdrop-blur-sm p-3 rounded-lg">
+                <Building2 className="h-8 w-8 text-white" />
+              </div>
+              <div>
+                <h1 className="text-3xl md:text-4xl font-bold mb-2">
+                  Create Buyer Request
+                </h1>
+                <p className="text-white/90 text-lg">
+                  Submit your sourcing requirements and we'll match you with suitable cooperatives
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-6 space-y-6">
+        <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-lg p-6 md:p-8 space-y-6 border border-gray-100">
           {error && (
-            <div className="bg-red-50 border border-red-200 rounded-lg p-4 flex items-start gap-3">
+            <div className="bg-red-50 border border-red-200 rounded-xl p-4 flex items-start gap-3 shadow-sm">
               <AlertCircle className="h-5 w-5 text-red-600 mt-0.5" />
               <div>
                 <p className="text-red-800 font-medium">Error</p>

@@ -12,6 +12,7 @@ import {
   Target
 } from 'lucide-react';
 import { useI18n } from '@/lib/i18n/I18nProvider';
+import Breadcrumbs from '@/components/layout/Breadcrumbs';
 
 export default function PartnerLandingPage() {
   const { t } = useI18n();
@@ -86,6 +87,12 @@ export default function PartnerLandingPage() {
       </section>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+        {/* Breadcrumbs */}
+        <Breadcrumbs items={[
+          { label: 'Home', path: '/' },
+          { label: 'Partners & NGOs' }
+        ]} />
+
         {/* The NGO & Program Challenge */}
         <section className="mb-16 md:mb-24">
           <div className="bg-white rounded-xl shadow-lg p-8 md:p-12 border-l-4 border-orange-500">
@@ -128,7 +135,7 @@ export default function PartnerLandingPage() {
               return (
                 <div
                   key={index}
-                  className="bg-white rounded-xl shadow-lg p-8 md:p-12 border-l-4 border-green-500"
+                  className="bg-white rounded-xl shadow-lg p-8 md:p-12 border-l-4 border-green-500 hover:shadow-xl transition-shadow"
                 >
                   <div className="flex flex-col md:flex-row gap-6 md:gap-8">
                     <div className="flex-shrink-0">
@@ -170,7 +177,7 @@ export default function PartnerLandingPage() {
             </h2>
             
             <div className="grid md:grid-cols-2 gap-8">
-              <div className="bg-green-50 rounded-lg p-6 border border-green-200">
+              <div className="bg-green-50 rounded-xl p-6 border border-green-200 shadow-sm hover:shadow-md transition-shadow">
                 <div className="flex items-center gap-3 mb-4">
                   <CheckCircle className="h-6 w-6 text-green-600" />
                   <h3 className="text-xl font-semibold text-green-900">
@@ -187,7 +194,7 @@ export default function PartnerLandingPage() {
                 </ul>
               </div>
 
-              <div className="bg-red-50 rounded-lg p-6 border border-red-200">
+              <div className="bg-red-50 rounded-xl p-6 border border-red-200 shadow-sm hover:shadow-md transition-shadow">
                 <div className="flex items-center gap-3 mb-4">
                   <XCircle className="h-6 w-6 text-red-600" />
                   <h3 className="text-xl font-semibold text-red-900">
