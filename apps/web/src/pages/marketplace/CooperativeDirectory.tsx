@@ -16,7 +16,7 @@ export default function CooperativeDirectory() {
   const [commodityFilter, setCommodityFilter] = useState('');
   const [certificationFilter, setCertificationFilter] = useState<string[]>([]);
   const [eudrFilter, setEudrFilter] = useState<boolean | null>(null);
-  const [activeTab, setActiveTab] = useState<'list' | 'map' | 'stats'>('list');
+  const [activeTab, setActiveTab] = useState<'list' | 'map' | 'stats'>('map'); // Map is default landing view
 
   const filteredCooperatives = useMemo(() => {
     return cooperatives.filter(coop => {
@@ -329,7 +329,13 @@ export default function CooperativeDirectory() {
             )}
 
             {activeTab === 'map' && (
-              <CooperativeMap cooperatives={filteredCooperatives} />
+              <CooperativeMap 
+                cooperatives={filteredCooperatives} 
+                onRegionClick={(region) => {
+                  setRegionFilter(region);
+                  setActiveTab('list'); // Switch to list view when region is selected
+                }}
+              />
             )}
 
             {activeTab === 'stats' && (

@@ -24,9 +24,10 @@ L.Marker.prototype.options.icon = DefaultIcon;
 
 interface CooperativeMapProps {
   cooperatives: Cooperative[];
+  onRegionClick?: (region: string) => void;
 }
 
-export default function CooperativeMap({ cooperatives }: CooperativeMapProps) {
+export default function CooperativeMap({ cooperatives, onRegionClick }: CooperativeMapProps) {
   const mapRef = useRef<L.Map | null>(null);
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const markersRef = useRef<L.Marker[]>([]);
@@ -81,14 +82,57 @@ export default function CooperativeMap({ cooperatives }: CooperativeMapProps) {
       // Create marker
       const marker = L.marker(coords, { icon }).addTo(map);
 
-      // Add popup
-      const popupContent = `
-        <div style="text-align: center; padding: 5px;">
-          <strong style="color: #FF7900; font-size: 14px;">${region}</strong><br>
-          <span style="font-size: 16px; font-weight: bold; color: #2E7D32;">${count}</span> coopérative${count > 1 ? 's' : ''}
+      // Create popup element with filter button
+      const popupDiv = document.createElement('div');
+      popupDiv.style.cssText = 'text-align: center; padding: 8px; min-width: 200px;';
+      popupDiv.innerHTML = `
+        <strong style="color: #FF7900; font-size: 14px; display: block; margin-bottom: 8px;">${region}</strong>
+        <div style="margin-bottom: 8px;">
+          <span style="font-size: 16px; font-weight: bold; color: #2E7D32;">${count}</span>
+          <span style="font-size: 14px; color: #666;"> coopérative${count > 1 ? 's' : ''}</span>
         </div>
+        ${onRegionClick ? `
+          <button 
+            class="filter-region-btn"
+            data-region="${region}"
+            style="
+              display: inline-block;
+              padding: 6px 12px;
+              background-color: #F97316;
+              color: white;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+              font-size: 12px;
+              font-weight: 500;
+              margin-top: 8px;
+            "
+          >
+            Filtrer par région →
+          </button>
+        ` : ''}
       `;
-      marker.bindPopup(popupContent);
+      
+      // Add click handler to button
+      if (onRegionClick) {
+        const button = popupDiv.querySelector('.filter-region-btn') as HTMLButtonElement;
+        if (button) {
+          button.addEventListener('click', (e) => {
+            e.stopPropagation();
+            onRegionClick(region);
+          });
+        }
+      }
+      
+      marker.bindPopup(popupDiv);
+      
+      // Also allow clicking the marker itself to filter
+      if (onRegionClick) {
+        marker.on('click', () => {
+          onRegionClick(region);
+        });
+      }
+      
       markersRef.current.push(marker);
     });
 
