@@ -133,10 +133,18 @@ export default function CooperativeDirectory() {
   }
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen py-8 bg-gradient-to-br from-secondary-50 via-primary-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Breadcrumbs */}
+        <Breadcrumbs items={[
+          { label: 'Home', path: '/' },
+          { label: 'Cooperatives', path: '/cooperatives' }
+        ]} />
+
         {/* Header */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6 border-t-4 border-secondary-500">
+        <div className="bg-gradient-to-r from-secondary-500 to-secondary-600 rounded-xl shadow-lg p-8 mb-6 text-white relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-transparent"></div>
+          <div className="relative z-10">
             <h1 className="text-3xl md:text-4xl font-bold mb-2">
               🇨🇮 Répertoire des Coopératives - Côte d'Ivoire
             </h1>

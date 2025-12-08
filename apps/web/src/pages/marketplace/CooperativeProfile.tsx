@@ -115,9 +115,6 @@ export default function CooperativeProfile() {
             </div>
           </div>
         </div>
-            </div>
-          </div>
-        </div>
 
         {/* Tabs */}
         <div className="bg-white rounded-lg shadow-md mb-6">
