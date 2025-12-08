@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import { Search, Building2, X, ClipboardList } from 'lucide-react';
 import {
   getCanonicalDirectoryRecords,
@@ -10,7 +11,7 @@ import type { CoverageBand } from '@/types';
 import { EUDR_COMMODITIES_IN_SCOPE } from '@/types';
 
 // Helper function to get coverage band for a coop + commodity
-// TODO[directory-filters]: replace this placeholder with real per-commodity lookup
+// Note: This is a placeholder - can be enhanced with real per-commodity lookup when available
 function getCoverageBandForCommodity(
   coop: CanonicalCooperativeDirectory,
   commodity: EudrCommodity
@@ -63,8 +64,8 @@ export default function DirectoryPage() {
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   
-  // TODO[directory-filters]: directory filter controls
-  // Default commodity will be set after records load if 'cocoa' is not available
+  // Context-first filter controls (product-first, region-aware, coverage-aware)
+  // Default: Cocoa, CI (Côte d'Ivoire), All regions, All coverage levels
   const [selectedCommodity, setSelectedCommodity] = useState<EudrCommodity | 'all'>('cocoa');
   const [selectedCountry, setSelectedCountry] = useState<string>('CI'); // Côte d'Ivoire as v1 default
   const [selectedRegion, setSelectedRegion] = useState<string>('all');
@@ -108,7 +109,7 @@ export default function DirectoryPage() {
     fetchRecords();
   }, [statusFilter]);
 
-  // TODO[directory-filters]: derive filter options from data
+  // Derive filter options from data (context-aware filtering)
   const countries = useMemo(
     () =>
       Array.from(
@@ -157,7 +158,7 @@ export default function DirectoryPage() {
     }
   }, [availableCommodities, selectedCommodity]);
 
-  // TODO[directory-filters]: apply commodity, geography, coverage filters
+  // Apply context-first filters: commodity, geography, coverage
   const filteredRecords = useMemo(() => {
     let filtered = records;
 
@@ -329,7 +330,7 @@ export default function DirectoryPage() {
           </div>
         </div>
 
-        {/* TODO[directory-filters]: context-first filters bar */}
+        {/* Context-first filters bar (product-first, region-aware, coverage-aware) */}
         <section className="mb-4 space-y-2 bg-white rounded-lg shadow-md p-6">
           <p className="text-xs text-gray-600 mb-4">
             Filter cooperatives by EUDR commodity, geography, and documentation coverage to support sourcing and due-diligence planning.
@@ -445,7 +446,7 @@ export default function DirectoryPage() {
             </h2>
           </div>
 
-          {/* TODO[directory-filters]: show context (product / region / coverage) first */}
+          {/* Context-first display: product/region/coverage shown before cooperative names */}
           {filteredRecords.length === 0 ? (
             <div className="text-center py-12 text-gray-500">
               <Building2 className="h-12 w-12 mx-auto mb-4 text-gray-400" />
@@ -508,12 +509,12 @@ export default function DirectoryPage() {
                       }`}>
                         {coop.record_status === 'active' ? 'Actif' : coop.record_status}
                       </span>
-                      <a
-                        href={`/directory/${coop.coop_id}`}
+                      <Link
+                        to={`/directory/${coop.coop_id}`}
                         className="text-xs font-medium underline text-secondary-600 hover:text-secondary-700"
                       >
                         View cooperative profile →
-                      </a>
+                      </Link>
                     </div>
                   </li>
                 );
