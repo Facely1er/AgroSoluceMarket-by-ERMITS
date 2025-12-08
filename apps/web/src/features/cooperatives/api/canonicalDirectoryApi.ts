@@ -347,19 +347,30 @@ export async function getCanonicalDirectoryRecordsByPilotId(
   }
 }
 
+import { formatCooperativeName } from '@/lib/utils/cooperativeUtils';
+
 // Helper function to transform database records to TypeScript types
 function transformCanonicalRecord(data: any): CanonicalCooperativeDirectory {
+  // Use display_name if available, otherwise fall back to name
+  // Format the name according to workflow requirements (names should not be displayed directly)
+  const rawName = data.display_name || data.name;
+  const formattedName = formatCooperativeName(rawName);
+  
   return {
     coop_id: data.coop_id.toString(),
-    name: data.name,
+    name: formattedName, // Formatted name ready for display (not displayed directly)
     country: data.country,
+    countryCode: data.country_code || data.countryCode,
     region: data.region,
+    regionName: data.region_name || data.regionName,
     department: data.department,
     primary_crop: data.primary_crop,
+    commodities: data.commodities, // Use commodities array if available (conversion from primary_crop handled in DirectoryPage)
     source_registry: data.source_registry,
     record_status: data.record_status || 'active',
     pilot_id: data.pilot_id || null,
     pilot_label: data.pilot_label,
+    coverageBand: data.coverage_band || data.coverageBand,
     created_at: data.created_at,
   };
 }

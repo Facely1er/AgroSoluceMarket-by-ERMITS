@@ -71,6 +71,40 @@ export function canonicalizeSecteur(value: string | null | undefined): string {
   return v.toUpperCase();
 }
 
+/**
+ * Format cooperative name for display according to workflow requirements.
+ * Names should not be displayed directly - they should be formatted and normalized.
+ * 
+ * @param name - Raw cooperative name from database
+ * @returns Formatted name ready for display
+ */
+export function formatCooperativeName(name: string | null | undefined): string {
+  if (!name) return '';
+  
+  // Trim whitespace
+  let formatted = name.trim();
+  
+  // Remove extra whitespace
+  formatted = formatted.replace(/\s+/g, ' ');
+  
+  // Title case: capitalize first letter of each word, but preserve existing capitalization patterns
+  // This handles cases like "COOP ABC" or "coop abc" more intelligently
+  formatted = formatted
+    .split(' ')
+    .map(word => {
+      if (!word) return word;
+      // If word is all caps or all lowercase, apply title case
+      if (word === word.toUpperCase() || word === word.toLowerCase()) {
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+      }
+      // Otherwise preserve existing capitalization
+      return word;
+    })
+    .join(' ');
+  
+  return formatted;
+}
+
 // Region coordinates for Côte d'Ivoire
 export const regionCoordinates: Record<string, [number, number]> = {
   "AGNEBY-TIASSA": [5.93, -4.22],

@@ -491,7 +491,7 @@ export default function DirectoryPage() {
                       • {regionLabel}
                     </div>
 
-                    {/* Coop name */}
+                    {/* Coop name - formatted according to workflow (not displayed directly) */}
                     <h2 className="text-sm font-semibold mb-1">{coop.name}</h2>
 
                     {/* Coverage snippet (commodity-aware if possible) */}
