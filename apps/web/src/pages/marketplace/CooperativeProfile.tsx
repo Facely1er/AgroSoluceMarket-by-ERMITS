@@ -79,31 +79,31 @@ export default function CooperativeProfile() {
         <div className="bg-gradient-to-r from-secondary-500 to-secondary-600 rounded-xl shadow-lg p-8 mb-6 text-white relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-transparent"></div>
           <div className="relative z-10">
-          <div className="flex items-start justify-between">
-            <div className="flex-1">
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                {cooperative.name}
-              </h1>
-              {isVerified ? (
-                <span className="inline-flex items-center gap-2 px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">
-                  <CheckCircle className="h-4 w-4" />
-                  Vérifiée
-                </span>
-              ) : (
-                <span className="inline-flex items-center gap-2 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-sm">
-                  <Clock className="h-4 w-4" />
-                  En attente de vérification
-                </span>
-              )}
-            </div>
-            <div className="ml-4 flex gap-2">
-              <Link
-                to={`/compliance/child-labor?cooperativeId=${cooperative.id}`}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-secondary-600 text-white rounded-lg hover:bg-secondary-700 transition-colors"
-              >
-                <Shield className="h-4 w-4" />
-                Voir Évaluations
-              </Link>
+            <div className="flex items-start justify-between">
+              <div className="flex-1">
+                <h1 className="text-3xl md:text-4xl font-bold mb-3">
+                  {cooperative.name}
+                </h1>
+                {isVerified ? (
+                  <span className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full text-sm border border-white/30">
+                    <CheckCircle className="h-4 w-4" />
+                    Vérifiée
+                  </span>
+                ) : (
+                  <span className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-400/20 backdrop-blur-sm text-yellow-100 rounded-full text-sm border border-yellow-300/30">
+                    <Clock className="h-4 w-4" />
+                    En attente de vérification
+                  </span>
+                )}
+              </div>
+              <div className="ml-4 flex gap-2">
+                <Link
+                  to={`/compliance/child-labor?cooperativeId=${cooperative.id}`}
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-lg hover:bg-white/30 transition-colors border border-white/30"
+                >
+                  <Shield className="h-4 w-4" />
+                  Voir Évaluations
+                </Link>
               <Link
                 to={`/cooperative/${cooperative.id}/farmers-first`}
                 className="inline-flex items-center gap-2 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
