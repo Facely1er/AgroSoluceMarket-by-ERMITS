@@ -72,9 +72,10 @@ button, a, [role="button"] {
 }
 
 /* Prevent text size adjustment on mobile devices */
-/* Using webkit prefix as it's supported by Safari, iOS, and Chrome */
+/* Both properties needed for cross-browser support - warnings are informational */
 html {
-  -webkit-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%; /* Safari, iOS, Chrome */
+  text-size-adjust: 100%; /* Chrome, Edge - harmless in unsupported browsers */
 }
 
 /* Better font rendering */
