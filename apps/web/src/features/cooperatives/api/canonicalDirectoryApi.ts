@@ -2,6 +2,7 @@
 // Connects frontend to Supabase database
 
 import { supabase } from '@/lib/supabase/client';
+import { formatCooperativeName } from '@/lib/utils/cooperativeUtils';
 import type { CanonicalCooperativeDirectory, RecordStatus } from '@/types';
 
 /**
@@ -346,8 +347,6 @@ export async function getCanonicalDirectoryRecordsByPilotId(
     return { data: null, error };
   }
 }
-
-import { formatCooperativeName } from '@/lib/utils/cooperativeUtils';
 
 // Helper function to transform database records to TypeScript types
 function transformCanonicalRecord(data: any): CanonicalCooperativeDirectory {
