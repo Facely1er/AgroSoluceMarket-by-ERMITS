@@ -197,26 +197,38 @@ export default function CooperativeDirectory() {
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent"
                 />
               </div>
-              <select
-                value={regionFilter}
-                onChange={(e) => setRegionFilter(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent"
-              >
-                <option value="">Toutes les régions</option>
-                {regions.map(region => (
-                  <option key={region} value={region}>{region}</option>
-                ))}
-              </select>
-              <select
-                value={departmentFilter}
-                onChange={(e) => setDepartmentFilter(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent"
-              >
-                <option value="">Tous les départements</option>
-                {departments.map(dept => (
-                  <option key={dept} value={dept}>{dept}</option>
-                ))}
-              </select>
+              <div>
+                <label htmlFor="region-filter" id="region-filter-label" className="sr-only">Filtrer par région</label>
+                <select
+                  title="Filtrer par région"
+                  id="region-filter"
+                  value={regionFilter}
+                  onChange={(e) => setRegionFilter(e.target.value)}
+                  aria-label="Filtrer par région"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent"
+                >
+                  <option value="">Toutes les régions</option>
+                  {regions.map(region => (
+                    <option key={region} value={region}>{region}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label htmlFor="department-filter" id="department-filter-label" className="sr-only">Filtrer par département</label>
+                <select
+                  title="Filtrer par département"
+                  id="department-filter"
+                  value={departmentFilter}
+                  onChange={(e) => setDepartmentFilter(e.target.value)}
+                  aria-label="Filtrer par département"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent"
+                >
+                  <option value="">Tous les départements</option>
+                  {departments.map(dept => (
+                    <option key={dept} value={dept}>{dept}</option>
+                  ))}
+                </select>
+              </div>
               <button
                 onClick={exportToCSV}
                 className="flex items-center justify-center gap-2 px-4 py-2 bg-secondary-600 text-white rounded-lg hover:bg-secondary-700 transition-colors"
@@ -228,35 +240,53 @@ export default function CooperativeDirectory() {
 
             {/* v1 Scope Filters */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 pt-4 border-t">
-              <select
-                value={countryFilter}
-                onChange={(e) => setCountryFilter(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent"
-              >
-                <option value="">All Countries</option>
-                {countries.map(country => (
-                  <option key={country} value={country}>{country}</option>
-                ))}
-              </select>
-              <select
-                value={commodityFilter}
-                onChange={(e) => setCommodityFilter(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent"
-              >
-                <option value="">All Commodities</option>
-                {commodities.map(commodity => (
-                  <option key={commodity} value={commodity}>{commodity}</option>
-                ))}
-              </select>
-              <select
-                value={eudrFilter === null ? '' : eudrFilter ? 'yes' : 'no'}
-                onChange={(e) => setEudrFilter(e.target.value === '' ? null : e.target.value === 'yes')}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent"
-              >
-                <option value="">EUDR: All</option>
-                <option value="yes">EUDR Context Available</option>
-                <option value="no">EUDR Context Not Available</option>
-              </select>
+              <div>
+                <label htmlFor="country-filter" id="country-filter-label" className="sr-only">Filtrer par pays</label>
+                <select
+                  title="Filtrer par pays"
+                  id="country-filter"
+                  value={countryFilter}
+                  onChange={(e) => setCountryFilter(e.target.value)}
+                  aria-label="Filtrer par pays"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent"
+                >
+                  <option value="">All Countries</option>
+                  {countries.map(country => (
+                    <option key={country} value={country}>{country}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label htmlFor="commodity-filter" id="commodity-filter-label" className="sr-only">Filtrer par produit</label>
+                <select
+                  title="Filtrer par produit"
+                  id="commodity-filter"
+                  value={commodityFilter}
+                  onChange={(e) => setCommodityFilter(e.target.value)}
+                  aria-label="Filtrer par produit"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent"
+                >
+                  <option value="">All Commodities</option>
+                  {commodities.map(commodity => (
+                    <option key={commodity} value={commodity}>{commodity}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label htmlFor="eudr-filter" id="eudr-filter-label" className="sr-only">Filtrer par disponibilité EUDR</label>
+                <select
+                  title="Filtrer par disponibilité EUDR"
+                  id="eudr-filter"
+                  value={eudrFilter === null ? '' : eudrFilter ? 'yes' : 'no'}
+                  onChange={(e) => setEudrFilter(e.target.value === '' ? null : e.target.value === 'yes')}
+                  aria-label="Filtrer par disponibilité EUDR"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent"
+                >
+                  <option value="">EUDR: All</option>
+                  <option value="yes">EUDR Context Available</option>
+                  <option value="no">EUDR Context Not Available</option>
+                </select>
+              </div>
               <div className="flex flex-wrap gap-2">
                 {availableCertifications.slice(0, 3).map(cert => (
                   <button
@@ -361,8 +391,8 @@ export default function CooperativeDirectory() {
                           <div className="w-48 text-sm text-gray-700">{region}</div>
                           <div className="flex-1 bg-gray-200 rounded-full h-4">
                             <div
-                              className="bg-secondary-500 h-4 rounded-full"
-                              style={{ width: `${percentage}%` }}
+                              className="bg-secondary-500 h-4 rounded-full transition-all"
+                              style={{ width: `${percentage}%` } as React.CSSProperties}
                             />
                           </div>
                           <div className="w-16 text-sm font-semibold text-right">{count}</div>
