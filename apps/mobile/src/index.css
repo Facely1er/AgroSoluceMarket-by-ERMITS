@@ -72,10 +72,9 @@ button, a, [role="button"] {
 }
 
 /* Prevent text size adjustment on mobile devices */
-/* stylelint-disable-next-line value-no-vendor-prefix */
+/* Using webkit prefix as it's supported by Safari, iOS, and Chrome */
 html {
-  -webkit-text-size-adjust: 100%; /* Safari, iOS */
-  text-size-adjust: 100%; /* Chrome, Edge - Firefox doesn't support but harmless */
+  -webkit-text-size-adjust: 100%;
 }
 
 /* Better font rendering */
