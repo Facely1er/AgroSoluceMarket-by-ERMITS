@@ -3,6 +3,7 @@ import { MapPin, Building2, CheckCircle, Clock } from 'lucide-react';
 import type { Cooperative } from '@/types';
 import ComplianceBadge from '@/components/cooperatives/ComplianceBadge';
 import { useI18n } from '@/lib/i18n/I18nProvider';
+import { EUDR_COMMODITIES_IN_SCOPE } from '@/types';
 
 interface CooperativeCardProps {
   cooperative: Cooperative;
@@ -17,12 +18,33 @@ export default function CooperativeCard({ cooperative }: CooperativeCardProps) {
   // Support both database (sector/department) and legacy (secteur/departement) fields
   const sector = cooperative.sector || cooperative.secteur || '';
   const department = cooperative.department || cooperative.departement;
+  
+  // Context-first: Get commodity, country, region for context line
+  const commodity = (cooperative as any).commodity || '';
+  const commodityLabel = commodity 
+    ? EUDR_COMMODITIES_IN_SCOPE.find(c => c.id === commodity.toLowerCase().replace(/\s+/g, '_'))?.label || commodity
+    : null;
+  const country = cooperative.country || 'CI';
+  const countryCode = country.length === 2 ? country : 'CI';
+  const region = cooperative.region || '';
 
   return (
     <Link
       to={`/cooperatives/${cooperative.id}`}
       className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow border-l-4 border-secondary-500 hover:border-primary-500"
     >
+      {/* Context line - shown first (product-first, region-aware, coverage-aware) */}
+      {(commodityLabel || countryCode || region) && (
+        <div className="text-xs text-gray-600 mb-2">
+          {commodityLabel && <span className="font-semibold">{commodityLabel}</span>}
+          {commodityLabel && (countryCode || region) && <span> • </span>}
+          {countryCode && <span>{countryCode}</span>}
+          {countryCode && region && <span> • </span>}
+          {region && <span>{region}</span>}
+        </div>
+      )}
+
+      {/* Cooperative name - formatted, shown after context */}
       <div className="flex items-start justify-between mb-3">
         <h3 className="text-lg font-semibold text-gray-900 flex-1">
           {cooperative.name}

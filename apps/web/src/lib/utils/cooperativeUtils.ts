@@ -167,8 +167,13 @@ export function enrichCooperatives(cooperatives: any[]): any[] {
       .map(p => normalizeCIPhone(p))
       .filter(Boolean)
       .filter((v, i, arr) => arr.indexOf(v) === i)) as string[];
+    
+    // Format cooperative name according to workflow requirements
+    const formattedName = formatCooperativeName(c.name);
+    
     return {
       ...c,
+      name: formattedName, // Use formatted name (not displayed directly)
       lat,
       lng,
       regionSlug: toSlug(c.region),
@@ -178,7 +183,7 @@ export function enrichCooperatives(cooperatives: any[]): any[] {
       phonesE164,
       primaryPhoneE164: phonesE164[0] || null,
       searchKeywords: [
-        normalizeText(c.name),
+        normalizeText(c.name), // Keep original for search
         normalizeText(c.departement),
         normalizeText(c.president)
       ].filter(Boolean)
