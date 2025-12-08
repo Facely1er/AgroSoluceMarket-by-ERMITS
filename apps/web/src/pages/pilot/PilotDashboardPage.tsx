@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Building2, ArrowLeft, Info } from 'lucide-react';
+import { Building2, ArrowLeft, Info, BarChart3, TrendingUp, CheckCircle, Clock, AlertCircle } from 'lucide-react';
 import { getCanonicalDirectoryRecordsByPilotId } from '@/features/cooperatives/api/canonicalDirectoryApi';
+import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import type { CanonicalCooperativeDirectory } from '@/types';
 import { getCoverageMetrics } from '@/features/coverage/api/coverageApi';
 import type { CoverageMetrics } from '@/services/coverageService';
@@ -169,66 +170,89 @@ export default function PilotDashboardPage() {
   }
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen py-8 bg-gradient-to-br from-secondary-50 via-primary-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Back link */}
-        <Link
-          to="/directory"
-          className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6"
-        >
-          <ArrowLeft className="h-5 w-5" />
-          Back to directory
-        </Link>
+        {/* Breadcrumbs */}
+        <Breadcrumbs items={[
+          { label: 'Home', path: '/' },
+          { label: 'Directory', path: '/directory' },
+          { label: `Pilot: ${pilotLabel}` }
+        ]} />
 
         {/* Header Section */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6 border-t-4 border-primary-500">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
-            Pilot Due-Diligence Snapshot
-          </h1>
-          <div className="flex items-center gap-4 text-gray-600">
-            <div>
-              <span className="font-medium">Pilot:</span> {pilotLabel}
-            </div>
-            <div>
-              <span className="font-medium">Cooperatives:</span> {cooperatives.length}
+        <div className="bg-gradient-to-r from-primary-600 via-primary-700 to-secondary-500 rounded-xl shadow-lg p-8 mb-6 text-white relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-transparent"></div>
+          <div className="relative z-10">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="bg-white/20 backdrop-blur-sm p-3 rounded-lg">
+                <BarChart3 className="h-8 w-8 text-white" />
+              </div>
+              <div className="flex-1">
+                <h1 className="text-3xl md:text-4xl font-bold mb-2">
+                  Pilot Due-Diligence Snapshot
+                </h1>
+                <div className="flex flex-wrap items-center gap-4 text-white/90">
+                  <div>
+                    <span className="font-medium">Pilot:</span> {pilotLabel}
+                  </div>
+                  <div>
+                    <span className="font-medium">Cooperatives:</span> {cooperatives.length}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Aggregate Metrics Section */}
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">Aggregate Metrics</h2>
+        <div className="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-6 border border-gray-100">
+          <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-6 flex items-center gap-2">
+            <TrendingUp className="h-6 w-6 text-primary-600" />
+            Aggregate Metrics
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div>
-              <div className="text-sm text-gray-600 mb-1">Average Coverage</div>
-              <div className="text-2xl font-semibold text-gray-900">
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 border border-blue-200">
+              <div className="flex items-center gap-2 mb-2">
+                <BarChart3 className="h-5 w-5 text-blue-600" />
+                <div className="text-sm font-medium text-blue-900">Average Coverage</div>
+              </div>
+              <div className="text-3xl font-bold text-blue-900">
                 {aggregateMetrics.averageCoverage.toFixed(1)}%
               </div>
             </div>
-            <div>
-              <div className="text-sm text-gray-600 mb-1">Not Ready</div>
-              <div className="text-2xl font-semibold text-gray-900">
+            <div className="bg-gradient-to-br from-red-50 to-red-100 rounded-xl p-6 border border-red-200">
+              <div className="flex items-center gap-2 mb-2">
+                <AlertCircle className="h-5 w-5 text-red-600" />
+                <div className="text-sm font-medium text-red-900">Not Ready</div>
+              </div>
+              <div className="text-3xl font-bold text-red-900">
                 {aggregateMetrics.notReadyCount}
               </div>
-              <div className="text-xs text-gray-500">
+              <div className="text-sm text-red-700 mt-1">
                 ({aggregateMetrics.notReadyPercent.toFixed(1)}%)
               </div>
             </div>
-            <div>
-              <div className="text-sm text-gray-600 mb-1">In Progress</div>
-              <div className="text-2xl font-semibold text-gray-900">
+            <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-xl p-6 border border-yellow-200">
+              <div className="flex items-center gap-2 mb-2">
+                <Clock className="h-5 w-5 text-yellow-600" />
+                <div className="text-sm font-medium text-yellow-900">In Progress</div>
+              </div>
+              <div className="text-3xl font-bold text-yellow-900">
                 {aggregateMetrics.inProgressCount}
               </div>
-              <div className="text-xs text-gray-500">
+              <div className="text-sm text-yellow-700 mt-1">
                 ({aggregateMetrics.inProgressPercent.toFixed(1)}%)
               </div>
             </div>
-            <div>
-              <div className="text-sm text-gray-600 mb-1">Buyer Ready</div>
-              <div className="text-2xl font-semibold text-gray-900">
+            <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 border border-green-200">
+              <div className="flex items-center gap-2 mb-2">
+                <CheckCircle className="h-5 w-5 text-green-600" />
+                <div className="text-sm font-medium text-green-900">Buyer Ready</div>
+              </div>
+              <div className="text-3xl font-bold text-green-900">
                 {aggregateMetrics.buyerReadyCount}
               </div>
-              <div className="text-xs text-gray-500">
+              <div className="text-sm text-green-700 mt-1">
                 ({aggregateMetrics.buyerReadyPercent.toFixed(1)}%)
               </div>
             </div>
@@ -236,14 +260,18 @@ export default function PilotDashboardPage() {
         </div>
 
         {/* Cooperative Table Section */}
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-200 bg-gray-50">
-            <h2 className="text-xl font-semibold text-gray-900">Cooperatives</h2>
+        <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100">
+          <div className="px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-gray-50 to-gray-100">
+            <h2 className="text-xl md:text-2xl font-semibold text-gray-900 flex items-center gap-2">
+              <Building2 className="h-6 w-6 text-primary-600" />
+              Cooperatives
+            </h2>
           </div>
           {cooperatives.length === 0 ? (
             <div className="p-12 text-center text-gray-500">
-              <Building2 className="h-12 w-12 mx-auto mb-4 text-gray-400" />
-              <p>No cooperatives found in this pilot</p>
+              <Building2 className="h-16 w-16 mx-auto mb-4 text-gray-400" />
+              <p className="text-lg font-medium mb-2">No cooperatives found in this pilot</p>
+              <p className="text-sm text-gray-400">Try selecting a different pilot from the directory</p>
             </div>
           ) : (
             <div className="overflow-x-auto">
@@ -272,11 +300,11 @@ export default function PilotDashboardPage() {
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {cooperatives.map((coop) => (
-                    <tr key={coop.coop_id} className="hover:bg-gray-50">
+                    <tr key={coop.coop_id} className="hover:bg-gray-50 transition-colors">
                       <td className="px-6 py-4 whitespace-nowrap">
                         <Link
                           to={`/workspace/${coop.coop_id}`}
-                          className="text-sm font-medium text-primary-600 hover:text-primary-800"
+                          className="text-sm font-medium text-primary-600 hover:text-primary-800 hover:underline transition-colors"
                         >
                           {coop.name}
                         </Link>
@@ -309,14 +337,15 @@ export default function PilotDashboardPage() {
         </div>
 
         {/* Disclaimer Section */}
-        <div className="bg-white rounded-lg shadow-md p-6 mt-6 border-l-4 border-yellow-500">
+        <div className="bg-yellow-50 rounded-xl shadow-md p-6 mt-6 border-l-4 border-yellow-500">
           <div className="flex items-start gap-3">
-            <Info className="h-5 w-5 text-yellow-600 mt-0.5 flex-shrink-0" />
+            <Info className="h-6 w-6 text-yellow-600 mt-0.5 flex-shrink-0" />
             <div className="text-sm text-gray-700">
-              <p className="font-medium text-gray-900 mb-1">Disclaimer</p>
-              <p>
+              <p className="font-semibold text-gray-900 mb-2 text-base">Important Disclaimer</p>
+              <p className="leading-relaxed">
                 This pilot view summarizes documentation coverage and readiness shorthand for the selected cooperatives. 
-                It does not constitute a certification, rating, or compliance decision.
+                It does not constitute a certification, rating, or compliance decision. The data presented here is 
+                intended for monitoring and improvement purposes only.
               </p>
             </div>
           </div>
