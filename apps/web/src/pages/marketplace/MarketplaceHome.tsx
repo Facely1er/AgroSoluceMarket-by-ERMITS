@@ -27,7 +27,7 @@ export default function MarketplaceHome() {
 
   // Split description into carousel items
   const carouselItems = [
-    'AgroSoluce helps cooperatives, buyers, and partners make farmer engagement, documentation coverage, and improvement efforts visible',
+    'AgroSoluce™ helps cooperatives, buyers, and partners make farmer engagement, documentation coverage, and improvement efforts visible',
     '— without overstating readiness or replacing audits.',
     'We start from the farmer, structure reality at the cooperative level, and support credible EUDR-aligned due diligence across agricultural supply chains.'
   ];
@@ -286,7 +286,7 @@ export default function MarketplaceHome() {
               Learn More
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Explore how AgroSoluce supports responsible sourcing for different audiences
+              Explore how AgroSoluce™ supports responsible sourcing for different audiences
             </p>
           </div>
           
@@ -319,7 +319,7 @@ export default function MarketplaceHome() {
               <Link to="/what-we-do" className="block">
                 <h3 className="text-xl font-bold mb-3 text-gray-900">What We Do</h3>
                 <p className="text-gray-600 mb-4">
-                  See how AgroSoluce supports responsible sourcing through transparency
+                  See how AgroSoluce™ supports responsible sourcing through transparency
                 </p>
                 <span className="text-blue-600 font-semibold inline-flex items-center gap-2">
                   Learn more <ArrowRight className="h-4 w-4" />

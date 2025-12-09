@@ -31,7 +31,7 @@ export default function Navbar() {
     { to: '/about', icon: Info, label: 'About', exact: false },
     { to: '/cooperatives', icon: UsersRound, label: t.nav.cooperatives, exact: true, secondary: true },
     { to: '/cooperative', icon: User, label: t.nav.cooperativeSpace, exact: false, secondary: true },
-    { to: '/compliance/child-labor', icon: Shield, label: t.nav.compliance, exact: false, secondary: true },
+    { to: '/monitoring', icon: Shield, label: t.nav.compliance, exact: false, secondary: true },
   ];
 
   return (
@@ -50,7 +50,7 @@ export default function Navbar() {
             />
             <div>
               <h2 className="text-primary-600 font-bold text-lg leading-tight">AgroSoluce™</h2>
-              <p className="text-xs text-gray-500 leading-tight">Source Intelligence</p>
+              <p className="text-xs text-gray-700 leading-tight">Source Intelligence</p>
               <p className="text-xs text-gray-500 leading-tight">by ERMITS</p>
             </div>
           </Link>

@@ -523,7 +523,7 @@ export const translations: Record<Language, Translations> = {
       tagline: 'Farmers-First Due Diligence for Responsible Agricultural Sourcing',
       title: 'AgroSoluce™',
       subtitle: 'Making Farmer Engagement, Documentation Coverage, and Improvement Efforts Visible',
-      description: 'AgroSoluce helps cooperatives, buyers, and partners make farmer engagement, documentation coverage, and improvement efforts visible — without overstating readiness or replacing audits. We start from the farmer, structure reality at the cooperative level, and support credible EUDR-aligned due diligence across agricultural supply chains.',
+      description: 'AgroSoluce™ helps cooperatives, buyers, and partners make farmer engagement, documentation coverage, and improvement efforts visible — without overstating readiness or replacing audits. We start from the farmer, structure reality at the cooperative level, and support credible EUDR-aligned due diligence across agricultural supply chains.',
       ctaCooperatives: 'Explore Cooperatives',
       ctaBuyer: 'Buyer Portal',
       freeNote: 'Free for cooperatives • Transparent • Progress-focused',
@@ -563,7 +563,7 @@ export const translations: Record<Language, Translations> = {
       value: {
         tagline: 'Value We Bring',
         title: 'Transforming Challenges into Opportunities',
-        subtitle: 'AgroSoluce helps cooperatives turn regulatory pressure, environmental risks, and social challenges into pathways for market access, improved documentation, and stronger buyer relationships — all while supporting farmer livelihoods and forest preservation efforts.',
+        subtitle: 'AgroSoluce™ helps cooperatives turn regulatory pressure, environmental risks, and social challenges into pathways for market access, improved documentation, and stronger buyer relationships — all while supporting farmer livelihoods and forest preservation efforts.',
       },
       outcomes: {
         title: 'Value Delivered',
@@ -643,10 +643,10 @@ export const translations: Record<Language, Translations> = {
       },
     },
     about: {
-      title: 'About AgroSoluce',
+      title: 'About AgroSoluce™',
       subtitle: 'Farmers-First Due Diligence for Responsible Agricultural Sourcing',
       why: {
-        title: 'Why AgroSoluce Exists',
+        title: 'Why AgroSoluce™ Exists',
         subtitle: 'Responsible sourcing is no longer optional — but most tools still ask impossible questions that don\'t reflect reality in real supply chains.',
         problem: {
           title: 'The Problem with Traditional Tools',
@@ -656,7 +656,7 @@ export const translations: Record<Language, Translations> = {
           reality: 'In real supply chains, those answers don\'t exist.',
         },
         solution: {
-          title: 'AgroSoluce Reflects Reality',
+          title: 'AgroSoluce™ Reflects Reality',
           point1: 'Uneven documentation',
           point2: 'Gradual improvements',
           point3: 'Real people on the ground',
@@ -664,8 +664,8 @@ export const translations: Record<Language, Translations> = {
         },
       },
       whatNot: {
-        title: 'What AgroSoluce Is Not',
-        subtitle: 'To be clear, AgroSoluce:',
+        title: 'What AgroSoluce™ Is Not',
+        subtitle: 'To be clear, AgroSoluce™:',
         points: [
           'is not a certification body',
           'does not declare EUDR or labor compliance',
@@ -676,7 +676,7 @@ export const translations: Record<Language, Translations> = {
       },
       designPrinciples: {
         title: 'Our Design Principles',
-        subtitle: 'The values that guide how we build AgroSoluce',
+        subtitle: 'The values that guide how we build AgroSoluce™',
         farmerFirst: {
           title: 'Farmer-first, not document-first',
           description: 'We start from the farmer and structure reality at the cooperative level, ensuring farmer engagement is visible without exposing sensitive personal data.',
@@ -694,59 +694,59 @@ export const translations: Record<Language, Translations> = {
           description: 'We support continuous due diligence efforts, enabling ongoing oversight and documentation building rather than one-off verification checks.',
         },
       },
-      oneSentence: 'AgroSoluce makes farmer engagement, documentation coverage, and improvement efforts visible — responsibly, progressively, and without false compliance claims.',
+      oneSentence: 'AgroSoluce™ makes farmer engagement, documentation coverage, and improvement efforts visible — responsibly, progressively, and without false compliance claims.',
       cta: {
         explore: 'Explore Cooperatives',
         learnMore: 'Learn What We Do',
       },
     },
     whatWeDo: {
-      title: 'What AgroSoluce Does',
+      title: 'What AgroSoluce™ Does',
       subtitle: 'Supporting Responsible Sourcing Through Transparency',
       features: {
         visibility: {
           title: '1. Make Cooperatives Visible',
-          description: 'AgroSoluce provides a structured directory of agricultural cooperatives, showing who they are, where they operate, what crops they produce, and what information is available today.',
+          description: 'AgroSoluce™ provides a structured directory of agricultural cooperatives, showing who they are, where they operate, what crops they produce, and what information is available today.',
           point1: 'No inflated claims. No black boxes.',
           point2: 'Stable, shareable cooperative profiles',
           point3: 'Clear visibility into identity and sourcing context',
         },
         coverage: {
           title: '2. Show Documentation Coverage — Not Compliance',
-          description: 'Instead of binary labels, AgroSoluce displays documentation coverage indicators: Limited, Partial, Substantial.',
+          description: 'Instead of binary labels, AgroSoluce™ displays documentation coverage indicators: Limited, Partial, Substantial.',
           point1: 'Help buyers understand what exists, what is missing, and where further verification may be required',
           point2: 'Avoid false compliance claims while showing real progress',
           point3: 'Support informed due diligence decisions based on actual documentation',
         },
         dueDiligence: {
           title: '3. Support EUDR & Child-Labor Due Diligence',
-          description: 'AgroSoluce supports due diligence by structuring cooperative identity and sourcing context, highlighting documentation gaps, surfacing farmer engagement signals, and tracking improvement efforts over time.',
+          description: 'AgroSoluce™ supports due diligence by structuring cooperative identity and sourcing context, highlighting documentation gaps, surfacing farmer engagement signals, and tracking improvement efforts over time.',
           point1: 'Provide operational foundation required to perform due diligence responsibly',
-          point2: 'AgroSoluce does not certify compliance — it supports the process',
+          point2: 'AgroSoluce™ does not certify compliance — it supports the process',
           point3: 'Enable continuous due diligence, not one-time declarations',
           cta: 'View Compliance Dashboard',
         },
         farmersFirst: {
           title: '4. Put Farmers First',
-          description: 'AgroSoluce connects farmer-level actions to cooperative-level insight through a Farmers First toolkit, supporting farmer onboarding, training participation tracking, declarations and attestations, and baseline and progress indicators.',
+          description: 'AgroSoluce™ connects farmer-level actions to cooperative-level insight through a Farmers First toolkit, supporting farmer onboarding, training participation tracking, declarations and attestations, and baseline and progress indicators.',
           point1: 'Make farmer engagement visible — without exposing sensitive personal data',
           point2: 'Track farmer-level activities at cooperative scale',
           point3: 'Support behavior-based risk assessment, not just paperwork',
         },
         progress: {
           title: '5. Track Progress, Not Just Promises',
-          description: 'AgroSoluce records readiness snapshots and self-assessments over time, enabling transparent progress tracking, honest gap identification, and meaningful follow-up actions.',
+          description: 'AgroSoluce™ records readiness snapshots and self-assessments over time, enabling transparent progress tracking, honest gap identification, and meaningful follow-up actions.',
           point1: 'All assessments are explicitly self-reported and non-certifying',
           point2: 'Enable buyers to demonstrate ongoing oversight, not one-off checks',
           point3: 'Support evidence-aware reporting, not inflated claims',
           cta: 'Start Assessment',
         },
       },
-      footer: 'AgroSoluce provides the operational foundation required to perform due diligence responsibly — without false compliance claims.',
+      footer: 'AgroSoluce™ provides the operational foundation required to perform due diligence responsibly — without false compliance claims.',
       cta: 'Explore the Cooperative Directory',
     },
     whoItsFor: {
-      title: 'Who AgroSoluce Is For',
+      title: 'Who AgroSoluce™ Is For',
       subtitle: 'Designed for cooperatives, buyers, and partners working toward responsible sourcing',
       audiences: {
         cooperatives: {
@@ -774,14 +774,14 @@ export const translations: Record<Language, Translations> = {
           cta: 'Contact Us',
         },
       },
-      disclaimer: 'AgroSoluce supports due diligence and transparency efforts. Information shown may include self-reported data and does not constitute certification, regulatory approval, or verified compliance.',
+      disclaimer: 'AgroSoluce™ supports due diligence and transparency efforts. Information shown may include self-reported data and does not constitute certification, regulatory approval, or verified compliance.',
     },
     buyerLanding: {
       hero: {
         tagline: 'For Buyers & Sourcing Teams',
-        title: 'AgroSoluce for Buyers',
+        title: 'AgroSoluce™ for Buyers',
         subtitle: 'Responsible Sourcing Starts With Visibility — Not Assumptions',
-        description: 'AgroSoluce helps buyers understand what exists, what is missing, and where to focus due diligence — without forcing cooperatives into false compliance claims. We provide a structured, farmer-first view of cooperatives so sourcing decisions are based on transparency and progress, not guesswork.',
+        description: 'AgroSoluce™ helps buyers understand what exists, what is missing, and where to focus due diligence — without forcing cooperatives into false compliance claims. We provide a structured, farmer-first view of cooperatives so sourcing decisions are based on transparency and progress, not guesswork.',
       },
       problem: {
         title: 'The Buyer Problem',
@@ -794,7 +794,7 @@ export const translations: Record<Language, Translations> = {
         solution: 'What\'s missing is not another certification — it\'s clear visibility into reality.',
       },
       how: {
-        title: 'How AgroSoluce Supports Buyer Due Diligence',
+        title: 'How AgroSoluce™ Supports Buyer Due Diligence',
       },
       features: {
         discover: {
@@ -806,21 +806,21 @@ export const translations: Record<Language, Translations> = {
         },
         coverage: {
           title: '2. See Documentation Coverage (Not Binary Compliance)',
-          description: 'AgroSoluce displays documentation coverage as Limited, Partial, or Substantial. This helps buyers quickly assess readiness to engage, need for enhanced due diligence, and where further verification is required.',
+          description: 'AgroSoluce™ displays documentation coverage as Limited, Partial, or Substantial. This helps buyers quickly assess readiness to engage, need for enhanced due diligence, and where further verification is required.',
           point1: 'Understand what information exists today',
           point2: 'Identify where enhanced due diligence is needed',
           point3: 'Make informed decisions based on actual documentation status',
         },
         engagement: {
           title: '3. Understand Farmer Engagement',
-          description: 'Beyond documents, AgroSoluce shows whether farmers are onboarded, training participation at cooperative level, and declarations and engagement activity over time.',
+          description: 'Beyond documents, AgroSoluce™ shows whether farmers are onboarded, training participation at cooperative level, and declarations and engagement activity over time.',
           point1: 'Support behavior-based risk assessment, not just paperwork',
           point2: 'See farmer-level engagement signals at cooperative scale',
           point3: 'Track engagement activity over time',
         },
         progress: {
           title: '4. Track Progress Over Time',
-          description: 'AgroSoluce records readiness snapshots, cooperative self-assessments, and visible improvements and remaining gaps.',
+          description: 'AgroSoluce™ records readiness snapshots, cooperative self-assessments, and visible improvements and remaining gaps.',
           point1: 'Enable buyers to demonstrate ongoing oversight, not one-off checks',
           point2: 'Observe improvement trajectories and remaining gaps',
           point3: 'Support evidence-aware reporting and due diligence documentation',
@@ -844,10 +844,10 @@ export const translations: Record<Language, Translations> = {
             'certification badges',
           ],
         },
-        footer: 'AgroSoluce supports your due diligence — it does not replace it.',
+        footer: 'AgroSoluce™ supports your due diligence — it does not replace it.',
       },
       why: {
-        title: 'Why Buyers Use AgroSoluce',
+        title: 'Why Buyers Use AgroSoluce™',
         points: [
           'Reduce sourcing blind spots',
           'Prioritize engagement instead of exclusion',
@@ -859,14 +859,14 @@ export const translations: Record<Language, Translations> = {
         explore: 'Explore the Directory',
         pilot: 'Join a Buyer Pilot',
       },
-      disclaimer: 'AgroSoluce supports due diligence processes. All information may include self-reported data and does not constitute certification or regulatory approval.',
+      disclaimer: 'AgroSoluce™ supports due diligence processes. All information may include self-reported data and does not constitute certification or regulatory approval.',
     },
     partnerLanding: {
       hero: {
         tagline: 'For NGOs & Program Partners',
-        title: 'AgroSoluce for NGOs & Program Partners',
+        title: 'AgroSoluce™ for NGOs & Program Partners',
         subtitle: 'Make Farmer-Level Progress Visible — Without Distorting Reality',
-        description: 'AgroSoluce helps NGOs and partners monitor, structure, and support improvement efforts across cooperatives — starting from farmers and aggregating to programs and pilots. We focus on what is happening, not what is claimed.',
+        description: 'AgroSoluce™ helps NGOs and partners monitor, structure, and support improvement efforts across cooperatives — starting from farmers and aggregating to programs and pilots. We focus on what is happening, not what is claimed.',
       },
       challenge: {
         title: 'The NGO & Program Challenge',
@@ -876,22 +876,22 @@ export const translations: Record<Language, Translations> = {
           'compare efforts fairly without oversimplification',
           'report transparently without inflating outcomes',
         ],
-        solution: 'AgroSoluce was built to support learning, monitoring, and improvement — not marketing narratives.',
+        solution: 'AgroSoluce™ was built to support learning, monitoring, and improvement — not marketing narratives.',
       },
       how: {
-        title: 'How AgroSoluce Supports Programs',
+        title: 'How AgroSoluce™ Supports Programs',
       },
       features: {
         baselines: {
           title: '1. Structured Cooperative Baselines',
-          description: 'AgroSoluce establishes a common baseline across cooperatives: identity and sourcing context, documentation coverage, and farmer engagement visibility.',
+          description: 'AgroSoluce™ establishes a common baseline across cooperatives: identity and sourcing context, documentation coverage, and farmer engagement visibility.',
           point1: 'Create a shared language between partners',
           point2: 'Enable fair comparison across cooperatives',
           point3: 'Establish evidence-aware starting points',
         },
         monitoring: {
           title: '2. Farmer-First Monitoring',
-          description: 'AgroSoluce tracks farmer onboarding activities, training events, declarations and participation, and baseline vs progress indicators.',
+          description: 'AgroSoluce™ tracks farmer onboarding activities, training events, declarations and participation, and baseline vs progress indicators.',
           point1: 'Farmer engagement becomes observable, not anecdotal',
           point2: 'Track farmer-level activities at cooperative scale',
           point3: 'Monitor training participation and engagement over time',
@@ -906,16 +906,16 @@ export const translations: Record<Language, Translations> = {
         },
         views: {
           title: '4. Pilot & Portfolio Views',
-          description: 'AgroSoluce enables grouping cooperatives into pilots or programs, viewing aggregate indicators, and drilling down to cooperative-level reality when needed.',
+          description: 'AgroSoluce™ enables grouping cooperatives into pilots or programs, viewing aggregate indicators, and drilling down to cooperative-level reality when needed.',
           point1: 'Support evidence-aware reporting, not inflated claims',
           point2: 'View aggregate progress across programs',
           point3: 'Drill down to cooperative-level detail when needed',
         },
       },
       whatIs: {
-        title: 'What AgroSoluce Is (and Is Not)',
+        title: 'What AgroSoluce™ Is (and Is Not)',
         is: {
-          title: 'AgroSoluce is:',
+          title: 'AgroSoluce™ is:',
           points: [
             'a transparency and monitoring platform',
             'a due-diligence support tool',
@@ -923,7 +923,7 @@ export const translations: Record<Language, Translations> = {
           ],
         },
         isNot: {
-          title: 'AgroSoluce is not:',
+          title: 'AgroSoluce™ is not:',
           points: [
             'a certification scheme',
             'an audit engine',
@@ -932,7 +932,7 @@ export const translations: Record<Language, Translations> = {
         },
       },
       why: {
-        title: 'Why NGOs & Partners Use AgroSoluce',
+        title: 'Why NGOs & Partners Use AgroSoluce™',
         points: [
           'Strengthen program credibility',
           'Align cooperatives around realistic improvement paths',
@@ -944,7 +944,7 @@ export const translations: Record<Language, Translations> = {
         pilot: 'Start a Program Pilot',
         explore: 'Explore Cooperatives',
       },
-      disclaimer: 'AgroSoluce supports monitoring and due diligence efforts. It does not certify outcomes or replace independent verification.',
+      disclaimer: 'AgroSoluce™ supports monitoring and due diligence efforts. It does not certify outcomes or replace independent verification.',
     },
   },
   fr: {
@@ -1122,10 +1122,10 @@ export const translations: Record<Language, Translations> = {
       },
     },
     about: {
-      title: 'À Propos d\'AgroSoluce',
+      title: 'À Propos d\'AgroSoluce™',
       subtitle: 'Diligence Raisonnable Axée sur les Agriculteurs pour un Approvisionnement Agricole Responsable',
       why: {
-        title: 'Pourquoi AgroSoluce Existe',
+        title: 'Pourquoi AgroSoluce™ Existe',
         subtitle: 'L\'approvisionnement responsable n\'est plus optionnel — mais la plupart des outils posent encore des questions impossibles qui ne reflètent pas la réalité des chaînes d\'approvisionnement réelles.',
         problem: {
           title: 'Le Problème avec les Outils Traditionnels',
@@ -1135,7 +1135,7 @@ export const translations: Record<Language, Translations> = {
           reality: 'Dans les chaînes d\'approvisionnement réelles, ces réponses n\'existent pas.',
         },
         solution: {
-          title: 'AgroSoluce Reflète la Réalité',
+          title: 'AgroSoluce™ Reflète la Réalité',
           point1: 'Documentation inégale',
           point2: 'Améliorations graduelles',
           point3: 'Vraies personnes sur le terrain',
@@ -1143,8 +1143,8 @@ export const translations: Record<Language, Translations> = {
         },
       },
       whatNot: {
-        title: 'Ce qu\'AgroSoluce N\'est Pas',
-        subtitle: 'Pour être clair, AgroSoluce:',
+        title: 'Ce qu\'AgroSoluce™ N\'est Pas',
+        subtitle: 'Pour être clair, AgroSoluce™:',
         points: [
           'n\'est pas un organisme de certification',
           'ne déclare pas la conformité EUDR ou du travail',
@@ -1155,7 +1155,7 @@ export const translations: Record<Language, Translations> = {
       },
       designPrinciples: {
         title: 'Nos Principes de Conception',
-        subtitle: 'Les valeurs qui guident la construction d\'AgroSoluce',
+        subtitle: 'Les valeurs qui guident la construction d\'AgroSoluce™',
         farmerFirst: {
           title: 'Agriculteurs d\'abord, pas documents d\'abord',
           description: 'Nous commençons par l\'agriculteur et structurons la réalité au niveau de la coopérative, garantissant que l\'engagement des agriculteurs est visible sans exposer de données personnelles sensibles.',
@@ -1173,59 +1173,59 @@ export const translations: Record<Language, Translations> = {
           description: 'Nous soutenons les efforts continus de diligence raisonnable, permettant une surveillance continue plutôt que des contrôles de conformité ponctuels.',
         },
       },
-      oneSentence: 'AgroSoluce rend visible l\'engagement des agriculteurs, la couverture de la documentation et les efforts d\'amélioration — de manière responsable, progressive et sans fausses déclarations de conformité.',
+      oneSentence: 'AgroSoluce™ rend visible l\'engagement des agriculteurs, la couverture de la documentation et les efforts d\'amélioration — de manière responsable, progressive et sans fausses déclarations de conformité.',
       cta: {
         explore: 'Explorer les Coopératives',
         learnMore: 'Découvrir Ce Que Nous Faisons',
       },
     },
     whatWeDo: {
-      title: 'Ce Qu\'AgroSoluce Fait',
+      title: 'Ce Qu\'AgroSoluce™ Fait',
       subtitle: 'Soutenir l\'Approvisionnement Responsable par la Transparence',
       features: {
         visibility: {
           title: '1. Rendre les Coopératives Visibles',
-          description: 'AgroSoluce fournit un répertoire structuré de coopératives agricoles, montrant qui elles sont, où elles opèrent, quelles cultures elles produisent et quelles informations sont disponibles aujourd\'hui.',
+          description: 'AgroSoluce™ fournit un répertoire structuré de coopératives agricoles, montrant qui elles sont, où elles opèrent, quelles cultures elles produisent et quelles informations sont disponibles aujourd\'hui.',
           point1: 'Pas de déclarations exagérées. Pas de boîtes noires.',
           point2: 'Profils de coopératives stables et partageables',
           point3: 'Visibilité claire de l\'identité et du contexte d\'approvisionnement',
         },
         coverage: {
           title: '2. Montrer la Couverture de Documentation — Pas la Conformité',
-          description: 'Au lieu d\'étiquettes binaires, AgroSoluce affiche des indicateurs de couverture de documentation: Limité, Partiel, Substantiel.',
+          description: 'Au lieu d\'étiquettes binaires, AgroSoluce™ affiche des indicateurs de couverture de documentation: Limité, Partiel, Substantiel.',
           point1: 'Aider les acheteurs à comprendre ce qui existe, ce qui manque et où une vérification supplémentaire peut être requise',
           point2: 'Éviter les fausses déclarations de conformité tout en montrant de vrais progrès',
           point3: 'Soutenir des décisions de diligence raisonnable éclairées basées sur la documentation réelle',
         },
         dueDiligence: {
           title: '3. Soutenir la Diligence Raisonnable EUDR & Travail des Enfants',
-          description: 'AgroSoluce soutient la diligence raisonnable en structurant l\'identité de la coopérative et le contexte d\'approvisionnement, en mettant en évidence les lacunes de documentation, en révélant les signaux d\'engagement des agriculteurs et en suivant les efforts d\'amélioration dans le temps.',
+          description: 'AgroSoluce™ soutient la diligence raisonnable en structurant l\'identité de la coopérative et le contexte d\'approvisionnement, en mettant en évidence les lacunes de documentation, en révélant les signaux d\'engagement des agriculteurs et en suivant les efforts d\'amélioration dans le temps.',
           point1: 'Fournir la base opérationnelle requise pour effectuer la diligence raisonnable de manière responsable',
-          point2: 'AgroSoluce ne certifie pas la conformité — il soutient le processus',
+          point2: 'AgroSoluce™ ne certifie pas la conformité — il soutient le processus',
           point3: 'Permettre une diligence raisonnable continue, pas des déclarations ponctuelles',
           cta: 'Voir le Tableau de Bord',
         },
         farmersFirst: {
           title: '4. Mettre les Agriculteurs en Premier',
-          description: 'AgroSoluce connecte les actions au niveau des agriculteurs aux informations au niveau de la coopérative grâce à un toolkit Farmers First, soutenant l\'intégration des agriculteurs, le suivi de la participation à la formation, les déclarations et attestations, et les indicateurs de base et de progrès.',
+          description: 'AgroSoluce™ connecte les actions au niveau des agriculteurs aux informations au niveau de la coopérative grâce à un toolkit Farmers First, soutenant l\'intégration des agriculteurs, le suivi de la participation à la formation, les déclarations et attestations, et les indicateurs de base et de progrès.',
           point1: 'Rendre l\'engagement des agriculteurs visible — sans exposer de données personnelles sensibles',
           point2: 'Suivre les activités au niveau des agriculteurs à l\'échelle de la coopérative',
           point3: 'Soutenir l\'évaluation des risques basée sur le comportement, pas seulement sur les documents',
         },
         progress: {
           title: '5. Suivre le Progrès, Pas Seulement les Promesses',
-          description: 'AgroSoluce enregistre des instantanés de préparation et des auto-évaluations dans le temps, permettant un suivi transparent des progrès, une identification honnête des lacunes et des actions de suivi significatives.',
+          description: 'AgroSoluce™ enregistre des instantanés de préparation et des auto-évaluations dans le temps, permettant un suivi transparent des progrès, une identification honnête des lacunes et des actions de suivi significatives.',
           point1: 'Toutes les évaluations sont explicitement auto-déclarées et non certifiantes',
           point2: 'Permettre aux acheteurs de démontrer une surveillance continue, pas des contrôles ponctuels',
           point3: 'Soutenir un reporting basé sur des preuves, pas des déclarations exagérées',
           cta: 'Commencer l\'Évaluation',
         },
       },
-      footer: 'AgroSoluce fournit la base opérationnelle requise pour effectuer la diligence raisonnable de manière responsable — sans fausses déclarations de conformité.',
+      footer: 'AgroSoluce™ fournit la base opérationnelle requise pour effectuer la diligence raisonnable de manière responsable — sans fausses déclarations de conformité.',
       cta: 'Explorer le Répertoire des Coopératives',
     },
     whoItsFor: {
-      title: 'Pour Qui est AgroSoluce',
+      title: 'Pour Qui est AgroSoluce™',
       subtitle: 'Conçu pour les coopératives, acheteurs et partenaires travaillant vers un approvisionnement responsable',
       audiences: {
         cooperatives: {
@@ -1253,14 +1253,14 @@ export const translations: Record<Language, Translations> = {
           cta: 'Nous Contacter',
         },
       },
-      disclaimer: 'AgroSoluce soutient les efforts de diligence raisonnable et de transparence. Les informations affichées peuvent inclure des données auto-déclarées et ne constituent pas une certification, une approbation réglementaire ou une conformité vérifiée.',
+      disclaimer: 'AgroSoluce™ soutient les efforts de diligence raisonnable et de transparence. Les informations affichées peuvent inclure des données auto-déclarées et ne constituent pas une certification, une approbation réglementaire ou une conformité vérifiée.',
     },
     buyerLanding: {
       hero: {
         tagline: 'Pour les Acheteurs & Équipes d\'Approvisionnement',
-        title: 'AgroSoluce pour les Acheteurs',
+        title: 'AgroSoluce™ pour les Acheteurs',
         subtitle: 'L\'Approvisionnement Responsable Commence par la Visibilité — Pas les Hypothèses',
-        description: 'AgroSoluce aide les acheteurs à comprendre ce qui existe, ce qui manque et où se concentrer sur la diligence raisonnable — sans forcer les coopératives à faire de fausses déclarations de conformité. Nous fournissons une vue structurée, axée sur les agriculteurs, des coopératives afin que les décisions d\'approvisionnement soient basées sur la transparence et le progrès, pas sur des suppositions.',
+        description: 'AgroSoluce™ aide les acheteurs à comprendre ce qui existe, ce qui manque et où se concentrer sur la diligence raisonnable — sans forcer les coopératives à faire de fausses déclarations de conformité. Nous fournissons une vue structurée, axée sur les agriculteurs, des coopératives afin que les décisions d\'approvisionnement soient basées sur la transparence et le progrès, pas sur des suppositions.',
       },
       problem: {
         title: 'Le Problème des Acheteurs',
@@ -1273,7 +1273,7 @@ export const translations: Record<Language, Translations> = {
         solution: 'Ce qui manque n\'est pas une autre certification — c\'est une visibilité claire sur la réalité.',
       },
       how: {
-        title: 'Comment AgroSoluce Soutient la Diligence Raisonnable des Acheteurs',
+        title: 'Comment AgroSoluce™ Soutient la Diligence Raisonnable des Acheteurs',
       },
       features: {
         discover: {
@@ -1285,21 +1285,21 @@ export const translations: Record<Language, Translations> = {
         },
         coverage: {
           title: '2. Voir la Couverture de Documentation (Pas la Conformité Binaire)',
-          description: 'AgroSoluce affiche la couverture de documentation comme Limité, Partiel ou Substantiel. Cela aide les acheteurs à évaluer rapidement la préparation à l\'engagement, le besoin de diligence raisonnable renforcée et où une vérification supplémentaire est requise.',
+          description: 'AgroSoluce™ affiche la couverture de documentation comme Limité, Partiel ou Substantiel. Cela aide les acheteurs à évaluer rapidement la préparation à l\'engagement, le besoin de diligence raisonnable renforcée et où une vérification supplémentaire est requise.',
           point1: 'Comprendre quelles informations existent aujourd\'hui',
           point2: 'Identifier où une diligence raisonnable renforcée est nécessaire',
           point3: 'Prendre des décisions éclairées basées sur le statut réel de la documentation',
         },
         engagement: {
           title: '3. Comprendre l\'Engagement des Agriculteurs',
-          description: 'Au-delà des documents, AgroSoluce montre si les agriculteurs sont intégrés, la participation à la formation au niveau de la coopérative, et les déclarations et activités d\'engagement dans le temps.',
+          description: 'Au-delà des documents, AgroSoluce™ montre si les agriculteurs sont intégrés, la participation à la formation au niveau de la coopérative, et les déclarations et activités d\'engagement dans le temps.',
           point1: 'Soutenir l\'évaluation des risques basée sur le comportement, pas seulement sur les documents',
           point2: 'Voir les signaux d\'engagement au niveau des agriculteurs à l\'échelle de la coopérative',
           point3: 'Suivre l\'activité d\'engagement dans le temps',
         },
         progress: {
           title: '4. Suivre le Progrès dans le Temps',
-          description: 'AgroSoluce enregistre des instantanés de préparation, des auto-évaluations de coopératives, et des améliorations visibles et lacunes restantes.',
+          description: 'AgroSoluce™ enregistre des instantanés de préparation, des auto-évaluations de coopératives, et des améliorations visibles et lacunes restantes.',
           point1: 'Permettre aux acheteurs de démontrer une surveillance continue, pas des contrôles ponctuels',
           point2: 'Observer les trajectoires d\'amélioration et les lacunes restantes',
           point3: 'Soutenir le reporting basé sur des preuves et la documentation de diligence raisonnable',
@@ -1323,10 +1323,10 @@ export const translations: Record<Language, Translations> = {
             'badges de certification',
           ],
         },
-        footer: 'AgroSoluce soutient votre diligence raisonnable — il ne la remplace pas.',
+        footer: 'AgroSoluce™ soutient votre diligence raisonnable — il ne la remplace pas.',
       },
       why: {
-        title: 'Pourquoi les Acheteurs Utilisent AgroSoluce',
+        title: 'Pourquoi les Acheteurs Utilisent AgroSoluce™',
         points: [
           'Réduire les angles morts d\'approvisionnement',
           'Prioriser l\'engagement plutôt que l\'exclusion',
@@ -1338,14 +1338,14 @@ export const translations: Record<Language, Translations> = {
         explore: 'Explorer le Répertoire',
         pilot: 'Rejoindre un Pilote Acheteur',
       },
-      disclaimer: 'AgroSoluce soutient les processus de diligence raisonnable. Toutes les informations peuvent inclure des données auto-déclarées et ne constituent pas une certification ou une approbation réglementaire.',
+      disclaimer: 'AgroSoluce™ soutient les processus de diligence raisonnable. Toutes les informations peuvent inclure des données auto-déclarées et ne constituent pas une certification ou une approbation réglementaire.',
     },
     partnerLanding: {
       hero: {
         tagline: 'Pour les ONG & Partenaires de Programme',
-        title: 'AgroSoluce pour les ONG & Partenaires de Programme',
+        title: 'AgroSoluce™ pour les ONG & Partenaires de Programme',
         subtitle: 'Rendre Visible le Progrès au Niveau des Agriculteurs — Sans Déformer la Réalité',
-        description: 'AgroSoluce aide les ONG et partenaires à surveiller, structurer et soutenir les efforts d\'amélioration dans les coopératives — en commençant par les agriculteurs et en agrégant aux programmes et pilotes. Nous nous concentrons sur ce qui se passe, pas sur ce qui est revendiqué.',
+        description: 'AgroSoluce™ aide les ONG et partenaires à surveiller, structurer et soutenir les efforts d\'amélioration dans les coopératives — en commençant par les agriculteurs et en agrégant aux programmes et pilotes. Nous nous concentrons sur ce qui se passe, pas sur ce qui est revendiqué.',
       },
       challenge: {
         title: 'Le Défi des ONG & Programmes',
@@ -1355,22 +1355,22 @@ export const translations: Record<Language, Translations> = {
           'comparer les efforts équitablement sans simplification excessive',
           'rapporter de manière transparente sans exagérer les résultats',
         ],
-        solution: 'AgroSoluce a été construit pour soutenir l\'apprentissage, la surveillance et l\'amélioration — pas les récits marketing.',
+        solution: 'AgroSoluce™ a été construit pour soutenir l\'apprentissage, la surveillance et l\'amélioration — pas les récits marketing.',
       },
       how: {
-        title: 'Comment AgroSoluce Soutient les Programmes',
+        title: 'Comment AgroSoluce™ Soutient les Programmes',
       },
       features: {
         baselines: {
           title: '1. Bases de Coopératives Structurées',
-          description: 'AgroSoluce établit une base commune dans les coopératives: identité et contexte d\'approvisionnement, couverture de documentation, et visibilité de l\'engagement des agriculteurs.',
+          description: 'AgroSoluce™ établit une base commune dans les coopératives: identité et contexte d\'approvisionnement, couverture de documentation, et visibilité de l\'engagement des agriculteurs.',
           point1: 'Créer un langage commun entre partenaires',
           point2: 'Permettre une comparaison équitable entre coopératives',
           point3: 'Établir des points de départ basés sur des preuves',
         },
         monitoring: {
           title: '2. Surveillance Axée sur les Agriculteurs',
-          description: 'AgroSoluce suit les activités d\'intégration des agriculteurs, les événements de formation, les déclarations et la participation, et les indicateurs de base vs progrès.',
+          description: 'AgroSoluce™ suit les activités d\'intégration des agriculteurs, les événements de formation, les déclarations et la participation, et les indicateurs de base vs progrès.',
           point1: 'L\'engagement des agriculteurs devient observable, pas anecdotique',
           point2: 'Suivre les activités au niveau des agriculteurs à l\'échelle de la coopérative',
           point3: 'Surveiller la participation à la formation et l\'engagement dans le temps',
@@ -1385,16 +1385,16 @@ export const translations: Record<Language, Translations> = {
         },
         views: {
           title: '4. Vues Pilote & Portefeuille',
-          description: 'AgroSoluce permet de regrouper les coopératives en pilotes ou programmes, de visualiser des indicateurs agrégés et de descendre à la réalité au niveau de la coopérative lorsque nécessaire.',
+          description: 'AgroSoluce™ permet de regrouper les coopératives en pilotes ou programmes, de visualiser des indicateurs agrégés et de descendre à la réalité au niveau de la coopérative lorsque nécessaire.',
           point1: 'Soutenir un reporting basé sur des preuves, pas des déclarations exagérées',
           point2: 'Visualiser les progrès agrégés dans les programmes',
           point3: 'Descendre au détail au niveau de la coopérative lorsque nécessaire',
         },
       },
       whatIs: {
-        title: 'Ce Qu\'AgroSoluce Est (et N\'Est Pas)',
+        title: 'Ce Qu\'AgroSoluce™ Est (et N\'Est Pas)',
         is: {
-          title: 'AgroSoluce est:',
+          title: 'AgroSoluce™ est:',
           points: [
             'une plateforme de transparence et de surveillance',
             'un outil de soutien à la diligence raisonnable',
@@ -1402,7 +1402,7 @@ export const translations: Record<Language, Translations> = {
           ],
         },
         isNot: {
-          title: 'AgroSoluce n\'est pas:',
+          title: 'AgroSoluce™ n\'est pas:',
           points: [
             'un système de certification',
             'un moteur d\'audit',
@@ -1411,7 +1411,7 @@ export const translations: Record<Language, Translations> = {
         },
       },
       why: {
-        title: 'Pourquoi les ONG & Partenaires Utilisent AgroSoluce',
+        title: 'Pourquoi les ONG & Partenaires Utilisent AgroSoluce™',
         points: [
           'Renforcer la crédibilité du programme',
           'Aligner les coopératives autour de chemins d\'amélioration réalistes',
@@ -1423,7 +1423,7 @@ export const translations: Record<Language, Translations> = {
         pilot: 'Démarrer un Pilote de Programme',
         explore: 'Explorer les Coopératives',
       },
-      disclaimer: 'AgroSoluce soutient les efforts de surveillance et de diligence raisonnable. Il ne certifie pas les résultats ni ne remplace la vérification indépendante.',
+      disclaimer: 'AgroSoluce™ soutient les efforts de surveillance et de diligence raisonnable. Il ne certifie pas les résultats ni ne remplace la vérification indépendante.',
     },
   },
 };

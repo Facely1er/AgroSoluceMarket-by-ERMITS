@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, MapPin, Building2, Filter, Download, CheckCircle } from 'lucide-react';
+import { Search, MapPin, Building2, Filter, Download, CheckCircle, Users, Shield, TrendingUp, Globe, Info, ArrowRight, Eye } from 'lucide-react';
 import { useCooperatives } from '@/hooks/useCooperatives';
 import { normalizeText } from '@/lib/utils/cooperativeUtils';
 import CooperativeMap from '@/features/cooperatives/components/CooperativeMap';
@@ -141,16 +141,106 @@ export default function CooperativeDirectory() {
           { label: 'Cooperatives', path: '/cooperatives' }
         ]} />
 
-        {/* Header */}
-        <div className="bg-gradient-to-r from-secondary-500 to-secondary-600 rounded-xl shadow-lg p-8 mb-6 text-white relative overflow-hidden">
+        {/* Enhanced Header */}
+        <div className="bg-gradient-to-r from-secondary-500 via-secondary-600 to-primary-600 rounded-xl shadow-2xl p-8 md:p-12 mb-8 text-white relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-transparent"></div>
+          <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32"></div>
+          <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full -ml-24 -mb-24"></div>
           <div className="relative z-10">
-            <h1 className="text-3xl md:text-4xl font-bold mb-2">
-              🇨🇮 Répertoire des Coopératives - Côte d'Ivoire
+            <div className="flex items-center gap-3 mb-4">
+              <Building2 className="h-8 w-8 text-white/90" />
+              <span className="text-sm font-semibold text-white/80 uppercase tracking-wider">Cooperative Space</span>
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
+              🇨🇮 Répertoire des Coopératives
             </h1>
-            <p className="text-lg text-white/90">
+            <p className="text-xl md:text-2xl text-white/90 mb-6 max-w-3xl">
               Système de Traçabilité et Sourcing des Filières Agricoles
             </p>
+            <p className="text-base text-white/80 max-w-3xl mb-6 leading-relaxed">
+              Explorez un répertoire structuré de coopératives agricoles en Côte d'Ivoire. 
+              Découvrez qui elles sont, où elles opèrent, quelles cultures elles produisent, 
+              et quelles informations sont disponibles aujourd'hui pour soutenir votre due diligence.
+            </p>
+            <div className="flex flex-wrap gap-4 mt-6">
+              <Link
+                to="/monitoring"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-white/20 backdrop-blur-sm text-white rounded-lg hover:bg-white/30 transition-all border border-white/30 font-medium"
+              >
+                <Shield className="h-5 w-5" />
+                Monitoring & Compliance
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link
+                to="/buyers"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm text-white rounded-lg hover:bg-white/20 transition-all border border-white/20 font-medium"
+              >
+                <Eye className="h-5 w-5" />
+                For Buyers
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* Informative Section */}
+        <div className="bg-white rounded-xl shadow-lg p-8 mb-8 border border-gray-100">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="flex items-start gap-4">
+              <div className="flex-shrink-0 w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                <Users className="h-6 w-6 text-primary-600" />
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Structured Directory</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  Accédez à des profils stables et partageables de coopératives avec leur identité, 
+                  contexte de sourcing, et informations régionales.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <div className="flex-shrink-0 w-12 h-12 bg-secondary-100 rounded-lg flex items-center justify-center">
+                <Shield className="h-6 w-6 text-secondary-600" />
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Due Diligence Support</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  Identifiez les écarts de documentation, visualisez les signaux d'engagement des agriculteurs, 
+                  et suivez les efforts d'amélioration dans le temps.
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <div className="flex-shrink-0 w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                <TrendingUp className="h-6 w-6 text-green-600" />
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Progress Tracking</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  Suivez les améliorations visibles et les écarts restants pour prendre des décisions 
+                  de sourcing basées sur la transparence et le progrès.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Info Banner */}
+        <div className="bg-blue-50 border-l-4 border-blue-500 rounded-lg p-6 mb-8">
+          <div className="flex items-start gap-4">
+            <Info className="h-6 w-6 text-blue-600 flex-shrink-0 mt-0.5" />
+            <div>
+              <h3 className="text-lg font-semibold text-blue-900 mb-2">À propos de ce répertoire</h3>
+              <p className="text-blue-800 text-sm leading-relaxed mb-3">
+                Ce répertoire est conçu pour rendre les coopératives visibles et structurer la réalité au niveau 
+                des coopératives. Nous commençons par l'agriculteur et agrégeons les informations pour fournir 
+                une vue transparente de l'engagement des agriculteurs sans exposer de données personnelles sensibles.
+              </p>
+              <p className="text-blue-700 text-xs leading-relaxed">
+                <strong>Note importante:</strong> Les informations affichées sont basées sur les données disponibles 
+                et les auto-évaluations. Ce répertoire ne certifie pas les résultats et ne remplace pas les audits 
+                ou vérifications indépendantes. Les décisions finales de sourcing restent la responsabilité des acheteurs.
+              </p>
+            </div>
           </div>
         </div>
 

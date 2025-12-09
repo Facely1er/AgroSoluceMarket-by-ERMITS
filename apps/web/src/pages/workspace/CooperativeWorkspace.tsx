@@ -2308,7 +2308,7 @@ function EnablementTab({ cooperativeId }: { cooperativeId: string }) {
       <div className="bg-white rounded-lg border border-gray-200 p-6">
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Farmer Protection Principles</h3>
         <p className="text-sm text-gray-600 mb-4">
-          Learn about AgroSoluce's approach to protecting farmer privacy, reducing audit burden, 
+          Learn about AgroSoluce™'s approach to protecting farmer privacy, reducing audit burden, 
           and ensuring responsible data use.
         </p>
         <Link

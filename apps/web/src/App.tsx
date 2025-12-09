@@ -30,6 +30,7 @@ const DueCarePrinciplesPage = lazy(() => import('./pages/governance/DueCarePrinc
 const ChildLaborDashboard = lazy(() => import('./components/compliance').then(m => ({ default: m.ChildLaborDashboard })));
 const AssessmentForm = lazy(() => import('./components/compliance').then(m => ({ default: m.AssessmentForm })));
 const AssessmentPage = lazy(() => import('./pages/assessment'));
+const MonitoringPage = lazy(() => import('./pages/monitoring/MonitoringPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 // Loading component
@@ -84,6 +85,14 @@ function App() {
             <Route path="/regulatory-references" element={<RegulatoryReferencesPage />} />
             <Route path="/references/ngo" element={<NGORegistryPage />} />
             <Route path="/governance/due-care" element={<DueCarePrinciplesPage />} />
+            <Route
+              path="/monitoring"
+              element={
+                <ErrorBoundary>
+                  <MonitoringPage />
+                </ErrorBoundary>
+              }
+            />
             <Route
               path="/compliance/child-labor"
               element={

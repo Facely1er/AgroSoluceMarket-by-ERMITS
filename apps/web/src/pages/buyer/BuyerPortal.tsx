@@ -46,7 +46,7 @@ export default function BuyerPortal() {
               Discover, evaluate, and connect with EUDR-compliant cooperatives
             </p>
             <p className="text-lg text-white/85 max-w-3xl leading-relaxed">
-              AgroSoluce provides buyers with transparent access to cooperative documentation coverage, 
+              AgroSoluce™ provides buyers with transparent access to cooperative documentation coverage, 
               compliance readiness, and farmer engagement metrics. Make informed sourcing decisions 
               based on real evidence, not promises.
             </p>
@@ -263,10 +263,10 @@ export default function BuyerPortal() {
             <Info className="h-6 w-6 text-blue-600 mt-0.5 flex-shrink-0" />
             <div>
               <h3 className="text-lg font-semibold text-blue-900 mb-2">
-                About AgroSoluce for Buyers
+                About AgroSoluce™ for Buyers
               </h3>
               <p className="text-blue-800 leading-relaxed mb-3">
-                AgroSoluce provides transparency into cooperative documentation and compliance status. 
+                AgroSoluce™ provides transparency into cooperative documentation and compliance status. 
                 We help you understand <strong>what exists, what's missing, and where to focus your due diligence</strong>. 
                 This platform does not replace audits or certifications, but rather makes visible the 
                 reality of farmer engagement, documentation coverage, and improvement efforts.
@@ -292,7 +292,7 @@ export default function BuyerPortal() {
               <ArrowRight className="h-6 w-6 group-hover:translate-x-1 transition-transform" />
             </div>
             <p className="text-white/90 leading-relaxed">
-              Read our comprehensive guide for buyers on how AgroSoluce supports responsible sourcing 
+              Read our comprehensive guide for buyers on how AgroSoluce™ supports responsible sourcing 
               and due diligence processes.
             </p>
           </Link>
