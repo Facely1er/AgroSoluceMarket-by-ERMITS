@@ -220,7 +220,7 @@ const ERMITSTeamDashboard = () => {
           <div className="list-content">
             <div className="section-header">
               <h3 className="section-title">Cooperative Directory</h3>
-              <button className="btn-icon">
+              <button className="btn-icon" aria-label="Add new cooperative" title="Add new cooperative">
                 <Plus className="icon-sm" />
               </button>
             </div>
@@ -340,7 +340,7 @@ const ERMITSTeamDashboard = () => {
           <div className="alerts-content">
             <div className="section-header">
               <h3 className="section-title">Compliance Alerts</h3>
-              <button className="btn-icon">
+              <button className="btn-icon" aria-label="Add new alert" title="Add new alert">
                 <Plus className="icon-sm" />
               </button>
             </div>
@@ -502,7 +502,7 @@ const CooperativeDashboard = () => {
                     <h4 className="member-name">Farmer {i}</h4>
                     <p className="member-details">Plot {i} • 2.3 hectares • Cocoa</p>
                   </div>
-                  <button className="member-action">
+                  <button className="member-action" aria-label="View member details" title="View member details">
                     <Eye className="icon-sm" />
                   </button>
                 </div>
@@ -689,7 +689,7 @@ const CooperativeDashboard = () => {
                           <span>Clean</span>
                         </div>
                       )}
-                      <button className="btn-icon">
+                      <button className="btn-icon" aria-label="View assessment details" title="View assessment details">
                         <Eye className="icon-sm" />
                       </button>
                     </div>
@@ -783,7 +783,7 @@ const FarmerFieldApp = () => {
           <h1 className="header-title">AgroSoluce</h1>
           <p className="header-subtitle">Field Operations • Offline Mode</p>
         </div>
-        <button className="header-action-btn">
+        <button className="header-action-btn" aria-label="Change language" title="Change language">
           <Globe className="icon-md" />
         </button>
       </header>
