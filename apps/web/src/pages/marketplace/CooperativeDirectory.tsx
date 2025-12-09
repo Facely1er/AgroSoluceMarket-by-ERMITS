@@ -479,11 +479,13 @@ export default function CooperativeDirectory() {
                       return (
                         <div key={region} className="flex items-center gap-4">
                           <div className="w-48 text-sm text-gray-800 dark:text-gray-200 font-medium">{region}</div>
-                          {/* CSS variable needed for dynamic width - inline style required */}
-                          {/* eslint-disable-next-line */}
                           <div 
                             className={styles.progressBarContainer}
-                            style={{ '--progress-width': `${percentage}%` } as React.CSSProperties & { '--progress-width': string }}
+                            ref={(el) => {
+                              if (el) {
+                                el.style.setProperty('--progress-width', `${percentage}%`);
+                              }
+                            }}
                           >
                             <div className={styles.progressBar} />
                           </div>
