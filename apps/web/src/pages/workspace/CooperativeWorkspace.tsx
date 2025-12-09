@@ -62,6 +62,7 @@ import type { FarmersFirstSummary } from '@/features/farmers/api/farmersFirstApi
 import { AssessmentFlow } from '@/components/assessment/AssessmentFlow';
 import { getLatestAssessment } from '@/features/assessment/api/assessmentApi';
 import type { AssessmentRecord } from '@/features/assessment/api/assessmentApi';
+import CooperativeLandingPage from './CooperativeLandingPage';
 
 // NOTE: Authentication check is available via getCurrentUser() but not enforced.
 // This workspace is currently unprotected. In production, add auth protection here.
@@ -69,6 +70,29 @@ import type { AssessmentRecord } from '@/features/assessment/api/assessmentApi';
 export default function CooperativeWorkspace() {
   const { coop_id } = useParams<{ coop_id: string }>();
   const [activeTab, setActiveTab] = useState<'overview' | 'evidence' | 'coverage' | 'gaps' | 'enablement' | 'farmers-first' | 'assessment'>('overview');
+  const [hasData, setHasData] = useState<boolean | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    checkCooperativeExists();
+  }, [coop_id]);
+
+  const checkCooperativeExists = async () => {
+    if (!coop_id) {
+      setHasData(false);
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const result = await getCanonicalDirectoryRecordById(coop_id);
+      setHasData(result.data !== null && !result.error);
+    } catch (err) {
+      setHasData(false);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   if (!coop_id) {
     return (
@@ -78,6 +102,21 @@ export default function CooperativeWorkspace() {
         </div>
       </div>
     );
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading workspace...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!hasData) {
+    return <CooperativeLandingPage cooperativeId={coop_id} />;
   }
 
   const tabs = [

@@ -10,18 +10,21 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           {/* Logo & Brand */}
-          <div className="flex items-center gap-2">
+          <Link 
+            to="/" 
+            className="flex items-center gap-2 hover:opacity-80 transition-opacity group"
+          >
             <img 
               src="/agrosoluce.png" 
               alt="AgroSoluce Logo" 
-              className="h-12 w-auto"
+              className="h-14 w-auto transition-transform group-hover:scale-105"
             />
-            <div className="text-xs">
-              <div className="text-primary-600 dark:text-primary-400 font-semibold">AgroSoluce™</div>
-              <div className="text-gray-500 dark:text-gray-400">Source Intelligence</div>
-              <div className="text-gray-500 dark:text-gray-400">by ERMITS</div>
+            <div>
+              <h2 className="text-primary-600 dark:text-primary-400 font-bold text-lg leading-tight">AgroSoluce™</h2>
+              <p className="text-xs text-gray-700 dark:text-gray-300 leading-tight">Source Intelligence</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 leading-tight">by ERMITS</p>
             </div>
-          </div>
+          </Link>
 
           {/* Links */}
           <div className="flex flex-wrap items-center justify-center gap-4 text-xs">
