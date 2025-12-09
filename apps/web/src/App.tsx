@@ -1,8 +1,9 @@
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import ErrorBoundary from './components/common/ErrorBoundary';
+import { isSupabaseConfigured, getSupabaseConfigStatus } from './lib/supabase';
 
 // Lazy load all route components for code splitting
 const MarketplaceHome = lazy(() => import('./pages/marketplace/MarketplaceHome'));
@@ -39,6 +40,20 @@ const LoadingSpinner = () => (
 );
 
 function App() {
+  // Check Supabase configuration on app startup
+  useEffect(() => {
+    if (!isSupabaseConfigured()) {
+      const configStatus = getSupabaseConfigStatus();
+      console.warn(
+        '⚠️ AgroSoluce: Supabase is not configured.\n' +
+        `Configuration: URL=${configStatus.urlConfigured ? '✓' : '✗'}, ` +
+        `Key=${configStatus.keyConfigured ? '✓' : '✗'}\n` +
+        'Database features will not be available. ' +
+        'Please set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY environment variables.'
+      );
+    }
+  }, []);
+
   return (
     <Router>
       <div className="flex flex-col min-h-screen bg-gradient-to-br from-secondary-50 via-primary-50 to-white">
