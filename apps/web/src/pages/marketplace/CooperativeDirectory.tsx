@@ -1,12 +1,12 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { Search, MapPin, Building2, Filter, Download, CheckCircle, Users, Shield, TrendingUp, Globe, Info, ArrowRight, Eye } from 'lucide-react';
+import { Search, MapPin, Building2, Download, Users, Shield, TrendingUp, Info, ArrowRight, Eye } from 'lucide-react';
 import { useCooperatives } from '@/hooks/useCooperatives';
 import { normalizeText } from '@/lib/utils/cooperativeUtils';
 import CooperativeMap from '@/features/cooperatives/components/CooperativeMap';
 import CooperativeCard from '@/features/cooperatives/components/CooperativeCard';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
-import type { Cooperative } from '@/types';
+import styles from './CooperativeDirectory.module.css';
 
 export default function CooperativeDirectory() {
   const { cooperatives, loading, error } = useCooperatives();
@@ -479,11 +479,13 @@ export default function CooperativeDirectory() {
                       return (
                         <div key={region} className="flex items-center gap-4">
                           <div className="w-48 text-sm text-gray-800 dark:text-gray-200 font-medium">{region}</div>
-                          <div className="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-4">
-                            <div
-                              className="bg-secondary-600 dark:bg-secondary-400 h-4 rounded-full transition-all"
-                              style={{ width: `${percentage}%` } as React.CSSProperties}
-                            />
+                          {/* CSS variable needed for dynamic width - inline style required */}
+                          {/* eslint-disable-next-line */}
+                          <div 
+                            className={styles.progressBarContainer}
+                            style={{ '--progress-width': `${percentage}%` } as React.CSSProperties & { '--progress-width': string }}
+                          >
+                            <div className={styles.progressBar} />
                           </div>
                           <div className="w-16 text-sm font-semibold text-right text-gray-900 dark:text-gray-100">{count}</div>
                         </div>

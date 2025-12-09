@@ -25,15 +25,12 @@ import {
   Calendar,
   MapPin,
   Activity,
-  Award,
   ClipboardList,
   Sprout,
   UserCheck,
   GraduationCap,
   DollarSign,
   Home,
-  Cloud,
-  DollarSign as PriceIcon,
   Phone,
   Video,
   Globe,
@@ -41,8 +38,6 @@ import {
   Plus,
   Eye,
   Clock,
-  XCircle,
-  AlertCircle as AlertIcon,
 } from 'lucide-react';
 import './IntelligenceApp.css';
 
