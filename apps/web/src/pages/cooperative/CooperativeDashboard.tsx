@@ -10,6 +10,8 @@ import { getCooperativeById } from '@/features/cooperatives/api/cooperativesApi'
 import { useCooperativeEnrichment } from '@/hooks/useCooperativeEnrichment';
 import type { Cooperative } from '@/types';
 import CoopReadinessChecklist from '@/components/CoopReadinessChecklist';
+import { getCurrentUser } from '@/lib/supabase/client';
+import CooperativeSpaceLanding from './CooperativeSpaceLanding';
 
 // Mock cooperative ID - in real app, get from auth/context
 const MOCK_COOPERATIVE_ID = 'cooperative-id-placeholder';
@@ -19,6 +21,40 @@ export default function CooperativeDashboard() {
     'overview' | 'farmers' | 'products' | 'traceability' | 'compliance' | 'evidence'
   >('overview');
   const [showFieldDeclarationForm, setShowFieldDeclarationForm] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    checkAuthentication();
+  }, []);
+
+  const checkAuthentication = async () => {
+    try {
+      const user = await getCurrentUser();
+      // For now, we'll show the landing page if no user is authenticated
+      // In production, you might also check if the user has a cooperative role
+      setIsAuthenticated(user !== null);
+    } catch (error) {
+      setIsAuthenticated(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return <CooperativeSpaceLanding />;
+  }
 
   const tabs = [
     { id: 'overview', label: 'Vue d\'ensemble', icon: Building2 },
