@@ -1,12 +1,12 @@
 // Supabase client configuration for AgroSoluce
-// Using Database 3 with agrosoluce schema prefix
+// Using public schema (Supabase only supports 'public' or 'graphql_public')
 
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
 // Environment variables
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
-const defaultSchema = import.meta.env.VITE_SUPABASE_SCHEMA || 'agrosoluce';
+const defaultSchema = 'public'; // Supabase only allows 'public' or 'graphql_public'
 
 // Validation function to check if Supabase is properly configured
 export const isSupabaseConfigured = (): boolean => {
@@ -41,7 +41,7 @@ if (import.meta.env.DEV) {
   }
 }
 
-// Create Supabase client with agrosoluce schema
+// Create Supabase client with public schema
 let supabaseInstance: SupabaseClient | null = null;
 
 try {
@@ -61,7 +61,7 @@ try {
         }
       },
       db: {
-        schema: 'agrosoluce'
+        schema: 'public'
       }
     });
     
@@ -122,9 +122,16 @@ export const schemaManager = {
   },
   
   // Create a client with a specific schema
+  // Note: Supabase only supports 'public' or 'graphql_public' schemas
   createClientWithSchema(schema: string): SupabaseClient | null {
     if (!supabaseUrl || !supabaseAnonKey) {
       return null;
+    }
+    // Validate schema - Supabase only allows 'public' or 'graphql_public'
+    const validSchemas = ['public', 'graphql_public'];
+    if (!validSchemas.includes(schema)) {
+      console.warn(`Invalid schema "${schema}". Using 'public' instead. Supabase only supports: ${validSchemas.join(', ')}`);
+      schema = 'public';
     }
     return createClient(supabaseUrl, supabaseAnonKey, {
       auth: {
