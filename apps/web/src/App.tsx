@@ -57,7 +57,7 @@ function App() {
 
   return (
     <Router>
-      <div className="flex flex-col min-h-screen bg-gradient-to-br from-secondary-50 via-primary-50 to-white">
+      <div className="flex flex-col min-h-screen bg-gradient-to-br from-secondary-50 dark:from-gray-900 via-primary-50 dark:via-gray-900 to-white dark:to-gray-800">
         <Navbar />
         <main className="flex-grow">
           <Suspense fallback={<LoadingSpinner />}>

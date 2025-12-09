@@ -31,11 +31,11 @@ export default function CooperativeCard({ cooperative }: CooperativeCardProps) {
   return (
     <Link
       to={`/cooperatives/${cooperative.id}`}
-      className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow border-l-4 border-secondary-500 hover:border-primary-500"
+      className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow border-l-4 border-secondary-500 dark:border-secondary-400 hover:border-primary-500 dark:hover:border-primary-400"
     >
       {/* Context line - shown first (product-first, region-aware, coverage-aware) */}
       {(commodityLabel || countryCode || region) && (
-        <div className="text-xs text-gray-600 mb-2">
+        <div className="text-xs text-gray-600 dark:text-gray-300 mb-2">
           {commodityLabel && <span className="font-semibold">{commodityLabel}</span>}
           {commodityLabel && (countryCode || region) && <span> • </span>}
           {countryCode && <span>{countryCode}</span>}
@@ -46,36 +46,36 @@ export default function CooperativeCard({ cooperative }: CooperativeCardProps) {
 
       {/* Cooperative name - formatted, shown after context */}
       <div className="flex items-start justify-between mb-3">
-        <h3 className="text-lg font-semibold text-gray-900 flex-1">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 flex-1">
           {cooperative.name}
         </h3>
         {isVerified ? (
-          <span className="flex items-center gap-1 text-green-600 text-sm">
+          <span className="flex items-center gap-1 text-green-600 dark:text-green-400 text-sm">
             <CheckCircle className="h-4 w-4" />
             {t.cooperative.verified}
           </span>
         ) : (
-          <span className="flex items-center gap-1 text-yellow-600 text-sm">
+          <span className="flex items-center gap-1 text-yellow-600 dark:text-yellow-400 text-sm">
             <Clock className="h-4 w-4" />
             {t.cooperative.pending}
           </span>
         )}
       </div>
 
-      <div className="space-y-2 text-sm text-gray-600">
+      <div className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
         <div className="flex items-center gap-2">
-          <MapPin className="h-4 w-4 text-gray-400" />
+          <MapPin className="h-4 w-4 text-gray-400 dark:text-gray-500" />
           <span>{cooperative.region}</span>
           {department && (
             <>
-              <span className="text-gray-300">•</span>
+              <span className="text-gray-300 dark:text-gray-600">•</span>
               <span>{department}</span>
             </>
           )}
         </div>
         {sector && (
           <div className="flex items-center gap-2">
-            <Building2 className="h-4 w-4 text-gray-400" />
+            <Building2 className="h-4 w-4 text-gray-400 dark:text-gray-500" />
             <span>{sector}</span>
           </div>
         )}
@@ -88,7 +88,7 @@ export default function CooperativeCard({ cooperative }: CooperativeCardProps) {
             {cooperative.natureActiviteTags.slice(0, 3).map(tag => (
               <span
                 key={tag}
-                className="px-2 py-1 bg-primary-50 text-primary-700 text-xs rounded-full"
+                className="px-2 py-1 bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-xs rounded-full"
               >
                 {tag}
               </span>

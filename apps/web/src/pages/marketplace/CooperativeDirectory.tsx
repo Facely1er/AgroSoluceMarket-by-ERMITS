@@ -116,7 +116,7 @@ export default function CooperativeDirectory() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Chargement des données...</p>
+          <p className="text-gray-700 dark:text-gray-300">Chargement des données...</p>
         </div>
       </div>
     );
@@ -133,7 +133,7 @@ export default function CooperativeDirectory() {
   }
 
   return (
-    <div className="min-h-screen py-8 bg-gradient-to-br from-secondary-50 via-primary-50 to-white">
+    <div className="min-h-screen py-8 bg-gradient-to-br from-secondary-50 dark:from-gray-900 via-primary-50 dark:via-gray-900 to-white dark:to-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumbs */}
         <Breadcrumbs items={[
@@ -183,39 +183,39 @@ export default function CooperativeDirectory() {
         </div>
 
         {/* Informative Section */}
-        <div className="bg-white rounded-xl shadow-lg p-8 mb-8 border border-gray-100">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 mb-8 border border-gray-200 dark:border-gray-700">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
-                <Users className="h-6 w-6 text-primary-600" />
+              <div className="flex-shrink-0 w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center">
+                <Users className="h-6 w-6 text-primary-700 dark:text-primary-400" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Structured Directory</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Structured Directory</h3>
+                <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
                   Accédez à des profils stables et partageables de coopératives avec leur identité, 
                   contexte de sourcing, et informations régionales.
                 </p>
               </div>
             </div>
             <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-12 h-12 bg-secondary-100 rounded-lg flex items-center justify-center">
-                <Shield className="h-6 w-6 text-secondary-600" />
+              <div className="flex-shrink-0 w-12 h-12 bg-secondary-100 dark:bg-secondary-900/30 rounded-lg flex items-center justify-center">
+                <Shield className="h-6 w-6 text-secondary-700 dark:text-secondary-400" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Due Diligence Support</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Due Diligence Support</h3>
+                <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
                   Identifiez les écarts de documentation, visualisez les signaux d'engagement des agriculteurs, 
                   et suivez les efforts d'amélioration dans le temps.
                 </p>
               </div>
             </div>
             <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                <TrendingUp className="h-6 w-6 text-green-600" />
+              <div className="flex-shrink-0 w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
+                <TrendingUp className="h-6 w-6 text-green-700 dark:text-green-400" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Progress Tracking</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Progress Tracking</h3>
+                <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
                   Suivez les améliorations visibles et les écarts restants pour prendre des décisions 
                   de sourcing basées sur la transparence et le progrès.
                 </p>
@@ -225,18 +225,18 @@ export default function CooperativeDirectory() {
         </div>
 
         {/* Info Banner */}
-        <div className="bg-blue-50 border-l-4 border-blue-500 rounded-lg p-6 mb-8">
+        <div className="bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-600 dark:border-blue-400 rounded-lg p-6 mb-8">
           <div className="flex items-start gap-4">
-            <Info className="h-6 w-6 text-blue-600 flex-shrink-0 mt-0.5" />
+            <Info className="h-6 w-6 text-blue-700 dark:text-blue-400 flex-shrink-0 mt-0.5" />
             <div>
-              <h3 className="text-lg font-semibold text-blue-900 mb-2">À propos de ce répertoire</h3>
-              <p className="text-blue-800 text-sm leading-relaxed mb-3">
+              <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-2">À propos de ce répertoire</h3>
+              <p className="text-blue-800 dark:text-blue-200 text-sm leading-relaxed mb-3">
                 Ce répertoire est conçu pour rendre les coopératives visibles et structurer la réalité au niveau 
                 des coopératives. Nous commençons par l'agriculteur et agrégeons les informations pour fournir 
                 une vue transparente de l'engagement des agriculteurs sans exposer de données personnelles sensibles.
               </p>
-              <p className="text-blue-700 text-xs leading-relaxed">
-                <strong>Note importante:</strong> Les informations affichées sont basées sur les données disponibles 
+              <p className="text-blue-700 dark:text-blue-300 text-xs leading-relaxed">
+                <strong className="font-semibold">Note importante:</strong> Les informations affichées sont basées sur les données disponibles 
                 et les auto-évaluations. Ce répertoire ne certifie pas les résultats et ne remplace pas les audits 
                 ou vérifications indépendantes. Les décisions finales de sourcing restent la responsabilité des acheteurs.
               </p>
@@ -246,34 +246,34 @@ export default function CooperativeDirectory() {
 
         {/* Stats Dashboard */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-          <div className="bg-white p-6 rounded-xl shadow-lg text-center border-l-4 border-primary-500 hover:shadow-xl transition-shadow">
-            <div className="text-3xl font-bold text-primary-600 mb-1">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg text-center border-l-4 border-primary-600 dark:border-primary-400 hover:shadow-xl transition-shadow">
+            <div className="text-3xl font-bold text-primary-700 dark:text-primary-400 mb-1">
               {stats.total.toLocaleString()}
             </div>
-            <div className="text-gray-600 text-sm">Coopératives Enregistrées</div>
+            <div className="text-gray-700 dark:text-gray-300 text-sm font-medium">Coopératives Enregistrées</div>
           </div>
-          <div className="bg-white p-6 rounded-xl shadow-lg text-center border-l-4 border-secondary-500 hover:shadow-xl transition-shadow">
-            <div className="text-3xl font-bold text-secondary-600 mb-1">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg text-center border-l-4 border-secondary-600 dark:border-secondary-400 hover:shadow-xl transition-shadow">
+            <div className="text-3xl font-bold text-secondary-700 dark:text-secondary-400 mb-1">
               {stats.regions}
             </div>
-            <div className="text-gray-600 text-sm">Régions Couvertes</div>
+            <div className="text-gray-700 dark:text-gray-300 text-sm font-medium">Régions Couvertes</div>
           </div>
-          <div className="bg-white p-6 rounded-xl shadow-lg text-center border-l-4 border-green-500 hover:shadow-xl transition-shadow">
-            <div className="text-3xl font-bold text-green-600 mb-1">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg text-center border-l-4 border-green-600 dark:border-green-400 hover:shadow-xl transition-shadow">
+            <div className="text-3xl font-bold text-green-700 dark:text-green-400 mb-1">
               {stats.verified.toLocaleString()}
             </div>
-            <div className="text-gray-600 text-sm">Enregistrées</div>
+            <div className="text-gray-700 dark:text-gray-300 text-sm font-medium">Enregistrées</div>
           </div>
-          <div className="bg-white p-6 rounded-xl shadow-lg text-center border-l-4 border-blue-500 hover:shadow-xl transition-shadow">
-            <div className="text-3xl font-bold text-blue-600 mb-1">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg text-center border-l-4 border-blue-600 dark:border-blue-400 hover:shadow-xl transition-shadow">
+            <div className="text-3xl font-bold text-blue-700 dark:text-blue-400 mb-1">
               {stats.departments}
             </div>
-            <div className="text-gray-600 text-sm">Départements</div>
+            <div className="text-gray-700 dark:text-gray-300 text-sm font-medium">Départements</div>
           </div>
         </div>
 
         {/* Filters */}
-        <div className="bg-white rounded-xl shadow-lg p-6 mb-6 border border-gray-100">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-6 border border-gray-200 dark:border-gray-700">
           <div className="space-y-4">
             {/* Search and Basic Filters */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -284,7 +284,7 @@ export default function CooperativeDirectory() {
                   placeholder="Rechercher par nom, département..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent"
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
                 />
               </div>
               <div>
@@ -295,7 +295,7 @@ export default function CooperativeDirectory() {
                   value={regionFilter}
                   onChange={(e) => setRegionFilter(e.target.value)}
                   aria-label="Filtrer par région"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                 >
                   <option value="">Toutes les régions</option>
                   {regions.map(region => (
@@ -311,7 +311,7 @@ export default function CooperativeDirectory() {
                   value={departmentFilter}
                   onChange={(e) => setDepartmentFilter(e.target.value)}
                   aria-label="Filtrer par département"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                 >
                   <option value="">Tous les départements</option>
                   {departments.map(dept => (
@@ -338,7 +338,7 @@ export default function CooperativeDirectory() {
                   value={countryFilter}
                   onChange={(e) => setCountryFilter(e.target.value)}
                   aria-label="Filtrer par pays"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                 >
                   <option value="">All Countries</option>
                   {countries.map(country => (
@@ -354,7 +354,7 @@ export default function CooperativeDirectory() {
                   value={commodityFilter}
                   onChange={(e) => setCommodityFilter(e.target.value)}
                   aria-label="Filtrer par produit"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                 >
                   <option value="">All Commodities</option>
                   {commodities.map(commodity => (
@@ -370,7 +370,7 @@ export default function CooperativeDirectory() {
                   value={eudrFilter === null ? '' : eudrFilter ? 'yes' : 'no'}
                   onChange={(e) => setEudrFilter(e.target.value === '' ? null : e.target.value === 'yes')}
                   aria-label="Filtrer par disponibilité EUDR"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-secondary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                 >
                   <option value="">EUDR: All</option>
                   <option value="yes">EUDR Context Available</option>
@@ -391,8 +391,8 @@ export default function CooperativeDirectory() {
                     }}
                     className={`px-3 py-1 text-sm rounded-lg border transition-colors ${
                       certificationFilter.includes(cert)
-                        ? 'bg-primary-600 text-white border-primary-600'
-                        : 'bg-white text-gray-700 border-gray-300 hover:border-primary-500'
+                        ? 'bg-primary-600 dark:bg-primary-500 text-white border-primary-600 dark:border-primary-500'
+                        : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:border-primary-500 dark:hover:border-primary-400'
                     }`}
                   >
                     {cert}
@@ -404,15 +404,15 @@ export default function CooperativeDirectory() {
         </div>
 
         {/* Tabs */}
-        <div className="bg-white rounded-xl shadow-lg mb-6 border border-gray-100">
-          <div className="border-b border-gray-200">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg mb-6 border border-gray-200 dark:border-gray-700">
+          <div className="border-b border-gray-200 dark:border-gray-700">
             <nav className="flex -mb-px">
               <button
                 onClick={() => setActiveTab('list')}
                 className={`px-6 py-3 text-sm font-medium border-b-2 ${
                   activeTab === 'list'
-                    ? 'border-secondary-500 text-secondary-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    ? 'border-secondary-600 dark:border-secondary-400 text-secondary-700 dark:text-secondary-400'
+                    : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600'
                 }`}
               >
                 <Building2 className="inline h-4 w-4 mr-2" />
@@ -422,8 +422,8 @@ export default function CooperativeDirectory() {
                 onClick={() => setActiveTab('map')}
                 className={`px-6 py-3 text-sm font-medium border-b-2 ${
                   activeTab === 'map'
-                    ? 'border-secondary-500 text-secondary-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    ? 'border-secondary-600 dark:border-secondary-400 text-secondary-700 dark:text-secondary-400'
+                    : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600'
                 }`}
               >
                 <MapPin className="inline h-4 w-4 mr-2" />
@@ -433,8 +433,8 @@ export default function CooperativeDirectory() {
                 onClick={() => setActiveTab('stats')}
                 className={`px-6 py-3 text-sm font-medium border-b-2 ${
                   activeTab === 'stats'
-                    ? 'border-secondary-500 text-secondary-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    ? 'border-secondary-600 dark:border-secondary-400 text-secondary-700 dark:text-secondary-400'
+                    : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600'
                 }`}
               >
                 Statistiques
@@ -446,9 +446,9 @@ export default function CooperativeDirectory() {
             {activeTab === 'list' && (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {filteredCooperatives.length === 0 ? (
-                  <div className="col-span-full text-center py-12 text-gray-500">
-                    <Building2 className="h-12 w-12 mx-auto mb-4 text-gray-400" />
-                    <p>Aucune coopérative trouvée</p>
+                  <div className="col-span-full text-center py-12 text-gray-600 dark:text-gray-400">
+                    <Building2 className="h-12 w-12 mx-auto mb-4 text-gray-400 dark:text-gray-500" />
+                    <p className="font-medium">Aucune coopérative trouvée</p>
                   </div>
                 ) : (
                   filteredCooperatives.map(coop => (
@@ -471,21 +471,21 @@ export default function CooperativeDirectory() {
             {activeTab === 'stats' && (
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-lg font-semibold mb-4">Distribution par Région</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Distribution par Région</h3>
                   <div className="space-y-2">
                     {regions.slice(0, 10).map(region => {
                       const count = cooperatives.filter(c => c.region === region).length;
                       const percentage = (count / cooperatives.length) * 100;
                       return (
                         <div key={region} className="flex items-center gap-4">
-                          <div className="w-48 text-sm text-gray-700">{region}</div>
-                          <div className="flex-1 bg-gray-200 rounded-full h-4">
+                          <div className="w-48 text-sm text-gray-800 dark:text-gray-200 font-medium">{region}</div>
+                          <div className="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-4">
                             <div
-                              className="bg-secondary-500 h-4 rounded-full transition-all"
+                              className="bg-secondary-600 dark:bg-secondary-400 h-4 rounded-full transition-all"
                               style={{ width: `${percentage}%` } as React.CSSProperties}
                             />
                           </div>
-                          <div className="w-16 text-sm font-semibold text-right">{count}</div>
+                          <div className="w-16 text-sm font-semibold text-right text-gray-900 dark:text-gray-100">{count}</div>
                         </div>
                       );
                     })}
