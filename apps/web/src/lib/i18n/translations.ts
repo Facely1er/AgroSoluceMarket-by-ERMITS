@@ -1082,6 +1082,140 @@ export const translations: Record<Language, Translations> = {
       },
       disclaimer: 'AgroSoluce™ supports monitoring and due diligence efforts. It does not certify outcomes or replace independent verification.',
     },
+    cooperativeSpace: {
+      hero: {
+        title: 'Cooperative Space',
+        subtitle: 'Your dedicated workspace to manage compliance, documentation, and farmer engagement',
+        description: 'Access your cooperative dashboard to track progress, manage evidence, and make your compliance journey visible to buyers.',
+      },
+      features: {
+        evidence: {
+          title: 'Evidence Management',
+          description: 'Upload and organize compliance documentation, including land rights, farmer registrations, and certificates.',
+        },
+        coverage: {
+          title: 'Coverage Tracking',
+          description: 'Monitor your documentation coverage metrics and see how complete your evidence collection is.',
+        },
+        compliance: {
+          title: 'Compliance Readiness',
+          description: 'View readiness scores and maturity levels for EUDR, CMMC, and other regulatory frameworks.',
+        },
+        farmersFirst: {
+          title: 'Farmers First',
+          description: 'Track and manage farmer registrations, training programs, and engagement initiatives.',
+        },
+        enablement: {
+          title: 'Enablement Resources',
+          description: 'Access toolkits, templates, and guidance documents to improve your documentation practices.',
+        },
+        producers: {
+          title: 'Producer Management',
+          description: 'Manage your producers, track their documentation, and monitor compliance at scale.',
+        },
+      },
+      benefits: {
+        title: 'What You\'ll Have Access To',
+        documentation: {
+          title: 'Documentation Management',
+          description: 'Upload, organize, and manage proof documents for compliance and due diligence.',
+        },
+        gapAnalysis: {
+          title: 'Gap Analysis',
+          description: 'Identify missing documentation with specific guidance on what\'s needed.',
+        },
+        enablement: {
+          title: 'Enablement Resources',
+          description: 'Access toolkits, templates, and guidance documents to improve your practices.',
+        },
+        transparency: {
+          title: 'Transparency and Visibility',
+          description: 'Make your progress visible to buyers and partners while maintaining transparency.',
+        },
+        traceability: {
+          title: 'Traceability Tracking',
+          description: 'Track batches, products, and supply chain information for complete traceability.',
+        },
+        compliance: {
+          title: 'Compliance Dashboard',
+          description: 'Monitor your compliance status and readiness across multiple regulatory frameworks.',
+        },
+      },
+      cta: {
+        title: 'Ready to Access Your Cooperative Space?',
+        subtitle: 'Sign in or register your cooperative to unlock the full power of AgroSoluce™ workspace tools.',
+        findCooperative: 'Find Your Cooperative',
+        learnMore: 'Learn More',
+        freeNote: 'Free for cooperatives • Transparent • Progress-focused',
+      },
+      info: {
+        title: 'About the Cooperative Space',
+        description1: 'The Cooperative Space is designed to help cooperatives make their documentation and compliance efforts visible and transparent. By uploading evidence and tracking coverage, you enable buyers and partners to understand your current state and progress.',
+        description2: 'This platform does not replace audits or certifications. Instead, it provides a transparent view of what exists, what is missing, and where to focus improvement efforts. We start from the farmer, structure reality at the cooperative level, and support credible EUDR-aligned due diligence.',
+      },
+      links: {
+        lookingFor: 'Looking for something else?',
+        browseDirectory: 'Browse Cooperative Directory',
+        buyerPortal: 'Buyer Portal',
+        about: 'About AgroSoluce',
+      },
+    },
+    cooperativeWorkspaceLanding: {
+      hero: {
+        title: 'Welcome to the Cooperative Space',
+        subtitle: 'Your cooperative workspace is ready, but we need to register your cooperative first.',
+        description: 'Register your cooperative to access documentation management, compliance tracking, and farmer engagement tools.',
+      },
+      features: {
+        evidence: {
+          title: 'Evidence Management',
+          description: 'Upload and organize compliance documentation, including land rights, farmer registrations, and certificates.',
+        },
+        coverage: {
+          title: 'Coverage Tracking',
+          description: 'Monitor your documentation coverage metrics and see how complete your evidence collection is.',
+        },
+        compliance: {
+          title: 'Compliance Readiness',
+          description: 'View readiness scores and maturity levels for EUDR, CMMC, and other regulatory frameworks.',
+        },
+        farmersFirst: {
+          title: 'Farmers First',
+          description: 'Track and manage farmer registrations, training programs, and engagement initiatives.',
+        },
+      },
+      benefits: {
+        title: 'What You\'ll Have Access To',
+        documentation: {
+          title: 'Documentation Management',
+          description: 'Upload, organize, and manage proof documents for compliance and due diligence.',
+        },
+        gapAnalysis: {
+          title: 'Gap Analysis',
+          description: 'Identify missing documentation with specific guidance on what\'s needed.',
+        },
+        enablement: {
+          title: 'Enablement Resources',
+          description: 'Access toolkits, templates, and guidance documents to improve your practices.',
+        },
+        transparency: {
+          title: 'Transparency and Visibility',
+          description: 'Make your progress visible to buyers and partners while maintaining transparency.',
+        },
+      },
+      cta: {
+        title: 'Ready to Get Started?',
+        subtitle: 'Register your cooperative to unlock the full power of AgroSoluce™ workspace tools.',
+        register: 'Register Your Cooperative',
+        learnMore: 'Learn More',
+        freeNote: 'Free for cooperatives • Transparent • Progress-focused',
+      },
+      additional: {
+        alreadyRegistered: 'Already registered? Make sure you\'re using the correct cooperative ID.',
+        errorMessage: 'If you think this is an error, please contact support or check the',
+        checkDirectory: 'Cooperative Directory',
+      },
+    },
   },
   fr: {
     nav: {
