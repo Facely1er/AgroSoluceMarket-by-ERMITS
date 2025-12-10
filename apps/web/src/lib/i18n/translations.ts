@@ -53,6 +53,9 @@ export interface Translations {
     dueCarePrinciples: string;
     tagline: string;
     description: string;
+    logoAlt: string;
+    sourceIntelligence: string;
+    byErmits: string;
   };
 
   // Compliance
@@ -660,6 +663,9 @@ export const translations: Record<Language, Translations> = {
       dueCarePrinciples: 'Due Care Principles',
       tagline: 'Farmers-First Due Diligence for Responsible Agricultural Sourcing',
       description: 'Making farmer engagement, documentation coverage, and improvement efforts visible',
+      logoAlt: 'AgroSoluce Logo',
+      sourceIntelligence: 'Source Intelligence',
+      byErmits: 'by ERMITS',
     },
     compliance: {
       dashboard: 'Child Labor Monitoring Dashboard',
@@ -1286,6 +1292,9 @@ export const translations: Record<Language, Translations> = {
       dueCarePrinciples: 'Principes de Diligence Raisonnable',
       tagline: 'Diligence Raisonnable Axée sur les Agriculteurs pour un Approvisionnement Agricole Responsable',
       description: 'Rendre visible l\'engagement des agriculteurs, la couverture de la documentation et les efforts d\'amélioration',
+      logoAlt: 'Logo AgroSoluce',
+      sourceIntelligence: 'Intelligence des Sources',
+      byErmits: 'par ERMITS',
     },
     compliance: {
       dashboard: 'Tableau de bord de suivi du travail des enfants',

@@ -17,13 +17,13 @@ export default function Footer() {
             >
               <img 
                 src="/agrosoluce.png" 
-                alt="AgroSoluce Logo" 
+                alt={t.footer.logoAlt} 
                 className="h-12 w-auto transition-transform group-hover:scale-105"
               />
               <div>
                 <h2 className="text-primary-600 dark:text-primary-400 font-bold text-lg leading-tight">AgroSoluce™</h2>
-                <p className="text-xs text-gray-700 dark:text-gray-300 leading-tight">Source Intelligence</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400 leading-tight">by ERMITS</p>
+                <p className="text-xs text-gray-700 dark:text-gray-300 leading-tight">{t.footer.sourceIntelligence}</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400 leading-tight">{t.footer.byErmits}</p>
               </div>
             </Link>
             <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
