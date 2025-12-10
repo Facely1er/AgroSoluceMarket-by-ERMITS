@@ -396,6 +396,142 @@ export interface Translations {
     disclaimer: string;
   };
 
+  // Cooperative Space Landing
+  cooperativeSpace: {
+    hero: {
+      title: string;
+      subtitle: string;
+      description: string;
+    };
+    features: {
+      evidence: {
+        title: string;
+        description: string;
+      };
+      coverage: {
+        title: string;
+        description: string;
+      };
+      compliance: {
+        title: string;
+        description: string;
+      };
+      farmersFirst: {
+        title: string;
+        description: string;
+      };
+      enablement: {
+        title: string;
+        description: string;
+      };
+      producers: {
+        title: string;
+        description: string;
+      };
+    };
+    benefits: {
+      title: string;
+      documentation: {
+        title: string;
+        description: string;
+      };
+      gapAnalysis: {
+        title: string;
+        description: string;
+      };
+      enablement: {
+        title: string;
+        description: string;
+      };
+      transparency: {
+        title: string;
+        description: string;
+      };
+      traceability: {
+        title: string;
+        description: string;
+      };
+      compliance: {
+        title: string;
+        description: string;
+      };
+    };
+    cta: {
+      title: string;
+      subtitle: string;
+      findCooperative: string;
+      learnMore: string;
+      freeNote: string;
+    };
+    info: {
+      title: string;
+      description1: string;
+      description2: string;
+    };
+    links: {
+      lookingFor: string;
+      browseDirectory: string;
+      buyerPortal: string;
+      about: string;
+    };
+  };
+  // Cooperative Workspace Landing (no data)
+  cooperativeWorkspaceLanding: {
+    hero: {
+      title: string;
+      subtitle: string;
+      description: string;
+    };
+    features: {
+      evidence: {
+        title: string;
+        description: string;
+      };
+      coverage: {
+        title: string;
+        description: string;
+      };
+      compliance: {
+        title: string;
+        description: string;
+      };
+      farmersFirst: {
+        title: string;
+        description: string;
+      };
+    };
+    benefits: {
+      title: string;
+      documentation: {
+        title: string;
+        description: string;
+      };
+      gapAnalysis: {
+        title: string;
+        description: string;
+      };
+      enablement: {
+        title: string;
+        description: string;
+      };
+      transparency: {
+        title: string;
+        description: string;
+      };
+    };
+    cta: {
+      title: string;
+      subtitle: string;
+      register: string;
+      learnMore: string;
+      freeNote: string;
+    };
+    additional: {
+      alreadyRegistered: string;
+      errorMessage: string;
+      checkDirectory: string;
+    };
+  };
   // Partner Landing Page
   partnerLanding: {
     hero: {
@@ -1424,6 +1560,140 @@ export const translations: Record<Language, Translations> = {
         explore: 'Explorer les Coopératives',
       },
       disclaimer: 'AgroSoluce™ soutient les efforts de surveillance et de diligence raisonnable. Il ne certifie pas les résultats ni ne remplace la vérification indépendante.',
+    },
+    cooperativeSpace: {
+      hero: {
+        title: 'Espace Coopérative',
+        subtitle: 'Votre espace de travail dédié pour gérer la conformité, la documentation et l\'engagement des agriculteurs',
+        description: 'Accédez à votre tableau de bord coopératif pour suivre les progrès, gérer les preuves et rendre votre parcours de conformité visible aux acheteurs.',
+      },
+      features: {
+        evidence: {
+          title: 'Gestion des Preuves',
+          description: 'Téléchargez et organisez la documentation de conformité, y compris les droits fonciers, les enregistrements d\'agriculteurs et les certificats.',
+        },
+        coverage: {
+          title: 'Suivi de la Couverture',
+          description: 'Surveillez vos métriques de couverture de documentation et voyez à quel point votre collection de preuves est complète.',
+        },
+        compliance: {
+          title: 'Préparation à la Conformité',
+          description: 'Consultez les scores de préparation et les niveaux de maturité pour EUDR, CMMC et autres cadres réglementaires.',
+        },
+        farmersFirst: {
+          title: 'Agriculteurs en Premier',
+          description: 'Suivez et gérez les enregistrements d\'agriculteurs, les programmes de formation et les initiatives d\'engagement.',
+        },
+        enablement: {
+          title: 'Ressources d\'Autonomisation',
+          description: 'Accédez à des boîtes à outils, modèles et documents d\'orientation pour améliorer vos pratiques de documentation.',
+        },
+        producers: {
+          title: 'Gestion des Producteurs',
+          description: 'Gérez vos producteurs, suivez leur documentation et surveillez la conformité à grande échelle.',
+        },
+      },
+      benefits: {
+        title: 'À Quoi Vous Aurez Accès',
+        documentation: {
+          title: 'Gestion de la Documentation',
+          description: 'Téléchargez, organisez et gérez les documents de preuve pour la conformité et la diligence raisonnable.',
+        },
+        gapAnalysis: {
+          title: 'Analyse des Lacunes',
+          description: 'Identifiez la documentation manquante avec des conseils spécifiques sur ce qui est nécessaire.',
+        },
+        enablement: {
+          title: 'Ressources d\'Autonomisation',
+          description: 'Accédez à des boîtes à outils, modèles et documents d\'orientation pour améliorer vos pratiques.',
+        },
+        transparency: {
+          title: 'Transparence et Visibilité',
+          description: 'Rendez vos progrès visibles aux acheteurs et partenaires tout en maintenant la transparence.',
+        },
+        traceability: {
+          title: 'Suivi de la Traçabilité',
+          description: 'Suivez les lots, produits et informations de la chaîne d\'approvisionnement pour une traçabilité complète.',
+        },
+        compliance: {
+          title: 'Tableau de Bord de Conformité',
+          description: 'Surveillez votre statut de conformité et votre préparation dans plusieurs cadres réglementaires.',
+        },
+      },
+      cta: {
+        title: 'Prêt à Accéder à Votre Espace Coopérative?',
+        subtitle: 'Connectez-vous ou enregistrez votre coopérative pour débloquer toute la puissance des outils d\'espace de travail AgroSoluce™.',
+        findCooperative: 'Trouver Votre Coopérative',
+        learnMore: 'En Savoir Plus',
+        freeNote: 'Gratuit pour les coopératives • Transparent • Axé sur le progrès',
+      },
+      info: {
+        title: 'À Propos de l\'Espace Coopérative',
+        description1: 'L\'Espace Coopérative est conçu pour aider les coopératives à rendre leurs efforts de documentation et de conformité visibles et transparents. En téléchargeant des preuves et en suivant la couverture, vous permettez aux acheteurs et partenaires de comprendre votre état actuel et vos progrès.',
+        description2: 'Cette plateforme ne remplace pas les audits ou certifications. Au lieu de cela, elle fournit une vue transparente de ce qui existe, ce qui manque et où concentrer les efforts d\'amélioration. Nous commençons par l\'agriculteur, structurons la réalité au niveau de la coopérative et soutenons une diligence raisonnable crédible alignée sur l\'EUDR.',
+      },
+      links: {
+        lookingFor: 'Vous cherchez autre chose?',
+        browseDirectory: 'Parcourir le Répertoire des Coopératives',
+        buyerPortal: 'Portail Acheteur',
+        about: 'À Propos d\'AgroSoluce',
+      },
+    },
+    cooperativeWorkspaceLanding: {
+      hero: {
+        title: 'Bienvenue dans l\'Espace Coopérative',
+        subtitle: 'Votre espace de travail coopératif est prêt, mais nous devons d\'abord enregistrer votre coopérative.',
+        description: 'Enregistrez votre coopérative pour accéder à la gestion de la documentation, au suivi de la conformité et aux outils d\'engagement des agriculteurs.',
+      },
+      features: {
+        evidence: {
+          title: 'Gestion des Preuves',
+          description: 'Téléchargez et organisez la documentation de conformité, y compris les droits fonciers, les enregistrements d\'agriculteurs et les certificats.',
+        },
+        coverage: {
+          title: 'Suivi de la Couverture',
+          description: 'Surveillez vos métriques de couverture de documentation et voyez à quel point votre collection de preuves est complète.',
+        },
+        compliance: {
+          title: 'Préparation à la Conformité',
+          description: 'Consultez les scores de préparation et les niveaux de maturité pour EUDR, CMMC et autres cadres réglementaires.',
+        },
+        farmersFirst: {
+          title: 'Agriculteurs en Premier',
+          description: 'Suivez et gérez les enregistrements d\'agriculteurs, les programmes de formation et les initiatives d\'engagement.',
+        },
+      },
+      benefits: {
+        title: 'À Quoi Vous Aurez Accès',
+        documentation: {
+          title: 'Gestion de la Documentation',
+          description: 'Téléchargez, organisez et gérez les documents de preuve pour la conformité et la diligence raisonnable.',
+        },
+        gapAnalysis: {
+          title: 'Analyse des Lacunes',
+          description: 'Identifiez la documentation manquante avec des conseils spécifiques sur ce qui est nécessaire.',
+        },
+        enablement: {
+          title: 'Ressources d\'Autonomisation',
+          description: 'Accédez à des boîtes à outils, modèles et documents d\'orientation pour améliorer vos pratiques.',
+        },
+        transparency: {
+          title: 'Transparence et Visibilité',
+          description: 'Rendez vos progrès visibles aux acheteurs et partenaires tout en maintenant la transparence.',
+        },
+      },
+      cta: {
+        title: 'Prêt à Commencer?',
+        subtitle: 'Enregistrez votre coopérative pour débloquer toute la puissance des outils d\'espace de travail AgroSoluce™.',
+        register: 'Enregistrer Votre Coopérative',
+        learnMore: 'En Savoir Plus',
+        freeNote: 'Gratuit pour les coopératives • Transparent • Axé sur le progrès',
+      },
+      additional: {
+        alreadyRegistered: 'Déjà enregistré? Assurez-vous d\'utiliser le bon identifiant de coopérative.',
+        errorMessage: 'Si vous pensez qu\'il s\'agit d\'une erreur, veuillez contacter le support ou consulter le',
+        checkDirectory: 'Répertoire des Coopératives',
+      },
     },
   },
 };
