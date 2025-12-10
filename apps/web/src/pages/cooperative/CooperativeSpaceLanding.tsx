@@ -209,18 +209,12 @@ export default function CooperativeSpaceLanding() {
               <h3 className="text-lg font-semibold text-blue-900 mb-2">
                 {t.cooperativeSpace.info.title}
               </h3>
-              <p className="text-blue-800 leading-relaxed mb-3" dangerouslySetInnerHTML={{
-                __html: t.cooperativeSpace.info.description1.replace(
-                  'visible and transparent',
-                  '<strong>visible and transparent</strong>'
-                )
-              }} />
-              <p className="text-blue-800 leading-relaxed" dangerouslySetInnerHTML={{
-                __html: t.cooperativeSpace.info.description2.replace(
-                  'This platform does not replace audits or certifications.',
-                  '<strong>This platform does not replace audits or certifications.</strong>'
-                )
-              }} />
+              <p className="text-blue-800 leading-relaxed mb-3">
+                {t.cooperativeSpace.info.description1}
+              </p>
+              <p className="text-blue-800 leading-relaxed">
+                {t.cooperativeSpace.info.description2}
+              </p>
             </div>
           </div>
         </div>
