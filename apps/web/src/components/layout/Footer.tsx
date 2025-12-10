@@ -27,13 +27,13 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
-              Farmers-First Due Diligence for Responsible Agricultural Sourcing
+              {t.footer.tagline}
             </p>
           </div>
 
           {/* Navigation Links */}
           <div>
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-3">Navigation</h3>
+            <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-3">{t.footer.navigation}</h3>
             <ul className="space-y-2">
               <li>
                 <Link 
@@ -67,7 +67,7 @@ export default function Footer() {
                   className="text-xs text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center gap-1"
                 >
                   <Users className="h-3 w-3" />
-                  Partners
+                  {t.footer.partners}
                 </Link>
               </li>
               <li>
@@ -84,7 +84,7 @@ export default function Footer() {
 
           {/* About & Information */}
           <div>
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-3">About</h3>
+            <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-3">{t.footer.about}</h3>
             <ul className="space-y-2">
               <li>
                 <Link 
@@ -92,7 +92,7 @@ export default function Footer() {
                   className="text-xs text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center gap-1"
                 >
                   <Info className="h-3 w-3" />
-                  About Us
+                  {t.footer.aboutUs}
                 </Link>
               </li>
               <li>
@@ -101,7 +101,7 @@ export default function Footer() {
                   className="text-xs text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center gap-1"
                 >
                   <FileText className="h-3 w-3" />
-                  What We Do
+                  {t.footer.whatWeDo}
                 </Link>
               </li>
               <li>
@@ -110,7 +110,7 @@ export default function Footer() {
                   className="text-xs text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center gap-1"
                 >
                   <Users className="h-3 w-3" />
-                  Who It's For
+                  {t.footer.whoItsFor}
                 </Link>
               </li>
               <li>
@@ -128,7 +128,7 @@ export default function Footer() {
                   className="text-xs text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center gap-1"
                 >
                   <FileText className="h-3 w-3" />
-                  Regulatory References
+                  {t.footer.regulatoryReferences}
                 </Link>
               </li>
             </ul>
@@ -136,7 +136,7 @@ export default function Footer() {
 
           {/* Resources & Compliance */}
           <div>
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-3">Resources</h3>
+            <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-3">{t.footer.resources}</h3>
             <ul className="space-y-2">
               <li>
                 <Link 
@@ -153,7 +153,7 @@ export default function Footer() {
                   className="text-xs text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center gap-1"
                 >
                   <Building2 className="h-3 w-3" />
-                  Directory
+                  {t.footer.directory}
                 </Link>
               </li>
               <li>
@@ -162,7 +162,7 @@ export default function Footer() {
                   className="text-xs text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center gap-1"
                 >
                   <FileText className="h-3 w-3" />
-                  NGO Registry
+                  {t.footer.ngoRegistry}
                 </Link>
               </li>
               <li>
@@ -171,7 +171,7 @@ export default function Footer() {
                   className="text-xs text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors flex items-center gap-1"
                 >
                   <Scale className="h-3 w-3" />
-                  Due Care Principles
+                  {t.footer.dueCarePrinciples}
                 </Link>
               </li>
               <li>
@@ -194,7 +194,7 @@ export default function Footer() {
               © {new Date().getFullYear()} ERMITS LLC. {t.footer.copyright}
             </div>
             <div className="text-xs text-gray-500 dark:text-gray-400 text-center md:text-right">
-              <span className="text-gray-400 dark:text-gray-500">AgroSoluce™</span> - Making farmer engagement, documentation coverage, and improvement efforts visible
+              <span className="text-gray-400 dark:text-gray-500">AgroSoluce™</span> - {t.footer.description}
             </div>
           </div>
         </div>

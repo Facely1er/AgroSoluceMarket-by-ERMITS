@@ -40,6 +40,19 @@ export interface Translations {
     contact: string;
     principles: string;
     copyright: string;
+    navigation: string;
+    about: string;
+    resources: string;
+    aboutUs: string;
+    whatWeDo: string;
+    whoItsFor: string;
+    partners: string;
+    directory: string;
+    regulatoryReferences: string;
+    ngoRegistry: string;
+    dueCarePrinciples: string;
+    tagline: string;
+    description: string;
   };
 
   // Compliance
@@ -634,6 +647,19 @@ export const translations: Record<Language, Translations> = {
       contact: 'Contact',
       principles: 'Principles',
       copyright: 'All rights reserved',
+      navigation: 'Navigation',
+      about: 'About',
+      resources: 'Resources',
+      aboutUs: 'About Us',
+      whatWeDo: 'What We Do',
+      whoItsFor: 'Who It\'s For',
+      partners: 'Partners',
+      directory: 'Directory',
+      regulatoryReferences: 'Regulatory References',
+      ngoRegistry: 'NGO Registry',
+      dueCarePrinciples: 'Due Care Principles',
+      tagline: 'Farmers-First Due Diligence for Responsible Agricultural Sourcing',
+      description: 'Making farmer engagement, documentation coverage, and improvement efforts visible',
     },
     compliance: {
       dashboard: 'Child Labor Monitoring Dashboard',
@@ -1247,6 +1273,19 @@ export const translations: Record<Language, Translations> = {
       contact: 'Contact',
       principles: 'Principes',
       copyright: 'Tous droits réservés',
+      navigation: 'Navigation',
+      about: 'À Propos',
+      resources: 'Ressources',
+      aboutUs: 'À Propos de Nous',
+      whatWeDo: 'Ce Que Nous Faisons',
+      whoItsFor: 'Pour Qui',
+      partners: 'Partenaires',
+      directory: 'Répertoire',
+      regulatoryReferences: 'Références Réglementaires',
+      ngoRegistry: 'Registre des ONG',
+      dueCarePrinciples: 'Principes de Diligence Raisonnable',
+      tagline: 'Diligence Raisonnable Axée sur les Agriculteurs pour un Approvisionnement Agricole Responsable',
+      description: 'Rendre visible l\'engagement des agriculteurs, la couverture de la documentation et les efforts d\'amélioration',
     },
     compliance: {
       dashboard: 'Tableau de bord de suivi du travail des enfants',
